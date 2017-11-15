@@ -33,7 +33,7 @@ class I_want_to_combine_property_mappings_into_an_object_mapping extends TestCas
             $propertyMapping
         );
 
-        $this->assertSame(Author::class, $mapped->className());
+        $this->assertSame(Authors::class, $mapped->className());
         $this->assertSame([$propertyMapping], $mapped->properties());
     }
 }
