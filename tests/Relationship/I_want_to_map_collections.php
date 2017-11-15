@@ -17,21 +17,21 @@ class I_want_to_map_collections extends TestCase
     function mapping_a_nested_array_of_names_to_a_collection_of_Authors()
     {
         $inSourceData = [
-            'Authors' => [
-                ['FirstName' => 'Jules',     'LastName' => 'Verne'      ],
-                ['FirstName' => 'George',    'LastName' => 'Orwell'     ],
-                ['FirstName' => 'Dante',     'LastName' => 'Alighieri'  ],
-                ['FirstName' => 'William',   'LastName' => 'Shakespeare'],
-                ['FirstName' => 'Sun',       'LastName' => 'Tzu'        ],
-                ['FirstName' => 'Charles',   'LastName' => 'Dickens'    ],
-                ['FirstName' => 'Mark',      'LastName' => 'Twain'      ],
-                ['FirstName' => 'Alexandre', 'LastName' => 'Dumas'      ],
-                ['FirstName' => 'Franz',     'LastName' => 'Kafka'      ],
-                ['FirstName' => 'Isaac',     'LastName' => 'Asimov'     ],
+            'authors' => [
+                ['firstName' => 'Jules',     'lastName' => 'Verne'      ],
+                ['firstName' => 'George',    'lastName' => 'Orwell'     ],
+                ['firstName' => 'Dante',     'lastName' => 'Alighieri'  ],
+                ['firstName' => 'William',   'lastName' => 'Shakespeare'],
+                ['firstName' => 'Sun',       'lastName' => 'Tzu'        ],
+                ['firstName' => 'Charles',   'lastName' => 'Dickens'    ],
+                ['firstName' => 'Mark',      'lastName' => 'Twain'      ],
+                ['firstName' => 'Alexandre', 'lastName' => 'Dumas'      ],
+                ['firstName' => 'Franz',     'lastName' => 'Kafka'      ],
+                ['firstName' => 'Isaac',     'lastName' => 'Asimov'     ],
             ]
         ];
 
-        $authorsMapping = HasManyNested::inProperty('Authors',
+        $authorsMapping = HasManyNested::inProperty('authors',
             $this->mockHydratorForThe(Authors::class),
             $this->mockHydratorForThe(Author::class)
         );
@@ -41,21 +41,21 @@ class I_want_to_map_collections extends TestCase
 
         $this->assertInstanceOf(Authors::class, $authors);
         $this->assertCount(10, $authors);
-        foreach ($inSourceData['Authors'] as $who => $author) {
+        foreach ($inSourceData['authors'] as $who => $author) {
             $this->assertInstanceOf(Author::class, $authors[$who]);
-            $this->assertSame($author['FirstName'], $authors[$who]->firstName());
-            $this->assertSame($author['LastName'], $authors[$who]->lastName());
+            $this->assertSame($author['firstName'], $authors[$who]->firstName());
+            $this->assertSame($author['lastName'], $authors[$who]->lastName());
         }
     }
 
     /** @scenario */
     function property_mapping_objects_know_which_property_they_map_to()
     {
-        $authorsMapping = HasManyNested::inProperty('Authors',
+        $authorsMapping = HasManyNested::inProperty('authors',
             $this->mockHydratorForThe(Authors::class),
             $this->mockHydratorForThe(Author::class)
         );
-        $this->assertSame('Authors', $authorsMapping->name());
+        $this->assertSame('authors', $authorsMapping->name());
     }
 
     /**
