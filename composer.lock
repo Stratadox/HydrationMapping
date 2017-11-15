@@ -4,9 +4,46 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6ce769c4453b7e8b40340891f4f17bfc",
-    "content-hash": "aecaa5ce7e12a09f240b6c2578537ea0",
+    "hash": "cb2badda23cfd8f83bca989ba27e6bdc",
+    "content-hash": "ecc694257667022cf6c2032716e3f602",
     "packages": [
+        {
+            "name": "stratadox/collection-contracts",
+            "version": "v1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Stratadox/CollectionContracts.git",
+                "reference": "a7de67fd0edbc68be319c5ddc7fd0a1c6291f254"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Stratadox/CollectionContracts/zipball/a7de67fd0edbc68be319c5ddc7fd0a1c6291f254",
+                "reference": "a7de67fd0edbc68be319c5ddc7fd0a1c6291f254",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0",
+                "stratadox/specification-interfaces": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Stratadox\\Collection\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stratadox",
+                    "homepage": "http://www.stratadox.com/"
+                }
+            ],
+            "description": "Interfaces for the collection classes.",
+            "time": "2017-11-06 23:12:22"
+        },
         {
             "name": "stratadox/hydration",
             "version": "v1.1",
@@ -41,6 +78,107 @@
                 }
             ],
             "time": "2017-11-12 23:09:23"
+        },
+        {
+            "name": "stratadox/immutable-collection",
+            "version": "v1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Stratadox/ImmutableCollection.git",
+                "reference": "c8527d7ecf53f10a7c16a0cf1d1edecb75a5003e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Stratadox/ImmutableCollection/zipball/c8527d7ecf53f10a7c16a0cf1d1edecb75a5003e",
+                "reference": "c8527d7ecf53f10a7c16a0cf1d1edecb75a5003e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1",
+                "stratadox/collection-contracts": "^1.0",
+                "stratadox/specification-interfaces": "^1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.3",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Stratadox\\ImmutableCollection\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stratadox",
+                    "homepage": "http://www.stratadox.com/"
+                }
+            ],
+            "time": "2017-11-11 20:39:52"
+        },
+        {
+            "name": "stratadox/specification-interfaces",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Stratadox/SpecificationInterfaces.git",
+                "reference": "bff3d973c5a101fbea7a40cd236dcd520d35ba3d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Stratadox/SpecificationInterfaces/zipball/bff3d973c5a101fbea7a40cd236dcd520d35ba3d",
+                "reference": "bff3d973c5a101fbea7a40cd236dcd520d35ba3d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Stratadox\\Specification\\Contract\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stratadox",
+                    "homepage": "http://www.stratadox.com/"
+                }
+            ],
+            "description": "Interfaces for the Specification Pattern for Php7",
+            "keywords": [
+                "PHP7",
+                "Specifications",
+                "condition",
+                "contract",
+                "contracts",
+                "ddd",
+                "filter",
+                "filters",
+                "interface",
+                "interfaces",
+                "isSatisfiedBy",
+                "pattern",
+                "satisfiable",
+                "satisfied",
+                "satisfiedBy",
+                "satisfying",
+                "select",
+                "selector",
+                "specification",
+                "specifier",
+                "specifying",
+                "stratadox"
+            ],
+            "time": "2017-09-07 22:10:47"
         }
     ],
     "packages-dev": [
@@ -1654,144 +1792,6 @@
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
             "time": "2016-10-03 07:35:21"
-        },
-        {
-            "name": "stratadox/collection-contracts",
-            "version": "v1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Stratadox/CollectionContracts.git",
-                "reference": "a7de67fd0edbc68be319c5ddc7fd0a1c6291f254"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Stratadox/CollectionContracts/zipball/a7de67fd0edbc68be319c5ddc7fd0a1c6291f254",
-                "reference": "a7de67fd0edbc68be319c5ddc7fd0a1c6291f254",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0",
-                "stratadox/specification-interfaces": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Stratadox\\Collection\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Stratadox",
-                    "homepage": "http://www.stratadox.com/"
-                }
-            ],
-            "description": "Interfaces for the collection classes.",
-            "time": "2017-11-06 23:12:22"
-        },
-        {
-            "name": "stratadox/immutable-collection",
-            "version": "v1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Stratadox/ImmutableCollection.git",
-                "reference": "c8527d7ecf53f10a7c16a0cf1d1edecb75a5003e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Stratadox/ImmutableCollection/zipball/c8527d7ecf53f10a7c16a0cf1d1edecb75a5003e",
-                "reference": "c8527d7ecf53f10a7c16a0cf1d1edecb75a5003e",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1",
-                "stratadox/collection-contracts": "^1.0",
-                "stratadox/specification-interfaces": "^1.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^6.3",
-                "satooshi/php-coveralls": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Stratadox\\ImmutableCollection\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Stratadox",
-                    "homepage": "http://www.stratadox.com/"
-                }
-            ],
-            "time": "2017-11-11 20:39:52"
-        },
-        {
-            "name": "stratadox/specification-interfaces",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Stratadox/SpecificationInterfaces.git",
-                "reference": "bff3d973c5a101fbea7a40cd236dcd520d35ba3d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Stratadox/SpecificationInterfaces/zipball/bff3d973c5a101fbea7a40cd236dcd520d35ba3d",
-                "reference": "bff3d973c5a101fbea7a40cd236dcd520d35ba3d",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Stratadox\\Specification\\Contract\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Stratadox",
-                    "homepage": "http://www.stratadox.com/"
-                }
-            ],
-            "description": "Interfaces for the Specification Pattern for Php7",
-            "keywords": [
-                "PHP7",
-                "Specifications",
-                "condition",
-                "contract",
-                "contracts",
-                "ddd",
-                "filter",
-                "filters",
-                "interface",
-                "interfaces",
-                "isSatisfiedBy",
-                "pattern",
-                "satisfiable",
-                "satisfied",
-                "satisfiedBy",
-                "satisfying",
-                "select",
-                "selector",
-                "specification",
-                "specifier",
-                "specifying",
-                "stratadox"
-            ],
-            "time": "2017-09-07 22:10:47"
         },
         {
             "name": "symfony/config",
