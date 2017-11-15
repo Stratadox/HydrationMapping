@@ -29,6 +29,15 @@ class HasOneNested extends FromSingleKey
         return new static($name, $name, $hydrator);
     }
 
+    public static function inPropertyWithDifferentKey(
+        string $name,
+        string $key,
+        Hydrates $hydrator
+    ) : HasOneNested
+    {
+        return new static($name, $key, $hydrator);
+    }
+
     /** @return object */
     public function value(array $data, $owner = null)
     {
