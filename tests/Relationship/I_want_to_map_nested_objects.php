@@ -16,7 +16,7 @@ class I_want_to_map_nested_objects extends TestCase
     /** @scenario */
     function mapping_a_nested_array_to_a_HasOne_relationship()
     {
-        $inProfileData = [
+        $inAuthorData = [
             'author' => [
                 'firstName' => 'Jules',
                 'lastName' => 'Verne'
@@ -27,8 +27,32 @@ class I_want_to_map_nested_objects extends TestCase
             $this->mockHydratorForThe(Author::class)
         );
 
-        $author = $authorMapping->value($inProfileData);
+        /** @var Author $author */
+        $author = $authorMapping->value($inAuthorData);
 
         $this->assertInstanceOf(Author::class, $author);
+        $this->assertSame('Jules', $author->firstName());
+        $this->assertSame('Verne', $author->lastName());
+    }
+
+    /** @scenario */
+    function the_source_key_can_differ_from_the_property_name()
+    {
+        $inAuthorData = [
+            'person' => [
+                'firstName' => 'Jules',
+                'lastName' => 'Verne'
+            ]
+        ];
+
+        $authorMapping = HasOneNested::inPropertyWithDifferentKey('author',
+            'person',
+            $this->mockHydratorForThe(Author::class)
+        );
+
+        $author = $authorMapping->value($inAuthorData);
+
+        $this->assertInstanceOf(Author::class, $author);
+        $this->assertSame('author', $authorMapping->name());
     }
 }
