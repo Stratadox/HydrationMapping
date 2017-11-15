@@ -38,6 +38,16 @@ class HasManyNested extends FromSingleKey
         return new static($name, $name, $collection, $item);
     }
 
+    public static function propertyWithDifferentKey(
+        string $name,
+        string $key,
+        Hydrates $collection,
+        Hydrates $item
+    ) : HasManyNested
+    {
+        return new static($name, $key, $collection, $item);
+    }
+
     /** @return object */
     public function value(array $data, $owner = null)
     {
