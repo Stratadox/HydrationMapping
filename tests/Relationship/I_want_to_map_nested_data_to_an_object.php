@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Stratadox\Hydration\Test;
 
 use PHPUnit\Framework\TestCase;
+use Stratadox\Hydration\Mapping\Property\Relationship\HasOneNested;
 use Stratadox\Hydration\Test\Authors\Author;
 use Stratadox\Hydration\Test\Relationship\MockHydrator;
 
@@ -22,7 +23,7 @@ class I_want_to_map_nested_data_to_an_object extends TestCase
             ]
         ];
 
-        $authorMapping = HasOneNested::inProperty('for',
+        $authorMapping = HasOneNested::inProperty('author',
             $this->mockHydratorForThe(Author::class)
         );
 
