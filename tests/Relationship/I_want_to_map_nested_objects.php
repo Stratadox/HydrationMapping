@@ -9,7 +9,7 @@ use Stratadox\Hydration\Mapping\Property\Relationship\HasOneNested;
 use Stratadox\Hydration\Test\Authors\Author;
 use Stratadox\Hydration\Test\Relationship\MockHydrator;
 
-class I_want_to_map_nested_data_to_an_object extends TestCase
+class I_want_to_map_nested_objects extends TestCase
 {
     use MockHydrator;
 

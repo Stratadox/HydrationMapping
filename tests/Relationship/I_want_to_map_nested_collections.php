@@ -10,7 +10,7 @@ use Stratadox\Hydration\Test\Authors\Author;
 use Stratadox\Hydration\Test\Authors\Authors;
 use Stratadox\Hydration\Test\Relationship\MockHydrator;
 
-class I_want_to_map_collections extends TestCase
+class I_want_to_map_nested_collections extends TestCase
 {
     use MockHydrator;
 

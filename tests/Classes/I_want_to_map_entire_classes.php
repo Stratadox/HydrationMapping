@@ -10,7 +10,7 @@ use Stratadox\Hydration\Mapping\Property\Relationship\HasOneNested;
 use Stratadox\Hydration\Test\Classes\Foo\Foo;
 use Stratadox\Hydration\Test\Relationship\MockHydrator;
 
-class I_want_to_combine_property_mappings_into_an_object_mapping extends TestCase
+class I_want_to_map_entire_classes extends TestCase
 {
     use MockHydrator;
 
