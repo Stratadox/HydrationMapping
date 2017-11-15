@@ -70,18 +70,6 @@ class I_want_to_map_nested_collections extends TestCase
         $authors = $authorsMapping->value($inSourceData);
 
         $this->assertCount(3, $authors);
-        foreach ($inSourceData['these'] as $who => $author) {
-            $this->assertInstanceOf(Author::class, $authors[$who]);
-        }
-    }
-
-    /** @scenario */
-    function property_mapping_objects_know_which_property_they_map_to()
-    {
-        $authorsMapping = HasManyNested::inProperty('authors',
-            $this->mockHydratorForThe(Authors::class),
-            $this->mockHydratorForThe(Author::class)
-        );
         $this->assertSame('authors', $authorsMapping->name());
     }
 }
