@@ -32,4 +32,14 @@ class I_want_to_map_embedded_objects extends TestCase
 
         $this->assertInstanceOf(Author::class, $author);
     }
+
+    /** @scenario */
+    function property_mappers_know_which_property_they_map_to()
+    {
+        $authorMapping = HasOneEmbedded::inProperty('author',
+            $this->mockPublicSetterHydratorForThe(Author::class)
+        );
+
+        $this->assertSame('author', $authorMapping->name());
+    }
 }
