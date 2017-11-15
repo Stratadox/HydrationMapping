@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Stratadox\Hydration\Test;
 
 use PHPUnit\Framework\TestCase;
+use Stratadox\Hydration\Mapping\Mapping;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasManyNested;
 use Stratadox\Hydration\Test\Authors\Author;
 use Stratadox\Hydration\Test\Authors\Authors;
