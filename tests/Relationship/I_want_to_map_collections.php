@@ -49,6 +49,32 @@ class I_want_to_map_collections extends TestCase
     }
 
     /** @scenario */
+    function the_source_key_can_differ_from_the_property_name()
+    {
+        $inSourceData = [
+            'these' => [
+                ['firstName' => 'Jules',     'lastName' => 'Verne'      ],
+                ['firstName' => 'George',    'lastName' => 'Orwell'     ],
+                ['firstName' => 'Dante',     'lastName' => 'Alighieri'  ],
+            ]
+        ];
+
+        $authorsMapping = HasManyNested::propertyWithDifferentKey('authors',
+            'these',
+            $this->mockHydratorForThe(Authors::class),
+            $this->mockHydratorForThe(Author::class)
+        );
+
+        /** @var Authors|Author[] $authors */
+        $authors = $authorsMapping->value($inSourceData);
+
+        $this->assertCount(3, $authors);
+        foreach ($inSourceData['these'] as $who => $author) {
+            $this->assertInstanceOf(Author::class, $authors[$who]);
+        }
+    }
+
+    /** @scenario */
     function property_mapping_objects_know_which_property_they_map_to()
     {
         $authorsMapping = HasManyNested::inProperty('authors',
