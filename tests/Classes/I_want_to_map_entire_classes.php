@@ -26,7 +26,7 @@ class I_want_to_map_entire_classes extends TestCase
     function class_mappings_contain_property_mappings()
     {
         $propertyMapping = HasOneNested::inProperty('foo',
-            $this->mockHydratorForThe(Foo::class)
+            $this->mockCollectionHydratorForThe(Foo::class)
         );
         $mapped = Mapping::ofThe(Foo::class,
             $propertyMapping

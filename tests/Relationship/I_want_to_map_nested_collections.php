@@ -33,8 +33,8 @@ class I_want_to_map_nested_collections extends TestCase
         ];
 
         $authorsMapping = HasManyNested::inProperty('authors',
-            $this->mockHydratorForThe(Authors::class),
-            $this->mockHydratorForThe(Author::class)
+            $this->mockCollectionHydratorForThe(Authors::class),
+            $this->mockPublicSetterHydratorForThe(Author::class)
         );
 
         /** @var Authors|Author[] $authors */
@@ -62,8 +62,8 @@ class I_want_to_map_nested_collections extends TestCase
 
         $authorsMapping = HasManyNested::inPropertyWithDifferentKey('authors',
             'these',
-            $this->mockHydratorForThe(Authors::class),
-            $this->mockHydratorForThe(Author::class)
+            $this->mockCollectionHydratorForThe(Authors::class),
+            $this->mockPublicSetterHydratorForThe(Author::class)
         );
 
         /** @var Authors|Author[] $authors */

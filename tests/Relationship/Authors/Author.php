@@ -6,8 +6,8 @@ namespace Stratadox\Hydration\Test\Authors;
 
 class Author
 {
-    private $firstName;
-    private $lastName;
+    public $firstName;
+    public $lastName;
 
     public function __construct(string $firstName, string $lastName)
     {

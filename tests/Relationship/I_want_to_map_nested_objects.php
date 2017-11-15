@@ -24,7 +24,7 @@ class I_want_to_map_nested_objects extends TestCase
         ];
 
         $authorMapping = HasOneNested::inProperty('author',
-            $this->mockHydratorForThe(Author::class)
+            $this->mockPublicSetterHydratorForThe(Author::class)
         );
 
         /** @var Author $author */
@@ -47,7 +47,7 @@ class I_want_to_map_nested_objects extends TestCase
 
         $authorMapping = HasOneNested::inPropertyWithDifferentKey('author',
             'person',
-            $this->mockHydratorForThe(Author::class)
+            $this->mockPublicSetterHydratorForThe(Author::class)
         );
 
         $author = $authorMapping->value($inAuthorData);

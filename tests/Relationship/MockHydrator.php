@@ -9,13 +9,12 @@ use Stratadox\Hydration\Hydrates;
 trait MockHydrator
 {
     /**
-     * Extremely simple mock hydrator. It essentially just calls the constructor,
-     * which is sufficient for our testing purposes.
+     * Mocks a simple collection hydrator. It essentially just calls the constructor.
      *
      * @param string $class
      * @return Hydrates|MockObject
      */
-    protected function mockHydratorForThe(string $class) : MockObject
+    protected function mockCollectionHydratorForThe(string $class) : MockObject
     {
         $hydrator = $this->createMock(Hydrates::class);
 
@@ -25,6 +24,32 @@ trait MockHydrator
                 function (array $data) use ($class)
                 {
                     return new $class(...array_values($data));
+                }
+            );
+
+        return $hydrator;
+    }
+
+    /**
+     * Mocks a simple dumb hydrator. It essentially just sets public properties.
+     *
+     * @param string $class
+     * @return Hydrates|MockObject
+     */
+    protected function mockPublicSetterHydratorForThe(string $class) : MockObject
+    {
+        $hydrator = $this->createMock(Hydrates::class);
+
+        $hydrator->expects($this->any())
+            ->method('fromArray')
+            ->willReturnCallback(
+                function (array $data) use ($class)
+                {
+                    $inst = (new \ReflectionClass($class))->newInstanceWithoutConstructor();
+                    foreach ($data as $key => $value) {
+                        $inst->$key = $value;
+                    }
+                    return $inst;
                 }
             );
 
