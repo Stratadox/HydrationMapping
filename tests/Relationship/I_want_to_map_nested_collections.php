@@ -60,7 +60,7 @@ class I_want_to_map_nested_collections extends TestCase
             ]
         ];
 
-        $authorsMapping = HasManyNested::propertyWithDifferentKey('authors',
+        $authorsMapping = HasManyNested::inPropertyWithDifferentKey('authors',
             'these',
             $this->mockHydratorForThe(Authors::class),
             $this->mockHydratorForThe(Author::class)
