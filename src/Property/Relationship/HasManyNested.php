@@ -7,6 +7,12 @@ namespace Stratadox\Hydration\Mapping\Property\Relationship;
 use Stratadox\Hydration\Hydrates;
 use Stratadox\Hydration\Mapping\Property\FromSingleKey;
 
+/**
+ * Maps a nested data structure to a collection in an object property.
+ *
+ * @package Stratadox\Hydrating
+ * @author Stratadox
+ */
 class HasManyNested extends FromSingleKey
 {
     private $collection;

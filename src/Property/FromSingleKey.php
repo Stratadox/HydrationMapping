@@ -6,6 +6,12 @@ namespace Stratadox\Hydration\Mapping\Property;
 
 use Stratadox\Hydration\MapsProperty;
 
+/**
+ * Maps data from a single array position into something else.
+ *
+ * @package Stratadox\Hydrating
+ * @author Stratadox
+ */
 abstract class FromSingleKey implements MapsProperty
 {
     private $name;
