@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Stratadox\Hydration\Test\Unit\Mapping\Relationship;
 
 use PHPUnit\Framework\TestCase;
