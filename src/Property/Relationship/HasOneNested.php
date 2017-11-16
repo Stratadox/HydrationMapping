@@ -8,7 +8,7 @@ use Stratadox\Hydration\Mapping\Property\FromSingleKey;
 /**
  * Maps a nested data structure to a has-one relation in an object property.
  *
- * @package Stratadox\Hydrating
+ * @package Stratadox\Hydrate
  * @author Stratadox
  */
 class HasOneNested extends FromSingleKey

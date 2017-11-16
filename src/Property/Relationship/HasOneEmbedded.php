@@ -5,6 +5,12 @@ namespace Stratadox\Hydration\Mapping\Property\Relationship;
 use Stratadox\Hydration\Hydrates;
 use Stratadox\Hydration\MapsProperty;
 
+/**
+ * Maps an embedded data structure to a has-one relation in an object property.
+ *
+ * @package Stratadox\Hydrate
+ * @author Stratadox
+ */
 class HasOneEmbedded implements MapsProperty
 {
     private $name;

@@ -2,6 +2,12 @@
 
 namespace Stratadox\Hydration\Mapping\Property\Scalar;
 
+/**
+ * Maps scalar input to a float property in an object property.
+ *
+ * @package Stratadox\Hydrate
+ * @author Stratadox
+ */
 class CastedFloat extends Scalar
 {
     public function value(array $data, $owner = null) : float

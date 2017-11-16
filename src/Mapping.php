@@ -9,7 +9,7 @@ use Stratadox\ImmutableCollection\ImmutableCollection;
 /**
  * Defines how to map a specific structure of data to an object.
  *
- * @package Stratadox\Hydrating
+ * @package Stratadox\Hydrate
  * @author Stratadox
  */
 class Mapping extends ImmutableCollection implements MapsObject

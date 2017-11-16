@@ -10,7 +10,7 @@ use Stratadox\Hydration\Mapping\Property\FromSingleKey;
 /**
  * Maps a nested data structure to a collection in an object property.
  *
- * @package Stratadox\Hydrating
+ * @package Stratadox\Hydrate
  * @author Stratadox
  */
 class HasManyNested extends FromSingleKey

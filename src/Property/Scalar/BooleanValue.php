@@ -3,8 +3,16 @@
 namespace Stratadox\Hydration\Mapping\Property\Scalar;
 
 use function in_array;
+use function is_bool;
+use function is_numeric;
 use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
 
+/**
+ * Maps boolean-like input to a boolean property in an object property.
+ *
+ * @package Stratadox\Hydrate
+ * @author Stratadox
+ */
 class BooleanValue extends Scalar
 {
     private $truths = ['true', 'yes', 'y',];

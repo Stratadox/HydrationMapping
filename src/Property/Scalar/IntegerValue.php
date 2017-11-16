@@ -5,6 +5,12 @@ namespace Stratadox\Hydration\Mapping\Property\Scalar;
 use function preg_match;
 use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
 
+/**
+ * Maps integer-like input to an integer property in an object property.
+ *
+ * @package Stratadox\Hydrate
+ * @author Stratadox
+ */
 class IntegerValue extends Scalar
 {
     public function value(array $data, $owner = null) : int
