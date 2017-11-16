@@ -1,0 +1,46 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Stratadox\Hydration\Mapping\Property\Relationship;
+
+use Stratadox\Hydration\Hydrates;
+use Stratadox\Hydration\Mapping\Property\FromSingleKey;
+use Stratadox\Hydration\ProducesProxies;
+
+class HasManyProxies extends FromSingleKey
+{
+    private $collection;
+    private $proxyBuilder;
+
+    public function __construct(
+        string $name,
+        string $dataKey,
+        Hydrates $collectionHydrator,
+        ProducesProxies $proxyBuilder
+    ) {
+        parent::__construct($name, $dataKey);
+        $this->collection = $collectionHydrator;
+        $this->proxyBuilder = $proxyBuilder;
+    }
+
+    public static function inProperty(
+        string $name,
+        Hydrates $collection,
+        ProducesProxies $proxyBuilder
+    ) : HasManyProxies
+    {
+        return new static($name, $name, $collection, $proxyBuilder);
+    }
+
+    /** @return object */
+    public function value(array $data, $owner = null)
+    {
+        $amount = $this->my($data);
+        $proxies = [];
+        for ($i = $amount; $i > 0; --$i) {
+            $proxies[] = $this->proxyBuilder->createFor($owner, $this->name(), $i);
+        }
+        return $this->collection->fromArray($proxies);
+    }
+}
