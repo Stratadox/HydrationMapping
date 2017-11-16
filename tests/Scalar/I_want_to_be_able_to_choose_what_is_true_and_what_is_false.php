@@ -70,7 +70,7 @@ class I_want_to_be_able_to_choose_what_is_true_and_what_is_false extends TestCas
             '"OK!"' => ['OK!', $truths, $falsehoods],
             '"yeah"' => ['yeah', $truths, $falsehoods],
             '"why not?"' => ['why not?', $truths, $falsehoods],
-            '"1"' => ['1'],
+            '"1"' => ['1', $truths, $falsehoods],
         ];
     }
 
@@ -82,7 +82,7 @@ class I_want_to_be_able_to_choose_what_is_true_and_what_is_false extends TestCas
             'CNN' => ['CNN', $truths, $falsehoods],
             'Russia' => ['Russia', $truths, $falsehoods],
             'nah' => ['nah', $truths, $falsehoods],
-            '"0"' => ['0'],
+            '"0"' => ['0', $truths, $falsehoods],
         ];
     }
 
