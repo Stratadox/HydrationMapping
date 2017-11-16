@@ -4,6 +4,7 @@ namespace Stratadox\Hydration\Test\Unit\Mapping;
 
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Scalar\BooleanValue;
+use Stratadox\Hydration\UnmappableInput;
 
 class I_want_to_cast_appropriate_values_into_booleans extends TestCase
 {
@@ -53,6 +54,7 @@ class I_want_to_cast_appropriate_values_into_booleans extends TestCase
             'One' => [1],
             'Positive integer' => [100],
             'Positive float' => [0.1],
+            'Positive numeric string' => ['3'],
             '"true"' => ['true'],
             '"True"' => ['True'],
             '"TRUE"' => ['TRUE'],
@@ -69,8 +71,10 @@ class I_want_to_cast_appropriate_values_into_booleans extends TestCase
     {
         return [
             'Zero' => [0],
+            'Zero as string' => ['0'],
             'Negative integer' => [-100],
             'Negative float' => [-0.1],
+            'Negative numeric string' => ['-3.5'],
             '"false"' => ['false'],
             '"False"' => ['False'],
             '"FALSE"' => ['FALSE'],
