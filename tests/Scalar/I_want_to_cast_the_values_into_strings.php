@@ -42,7 +42,7 @@ class I_want_to_cast_the_values_into_strings extends TestCase
     {
         $source = ['string' => 10.0002597343609724924];
 
-        $map = StringValue::mapProperty('string');
+        $map = StringValue::inProperty('string');
 
         $this->assertSame('10.000259734361', $map->value($source));
     }

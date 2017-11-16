@@ -42,7 +42,7 @@ class I_want_to_cast_everything_into_nulls extends TestCase
     {
         $source = ['null' => 10.0002597343609724924];
 
-        $map = NullValue::mapProperty('null');
+        $map = NullValue::inProperty('null');
 
         $this->assertNull($map->value($source));
     }
@@ -52,7 +52,7 @@ class I_want_to_cast_everything_into_nulls extends TestCase
     {
         $source = ['null' => 'Oh no! I will be nullified!'];
 
-        $map = NullValue::mapProperty('null');
+        $map = NullValue::inProperty('null');
 
         $this->assertNull($map->value($source));
     }
