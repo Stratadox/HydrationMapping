@@ -14,7 +14,7 @@ class UnmappableProperty extends InvalidArgumentException implements UnmappableI
         return static::inputData($failedToMapTo, 'integer', $value);
     }
 
-    public static function itMustInIntegerRange(MapsProperty $failedToMapTo, $value) : UnmappableInput
+    public static function itMustBeInIntegerRange(MapsProperty $failedToMapTo, $value) : UnmappableInput
     {
         return static::inputData($failedToMapTo, 'integer', $value, 'The value is out of range.');
     }
