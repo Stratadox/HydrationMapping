@@ -93,6 +93,7 @@ class I_want_to_cast_appropriate_values_into_booleans extends TestCase
             '"Yolo"' => ['Yolo'],
             '"somewhat true"' => ['somewhat true'],
             '"false?"' => ['false?'],
+            '"probably"' => ['probably'],
             '"true, maybe"' => ['true, maybe'],
         ];
     }
