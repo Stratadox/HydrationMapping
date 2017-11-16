@@ -19,9 +19,30 @@ class I_want_to_cast_integer_like_values_into_integers extends TestCase
     }
 
     /** @scenario */
-    function number_out_of_range_throws_an_exception()
+    function negative_integer_like_numeric_string_input_become_integer_values()
+    {
+        $source = ['int' => '-123'];
+
+        $map = IntegerValue::inProperty('int');
+
+        $this->assertSame(-123, $map->value($source));
+    }
+
+    /** @scenario */
+    function number_over_maximum_integer_limit_throws_an_exception()
     {
         $source = ['int' => '99999999999999999999999999999999999999999999999999'];
+
+        $map = IntegerValue::inProperty('int');
+
+        $this->expectException(UnmappableInput::class);
+        $map->value($source);
+    }
+
+    /** @scenario */
+    function number_under_minimum_integer_limit_throws_an_exception()
+    {
+        $source = ['int' => '-99999999999999999999999999999999999999999999999999'];
 
         $map = IntegerValue::inProperty('int');
 
