@@ -18,6 +18,22 @@ class BooleanValue extends Scalar
     private $truths = ['true', 'yes', 'y',];
     private $falsehoods = ['false', 'no', 'n'];
 
+    public function __construct(string $name, string $dataKey, array $truths = null, array $falsehoods = null)
+    {
+        parent::__construct($name, $dataKey);
+        if (isset($truths)) {
+            $this->truths = $truths;
+        }
+        if (isset($falsehoods)) {
+            $this->falsehoods = $falsehoods;
+        }
+    }
+
+    public static function withCustomTruth(string $name, array $truths, array $falsehoods) : Scalar
+    {
+        return new static($name, $name, $truths, $falsehoods);
+    }
+
     public function value(array $data, $owner = null) : bool
     {
         $value = $this->my($data);
