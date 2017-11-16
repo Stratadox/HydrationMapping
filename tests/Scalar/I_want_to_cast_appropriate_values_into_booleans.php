@@ -38,9 +38,9 @@ class I_want_to_cast_appropriate_values_into_booleans extends TestCase
      * @scenario
      * @dataProvider unacceptableValues
      */
-    function unacceptable_input_throws_an_exception($false)
+    function unacceptable_input_throws_an_exception($itsNotBoolean)
     {
-        $source = ['boolean' => $false];
+        $source = ['boolean' => $itsNotBoolean];
 
         $map = BooleanValue::inProperty('boolean');
 
