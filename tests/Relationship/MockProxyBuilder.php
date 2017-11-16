@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Stratadox\Hydration\Test\Relationship;
 
 use PHPUnit_Framework_MockObject_Matcher_AnyInvokedCount as AnyInvokedCount;
