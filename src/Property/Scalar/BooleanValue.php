@@ -8,6 +8,7 @@ use function in_array;
 use function is_bool;
 use function is_numeric;
 use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
+use function strtolower;
 
 /**
  * Maps boolean-like input to a boolean property in an object property.
@@ -22,13 +23,9 @@ class BooleanValue extends Scalar
 
     public function __construct(string $name, string $dataKey, array $truths = null, array $falsehoods = null)
     {
+        $this->truths = $truths ?: $this->truths;
+        $this->falsehoods = $falsehoods ?: $this->falsehoods;
         parent::__construct($name, $dataKey);
-        if (isset($truths)) {
-            $this->truths = $truths;
-        }
-        if (isset($falsehoods)) {
-            $this->falsehoods = $falsehoods;
-        }
     }
 
     public static function withCustomTruth(string $name, array $truths, array $falsehoods) : Scalar
@@ -42,6 +39,10 @@ class BooleanValue extends Scalar
         if (is_bool($value)) {
             return $value;
         }
+        if (is_numeric($value)) {
+            return $value > 0;
+        }
+        // @todo refactor to decorator
         if ($this->isConsideredTrue($value)) {
             return true;
         }
@@ -53,17 +54,11 @@ class BooleanValue extends Scalar
 
     private function isConsideredTrue($value) : bool
     {
-        if (is_numeric($value)) {
-            return $value > 0;
-        }
         return in_array(strtolower($value), $this->truths);
     }
 
     private function isConsideredFalse($value) : bool
     {
-        if (is_numeric($value)) {
-            return $value <= 0;
-        }
         return in_array(strtolower($value), $this->falsehoods);
     }
 }
