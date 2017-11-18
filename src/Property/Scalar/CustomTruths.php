@@ -19,14 +19,21 @@ class CustomTruths implements MapsProperty
     private $truths;
     private $falsehoods;
 
-    public function __construct(BooleanValue $mapping, array $truths, array $falsehoods)
-    {
+    public function __construct(
+        BooleanValue $mapping,
+        array $truths,
+        array $falsehoods
+    ) {
         $this->for = $mapping;
         $this->truths = $truths;
         $this->falsehoods = $falsehoods;
     }
 
-    public static function forThe(BooleanValue $mapping, array $truths, array $falsehoods) : MapsProperty
+    public static function forThe(
+        BooleanValue $mapping,
+        array $truths,
+        array $falsehoods
+    ) : MapsProperty
     {
         return new static($mapping, $truths, $falsehoods);
     }

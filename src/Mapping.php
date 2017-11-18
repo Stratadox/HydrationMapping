@@ -24,7 +24,10 @@ class Mapping extends ImmutableCollection implements MapsObject
         parent::__construct(...$properties);
     }
 
-    public static function ofThe(string $class, MapsProperty ...$properties) : Mapping
+    public static function ofThe(
+        string $class,
+        MapsProperty ...$properties
+    ) : Mapping
     {
         return new static($class, ...$properties);
     }
