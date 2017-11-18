@@ -8,6 +8,12 @@ use Stratadox\Hydration\Hydrates;
 use Stratadox\Hydration\Mapping\Property\FromSingleKey;
 use Stratadox\Hydration\ProducesProxies;
 
+/**
+ * Maps a number to a collection of proxies in an object property.
+ *
+ * @package Stratadox\Hydrate
+ * @author Stratadox
+ */
 class HasManyProxies extends FromSingleKey
 {
     private $collection;
