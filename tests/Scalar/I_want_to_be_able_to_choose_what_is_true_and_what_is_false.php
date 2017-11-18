@@ -93,7 +93,7 @@ class I_want_to_be_able_to_choose_what_is_true_and_what_is_false extends TestCas
     public function falseValues()
     {
         $truths = ['what', 'is', 'truth', 'anyway', '?'];
-        $falsehoods = ['cnn', 'russia', 'nah'];
+        $falsehoods = ['CNN', 'Russia', 'nah'];
         return [
             'CNN' => ['CNN', $truths, $falsehoods],
             'Russia' => ['Russia', $truths, $falsehoods],
@@ -104,8 +104,8 @@ class I_want_to_be_able_to_choose_what_is_true_and_what_is_false extends TestCas
 
     public function unacceptableValues()
     {
-        $truths = ['great', 'ok!', 'yeah', 'why not?'];
-        $falsehoods = ['nah', 'no way', 'nope'];
+        $truths = ['TRUE', 'ok!', 'yeah', 'why not?'];
+        $falsehoods = ['FALSE', 'no way', 'nope'];
         return [
             '"true"' => ['true', $truths, $falsehoods],
             '"false"' => ['false', $truths, $falsehoods],
