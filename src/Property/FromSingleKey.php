@@ -28,6 +28,11 @@ abstract class FromSingleKey implements MapsProperty
         return $this->name;
     }
 
+    public function key() : string
+    {
+        return $this->key;
+    }
+
     protected function my(array $data)
     {
         return $data[$this->key];
