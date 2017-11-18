@@ -6,11 +6,13 @@ namespace Stratadox\Hydration\Test\Unit\Mapping;
 
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Scalar\BooleanValue;
+use Stratadox\Hydration\Mapping\Property\Scalar\CustomTruths;
 use Stratadox\Hydration\UnmappableInput;
 
 /**
  * Don't we all?
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\BooleanValue
+ * @covers \Stratadox\Hydration\Mapping\Property\Scalar\CustomTruths
  * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
  * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
@@ -28,7 +30,10 @@ class I_want_to_be_able_to_choose_what_is_true_and_what_is_false extends TestCas
     {
         $source = ['boolean' => $true];
 
-        $map = BooleanValue::withCustomTruth('boolean', $truths, $falsehoods);
+        $map = CustomTruths::forThe(BooleanValue::inProperty('boolean'),
+            $truths,
+            $falsehoods
+        );
 
         $this->assertSame(true, $map->value($source));
     }
@@ -44,7 +49,10 @@ class I_want_to_be_able_to_choose_what_is_true_and_what_is_false extends TestCas
     {
         $source = ['boolean' => $itsFakeBelieveMe];
 
-        $map = BooleanValue::withCustomTruth('boolean', $truths, $falsehoods);
+        $map = CustomTruths::forThe(BooleanValue::inProperty('boolean'),
+            $truths,
+            $falsehoods
+        );
 
         $this->assertSame(false, $map->value($source));
     }
@@ -60,7 +68,10 @@ class I_want_to_be_able_to_choose_what_is_true_and_what_is_false extends TestCas
     {
         $source = ['boolean' => $itsNotBoolean];
 
-        $map = BooleanValue::withCustomTruth('boolean', $truths, $falsehoods);
+        $map = CustomTruths::forThe(BooleanValue::inProperty('boolean'),
+            $truths,
+            $falsehoods
+        );
 
         $this->expectException(UnmappableInput::class);
         $map->value($source);
@@ -68,14 +79,13 @@ class I_want_to_be_able_to_choose_what_is_true_and_what_is_false extends TestCas
 
     public function trueValues()
     {
-        $truths = ['great', 'ok!', 'yeah', 'why not?'];
-        $falsehoods = ['nah', 'no way', 'nope'];
+        $truths = ['true', 'TRUE', 'y', 'yes'];
+        $falsehoods = ['false', 'FALSE', 'n', 'no'];
         return [
-            '"great"' => ['great', $truths, $falsehoods],
-            '"ok!"' => ['ok!', $truths, $falsehoods],
-            '"OK!"' => ['OK!', $truths, $falsehoods],
-            '"yeah"' => ['yeah', $truths, $falsehoods],
-            '"why not?"' => ['why not?', $truths, $falsehoods],
+            '"true"' => ['true', $truths, $falsehoods],
+            '"TRUE"' => ['TRUE', $truths, $falsehoods],
+            '"y"' => ['y', $truths, $falsehoods],
+            '"yes"' => ['yes', $truths, $falsehoods],
             '"1"' => ['1', $truths, $falsehoods],
         ];
     }
