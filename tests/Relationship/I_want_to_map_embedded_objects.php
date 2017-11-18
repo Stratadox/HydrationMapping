@@ -9,6 +9,7 @@ use Stratadox\Hydration\Mapping\Property\Relationship\HasOneEmbedded;
 use Stratadox\Hydration\Test\Authors\Author;
 use Stratadox\Hydration\Test\Relationship\MockHydrator;
 
+/** @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasOneEmbedded */
 class I_want_to_map_embedded_objects extends TestCase
 {
     use MockHydrator;

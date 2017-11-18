@@ -7,6 +7,11 @@ namespace Stratadox\Hydration\Test\Unit\Mapping;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Scalar\StringValue;
 
+/**
+ * @covers \Stratadox\Hydration\Mapping\Property\Scalar\StringValue
+ * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
+ * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
+ */
 class I_want_to_cast_the_values_into_strings extends TestCase
 {
     /** @scenario */

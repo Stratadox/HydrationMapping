@@ -8,6 +8,12 @@ use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Scalar\FloatValue;
 use Stratadox\Hydration\UnmappableInput;
 
+/**
+ * @covers \Stratadox\Hydration\Mapping\Property\Scalar\FloatValue
+ * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
+ * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
+ * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
+ */
 class I_want_to_cast_float_like_values_into_floats extends TestCase
 {
     /** @scenario */

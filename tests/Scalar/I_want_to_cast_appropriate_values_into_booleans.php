@@ -8,6 +8,12 @@ use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Scalar\BooleanValue;
 use Stratadox\Hydration\UnmappableInput;
 
+/**
+ * @covers \Stratadox\Hydration\Mapping\Property\Scalar\BooleanValue
+ * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
+ * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
+ * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
+ */
 class I_want_to_cast_appropriate_values_into_booleans extends TestCase
 {
     /**

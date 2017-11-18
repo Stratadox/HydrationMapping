@@ -12,6 +12,10 @@ use Stratadox\Hydration\Test\Authors\Authors;
 use Stratadox\Hydration\Test\Relationship\MockHydrator;
 use Stratadox\Hydration\Test\Relationship\MockProxyBuilder;
 
+/**
+ * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasManyProxies
+ * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
+ */
 class I_want_to_map_lazy_collections extends TestCase
 {
     use MockHydrator;

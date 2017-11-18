@@ -7,6 +7,11 @@ namespace Stratadox\Hydration\Test\Unit\Mapping;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Scalar\CastedFloat;
 
+/**
+ * @covers \Stratadox\Hydration\Mapping\Property\Scalar\CastedFloat
+ * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
+ * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
+ */
 class I_want_to_cast_whatever_input_I_get_into_floats extends TestCase
 {
     /** @scenario */
