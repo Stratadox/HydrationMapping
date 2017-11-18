@@ -77,6 +77,13 @@ class I_want_to_be_able_to_choose_what_is_true_and_what_is_false extends TestCas
         $map->value($source);
     }
 
+    /** @scenario */
+    function custom_truth_mapping_knows_which_property_to_map_to()
+    {
+        $map = CustomTruths::forThe(BooleanValue::inProperty('boolean'), [], []);
+        $this->assertSame('boolean', $map->name());
+    }
+
     public function trueValues()
     {
         $truths = ['true', 'TRUE', 'y', 'yes'];
