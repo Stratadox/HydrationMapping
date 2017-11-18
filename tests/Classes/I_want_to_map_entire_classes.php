@@ -33,7 +33,6 @@ class I_want_to_map_entire_classes extends TestCase
             $propertyMapping
         );
 
-        $this->assertSame(Foo::class, $mapped->className());
         $this->assertSame([$propertyMapping], $mapped->properties());
     }
 }
