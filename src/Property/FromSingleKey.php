@@ -9,7 +9,7 @@ use Stratadox\Hydration\MapsProperty;
 /**
  * Maps data from a single array position into something else.
  *
- * @package Stratadox\Hydrating
+ * @package Stratadox\Hydrate
  * @author Stratadox
  */
 abstract class FromSingleKey implements MapsProperty
