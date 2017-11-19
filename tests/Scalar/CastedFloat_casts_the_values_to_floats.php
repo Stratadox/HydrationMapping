@@ -12,7 +12,7 @@ use Stratadox\Hydration\Mapping\Property\Scalar\CastedFloat;
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
  * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
  */
-class I_want_to_cast_whatever_input_I_get_into_floats extends TestCase
+class CastedFloat_casts_the_values_to_floats extends TestCase
 {
     /** @scenario */
     function float_like_strings_become_floats()

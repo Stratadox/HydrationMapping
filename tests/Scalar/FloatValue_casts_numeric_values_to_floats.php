@@ -14,7 +14,7 @@ use Stratadox\Hydration\UnmappableInput;
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
  * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
  */
-class I_want_to_cast_float_like_values_into_floats extends TestCase
+class FloatValue_casts_numeric_values_to_floats extends TestCase
 {
     /** @scenario */
     function float_like_strings_become_floats()

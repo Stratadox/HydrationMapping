@@ -14,7 +14,7 @@ use Stratadox\Hydration\UnmappableInput;
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
  * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
  */
-class I_want_to_cast_integer_like_values_into_integers extends TestCase
+class IntegerValue_casts_integer_like_values_to_integers extends TestCase
 {
     /** @scenario */
     function integer_like_numeric_string_input_become_integer_values()

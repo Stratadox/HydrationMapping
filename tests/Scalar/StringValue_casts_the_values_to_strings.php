@@ -12,7 +12,7 @@ use Stratadox\Hydration\Mapping\Property\Scalar\StringValue;
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
  * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
  */
-class I_want_to_cast_the_values_into_strings extends TestCase
+class StringValue_casts_the_values_to_strings extends TestCase
 {
     /** @scenario */
     function integer_values_become_numeric_strings()

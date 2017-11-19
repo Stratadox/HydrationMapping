@@ -11,7 +11,7 @@ use Stratadox\Hydration\Test\Classes\Foo\Foo;
 use Stratadox\Hydration\Test\Relationship\MockHydrator;
 
 /** @covers \Stratadox\Hydration\Mapping\Mapping */
-class I_want_to_map_entire_classes extends TestCase
+class Mapping_maps_entire_classes extends TestCase
 {
     use MockHydrator;
 

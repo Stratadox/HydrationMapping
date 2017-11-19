@@ -14,7 +14,7 @@ use Stratadox\Hydration\UnmappableInput;
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
  * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
  */
-class I_want_to_cast_appropriate_values_into_booleans extends TestCase
+class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
 {
     /**
      * @scenario

@@ -12,7 +12,7 @@ use Stratadox\Hydration\Mapping\Property\Scalar\NullValue;
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
  * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
  */
-class I_want_to_cast_everything_into_nulls extends TestCase
+class NullValue_casts_everything_to_nulls extends TestCase
 {
     /** @scenario */
     function integer_values_convert_to_null()

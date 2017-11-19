@@ -13,7 +13,7 @@ use Stratadox\Hydration\Test\Relationship\MockHydrator;
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasOneNested
  * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
  */
-class I_want_to_map_nested_objects extends TestCase
+class HasOneNested_maps_nested_objects extends TestCase
 {
     use MockHydrator;
 

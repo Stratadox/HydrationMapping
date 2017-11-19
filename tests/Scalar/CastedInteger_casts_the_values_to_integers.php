@@ -12,7 +12,7 @@ use Stratadox\Hydration\Mapping\Property\Scalar\CastedInteger;
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
  * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
  */
-class I_want_to_cast_whatever_input_I_get_into_integers extends TestCase
+class CastedInteger_casts_the_values_to_integers extends TestCase
 {
     /** @scenario */
     function integer_like_numeric_string_input_become_integer_values()

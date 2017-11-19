@@ -10,14 +10,12 @@ use Stratadox\Hydration\Mapping\Property\Scalar\CustomTruths;
 use Stratadox\Hydration\UnmappableInput;
 
 /**
- * Don't we all?
- * @covers \Stratadox\Hydration\Mapping\Property\Scalar\BooleanValue
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\CustomTruths
  * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
  * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
  */
-class I_want_to_be_able_to_choose_what_is_true_and_what_is_false extends TestCase
+class CustomTruths_defines_what_is_true_and_what_is_false extends TestCase
 {
     /**
      * @param mixed $true
