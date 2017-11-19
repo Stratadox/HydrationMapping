@@ -9,6 +9,7 @@ use Stratadox\Hydration\Mapping\Property\Relationship\HasManyProxies;
 use Stratadox\Hydration\Test\Authors\Author;
 use Stratadox\Hydration\Test\Authors\AuthorProxy;
 use Stratadox\Hydration\Test\Authors\Authors;
+use Stratadox\Hydration\Test\Classes\Foo\Foo;
 use Stratadox\Hydration\Test\Relationship\MockHydrator;
 use Stratadox\Hydration\Test\Relationship\MockProxyBuilder;
 
@@ -58,6 +59,27 @@ class HasManyProxies_maps_lazy_collections extends TestCase
         foreach ($authors as $i => $author) {
             $this->assertSame('authors', $author->property());
             $this->assertSame($i, $author->position());
+        }
+    }
+
+    /** @scenario */
+    function proxies_receive_information_on_who_references_them()
+    {
+        $inSourceData = ['authors' => 2];
+
+        $authorsMapping = HasManyProxies::inProperty('authors',
+            $this->mockCollectionHydratorForThe(Authors::class),
+            $this->mockProxyBuilderFor(AuthorProxy::class)
+        );
+
+        $foo = new Foo();
+
+        /** @var Authors|AuthorProxy[] $authors */
+        $authors = $authorsMapping->value($inSourceData, $foo);
+
+        $this->assertCount(2, $authors);
+        foreach ($authors as $i => $author) {
+            $this->assertSame($foo, $author->owner());
         }
     }
 }

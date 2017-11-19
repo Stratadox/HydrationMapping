@@ -7,12 +7,14 @@ namespace Stratadox\Hydration\Test\Authors;
 class AuthorProxy extends Author
 {
     private $proxyFor;
+    private $owner;
     private $property;
     private $position;
 
-    public function __construct($owner, $property, $position)
+    public function __construct($owner, string $property, int $position)
     {
         parent::__construct('', '');
+        $this->owner = $owner;
         $this->property = $property;
         $this->position = $position;
     }
@@ -43,5 +45,10 @@ class AuthorProxy extends Author
     public function position()
     {
         return $this->position;
+    }
+
+    public function owner()
+    {
+        return $this->owner;
     }
 }
