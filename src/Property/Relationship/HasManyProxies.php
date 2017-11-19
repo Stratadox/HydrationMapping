@@ -44,7 +44,7 @@ class HasManyProxies extends FromSingleKey
     {
         $amount = $this->my($data);
         $proxies = [];
-        for ($i = $amount; $i > 0; --$i) {
+        for ($i = 0; $i < $amount; ++$i) {
             $proxies[] = $this->proxyBuilder->createFor($owner, $this->name(), $i);
         }
         return $this->collection->fromArray($proxies);
