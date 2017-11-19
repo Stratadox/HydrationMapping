@@ -27,7 +27,7 @@ class HasOneEmbedded implements MapsProperty
     public static function inProperty(
         string $name,
         Hydrates $hydrator
-    ) : HasOneEmbedded
+    ) : MapsProperty
     {
         return new static($name, $hydrator);
     }

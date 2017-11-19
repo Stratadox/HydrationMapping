@@ -6,6 +6,7 @@ namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
 use Stratadox\Hydration\Hydrates;
 use Stratadox\Hydration\Mapping\Property\FromSingleKey;
+use Stratadox\Hydration\MapsProperty;
 
 /**
  * Maps a nested data structure to a has-one relation in an object property.
@@ -26,7 +27,7 @@ class HasOneNested extends FromSingleKey
     public static function inProperty(
         string $name,
         Hydrates $hydrator
-    ) : HasOneNested
+    ) : MapsProperty
     {
         return new static($name, $name, $hydrator);
     }
@@ -35,7 +36,7 @@ class HasOneNested extends FromSingleKey
         string $name,
         string $key,
         Hydrates $hydrator
-    ) : HasOneNested
+    ) : MapsProperty
     {
         return new static($name, $key, $hydrator);
     }

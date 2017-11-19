@@ -27,7 +27,7 @@ class Mapping extends ImmutableCollection implements MapsObject
     public static function ofThe(
         string $class,
         MapsProperty ...$properties
-    ) : Mapping
+    ) : MapsObject
     {
         return new static($class, ...$properties);
     }

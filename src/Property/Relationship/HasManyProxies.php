@@ -6,6 +6,7 @@ namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
 use Stratadox\Hydration\Hydrates;
 use Stratadox\Hydration\Mapping\Property\FromSingleKey;
+use Stratadox\Hydration\MapsProperty;
 use Stratadox\Hydration\ProducesProxies;
 
 /**
@@ -34,7 +35,7 @@ class HasManyProxies extends FromSingleKey
         string $name,
         Hydrates $collection,
         ProducesProxies $proxyBuilder
-    ) : HasManyProxies
+    ) : MapsProperty
     {
         return new static($name, $name, $collection, $proxyBuilder);
     }
