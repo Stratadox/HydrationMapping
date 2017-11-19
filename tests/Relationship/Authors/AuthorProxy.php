@@ -7,10 +7,14 @@ namespace Stratadox\Hydration\Test\Authors;
 class AuthorProxy extends Author
 {
     private $proxyFor;
+    private $property;
+    private $position;
 
-    public function __construct()
+    public function __construct($owner, $property, $position)
     {
         parent::__construct('', '');
+        $this->property = $property;
+        $this->position = $position;
     }
 
     public function firstName() : string
@@ -29,5 +33,15 @@ class AuthorProxy extends Author
             $this->proxyFor = new Author('Lazy loading', 'Is out of scope');
         }
         return $this->proxyFor;
+    }
+
+    public function property() : string
+    {
+        return $this->property;
+    }
+
+    public function position()
+    {
+        return $this->position;
     }
 }

@@ -40,4 +40,24 @@ class HasManyProxies_maps_lazy_collections extends TestCase
             $this->assertSame('Is out of scope', $author->lastName());
         }
     }
+
+    /** @scenario */
+    function proxies_receive_information_on_where_they_are_referenced_from()
+    {
+        $inSourceData = ['authors' => 3];
+
+        $authorsMapping = HasManyProxies::inProperty('authors',
+            $this->mockCollectionHydratorForThe(Authors::class),
+            $this->mockProxyBuilderFor(AuthorProxy::class)
+        );
+
+        /** @var Authors|AuthorProxy[] $authors */
+        $authors = $authorsMapping->value($inSourceData);
+
+        $this->assertCount(3, $authors);
+        foreach ($authors as $i => $author) {
+            $this->assertSame('authors', $author->property());
+            $this->assertSame($i, $author->position());
+        }
+    }
 }

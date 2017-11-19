@@ -23,9 +23,9 @@ trait MockProxyBuilder
         $proxyBuilder->expects($this->any())
             ->method('createFor')
             ->willReturnCallback(
-                function () use ($class)
+                function ($owner, $name, $position = null) use ($class)
                 {
-                    return new $class();
+                    return new $class($owner, $name, $position);
                 }
             );
 
