@@ -18,7 +18,7 @@ class HasOneEmbedded implements MapsProperty
     private $name;
     private $hydrate;
 
-    public function __construct(string $name, Hydrates $hydrate)
+    protected function __construct(string $name, Hydrates $hydrate)
     {
         $this->name = $name;
         $this->hydrate = $hydrate;

@@ -17,7 +17,7 @@ abstract class FromSingleKey implements MapsProperty
     private $name;
     private $key;
 
-    public function __construct(string $name, string $dataKey)
+    protected function __construct(string $name, string $dataKey)
     {
         $this->name = $name;
         $this->key = $dataKey;

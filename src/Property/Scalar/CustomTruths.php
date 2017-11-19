@@ -19,7 +19,7 @@ class CustomTruths implements MapsProperty
     private $truths;
     private $falsehoods;
 
-    public function __construct(
+    protected function __construct(
         BooleanValue $mapping,
         array $truths,
         array $falsehoods

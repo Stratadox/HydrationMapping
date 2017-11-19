@@ -17,7 +17,7 @@ class HasOneNested extends FromSingleKey
 {
     private $hydrate;
 
-    public function __construct(string $name, string $dataKey, Hydrates $hydrator)
+    protected function __construct(string $name, string $dataKey, Hydrates $hydrator)
     {
         $this->hydrate = $hydrator;
         parent::__construct($name, $dataKey);

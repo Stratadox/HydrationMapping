@@ -19,7 +19,7 @@ class HasManyProxies extends FromSingleKey
     private $collection;
     private $proxyBuilder;
 
-    public function __construct(
+    protected function __construct(
         string $name,
         string $dataKey,
         Hydrates $collectionHydrator,

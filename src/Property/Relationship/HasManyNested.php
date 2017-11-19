@@ -18,7 +18,7 @@ class HasManyNested extends FromSingleKey
     private $collection;
     private $item;
 
-    public function __construct(
+    protected function __construct(
         string $name,
         string $dataKey,
         Hydrates $collection,
