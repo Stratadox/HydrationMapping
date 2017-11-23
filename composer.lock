@@ -46,16 +46,16 @@
         },
         {
             "name": "stratadox/hydration",
-            "version": "v1.1",
+            "version": "v1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Stratadox/Hydration.git",
-                "reference": "331468a1670e7eaf9e21c500106b0c02a3e0af83"
+                "reference": "e64f608c5ae7e0562b6a49fd066eece408dce6c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Stratadox/Hydration/zipball/331468a1670e7eaf9e21c500106b0c02a3e0af83",
-                "reference": "331468a1670e7eaf9e21c500106b0c02a3e0af83",
+                "url": "https://api.github.com/repos/Stratadox/Hydration/zipball/e64f608c5ae7e0562b6a49fd066eece408dce6c6",
+                "reference": "e64f608c5ae7e0562b6a49fd066eece408dce6c6",
                 "shasum": ""
             },
             "require": {
@@ -77,7 +77,7 @@
                     "homepage": "http://www.stratadox.com/"
                 }
             ],
-            "time": "2017-11-12 23:09:23"
+            "time": "2017-11-23 20:15:30"
         },
         {
             "name": "stratadox/immutable-collection",
