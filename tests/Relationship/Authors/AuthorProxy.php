@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Test\Authors;
 
-class AuthorProxy extends Author
+use Stratadox\Hydration\Proxy;
+
+class AuthorProxy extends Author implements Proxy
 {
     private $proxyFor;
     private $owner;
@@ -21,15 +23,15 @@ class AuthorProxy extends Author
 
     public function firstName() : string
     {
-        return $this->load()->firstName();
+        return $this->__load()->firstName();
     }
 
     public function lastName() : string
     {
-        return $this->load()->lastName();
+        return $this->__load()->lastName();
     }
 
-    private function load() : Author
+    public function __load() : Author
     {
         if (!isset($this->proxyFor)) {
             $this->proxyFor = new Author('Lazy loading', 'Is out of scope');
