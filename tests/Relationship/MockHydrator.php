@@ -6,6 +6,7 @@ namespace Stratadox\Hydration\Test\Relationship;
 
 use PHPUnit_Framework_MockObject_Matcher_AnyInvokedCount as AnyInvokedCount;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use ReflectionClass;
 use Stratadox\Hydration\Hydrates;
 
 trait MockHydrator
@@ -47,7 +48,7 @@ trait MockHydrator
             ->willReturnCallback(
                 function (array $data) use ($class)
                 {
-                    $inst = (new \ReflectionClass($class))->newInstanceWithoutConstructor();
+                    $inst = (new ReflectionClass($class))->newInstanceWithoutConstructor();
                     foreach ($data as $key => $value) {
                         $inst->$key = $value;
                     }
