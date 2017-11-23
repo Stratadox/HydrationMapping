@@ -82,4 +82,22 @@ class HasManyProxies_maps_lazy_collections extends TestCase
             $this->assertSame($foo, $author->owner());
         }
     }
+
+    /** @scenario */
+    function the_source_key_can_differ_from_the_property_name()
+    {
+
+        $inSourceData = ['amount' => 3];
+
+        $authorsMapping = HasManyProxies::inPropertyWithDifferentKey('authors', 'amount',
+            $this->mockCollectionHydratorForThe(Authors::class),
+            $this->mockProxyBuilderFor(AuthorProxy::class)
+        );
+
+        /** @var Authors|Author[] $authors */
+        $authors = $authorsMapping->value($inSourceData);
+
+        $this->assertCount(3, $authors);
+        $this->assertSame('authors', $authorsMapping->name());
+    }
 }
