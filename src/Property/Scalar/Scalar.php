@@ -13,4 +13,11 @@ abstract class Scalar extends FromSingleKey
     {
         return new static($name, $name);
     }
+
+    public static function inPropertyWithDifferentKey(
+        string $name, string $key
+    ) : MapsProperty
+    {
+        return new static($name, $key);
+    }
 }
