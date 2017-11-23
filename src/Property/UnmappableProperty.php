@@ -9,6 +9,13 @@ use InvalidArgumentException as InvalidArgument;
 use Stratadox\Hydration\MapsProperty;
 use Stratadox\Hydration\UnmappableInput;
 
+/**
+ * Exception which is thrown when the input to hydrate is not accepted by the
+ * property mapping.
+ *
+ * @author Stratadox
+ * @package Stratadox\Hydrate
+ */
 class UnmappableProperty extends InvalidArgument implements UnmappableInput
 {
     public static function itMustBeLikeAnInteger(
