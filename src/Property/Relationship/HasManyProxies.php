@@ -40,6 +40,16 @@ class HasManyProxies extends FromSingleKey
         return new static($name, $name, $collection, $proxyBuilder);
     }
 
+    public static function inPropertyWithDifferentKey(
+        string $name,
+        string $key,
+        Hydrates $collection,
+        ProducesProxies $proxyBuilder
+    ) : MapsProperty
+    {
+        return new static($name, $key, $collection, $proxyBuilder);
+    }
+
     /** @return object */
     public function value(array $data, $owner = null)
     {
