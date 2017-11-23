@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Stratadox\Hydration\Test\Relationship;
+namespace Stratadox\HydrationMapping\Test\Relationship;
 
 use PHPUnit_Framework_MockObject_Matcher_AnyInvokedCount as AnyInvokedCount;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;

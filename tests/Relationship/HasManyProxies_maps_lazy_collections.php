@@ -6,12 +6,12 @@ namespace Stratadox\HydrationMapping\Test;
 
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasManyProxies;
-use Stratadox\Hydration\Test\Authors\Author;
-use Stratadox\Hydration\Test\Authors\AuthorProxy;
-use Stratadox\Hydration\Test\Authors\Authors;
-use Stratadox\Hydration\Test\Classes\Foo\Foo;
-use Stratadox\Hydration\Test\Relationship\MockHydrator;
-use Stratadox\Hydration\Test\Relationship\MockProxyBuilder;
+use Stratadox\HydrationMapping\Test\Authors\Author;
+use Stratadox\HydrationMapping\Test\Authors\AuthorProxy;
+use Stratadox\HydrationMapping\Test\Authors\Authors;
+use Stratadox\HydrationMapping\Test\Classes\Foo\Foo;
+use Stratadox\HydrationMapping\Test\Relationship\MockHydrator;
+use Stratadox\HydrationMapping\Test\Relationship\MockProxyBuilder;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasManyProxies

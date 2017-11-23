@@ -6,9 +6,9 @@ namespace Stratadox\HydrationMapping\Test;
 
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasManyNested;
-use Stratadox\Hydration\Test\Authors\Author;
-use Stratadox\Hydration\Test\Authors\Authors;
-use Stratadox\Hydration\Test\Relationship\MockHydrator;
+use Stratadox\HydrationMapping\Test\Authors\Author;
+use Stratadox\HydrationMapping\Test\Authors\Authors;
+use Stratadox\HydrationMapping\Test\Relationship\MockHydrator;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasManyNested

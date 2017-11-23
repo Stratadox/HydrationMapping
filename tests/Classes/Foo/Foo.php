@@ -2,6 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Stratadox\Hydration\Test\Classes\Foo;
+namespace Stratadox\HydrationMapping\Test\Classes\Foo;
 
 class Foo {}

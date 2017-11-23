@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Stratadox\Hydration\Test\Authors;
+namespace Stratadox\HydrationMapping\Test\Authors;
 
 use Stratadox\ImmutableCollection\ImmutableCollection;
 
