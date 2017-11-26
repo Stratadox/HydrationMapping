@@ -46,10 +46,11 @@ class HasManyNested_maps_nested_collections extends TestCase
 
         $this->assertInstanceOf(Authors::class, $authors);
         $this->assertCount(10, $authors);
-        foreach ($inSourceData['authors'] as $who => $author) {
-            $this->assertInstanceOf(Author::class, $authors[$who]);
-            $this->assertSame($author['firstName'], $authors[$who]->firstName());
-            $this->assertSame($author['lastName'], $authors[$who]->lastName());
+        foreach ($inSourceData['authors'] as $who => $authorData) {
+            $author = $authors[$who];
+            $this->assertInstanceOf(Author::class, $author);
+            $this->assertSame($authorData['firstName'], $author->firstName());
+            $this->assertSame($authorData['lastName'], $author->lastName());
         }
     }
 
