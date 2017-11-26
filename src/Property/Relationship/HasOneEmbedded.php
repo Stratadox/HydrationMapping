@@ -37,7 +37,7 @@ class HasOneEmbedded implements MapsProperty
         return $this->name;
     }
 
-    /** @return object */
+    /** @inheritdoc @return mixed|object */
     public function value(array $data, $owner = null)
     {
         return $this->hydrate->fromArray($data);

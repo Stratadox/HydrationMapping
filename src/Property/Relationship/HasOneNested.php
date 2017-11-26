@@ -41,7 +41,7 @@ class HasOneNested extends FromSingleKey
         return new static($name, $key, $hydrator);
     }
 
-    /** @return object */
+    /** @inheritdoc @return mixed|object */
     public function value(array $data, $owner = null)
     {
         return $this->hydrate->fromArray($this->my($data));

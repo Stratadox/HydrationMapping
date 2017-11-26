@@ -49,7 +49,7 @@ class HasManyNested extends FromSingleKey
         return new static($name, $key, $collection, $item);
     }
 
-    /** @return object */
+    /** @inheritdoc @return mixed|object */
     public function value(array $data, $owner = null)
     {
         $objects = [];
