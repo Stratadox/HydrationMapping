@@ -20,7 +20,7 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
      * @scenario
      * @dataProvider trueValues
      */
-    function seemingly_truthful_input_becomes_true($true)
+    function true_values_becomes_true_booleans($true)
     {
         $source = ['boolean' => $true];
 
@@ -33,7 +33,7 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
      * @scenario
      * @dataProvider falseValues
      */
-    function seemingly_false_input_becomes_false($false)
+    function false_values_becomes_false_booleans($false)
     {
         $source = ['boolean' => $false];
 
