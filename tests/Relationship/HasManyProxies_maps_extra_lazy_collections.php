@@ -17,7 +17,7 @@ use Stratadox\HydrationMapping\Test\Relationship\MockProxyBuilder;
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasManyProxies
  * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
  */
-class HasManyProxies_maps_lazy_collections extends TestCase
+class HasManyProxies_maps_extra_lazy_collections extends TestCase
 {
     use MockHydrator;
     use MockProxyBuilder;
@@ -86,7 +86,6 @@ class HasManyProxies_maps_lazy_collections extends TestCase
     /** @scenario */
     function the_source_key_can_differ_from_the_property_name()
     {
-
         $inSourceData = ['amount' => 3];
 
         $authorsMapping = HasManyProxies::inPropertyWithDifferentKey('authors', 'amount',
