@@ -32,4 +32,14 @@ class HasOneProxy_maps_a_lazy_object extends TestCase
         $this->assertSame('Lazy loading', $author->firstName());
         $this->assertSame('Is out of scope', $author->lastName());
     }
+
+    /** @scenario */
+    function property_mappers_know_which_property_they_map_to()
+    {
+        $mapping = HasOneProxy::inProperty('author',
+            $this->mockProxyBuilderFor(AuthorProxy::class)
+        );
+
+        $this->assertSame('author', $mapping->name());
+    }
 }
