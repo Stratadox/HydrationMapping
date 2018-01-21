@@ -13,7 +13,7 @@ class AuthorProxy extends Author implements Proxy
     private $property;
     private $position;
 
-    public function __construct($owner, string $property, int $position)
+    public function __construct($owner, string $property, ?int $position)
     {
         parent::__construct('', '');
         $this->owner = $owner;
@@ -44,7 +44,7 @@ class AuthorProxy extends Author implements Proxy
         return $this->property;
     }
 
-    public function position()
+    public function position() : ?int
     {
         return $this->position;
     }
