@@ -6,10 +6,12 @@ namespace Stratadox\HydrationMapping\Test;
 
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Scalar\StringValue;
+use Stratadox\Hydration\UnmappableInput;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
  * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
+ * @covers \Stratadox\Hydration\Mapping\Property\MissingTheKey
  */
 class Scalars_can_map_keys_to_properties extends TestCase
 {
@@ -20,5 +22,14 @@ class Scalars_can_map_keys_to_properties extends TestCase
 
         $this->assertEquals('property', $map->name());
         $this->assertEquals('value', $map->value(['key' => 'value']));
+    }
+
+    /** @scenario */
+    function throwing_an_exception_if_the_key_does_not_exist()
+    {
+        $map = StringValue::inProperty('missing');
+
+        $this->expectException(UnmappableInput::class);
+        $map->value(['foo' => 'bar']);
     }
 }
