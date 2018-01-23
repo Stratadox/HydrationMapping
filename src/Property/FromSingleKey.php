@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property;
 
+use function array_key_exists;
 use Stratadox\Hydration\MapsProperty;
 
 /**
@@ -35,6 +36,9 @@ abstract class FromSingleKey implements MapsProperty
 
     protected function my(array $data)
     {
+        if (!array_key_exists($this->key, $data)) {
+            throw MissingTheKey::inTheInput($data, $this, $this->key);
+        }
         return $data[$this->key];
     }
 }
