@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 
 use PHPUnit\Framework\TestCase;
-use StdClass;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasManyProxies;
-use Stratadox\HydrationMapping\Test\Doubles\Author\Author;
-use Stratadox\HydrationMapping\Test\Doubles\Author\AuthorProxy;
-use Stratadox\HydrationMapping\Test\Doubles\Author\Authors;
-use Stratadox\HydrationMapping\Test\Doubles\MockHydrator;
-use Stratadox\HydrationMapping\Test\Doubles\MockProxyBuilder;
+use Stratadox\HydrationMapping\Test\Double\Author\Author;
+use Stratadox\HydrationMapping\Test\Double\Author\AuthorProxy;
+use Stratadox\HydrationMapping\Test\Double\Author\Authors;
+use Stratadox\HydrationMapping\Test\Double\MockHydrator;
+use Stratadox\HydrationMapping\Test\Double\MockProxyBuilder;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasManyProxies
@@ -72,7 +71,7 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
             $this->mockProxyBuilderFor(AuthorProxy::class)
         );
 
-        /** @var \Stratadox\HydrationMapping\Test\Doubles\Authors\Authors|AuthorProxy[] $authors */
+        /** @var Authors|AuthorProxy[] $authors */
         $authors = $authorsMapping->value($inSourceData, $this);
 
         $this->assertCount(2, $authors);
@@ -91,7 +90,7 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
             $this->mockProxyBuilderFor(AuthorProxy::class)
         );
 
-        /** @var \Stratadox\HydrationMapping\Test\Doubles\Authors\Authors|Author[] $authors */
+        /** @var Authors|Author[] $authors */
         $authors = $authorsMapping->value($inSourceData);
 
         $this->assertCount(3, $authors);

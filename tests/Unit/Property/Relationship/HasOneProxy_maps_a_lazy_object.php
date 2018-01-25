@@ -7,9 +7,9 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneProxy;
 use Stratadox\Hydration\Proxy;
-use Stratadox\HydrationMapping\Test\Doubles\Authors\Author;
-use Stratadox\HydrationMapping\Test\Doubles\Author\AuthorProxy;
-use Stratadox\HydrationMapping\Test\Doubles\MockProxyBuilder;
+use Stratadox\HydrationMapping\Test\Double\Author\Author;
+use Stratadox\HydrationMapping\Test\Double\Author\AuthorProxy;
+use Stratadox\HydrationMapping\Test\Double\MockProxyBuilder;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasOneProxy
@@ -25,7 +25,7 @@ class HasOneProxy_maps_a_lazy_object extends TestCase
             $this->mockProxyBuilderFor(AuthorProxy::class)
         );
 
-        /** @var \Stratadox\HydrationMapping\Test\Doubles\Authors\Author|AuthorProxy $author */
+        /** @var Author|AuthorProxy $author */
         $author = $mapping->value([]);
 
         $this->assertInstanceOf(Proxy::class, $author);

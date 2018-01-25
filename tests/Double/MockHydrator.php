@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Stratadox\HydrationMapping\Test\Doubles;
+namespace Stratadox\HydrationMapping\Test\Double;
 
 use PHPUnit\Framework\MockObject\Matcher\AnyInvokedCount;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;

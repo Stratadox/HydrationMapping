@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Stratadox\HydrationMapping\Test\Doubles\Author;
+namespace Stratadox\HydrationMapping\Test\Double\Author;
 
 use Stratadox\Hydration\Proxy;
 

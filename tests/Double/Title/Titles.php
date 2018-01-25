@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Stratadox\HydrationMapping\Test\Doubles\Title;
+namespace Stratadox\HydrationMapping\Test\Double\Title;
 
 use Stratadox\ImmutableCollection\ImmutableCollection;
 

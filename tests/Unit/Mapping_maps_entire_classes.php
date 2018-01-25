@@ -7,7 +7,7 @@ namespace Stratadox\HydrationMapping\Test\Unit;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Mapping;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneNested;
-use Stratadox\HydrationMapping\Test\Doubles\MockHydrator;
+use Stratadox\HydrationMapping\Test\Double\MockHydrator;
 
 /** @covers \Stratadox\Hydration\Mapping\Mapping */
 class Mapping_maps_entire_classes extends TestCase

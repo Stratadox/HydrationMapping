@@ -6,8 +6,8 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneEmbedded;
-use Stratadox\HydrationMapping\Test\Doubles\Author\Author;
-use Stratadox\HydrationMapping\Test\Doubles\MockHydrator;
+use Stratadox\HydrationMapping\Test\Double\Author\Author;
+use Stratadox\HydrationMapping\Test\Double\MockHydrator;
 
 /** @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasOneEmbedded */
 class HasOneEmbedded_maps_embedded_objects extends TestCase

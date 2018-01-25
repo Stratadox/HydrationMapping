@@ -6,9 +6,9 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasManyEmbedded;
-use Stratadox\HydrationMapping\Test\Doubles\Title\Title;
-use Stratadox\HydrationMapping\Test\Doubles\Title\Titles;
-use Stratadox\HydrationMapping\Test\Doubles\MockHydrator;
+use Stratadox\HydrationMapping\Test\Double\Title\Title;
+use Stratadox\HydrationMapping\Test\Double\Title\Titles;
+use Stratadox\HydrationMapping\Test\Double\MockHydrator;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasManyEmbedded
@@ -26,7 +26,7 @@ class HasManyEmbedded_maps_arrays_of_scalars extends TestCase
             'title'
         );
 
-        /** @var \Stratadox\HydrationMapping\Test\Doubles\Title\Titles $titles */
+        /** @var Titles $titles */
         $titles = $mapping->value(['foo', 'bar', 'baz']);
 
         $this->assertSame('foo', $titles[0]->title);
