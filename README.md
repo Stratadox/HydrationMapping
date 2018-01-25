@@ -14,3 +14,7 @@ object properties, in order to assemble the objects that model a business domain
 Install using composer:
 
 `composer require stratadox/hydration-mapping`
+
+# Hydrate
+
+This module is part of the [Hydrate Module](https://github.com/Stratadox/Hydrate).
