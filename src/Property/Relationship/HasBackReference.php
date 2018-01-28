@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
+use Stratadox\Hydration\Hydrates;
 use Stratadox\Hydration\MapsProperty;
 
 /**
@@ -15,15 +16,17 @@ use Stratadox\Hydration\MapsProperty;
 class HasBackReference implements MapsProperty
 {
     private $name;
+    private $sourceHydrator;
 
-    protected function __construct(string $name)
+    protected function __construct(string $name, ?Hydrates $source)
     {
         $this->name = $name;
+        $this->sourceHydrator = $source;
     }
 
-    public static function inProperty(string $name) : MapsProperty
+    public static function inProperty(string $name, Hydrates $source = null) : self
     {
-        return new static($name);
+        return new static($name, $source);
     }
 
     public function name() : string
@@ -31,9 +34,14 @@ class HasBackReference implements MapsProperty
         return $this->name;
     }
 
+    public function setSource(Hydrates $source)
+    {
+        $this->sourceHydrator = $source;
+    }
+
     /** @inheritdoc @return mixed|object */
     public function value(array $data, $owner = null)
     {
-        return $owner;
+        return $this->sourceHydrator->currentInstance();
     }
 }
