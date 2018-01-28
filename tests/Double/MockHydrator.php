@@ -60,6 +60,28 @@ trait MockHydrator
     }
 
     /**
+     * Mocks a simple hydrator which will throw an @see UnmappableInput exception.
+     *
+     * @param string $message
+     * @return Hydrates|MockObject
+     */
+    protected function mockExceptionThrowingHydrator(string $message = '') : MockObject
+    {
+        $hydrator = $this->createMock(Hydrates::class);
+
+        $hydrator->expects($this->any())
+            ->method('fromArray')
+            ->willReturnCallback(
+                function () use ($message)
+                {
+                    throw new Unmappable($message);
+                }
+            );
+
+        return $hydrator;
+    }
+
+    /**
      * @return AnyInvokedCount
      */
     abstract public static function any();

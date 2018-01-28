@@ -6,6 +6,7 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasManyEmbedded;
+use Stratadox\Hydration\UnmappableInput;
 use Stratadox\HydrationMapping\Test\Double\Title\Title;
 use Stratadox\HydrationMapping\Test\Double\Title\Titles;
 use Stratadox\HydrationMapping\Test\Double\MockHydrator;
@@ -62,5 +63,37 @@ class HasManyEmbedded_maps_arrays_of_scalars extends TestCase
             'foo',
             $mapping->name()
         );
+    }
+
+    /** @scenario */
+    function throwing_an_informative_exception_when_the_items_cannot_be_mapped()
+    {
+        $mapping = HasManyEmbedded::inProperty('foo',
+            $this->mockCollectionHydratorForThe(Titles::class),
+            $this->mockExceptionThrowingHydrator('Original message here.')
+        );
+
+        $this->expectException(UnmappableInput::class);
+        $this->expectExceptionMessage(
+            'Failed to map the embedded hasMany items of the `foo` property: Original message here.'
+        );
+
+        $mapping->value(['bar']);
+    }
+
+    /** @scenario */
+    function throwing_an_informative_exception_when_the_collection_cannot_be_mapped()
+    {
+        $mapping = HasManyEmbedded::inProperty('foo',
+            $this->mockExceptionThrowingHydrator('Original message here.'),
+            $this->mockPublicSetterHydratorForThe(Title::class)
+        );
+
+        $this->expectException(UnmappableInput::class);
+        $this->expectExceptionMessage(
+            'Failed to map the embedded hasMany collection of the `foo` property: Original message here.'
+        );
+
+        $mapping->value(['bar']);
     }
 }
