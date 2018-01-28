@@ -14,15 +14,14 @@ class ObjectMappingFailed extends RuntimeException implements UnmappableInput
 {
     public static function tryingToMapItem(
         MapsProperty $mapping,
-        Throwable $exception,
-        string $property
+        Throwable $exception
     ) : self
     {
         return new self(
             sprintf(
                 'Failed to map the %s relation of the `%s` property: %s',
                 (new ReflectionClass($mapping))->getShortName(),
-                $property,
+                $mapping->name(),
                 $exception->getMessage()
             ),
             0,

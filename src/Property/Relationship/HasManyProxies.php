@@ -66,9 +66,7 @@ class HasManyProxies extends FromSingleKey
         try {
             return $this->collection->fromArray($proxies);
         } catch (Throwable $exception) {
-            throw CollectionMappingFailed::tryingToMapCollection(
-                $this, $exception, $this->name()
-            );
+            throw CollectionMappingFailed::tryingToMapCollection($this, $exception);
         }
     }
 }

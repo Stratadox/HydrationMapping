@@ -14,15 +14,14 @@ class CollectionMappingFailed extends RuntimeException implements UnmappableInpu
 {
     public static function tryingToMapItem(
         MapsProperty $mapping,
-        Throwable $exception,
-        string $property
+        Throwable $exception
     ) : self
     {
         return new self(
             sprintf(
                 'Failed to map the %s items of the `%s` property: %s',
                 (new ReflectionClass($mapping))->getShortName(),
-                $property,
+                $mapping->name(),
                 $exception->getMessage()
             ),
             0,
@@ -32,15 +31,14 @@ class CollectionMappingFailed extends RuntimeException implements UnmappableInpu
 
     public static function tryingToMapCollection(
         MapsProperty $mapping,
-        Throwable $exception,
-        string $property
+        Throwable $exception
     ) : self
     {
         return new self(
             sprintf(
                 'Failed to map the %s collection of the `%s` property: %s',
                 (new ReflectionClass($mapping))->getShortName(),
-                $property,
+                $mapping->name(),
                 $exception->getMessage()
             ),
             0,

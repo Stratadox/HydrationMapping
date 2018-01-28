@@ -44,9 +44,7 @@ class HasOneEmbedded implements MapsProperty
         try {
             return $this->hydrate->fromArray($data);
         } catch (Throwable $exception) {
-            throw ObjectMappingFailed::tryingToMapItem(
-                $this, $exception, $this->name()
-            );
+            throw ObjectMappingFailed::tryingToMapItem($this, $exception);
         }
     }
 }

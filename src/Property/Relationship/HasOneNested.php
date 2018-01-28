@@ -48,9 +48,7 @@ class HasOneNested extends FromSingleKey
         try {
             return $this->hydrate->fromArray($this->my($data));
         } catch (Throwable $exception) {
-            throw ObjectMappingFailed::tryingToMapItem(
-                $this, $exception, $this->name()
-            );
+            throw ObjectMappingFailed::tryingToMapItem($this, $exception);
         }
     }
 }

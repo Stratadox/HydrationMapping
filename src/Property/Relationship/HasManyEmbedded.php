@@ -57,16 +57,12 @@ class HasManyEmbedded implements MapsProperty
                 $objects[] = $this->item->fromArray([$this->key => $value]);
             }
         } catch (Throwable $exception) {
-            throw CollectionMappingFailed::tryingToMapItem(
-                $this, $exception, $this->name
-            );
+            throw CollectionMappingFailed::tryingToMapItem($this, $exception);
         }
         try {
             return $this->collection->fromArray($objects);
         } catch (Throwable $exception) {
-            throw CollectionMappingFailed::tryingToMapCollection(
-                $this, $exception, $this->name
-            );
+            throw CollectionMappingFailed::tryingToMapCollection($this, $exception);
         }
     }
 }

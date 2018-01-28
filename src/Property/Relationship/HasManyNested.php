@@ -59,16 +59,12 @@ class HasManyNested extends FromSingleKey
                 $objects[] = $this->item->fromArray($objectData);
             }
         } catch (Throwable $exception) {
-            throw CollectionMappingFailed::tryingToMapItem(
-                $this, $exception, $this->name()
-            );
+            throw CollectionMappingFailed::tryingToMapItem($this, $exception);
         }
         try {
             return $this->collection->fromArray($objects);
         } catch (Throwable $exception) {
-            throw CollectionMappingFailed::tryingToMapCollection(
-                $this, $exception, $this->name()
-            );
+            throw CollectionMappingFailed::tryingToMapCollection($this, $exception);
         }
     }
 }
