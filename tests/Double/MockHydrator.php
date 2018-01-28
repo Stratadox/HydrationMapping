@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Stratadox\HydrationMapping\Test\Double;
 
+use Exception;
 use PHPUnit\Framework\MockObject\Matcher\AnyInvokedCount;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use ReflectionClass;
@@ -74,7 +75,7 @@ trait MockHydrator
             ->willReturnCallback(
                 function () use ($message)
                 {
-                    throw new Unmappable($message);
+                    throw new Exception($message);
                 }
             );
 
