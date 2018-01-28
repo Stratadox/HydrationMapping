@@ -8,7 +8,7 @@ use Stratadox\Hydration\Hydrates;
 use Stratadox\Hydration\Mapping\Property\FromSingleKey;
 use Stratadox\Hydration\MapsProperty;
 use Stratadox\Hydration\ProducesProxies;
-use Stratadox\Hydration\UnmappableInput;
+use Throwable;
 
 /**
  * Maps a number to a collection of proxies in an object property.
@@ -61,7 +61,7 @@ class HasManyProxies extends FromSingleKey
         }
         try {
             return $this->collection->fromArray($proxies);
-        } catch (UnmappableInput $exception) {
+        } catch (Throwable $exception) {
             throw CollectionMappingFailed::tryingToMapCollection(
                 $this, $exception, $this->name()
             );
