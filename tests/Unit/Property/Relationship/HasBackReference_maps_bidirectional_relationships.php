@@ -4,21 +4,33 @@ declare(strict_types=1);
 
 namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use StdClass;
+use Stratadox\Hydration\Hydrates;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasBackReference;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasBackReference
  */
-class HasBackReference_maps_back_to_the_owner extends TestCase
+class HasBackReference_maps_bidirectional_relationships extends TestCase
 {
     /** @scenario */
     function mapping_a_bidirectional_association()
     {
+        $owner = new StdClass;
+
+        /** @var MockObject|Hydrates $source */
+        $source = $this->createMock(Hydrates::class);
+        $source->expects($this->once())
+            ->method('currentInstance')
+            ->willReturn($owner);
+
         $mapping = HasBackReference::inProperty('foo');
+        $mapping->setSource($source);
 
         $this->assertSame(
-            $this,
+            $owner,
             $mapping->value([], $this)
         );
     }
