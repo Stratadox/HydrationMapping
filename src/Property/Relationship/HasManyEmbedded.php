@@ -6,6 +6,7 @@ namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
 use Stratadox\Hydration\Hydrates;
 use Stratadox\Hydration\MapsProperty;
+use Stratadox\Hydration\UnmappableInput;
 
 /**
  * Maps a list of scalars to a collection of objects.
@@ -51,9 +52,17 @@ class HasManyEmbedded implements MapsProperty
     public function value(array $data, $owner = null)
     {
         $objects = [];
-        foreach ($data as $value) {
-            $objects[] = $this->item->fromArray([$this->key => $value]);
+        try {
+            foreach ($data as $value) {
+                $objects[] = $this->item->fromArray([$this->key => $value]);
+            }
+        } catch (UnmappableInput $exception) {
+            throw MappingFailed::tryingToMapItem($this, $exception, $this->name);
         }
-        return $this->collection->fromArray($objects);
+        try {
+            return $this->collection->fromArray($objects);
+        } catch (UnmappableInput $exception) {
+            throw MappingFailed::tryingToMapCollection($this, $exception, $this->name);
+        }
     }
 }
