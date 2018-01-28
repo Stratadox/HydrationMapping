@@ -7,6 +7,7 @@ namespace Stratadox\Hydration\Mapping\Property\Relationship;
 use Stratadox\Hydration\Hydrates;
 use Stratadox\Hydration\Mapping\Property\FromSingleKey;
 use Stratadox\Hydration\MapsProperty;
+use Stratadox\Hydration\UnmappableInput;
 
 /**
  * Maps a nested data structure to a collection in an object property.
@@ -52,10 +53,18 @@ class HasManyNested extends FromSingleKey
     /** @inheritdoc @return mixed|object */
     public function value(array $data, $owner = null)
     {
-        $objects = [];
-        foreach ($this->my($data) as $objectData) {
-            $objects[] = $this->item->fromArray($objectData);
+        try {
+            $objects = [];
+            foreach ($this->my($data) as $objectData) {
+                $objects[] = $this->item->fromArray($objectData);
+            }
+        } catch (UnmappableInput $exception) {
+            throw MappingFailed::tryingToMapItem($this, $exception, $this->name());
         }
-        return $this->collection->fromArray($objects);
+        try {
+            return $this->collection->fromArray($objects);
+        } catch (UnmappableInput $exception) {
+            throw MappingFailed::tryingToMapCollection($this, $exception, $this->name());
+        }
     }
 }
