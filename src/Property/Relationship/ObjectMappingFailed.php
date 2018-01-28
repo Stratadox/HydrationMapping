@@ -6,6 +6,7 @@ namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
 use ReflectionClass;
 use RuntimeException;
+use function sprintf;
 use Stratadox\Hydration\MapsProperty;
 use Stratadox\Hydration\UnmappableInput;
 use Throwable;

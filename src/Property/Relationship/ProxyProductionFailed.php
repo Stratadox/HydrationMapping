@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
 use RuntimeException;
+use function sprintf;
 use Stratadox\Hydration\MapsProperty;
 use Stratadox\Hydration\UnmappableInput;
 use Throwable;
