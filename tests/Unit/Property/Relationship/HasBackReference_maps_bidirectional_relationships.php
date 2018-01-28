@@ -14,6 +14,7 @@ use Stratadox\Hydration\UnmappableInput;
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasBackReference
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\NoSourceHydrator
+ * @covers \Stratadox\Hydration\Mapping\Property\Relationship\NoReferrerFound
  */
 class HasBackReference_maps_bidirectional_relationships extends TestCase
 {
@@ -56,6 +57,25 @@ class HasBackReference_maps_bidirectional_relationships extends TestCase
         $this->expectException(UnmappableInput::class);
         $this->expectExceptionMessage(
             'Failed to reference back to the `foo` relationship: no source defined.'
+        );
+
+        $mapping->value([]);
+    }
+
+    function throwing_an_exception_if_no_referrer_was_found()
+    {
+        /** @var MockObject|Hydrates $source */
+        $source = $this->createMock(Hydrates::class);
+        $source->expects($this->once())
+            ->method('currentInstance')
+            ->willReturn(null);
+
+        $mapping = HasBackReference::inProperty('foo');
+        $mapping->setSource($source);
+
+        $this->expectException(UnmappableInput::class);
+        $this->expectExceptionMessage(
+            'Failed to reference back to the `foo` relationship: no referrer found.'
         );
 
         $mapping->value([]);
