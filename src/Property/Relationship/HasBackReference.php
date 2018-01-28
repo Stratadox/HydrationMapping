@@ -42,6 +42,9 @@ class HasBackReference implements MapsProperty
     /** @inheritdoc @return mixed|object */
     public function value(array $data, $owner = null)
     {
+        if (!isset($this->sourceHydrator)) {
+            throw NoSourceHydrator::tryingToHydrateBackReferenceIn($this->name);
+        }
         return $this->sourceHydrator->currentInstance();
     }
 }
