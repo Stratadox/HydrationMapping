@@ -16,7 +16,7 @@ use Stratadox\Hydration\UnmappableInput;
  * @author Stratadox
  * @package Stratadox\Hydrate
  */
-class UnmappableProperty extends InvalidArgument implements UnmappableInput
+final class UnmappableProperty extends InvalidArgument implements UnmappableInput
 {
     public static function itMustBeLikeAnInteger(
         MapsProperty $failedToMapTo,

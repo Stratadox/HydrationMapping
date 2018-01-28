@@ -6,7 +6,6 @@ namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
 use Stratadox\Hydration\Hydrates;
 use Stratadox\Hydration\Mapping\Property\FromSingleKey;
-use Stratadox\Hydration\MapsProperty;
 use Stratadox\Hydration\ProducesProxies;
 use Throwable;
 
@@ -16,7 +15,7 @@ use Throwable;
  * @package Stratadox\Hydrate
  * @author Stratadox
  */
-class HasManyProxies extends FromSingleKey
+final class HasManyProxies extends FromSingleKey
 {
     private $collection;
     private $proxyBuilder;
@@ -36,9 +35,9 @@ class HasManyProxies extends FromSingleKey
         string $name,
         Hydrates $collection,
         ProducesProxies $proxyBuilder
-    ) : MapsProperty
+    ) : self
     {
-        return new static($name, $name, $collection, $proxyBuilder);
+        return new self($name, $name, $collection, $proxyBuilder);
     }
 
     public static function inPropertyWithDifferentKey(
@@ -46,9 +45,9 @@ class HasManyProxies extends FromSingleKey
         string $key,
         Hydrates $collection,
         ProducesProxies $proxyBuilder
-    ) : MapsProperty
+    ) : self
     {
-        return new static($name, $key, $collection, $proxyBuilder);
+        return new self($name, $key, $collection, $proxyBuilder);
     }
 
     /** @inheritdoc @return mixed|object */

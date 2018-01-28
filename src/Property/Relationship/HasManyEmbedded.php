@@ -14,14 +14,14 @@ use Throwable;
  * @package Stratadox\Hydrate
  * @author Stratadox
  */
-class HasManyEmbedded implements MapsProperty
+final class HasManyEmbedded implements MapsProperty
 {
     private $name;
     private $collection;
     private $item;
     private $key;
 
-    public function __construct(
+    private function __construct(
         string $name,
         Hydrates $collection,
         Hydrates $item,
@@ -38,9 +38,9 @@ class HasManyEmbedded implements MapsProperty
         Hydrates $collection,
         Hydrates $item,
         string $key = 'key'
-    ) : MapsProperty
+    ) : self
     {
-        return new static($property, $collection, $item, $key);
+        return new self($property, $collection, $item, $key);
     }
 
     /** @inheritdoc */

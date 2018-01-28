@@ -10,7 +10,7 @@ namespace Stratadox\Hydration\Mapping\Property\Scalar;
  * @package Stratadox\Hydrate
  * @author Stratadox
  */
-class StringValue extends Scalar
+final class StringValue extends Scalar
 {
     /** @inheritdoc */
     public function value(array $data, $owner = null) : string

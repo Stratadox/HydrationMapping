@@ -10,7 +10,7 @@ use Stratadox\Hydration\MapsProperty;
 use Stratadox\Hydration\UnmappableInput;
 use Throwable;
 
-class ObjectMappingFailed extends RuntimeException implements UnmappableInput
+final class ObjectMappingFailed extends RuntimeException implements UnmappableInput
 {
     public static function tryingToMapItem(
         MapsProperty $mapping,

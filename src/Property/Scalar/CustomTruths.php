@@ -13,13 +13,13 @@ use Stratadox\Hydration\MapsProperty;
  * @package Stratadox\Hydrate
  * @author Stratadox
  */
-class CustomTruths implements MapsProperty
+final class CustomTruths implements MapsProperty
 {
     private $for;
     private $truths;
     private $falsehoods;
 
-    protected function __construct(
+    private function __construct(
         BooleanValue $mapping,
         array $truths,
         array $falsehoods
@@ -33,9 +33,9 @@ class CustomTruths implements MapsProperty
         BooleanValue $mapping,
         array $truths,
         array $falsehoods
-    ) : MapsProperty
+    ) : self
     {
-        return new static($mapping, $truths, $falsehoods);
+        return new self($mapping, $truths, $falsehoods);
     }
 
     /** @inheritdoc */

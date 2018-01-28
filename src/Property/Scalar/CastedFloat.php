@@ -10,7 +10,7 @@ namespace Stratadox\Hydration\Mapping\Property\Scalar;
  * @package Stratadox\Hydrate
  * @author Stratadox
  */
-class CastedFloat extends Scalar
+final class CastedFloat extends Scalar
 {
     /** @inheritdoc */
     public function value(array $data, $owner = null) : float

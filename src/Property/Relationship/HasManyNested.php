@@ -15,7 +15,7 @@ use Throwable;
  * @package Stratadox\Hydrate
  * @author Stratadox
  */
-class HasManyNested extends FromSingleKey
+final class HasManyNested extends FromSingleKey
 {
     private $collection;
     private $item;
@@ -45,9 +45,9 @@ class HasManyNested extends FromSingleKey
         string $key,
         Hydrates $collection,
         Hydrates $item
-    ) : MapsProperty
+    ) : self
     {
-        return new static($name, $key, $collection, $item);
+        return new self($name, $key, $collection, $item);
     }
 
     /** @inheritdoc @return mixed|object */

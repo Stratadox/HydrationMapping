@@ -8,7 +8,7 @@ use RuntimeException;
 use function sprintf;
 use Stratadox\Hydration\UnmappableInput;
 
-class NoSourceHydrator extends RuntimeException implements UnmappableInput
+final class NoSourceHydrator extends RuntimeException implements UnmappableInput
 {
     public static function tryingToHydrateBackReferenceIn(string $property) : self
     {

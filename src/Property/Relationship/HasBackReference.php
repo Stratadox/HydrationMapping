@@ -13,12 +13,12 @@ use Stratadox\Hydration\MapsProperty;
  * @package Stratadox\Hydrate
  * @author Stratadox
  */
-class HasBackReference implements MapsProperty
+final class HasBackReference implements MapsProperty
 {
     private $name;
     private $sourceHydrator;
 
-    protected function __construct(string $name, ?Hydrates $source)
+    private function __construct(string $name, ?Hydrates $source)
     {
         $this->name = $name;
         $this->sourceHydrator = $source;
@@ -26,7 +26,7 @@ class HasBackReference implements MapsProperty
 
     public static function inProperty(string $name, Hydrates $source = null) : self
     {
-        return new static($name, $source);
+        return new self($name, $source);
     }
 
     /** @inheritdoc */

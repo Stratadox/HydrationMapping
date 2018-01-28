@@ -14,12 +14,12 @@ use Throwable;
  * @package Stratadox\Hydrate
  * @author Stratadox
  */
-class HasOneProxy implements MapsProperty
+final class HasOneProxy implements MapsProperty
 {
     private $name;
     private $proxyBuilder;
 
-    protected function __construct(
+    private function __construct(
         string $name,
         ProducesProxies $proxyBuilder
     ) {
@@ -30,9 +30,9 @@ class HasOneProxy implements MapsProperty
     public static function inProperty(
         string $name,
         ProducesProxies $proxyBuilder
-    ) : MapsProperty
+    ) : self
     {
-        return new static($name, $proxyBuilder);
+        return new self($name, $proxyBuilder);
     }
 
     /** @inheritdoc @return mixed|object */

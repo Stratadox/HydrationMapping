@@ -9,7 +9,7 @@ use Stratadox\Hydration\MapsProperty;
 use Stratadox\Hydration\UnmappableInput;
 use Throwable;
 
-class ProxyProductionFailed extends RuntimeException implements UnmappableInput
+final class ProxyProductionFailed extends RuntimeException implements UnmappableInput
 {
     public static function tryingToProduceFor(
         MapsProperty $mapping,

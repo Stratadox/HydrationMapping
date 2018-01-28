@@ -9,7 +9,7 @@ use InvalidArgumentException as InvalidArgument;
 use Stratadox\Hydration\MapsProperty;
 use Stratadox\Hydration\UnmappableInput;
 
-class MissingTheKey extends InvalidArgument implements UnmappableInput
+final class MissingTheKey extends InvalidArgument implements UnmappableInput
 {
     public static function inTheInput(array $data, MapsProperty $mapping, string $key) : UnmappableInput
     {

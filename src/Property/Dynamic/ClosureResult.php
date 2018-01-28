@@ -13,7 +13,7 @@ use Stratadox\Hydration\MapsProperty;
  * @package Stratadox\Hydrate
  * @author Stratadox
  */
-class ClosureResult implements MapsProperty
+final class ClosureResult implements MapsProperty
 {
     private $property;
     private $function;
@@ -24,9 +24,9 @@ class ClosureResult implements MapsProperty
         $this->function = $function;
     }
 
-    public static function inProperty(string $name, Closure $function) : MapsProperty
+    public static function inProperty(string $name, Closure $function) : self
     {
-        return new static($name, $function);
+        return new self($name, $function);
     }
 
     /** @inheritdoc */

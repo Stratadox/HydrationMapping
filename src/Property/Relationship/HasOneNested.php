@@ -6,7 +6,6 @@ namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
 use Stratadox\Hydration\Hydrates;
 use Stratadox\Hydration\Mapping\Property\FromSingleKey;
-use Stratadox\Hydration\MapsProperty;
 use Throwable;
 
 /**
@@ -15,7 +14,7 @@ use Throwable;
  * @package Stratadox\Hydrate
  * @author Stratadox
  */
-class HasOneNested extends FromSingleKey
+final class HasOneNested extends FromSingleKey
 {
     private $hydrate;
 
@@ -28,18 +27,18 @@ class HasOneNested extends FromSingleKey
     public static function inProperty(
         string $name,
         Hydrates $hydrator
-    ) : MapsProperty
+    ) : self
     {
-        return new static($name, $name, $hydrator);
+        return new self($name, $name, $hydrator);
     }
 
     public static function inPropertyWithDifferentKey(
         string $name,
         string $key,
         Hydrates $hydrator
-    ) : MapsProperty
+    ) : self
     {
-        return new static($name, $key, $hydrator);
+        return new self($name, $key, $hydrator);
     }
 
     /** @inheritdoc @return mixed|object */

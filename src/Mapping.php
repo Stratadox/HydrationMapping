@@ -14,7 +14,7 @@ use Stratadox\ImmutableCollection\ImmutableCollection;
  * @package Stratadox\Hydrate
  * @author Stratadox
  */
-class Mapping extends ImmutableCollection implements MapsObject
+final class Mapping extends ImmutableCollection implements MapsObject
 {
     private $className;
 
