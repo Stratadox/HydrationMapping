@@ -6,6 +6,7 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasManyNested;
+use Stratadox\Hydration\UnmappableInput;
 use Stratadox\HydrationMapping\Test\Double\Author\Author;
 use Stratadox\HydrationMapping\Test\Double\Author\Authors;
 use Stratadox\HydrationMapping\Test\Double\MockHydrator;
@@ -13,6 +14,7 @@ use Stratadox\HydrationMapping\Test\Double\MockHydrator;
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasManyNested
  * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
+ * @covers \Stratadox\Hydration\Mapping\Property\Relationship\MappingFailed
  */
 class HasManyNested_maps_nested_collections extends TestCase
 {
@@ -76,5 +78,37 @@ class HasManyNested_maps_nested_collections extends TestCase
 
         $this->assertCount(3, $authors);
         $this->assertSame('authors', $authorsMapping->name());
+    }
+
+    /** @scenario */
+    function throwing_an_informative_exception_when_the_items_cannot_be_mapped()
+    {
+        $mapping = HasManyNested::inProperty('foo',
+            $this->mockCollectionHydratorForThe(Authors::class),
+            $this->mockExceptionThrowingHydrator('Original message here.')
+        );
+
+        $this->expectException(UnmappableInput::class);
+        $this->expectExceptionMessage(
+            'Failed to map the HasManyNested items of the `foo` property: Original message here.'
+        );
+
+        $mapping->value(['foo' => [[]]]);
+    }
+
+    /** @scenario */
+    function throwing_an_informative_exception_when_the_collection_cannot_be_mapped()
+    {
+        $mapping = HasManyNested::inProperty('foo',
+            $this->mockExceptionThrowingHydrator('Original message here.'),
+            $this->mockPublicSetterHydratorForThe(Author::class)
+        );
+
+        $this->expectException(UnmappableInput::class);
+        $this->expectExceptionMessage(
+            'Failed to map the HasManyNested collection of the `foo` property: Original message here.'
+        );
+
+        $mapping->value(['foo' => []]);
     }
 }
