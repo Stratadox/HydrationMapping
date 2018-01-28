@@ -17,6 +17,7 @@ use Stratadox\HydrationMapping\Test\Double\MockProxyBuilder;
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasManyProxies
  * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\CollectionMappingFailed
+ * @covers \Stratadox\Hydration\Mapping\Property\Relationship\ProxyProductionFailed
  */
 class HasManyProxies_maps_extra_lazy_collections extends TestCase
 {
@@ -110,6 +111,22 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
         $this->expectException(UnmappableInput::class);
         $this->expectExceptionMessage(
             'Failed to map the HasManyProxies collection of the `foo` property: Original message here.'
+        );
+
+        $mapping->value(['foo' => 1]);
+    }
+
+    /** @scenario */
+    function throwing_an_informative_exception_when_the_proxies_cannot_be_built()
+    {
+        $mapping = HasManyProxies::inProperty('foo',
+            $this->mockCollectionHydratorForThe(Authors::class),
+            $this->mockExceptionThrowingProxyBuilder('Original message here.')
+        );
+
+        $this->expectException(UnmappableInput::class);
+        $this->expectExceptionMessage(
+            'Proxy production for in the `foo` property failed: Original message here.'
         );
 
         $mapping->value(['foo' => 1]);
