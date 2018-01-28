@@ -62,6 +62,7 @@ class HasBackReference_maps_bidirectional_relationships extends TestCase
         $mapping->value([]);
     }
 
+    /** @scenario */
     function throwing_an_exception_if_no_referrer_was_found()
     {
         /** @var MockObject|Hydrates $source */
