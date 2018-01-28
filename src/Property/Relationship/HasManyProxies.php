@@ -55,9 +55,13 @@ class HasManyProxies extends FromSingleKey
     public function value(array $data, $owner = null)
     {
         $amount = $this->my($data);
-        $proxies = [];
-        for ($i = 0; $i < $amount; ++$i) {
-            $proxies[] = $this->proxyBuilder->createFor($owner, $this->name(), $i);
+        try {
+            $proxies = [];
+            for ($i = 0; $i < $amount; ++$i) {
+                $proxies[] = $this->proxyBuilder->createFor($owner, $this->name(), $i);
+            }
+        } catch (Throwable $exception) {
+            throw ProxyProductionFailed::tryingToProduceFor($this, $exception);
         }
         try {
             return $this->collection->fromArray($proxies);
