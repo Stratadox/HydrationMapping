@@ -6,10 +6,14 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneEmbedded;
+use Stratadox\Hydration\UnmappableInput;
 use Stratadox\HydrationMapping\Test\Double\Author\Author;
 use Stratadox\HydrationMapping\Test\Double\MockHydrator;
 
-/** @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasOneEmbedded */
+/**
+ * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasOneEmbedded
+ * @covers \Stratadox\Hydration\Mapping\Property\Relationship\ObjectMappingFailed
+ */
 class HasOneEmbedded_maps_embedded_objects extends TestCase
 {
     use MockHydrator;
@@ -42,5 +46,20 @@ class HasOneEmbedded_maps_embedded_objects extends TestCase
         );
 
         $this->assertSame('author', $authorMapping->name());
+    }
+
+    /** @scenario */
+    function throwing_an_informative_exception_when_the_items_cannot_be_mapped()
+    {
+        $mapping = HasOneEmbedded::inProperty('foo',
+            $this->mockExceptionThrowingHydrator('Original message here.')
+        );
+
+        $this->expectException(UnmappableInput::class);
+        $this->expectExceptionMessage(
+            'Failed to map the HasOneEmbedded relation of the `foo` property: Original message here.'
+        );
+
+        $mapping->value(['bar']);
     }
 }
