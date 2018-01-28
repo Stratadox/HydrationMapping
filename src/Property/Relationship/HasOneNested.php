@@ -7,6 +7,7 @@ namespace Stratadox\Hydration\Mapping\Property\Relationship;
 use Stratadox\Hydration\Hydrates;
 use Stratadox\Hydration\Mapping\Property\FromSingleKey;
 use Stratadox\Hydration\MapsProperty;
+use Throwable;
 
 /**
  * Maps a nested data structure to a has-one relation in an object property.
@@ -44,6 +45,12 @@ class HasOneNested extends FromSingleKey
     /** @inheritdoc @return mixed|object */
     public function value(array $data, $owner = null)
     {
-        return $this->hydrate->fromArray($this->my($data));
+        try {
+            return $this->hydrate->fromArray($this->my($data));
+        } catch (Throwable $exception) {
+            throw ObjectMappingFailed::tryingToMapItem(
+                $this, $exception, $this->name()
+            );
+        }
     }
 }
