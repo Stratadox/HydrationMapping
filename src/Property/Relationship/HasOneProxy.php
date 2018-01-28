@@ -45,6 +45,7 @@ class HasOneProxy implements MapsProperty
         }
     }
 
+    /** @inheritdoc */
     public function name() : string
     {
         return $this->name;

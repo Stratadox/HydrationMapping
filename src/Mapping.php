@@ -32,11 +32,13 @@ class Mapping extends ImmutableCollection implements MapsObject
         return new static($class, ...$properties);
     }
 
+    /** @inheritdoc */
     public function className() : string
     {
         return $this->className;
     }
 
+    /** @inheritdoc */
     public function properties() : array
     {
         return $this->items();

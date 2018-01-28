@@ -29,6 +29,7 @@ class HasBackReference implements MapsProperty
         return new static($name, $source);
     }
 
+    /** @inheritdoc */
     public function name() : string
     {
         return $this->name;

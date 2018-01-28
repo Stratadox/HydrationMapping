@@ -43,6 +43,7 @@ class HasManyEmbedded implements MapsProperty
         return new static($property, $collection, $item, $key);
     }
 
+    /** @inheritdoc */
     public function name() : string
     {
         return $this->name;

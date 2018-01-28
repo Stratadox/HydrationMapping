@@ -33,6 +33,7 @@ class HasOneEmbedded implements MapsProperty
         return new static($name, $hydrator);
     }
 
+    /** @inheritdoc */
     public function name() : string
     {
         return $this->name;

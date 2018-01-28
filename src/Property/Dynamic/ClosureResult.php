@@ -29,11 +29,13 @@ class ClosureResult implements MapsProperty
         return new static($name, $function);
     }
 
+    /** @inheritdoc */
     public function name() : string
     {
         return $this->property;
     }
 
+    /** @inheritdoc */
     public function value(array $data, $owner = null)
     {
         return $this->function->call($this, $data);

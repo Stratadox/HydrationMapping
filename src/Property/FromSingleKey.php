@@ -24,6 +24,7 @@ abstract class FromSingleKey implements MapsProperty
         $this->key = $dataKey;
     }
 
+    /** @inheritdoc */
     public function name() : string
     {
         return $this->name;
