@@ -45,6 +45,10 @@ class HasBackReference implements MapsProperty
         if (!isset($this->sourceHydrator)) {
             throw NoSourceHydrator::tryingToHydrateBackReferenceIn($this->name);
         }
-        return $this->sourceHydrator->currentInstance();
+        $instance = $this->sourceHydrator->currentInstance();
+        if (!isset($instance)) {
+            throw NoReferrerFound::tryingToHydrateBackReferenceIn($this->name);
+        }
+        return $instance;
     }
 }
