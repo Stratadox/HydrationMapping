@@ -7,7 +7,7 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneEmbedded;
 use Stratadox\Hydration\UnmappableInput;
-use Stratadox\HydrationMapping\Test\Double\Author\Author;
+use Stratadox\HydrationMapping\Test\Double\Person\Person;
 use Stratadox\HydrationMapping\Test\Double\MockHydrator;
 
 /**
@@ -29,20 +29,20 @@ class HasOneEmbedded_maps_embedded_objects extends TestCase
         ];
 
         $authorMapping = HasOneEmbedded::inProperty('author',
-            $this->mockPublicSetterHydratorForThe(Author::class)
+            $this->mockPublicSetterHydratorForThe(Person::class)
         );
 
-        /** @var Author $author */
+        /** @var Person $author */
         $author = $authorMapping->value($bookInformation);
 
-        $this->assertInstanceOf(Author::class, $author);
+        $this->assertInstanceOf(Person::class, $author);
     }
 
     /** @scenario */
     function property_mappers_know_which_property_they_map_to()
     {
         $authorMapping = HasOneEmbedded::inProperty('author',
-            $this->mockPublicSetterHydratorForThe(Author::class)
+            $this->mockPublicSetterHydratorForThe(Person::class)
         );
 
         $this->assertSame('author', $authorMapping->name());

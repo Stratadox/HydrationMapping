@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Stratadox\HydrationMapping\Test\Double\Author;
+namespace Stratadox\HydrationMapping\Test\Double\Person;
 
 use Stratadox\Hydration\Proxy;
 
-class AuthorProxy extends Author implements Proxy
+class PersonProxy extends Person implements Proxy
 {
     private $proxyFor;
     private $owner;
@@ -31,10 +31,10 @@ class AuthorProxy extends Author implements Proxy
         return $this->__load()->lastName();
     }
 
-    public function __load() : Author
+    public function __load() : Person
     {
         if (!isset($this->proxyFor)) {
-            $this->proxyFor = new Author('Lazy loading', 'Is out of scope');
+            $this->proxyFor = new Person('Lazy loading', 'Is out of scope');
         }
         return $this->proxyFor;
     }

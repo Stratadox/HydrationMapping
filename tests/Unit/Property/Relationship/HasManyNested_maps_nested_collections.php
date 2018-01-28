@@ -7,8 +7,8 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasManyNested;
 use Stratadox\Hydration\UnmappableInput;
-use Stratadox\HydrationMapping\Test\Double\Author\Author;
-use Stratadox\HydrationMapping\Test\Double\Author\Authors;
+use Stratadox\HydrationMapping\Test\Double\Person\Person;
+use Stratadox\HydrationMapping\Test\Double\Person\Persons;
 use Stratadox\HydrationMapping\Test\Double\MockHydrator;
 
 /**
@@ -39,18 +39,18 @@ class HasManyNested_maps_nested_collections extends TestCase
         ];
 
         $authorsMapping = HasManyNested::inProperty('authors',
-            $this->mockCollectionHydratorForThe(Authors::class),
-            $this->mockPublicSetterHydratorForThe(Author::class)
+            $this->mockCollectionHydratorForThe(Persons::class),
+            $this->mockPublicSetterHydratorForThe(Person::class)
         );
 
-        /** @var Authors|Author[] $authors */
+        /** @var Persons|Person[] $authors */
         $authors = $authorsMapping->value($inSourceData);
 
-        $this->assertInstanceOf(Authors::class, $authors);
+        $this->assertInstanceOf(Persons::class, $authors);
         $this->assertCount(10, $authors);
         foreach ($inSourceData['authors'] as $who => $authorData) {
             $author = $authors[$who];
-            $this->assertInstanceOf(Author::class, $author);
+            $this->assertInstanceOf(Person::class, $author);
             $this->assertSame($authorData['firstName'], $author->firstName());
             $this->assertSame($authorData['lastName'], $author->lastName());
         }
@@ -69,11 +69,11 @@ class HasManyNested_maps_nested_collections extends TestCase
 
         $authorsMapping = HasManyNested::inPropertyWithDifferentKey('authors',
             'these',
-            $this->mockCollectionHydratorForThe(Authors::class),
-            $this->mockPublicSetterHydratorForThe(Author::class)
+            $this->mockCollectionHydratorForThe(Persons::class),
+            $this->mockPublicSetterHydratorForThe(Person::class)
         );
 
-        /** @var Authors|Author[] $authors */
+        /** @var Persons|Person[] $authors */
         $authors = $authorsMapping->value($inSourceData);
 
         $this->assertCount(3, $authors);
@@ -84,7 +84,7 @@ class HasManyNested_maps_nested_collections extends TestCase
     function throwing_an_informative_exception_when_the_items_cannot_be_mapped()
     {
         $mapping = HasManyNested::inProperty('foo',
-            $this->mockCollectionHydratorForThe(Authors::class),
+            $this->mockCollectionHydratorForThe(Persons::class),
             $this->mockExceptionThrowingHydrator('Original message here.')
         );
 
@@ -101,7 +101,7 @@ class HasManyNested_maps_nested_collections extends TestCase
     {
         $mapping = HasManyNested::inProperty('foo',
             $this->mockExceptionThrowingHydrator('Original message here.'),
-            $this->mockPublicSetterHydratorForThe(Author::class)
+            $this->mockPublicSetterHydratorForThe(Person::class)
         );
 
         $this->expectException(UnmappableInput::class);

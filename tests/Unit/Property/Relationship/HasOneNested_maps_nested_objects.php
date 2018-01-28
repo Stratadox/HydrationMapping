@@ -7,7 +7,7 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneNested;
 use Stratadox\Hydration\UnmappableInput;
-use Stratadox\HydrationMapping\Test\Double\Author\Author;
+use Stratadox\HydrationMapping\Test\Double\Person\Person;
 use Stratadox\HydrationMapping\Test\Double\MockHydrator;
 
 /**
@@ -30,13 +30,13 @@ class HasOneNested_maps_nested_objects extends TestCase
         ];
 
         $authorMapping = HasOneNested::inProperty('author',
-            $this->mockPublicSetterHydratorForThe(Author::class)
+            $this->mockPublicSetterHydratorForThe(Person::class)
         );
 
-        /** @var Author $author */
+        /** @var Person $author */
         $author = $authorMapping->value($inAuthorData);
 
-        $this->assertInstanceOf(Author::class, $author);
+        $this->assertInstanceOf(Person::class, $author);
         $this->assertSame('Jules', $author->firstName());
         $this->assertSame('Verne', $author->lastName());
     }
@@ -53,12 +53,12 @@ class HasOneNested_maps_nested_objects extends TestCase
 
         $authorMapping = HasOneNested::inPropertyWithDifferentKey('author',
             'person',
-            $this->mockPublicSetterHydratorForThe(Author::class)
+            $this->mockPublicSetterHydratorForThe(Person::class)
         );
 
         $author = $authorMapping->value($inAuthorData);
 
-        $this->assertInstanceOf(Author::class, $author);
+        $this->assertInstanceOf(Person::class, $author);
         $this->assertSame('author', $authorMapping->name());
     }
 

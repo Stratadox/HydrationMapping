@@ -7,9 +7,9 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasManyProxies;
 use Stratadox\Hydration\UnmappableInput;
-use Stratadox\HydrationMapping\Test\Double\Author\Author;
-use Stratadox\HydrationMapping\Test\Double\Author\AuthorProxy;
-use Stratadox\HydrationMapping\Test\Double\Author\Authors;
+use Stratadox\HydrationMapping\Test\Double\Person\Person;
+use Stratadox\HydrationMapping\Test\Double\Person\PersonProxy;
+use Stratadox\HydrationMapping\Test\Double\Person\Persons;
 use Stratadox\HydrationMapping\Test\Double\MockHydrator;
 use Stratadox\HydrationMapping\Test\Double\MockProxyBuilder;
 
@@ -30,11 +30,11 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
         $inSourceData = ['authors' => 3];
 
         $authorsMapping = HasManyProxies::inProperty('authors',
-            $this->mockCollectionHydratorForThe(Authors::class),
-            $this->mockProxyBuilderFor(AuthorProxy::class)
+            $this->mockCollectionHydratorForThe(Persons::class),
+            $this->mockProxyBuilderFor(PersonProxy::class)
         );
 
-        /** @var Authors|Author[] $authors */
+        /** @var Persons|Person[] $authors */
         $authors = $authorsMapping->value($inSourceData);
 
         $this->assertCount(3, $authors);
@@ -50,11 +50,11 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
         $inSourceData = ['authors' => 3];
 
         $authorsMapping = HasManyProxies::inProperty('authors',
-            $this->mockCollectionHydratorForThe(Authors::class),
-            $this->mockProxyBuilderFor(AuthorProxy::class)
+            $this->mockCollectionHydratorForThe(Persons::class),
+            $this->mockProxyBuilderFor(PersonProxy::class)
         );
 
-        /** @var Authors|AuthorProxy[] $authors */
+        /** @var Persons|PersonProxy[] $authors */
         $authors = $authorsMapping->value($inSourceData);
 
         $this->assertCount(3, $authors);
@@ -70,11 +70,11 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
         $inSourceData = ['authors' => 2];
 
         $authorsMapping = HasManyProxies::inProperty('authors',
-            $this->mockCollectionHydratorForThe(Authors::class),
-            $this->mockProxyBuilderFor(AuthorProxy::class)
+            $this->mockCollectionHydratorForThe(Persons::class),
+            $this->mockProxyBuilderFor(PersonProxy::class)
         );
 
-        /** @var Authors|AuthorProxy[] $authors */
+        /** @var Persons|PersonProxy[] $authors */
         $authors = $authorsMapping->value($inSourceData, $this);
 
         $this->assertCount(2, $authors);
@@ -89,11 +89,11 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
         $inSourceData = ['amount' => 3];
 
         $authorsMapping = HasManyProxies::inPropertyWithDifferentKey('authors', 'amount',
-            $this->mockCollectionHydratorForThe(Authors::class),
-            $this->mockProxyBuilderFor(AuthorProxy::class)
+            $this->mockCollectionHydratorForThe(Persons::class),
+            $this->mockProxyBuilderFor(PersonProxy::class)
         );
 
-        /** @var Authors|Author[] $authors */
+        /** @var Persons|Person[] $authors */
         $authors = $authorsMapping->value($inSourceData);
 
         $this->assertCount(3, $authors);
@@ -105,7 +105,7 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
     {
         $mapping = HasManyProxies::inProperty('foo',
             $this->mockExceptionThrowingHydrator('Original message here.'),
-            $this->mockProxyBuilderFor(AuthorProxy::class)
+            $this->mockProxyBuilderFor(PersonProxy::class)
         );
 
         $this->expectException(UnmappableInput::class);
@@ -120,7 +120,7 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
     function throwing_an_informative_exception_when_the_proxies_cannot_be_built()
     {
         $mapping = HasManyProxies::inProperty('foo',
-            $this->mockCollectionHydratorForThe(Authors::class),
+            $this->mockCollectionHydratorForThe(Persons::class),
             $this->mockExceptionThrowingProxyBuilder('Original message here.')
         );
 

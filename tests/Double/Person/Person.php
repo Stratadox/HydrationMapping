@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Stratadox\HydrationMapping\Test\Double\Author;
+namespace Stratadox\HydrationMapping\Test\Double\Person;
 
-class Author
+class Person
 {
     public $firstName;
     public $lastName;

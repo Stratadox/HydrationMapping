@@ -8,8 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneProxy;
 use Stratadox\Hydration\Proxy;
 use Stratadox\Hydration\UnmappableInput;
-use Stratadox\HydrationMapping\Test\Double\Author\Author;
-use Stratadox\HydrationMapping\Test\Double\Author\AuthorProxy;
+use Stratadox\HydrationMapping\Test\Double\Person\Person;
+use Stratadox\HydrationMapping\Test\Double\Person\PersonProxy;
 use Stratadox\HydrationMapping\Test\Double\MockProxyBuilder;
 
 /**
@@ -24,10 +24,10 @@ class HasOneProxy_maps_a_lazy_object extends TestCase
     function mapping_an_object_without_any_data()
     {
         $mapping = HasOneProxy::inProperty('author',
-            $this->mockProxyBuilderFor(AuthorProxy::class)
+            $this->mockProxyBuilderFor(PersonProxy::class)
         );
 
-        /** @var Author|AuthorProxy $author */
+        /** @var Person|PersonProxy $author */
         $author = $mapping->value([]);
 
         $this->assertInstanceOf(Proxy::class, $author);
@@ -39,7 +39,7 @@ class HasOneProxy_maps_a_lazy_object extends TestCase
     function property_mappers_know_which_property_they_map_to()
     {
         $mapping = HasOneProxy::inProperty('author',
-            $this->mockProxyBuilderFor(AuthorProxy::class)
+            $this->mockProxyBuilderFor(PersonProxy::class)
         );
 
         $this->assertSame('author', $mapping->name());
