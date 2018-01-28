@@ -6,6 +6,7 @@ namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
 use Stratadox\Hydration\Hydrates;
 use Stratadox\Hydration\MapsProperty;
+use Stratadox\Hydration\UnmappableInput;
 
 /**
  * Maps an embedded data structure to a has-one relation in an object property.
@@ -40,6 +41,12 @@ class HasOneEmbedded implements MapsProperty
     /** @inheritdoc @return mixed|object */
     public function value(array $data, $owner = null)
     {
-        return $this->hydrate->fromArray($data);
+        try {
+            return $this->hydrate->fromArray($data);
+        } catch (UnmappableInput $exception) {
+            throw ObjectMappingFailed::tryingToMapItem(
+                $this, $exception, $this->name()
+            );
+        }
     }
 }
