@@ -9,7 +9,7 @@ use Stratadox\Hydration\Hydrates;
 use Stratadox\Hydration\Hydrator\ArrayHydrator;
 use Stratadox\Hydration\Hydrator\MappedHydrator;
 use Stratadox\Hydration\Hydrator\OneOfTheseHydrators;
-use Stratadox\Hydration\Mapping\Mapping;
+use Stratadox\Hydration\Mapping\Properties;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasBackReference;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasManyNested;
 use Stratadox\Hydration\Mapping\Property\Scalar\BooleanValue;
@@ -82,26 +82,22 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
     private function mappedHydrator() : Hydrates
     {
         $backReference = HasBackReference::inProperty('owner');
-        $petMappings = [
+        $petMappings = Properties::map(
             CustomTruths::forThe(BooleanValue::inProperty('hungry'),
                 ['yes', 'yeah'],
                 ['no', 'nah']
             ),
             $backReference,
-            StringValue::inProperty('name'),
-        ];
-        $hydrator = MappedHydrator::fromThis(Mapping::ofThe(Human::class,
+            StringValue::inProperty('name')
+        );
+        $hydrator = MappedHydrator::forThe(Human::class, Properties::map(
             StringValue::inProperty('name'),
             IntegerValue::inProperty('food'),
             HasManyNested::inProperty('pets',
                 ArrayHydrator::create(),
                 OneOfTheseHydrators::decideBasedOnThe('species', [
-                    'cat' => MappedHydrator::fromThis(Mapping::ofThe(Cat::class,
-                        ...$petMappings
-                    )),
-                    'dog' => MappedHydrator::fromThis(Mapping::ofThe(Dog::class,
-                        ...$petMappings
-                    )),
+                    'cat' => MappedHydrator::forThe(Cat::class, $petMappings),
+                    'dog' => MappedHydrator::forThe(Dog::class, $petMappings),
                 ])
             )
         ));
