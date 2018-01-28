@@ -9,9 +9,11 @@ use PHPUnit\Framework\TestCase;
 use StdClass;
 use Stratadox\Hydration\Hydrates;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasBackReference;
+use Stratadox\Hydration\UnmappableInput;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasBackReference
+ * @covers \Stratadox\Hydration\Mapping\Property\Relationship\NoSourceHydrator
  */
 class HasBackReference_maps_bidirectional_relationships extends TestCase
 {
@@ -44,5 +46,18 @@ class HasBackReference_maps_bidirectional_relationships extends TestCase
             'foo',
             $mapping->name()
         );
+    }
+
+    /** @scenario */
+    function throwing_an_exception_if_no_source_is_configured()
+    {
+        $mapping = HasBackReference::inProperty('foo');
+
+        $this->expectException(UnmappableInput::class);
+        $this->expectExceptionMessage(
+            'Failed to reference back to the `foo` relationship: no source defined.'
+        );
+
+        $mapping->value([]);
     }
 }
