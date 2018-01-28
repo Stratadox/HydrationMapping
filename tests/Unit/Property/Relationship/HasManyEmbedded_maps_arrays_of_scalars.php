@@ -13,6 +13,7 @@ use Stratadox\HydrationMapping\Test\Double\MockHydrator;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasManyEmbedded
+ * @covers \Stratadox\Hydration\Mapping\Property\Relationship\MappingFailed
  */
 class HasManyEmbedded_maps_arrays_of_scalars extends TestCase
 {
