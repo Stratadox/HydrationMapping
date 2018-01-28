@@ -7,12 +7,14 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneProxy;
 use Stratadox\Hydration\Proxy;
+use Stratadox\Hydration\UnmappableInput;
 use Stratadox\HydrationMapping\Test\Double\Author\Author;
 use Stratadox\HydrationMapping\Test\Double\Author\AuthorProxy;
 use Stratadox\HydrationMapping\Test\Double\MockProxyBuilder;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasOneProxy
+ * @covers \Stratadox\Hydration\Mapping\Property\Relationship\ProxyProductionFailed
  */
 class HasOneProxy_maps_a_lazy_object extends TestCase
 {
@@ -41,5 +43,20 @@ class HasOneProxy_maps_a_lazy_object extends TestCase
         );
 
         $this->assertSame('author', $mapping->name());
+    }
+
+    /** @scenario */
+    function throwing_an_informative_exception_when_the_proxy_cannot_be_built()
+    {
+        $mapping = HasOneProxy::inProperty('foo',
+            $this->mockExceptionThrowingProxyBuilder('Original message here.')
+        );
+
+        $this->expectException(UnmappableInput::class);
+        $this->expectExceptionMessage(
+            'Proxy production for in the `foo` property failed: Original message here.'
+        );
+
+        $mapping->value([]);
     }
 }
