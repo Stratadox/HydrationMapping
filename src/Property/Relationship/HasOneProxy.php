@@ -6,6 +6,7 @@ namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
 use Stratadox\Hydration\MapsProperty;
 use Stratadox\Hydration\ProducesProxies;
+use Throwable;
 
 /**
  * Maps a proxy to a has-one relation in an object property.
@@ -37,7 +38,11 @@ class HasOneProxy implements MapsProperty
     /** @inheritdoc @return mixed|object */
     public function value(array $data, $owner = null)
     {
-        return $this->proxyBuilder->createFor($owner, $this->name);
+        try {
+            return $this->proxyBuilder->createFor($owner, $this->name);
+        } catch (Throwable $exception) {
+            throw ProxyProductionFailed::tryingToProduceFor($this, $exception);
+        }
     }
 
     public function name() : string
