@@ -6,12 +6,14 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneNested;
+use Stratadox\Hydration\UnmappableInput;
 use Stratadox\HydrationMapping\Test\Double\Author\Author;
 use Stratadox\HydrationMapping\Test\Double\MockHydrator;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasOneNested
  * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
+ * @covers \Stratadox\Hydration\Mapping\Property\Relationship\ObjectMappingFailed
  */
 class HasOneNested_maps_nested_objects extends TestCase
 {
@@ -58,5 +60,20 @@ class HasOneNested_maps_nested_objects extends TestCase
 
         $this->assertInstanceOf(Author::class, $author);
         $this->assertSame('author', $authorMapping->name());
+    }
+
+    /** @scenario */
+    function throwing_an_informative_exception_when_the_items_cannot_be_mapped()
+    {
+        $mapping = HasOneNested::inProperty('foo',
+            $this->mockExceptionThrowingHydrator('Original message here.')
+        );
+
+        $this->expectException(UnmappableInput::class);
+        $this->expectExceptionMessage(
+            'Failed to map the HasOneNested relation of the `foo` property: Original message here.'
+        );
+
+        $mapping->value(['foo' => []]);
     }
 }
