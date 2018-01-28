@@ -16,7 +16,7 @@ use Stratadox\HydrationMapping\Test\Double\MockProxyBuilder;
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasManyProxies
  * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
- * @covers \Stratadox\Hydration\Mapping\Property\Relationship\MappingFailed
+ * @covers \Stratadox\Hydration\Mapping\Property\Relationship\CollectionMappingFailed
  */
 class HasManyProxies_maps_extra_lazy_collections extends TestCase
 {

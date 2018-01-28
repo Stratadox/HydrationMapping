@@ -14,7 +14,7 @@ use Stratadox\HydrationMapping\Test\Double\MockHydrator;
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasManyNested
  * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
- * @covers \Stratadox\Hydration\Mapping\Property\Relationship\MappingFailed
+ * @covers \Stratadox\Hydration\Mapping\Property\Relationship\CollectionMappingFailed
  */
 class HasManyNested_maps_nested_collections extends TestCase
 {
