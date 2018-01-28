@@ -6,6 +6,7 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasManyProxies;
+use Stratadox\Hydration\UnmappableInput;
 use Stratadox\HydrationMapping\Test\Double\Author\Author;
 use Stratadox\HydrationMapping\Test\Double\Author\AuthorProxy;
 use Stratadox\HydrationMapping\Test\Double\Author\Authors;
@@ -15,6 +16,7 @@ use Stratadox\HydrationMapping\Test\Double\MockProxyBuilder;
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasManyProxies
  * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
+ * @covers \Stratadox\Hydration\Mapping\Property\Relationship\MappingFailed
  */
 class HasManyProxies_maps_extra_lazy_collections extends TestCase
 {
@@ -95,5 +97,21 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
 
         $this->assertCount(3, $authors);
         $this->assertSame('authors', $authorsMapping->name());
+    }
+
+    /** @scenario */
+    function throwing_an_informative_exception_when_the_collection_cannot_be_mapped()
+    {
+        $mapping = HasManyProxies::inProperty('foo',
+            $this->mockExceptionThrowingHydrator('Original message here.'),
+            $this->mockProxyBuilderFor(AuthorProxy::class)
+        );
+
+        $this->expectException(UnmappableInput::class);
+        $this->expectExceptionMessage(
+            'Failed to map the HasManyProxies collection of the `foo` property: Original message here.'
+        );
+
+        $mapping->value(['foo' => 1]);
     }
 }
