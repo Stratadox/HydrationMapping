@@ -9,14 +9,14 @@ use Stratadox\Hydration\MapsProperty;
 
 abstract class Scalar extends FromSingleKey
 {
-    public static function inProperty(string $name) : MapsProperty
+    public static function inProperty(string $name) : self
     {
         return new static($name, $name);
     }
 
     public static function inPropertyWithDifferentKey(
         string $name, string $key
-    ) : MapsProperty
+    ) : self
     {
         return new static($name, $key);
     }
