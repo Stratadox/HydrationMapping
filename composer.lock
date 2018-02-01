@@ -45,16 +45,16 @@
         },
         {
             "name": "stratadox/hydration-mapping-contracts",
-            "version": "v0.1",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Stratadox/HydrationMappingContracts.git",
-                "reference": "b5bd0d28ecaeae071946200ea01c52f8c3487ffb"
+                "reference": "f4a67c86269e0fbe9487afe5140aaa9be8548d2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Stratadox/HydrationMappingContracts/zipball/b5bd0d28ecaeae071946200ea01c52f8c3487ffb",
-                "reference": "b5bd0d28ecaeae071946200ea01c52f8c3487ffb",
+                "url": "https://api.github.com/repos/Stratadox/HydrationMappingContracts/zipball/f4a67c86269e0fbe9487afe5140aaa9be8548d2b",
+                "reference": "f4a67c86269e0fbe9487afe5140aaa9be8548d2b",
                 "shasum": ""
             },
             "require": {
@@ -77,7 +77,7 @@
                     "homepage": "http://www.stratadox.com/"
                 }
             ],
-            "time": "2018-01-30T19:45:18+00:00"
+            "time": "2018-02-01T21:31:13+00:00"
         },
         {
             "name": "stratadox/immutable-collection",
