@@ -6,7 +6,7 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasManyEmbedded;
-use Stratadox\Hydration\UnmappableInput;
+use Stratadox\HydrationMapping\UnmappableInput;
 use Stratadox\HydrationMapping\Test\Double\Title\Title;
 use Stratadox\HydrationMapping\Test\Double\Title\Titles;
 use Stratadox\HydrationMapping\Test\Double\MockHydrator;

@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
-use Stratadox\Hydration\Hydrates;
 use Stratadox\Hydration\Mapping\Property\FromSingleKey;
-use Stratadox\Hydration\MapsProperty;
+use Stratadox\Hydrator\Hydrates;
 use Throwable;
 
 /**
@@ -35,9 +34,9 @@ final class HasManyNested extends FromSingleKey
         string $name,
         Hydrates $collection,
         Hydrates $item
-    ) : MapsProperty
+    ) : self
     {
-        return new static($name, $name, $collection, $item);
+        return new self($name, $name, $collection, $item);
     }
 
     public static function inPropertyWithDifferentKey(

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Stratadox\Hydration\Mapping;
 
 use Closure;
-use Stratadox\Hydration\MapsProperties;
-use Stratadox\Hydration\MapsProperty;
+use Stratadox\HydrationMapping\MapsProperties;
+use Stratadox\HydrationMapping\MapsProperty;
 use Stratadox\ImmutableCollection\ImmutableCollection;
 
 /**
@@ -29,15 +29,14 @@ final class Properties extends ImmutableCollection implements MapsProperties
         return new self(...$properties);
     }
 
+    /** @inheritdoc */
     public function current() : MapsProperty
     {
         return parent::current();
     }
 
-    public function writeData($object, Closure $setter, array $data) : void
+    public function offsetGet($offset) : MapsProperty
     {
-        foreach ($this as $property) {
-            $setter->call($object, $property->name(), $property->value($data));
-        }
+        return parent::offsetGet($offset);
     }
 }

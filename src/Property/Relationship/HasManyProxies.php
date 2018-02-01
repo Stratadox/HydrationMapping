@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
-use Stratadox\Hydration\Hydrates;
 use Stratadox\Hydration\Mapping\Property\FromSingleKey;
-use Stratadox\Hydration\ProducesProxies;
+use Stratadox\Hydrator\Hydrates;
+use Stratadox\Proxy\ProducesProxies;
 use Throwable;
 
 /**

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Stratadox\Hydration\Mapping\Property\Scalar;
 
 use function in_array;
-use Stratadox\Hydration\MapsProperty;
+use Stratadox\HydrationMapping\MapsProperty;
 
 /**
  * Decorates @see BooleanValue with custom true/false declarations.

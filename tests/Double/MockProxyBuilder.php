@@ -7,7 +7,7 @@ namespace Stratadox\HydrationMapping\Test\Double;
 use Exception;
 use PHPUnit\Framework\MockObject\Matcher\AnyInvokedCount;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
-use Stratadox\Hydration\ProducesProxies;
+use Stratadox\Proxy\ProducesProxies;
 
 trait MockProxyBuilder
 {

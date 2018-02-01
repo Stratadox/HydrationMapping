@@ -6,8 +6,8 @@ namespace Stratadox\Hydration\Mapping\Property;
 
 use function sprintf;
 use InvalidArgumentException as InvalidArgument;
-use Stratadox\Hydration\MapsProperty;
-use Stratadox\Hydration\UnmappableInput;
+use Stratadox\HydrationMapping\MapsProperty;
+use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
  * Exception which is thrown when the input to hydrate is not accepted by the

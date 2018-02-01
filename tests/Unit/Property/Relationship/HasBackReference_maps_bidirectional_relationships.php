@@ -4,16 +4,13 @@ declare(strict_types=1);
 
 namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use StdClass;
-use Stratadox\Hydration\Hydrates;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasBackReference;
-use Stratadox\Hydration\UnmappableInput;
+use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasBackReference
- * @covers \Stratadox\Hydration\Mapping\Property\Relationship\NoSourceHydrator
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\NoReferrerFound
  */
 class HasBackReference_maps_bidirectional_relationships extends TestCase
@@ -21,20 +18,14 @@ class HasBackReference_maps_bidirectional_relationships extends TestCase
     /** @scenario */
     function mapping_a_bidirectional_association()
     {
-        $owner = new StdClass;
-
-        /** @var MockObject|Hydrates $source */
-        $source = $this->createMock(Hydrates::class);
-        $source->expects($this->once())
-            ->method('currentInstance')
-            ->willReturn($owner);
+        $object = new StdClass;
 
         $mapping = HasBackReference::inProperty('foo');
-        $mapping->setSource($source);
+        $mapping->hydrating($object);
 
         $this->assertSame(
-            $owner,
-            $mapping->value([], $this)
+            $object,
+            $mapping->value([])
         );
     }
 
@@ -50,29 +41,9 @@ class HasBackReference_maps_bidirectional_relationships extends TestCase
     }
 
     /** @scenario */
-    function throwing_an_exception_if_no_source_is_configured()
+    function throwing_an_exception_if_there_is_no_referrer()
     {
         $mapping = HasBackReference::inProperty('foo');
-
-        $this->expectException(UnmappableInput::class);
-        $this->expectExceptionMessage(
-            'Failed to reference back to the `foo` relationship: no source defined.'
-        );
-
-        $mapping->value([]);
-    }
-
-    /** @scenario */
-    function throwing_an_exception_if_no_referrer_was_found()
-    {
-        /** @var MockObject|Hydrates $source */
-        $source = $this->createMock(Hydrates::class);
-        $source->expects($this->once())
-            ->method('currentInstance')
-            ->willReturn(null);
-
-        $mapping = HasBackReference::inProperty('foo');
-        $mapping->setSource($source);
 
         $this->expectException(UnmappableInput::class);
         $this->expectExceptionMessage(

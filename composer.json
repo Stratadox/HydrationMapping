@@ -19,13 +19,14 @@
     },
     "require": {
         "php": ">=7.1",
-        "stratadox/hydration": "^v2.0",
-        "stratadox/immutable-collection": "^1.0"
+        "stratadox/hydration-mapping-contracts": "^0.1.0",
+        "stratadox/immutable-collection": "^1.0",
+        "stratadox/proxy-contracts": "^0.1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.5",
         "rpkamp/fancy-testdox-printer": "^0.2.5",
         "satooshi/php-coveralls": "^2.0",
-        "stratadox/hydrator": "^v2.0"
+        "stratadox/hydrator": "^3.0"
     }
 }

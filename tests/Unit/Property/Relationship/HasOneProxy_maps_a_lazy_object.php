@@ -6,11 +6,11 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneProxy;
-use Stratadox\Hydration\Proxy;
-use Stratadox\Hydration\UnmappableInput;
 use Stratadox\HydrationMapping\Test\Double\Person\Person;
 use Stratadox\HydrationMapping\Test\Double\Person\PersonProxy;
 use Stratadox\HydrationMapping\Test\Double\MockProxyBuilder;
+use Stratadox\HydrationMapping\UnmappableInput;
+use Stratadox\Proxy\Proxy;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasOneProxy

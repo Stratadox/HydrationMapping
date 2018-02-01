@@ -7,7 +7,7 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Scalar;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Scalar\BooleanValue;
 use Stratadox\Hydration\Mapping\Property\Scalar\CustomTruths;
-use Stratadox\Hydration\UnmappableInput;
+use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\CustomTruths

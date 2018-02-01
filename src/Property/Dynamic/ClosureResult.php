@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Stratadox\Hydration\Mapping\Property\Dynamic;
 
 use Closure;
-use Stratadox\Hydration\MapsProperty;
+use Stratadox\HydrationMapping\MapsProperty;
 
 /**
  * Maps to the result of a closure that runs against the input data.

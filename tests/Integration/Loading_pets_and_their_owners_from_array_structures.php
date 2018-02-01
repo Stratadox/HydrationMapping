@@ -5,10 +5,6 @@ declare(strict_types=1);
 namespace Stratadox\HydrationMapping\Test\Integration;
 
 use PHPUnit\Framework\TestCase;
-use Stratadox\Hydration\Hydrates;
-use Stratadox\Hydration\Hydrator\ArrayHydrator;
-use Stratadox\Hydration\Hydrator\MappedHydrator;
-use Stratadox\Hydration\Hydrator\OneOfTheseHydrators;
 use Stratadox\Hydration\Mapping\Properties;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasBackReference;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasManyNested;
@@ -21,6 +17,10 @@ use Stratadox\HydrationMapping\Test\Double\Pet\Dog;
 use Stratadox\HydrationMapping\Test\Double\Pet\Human;
 use Stratadox\HydrationMapping\Test\Double\Pet\NoMoreFood;
 use Stratadox\HydrationMapping\Test\Double\Pet\ThatIsNotMyPet;
+use Stratadox\Hydrator\ArrayHydrator;
+use Stratadox\Hydrator\Hydrates;
+use Stratadox\Hydrator\MappedHydrator;
+use Stratadox\Hydrator\OneOfTheseHydrators;
 
 /**
  * @coversNothing
@@ -100,8 +100,7 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
                     'dog' => MappedHydrator::forThe(Dog::class, $petMappings),
                 ])
             )
-        ));
-        $backReference->setSource($hydrator);
+        ), null, $backReference);
         return $hydrator;
     }
 

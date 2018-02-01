@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Stratadox\HydrationMapping\Test\Unit;
 
-use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Properties;
+use Stratadox\Hydration\Mapping\Property\Scalar\IntegerValue;
 use Stratadox\Hydration\Mapping\Property\Scalar\StringValue;
 use Stratadox\HydrationMapping\Test\Double\MockHydrator;
 
@@ -20,16 +20,18 @@ class Properties_map_multiple_properties extends TestCase
     /** @scenario */
     function class_mappings_contain_property_mappings()
     {
-        $propertyMapping = StringValue::inProperty('foo');
-        $mapped = Properties::map(
-            $propertyMapping
+        $fooProperty = StringValue::inProperty('foo');
+        $barProperty = IntegerValue::inProperty('bar');
+
+        $propertyMappings = Properties::map(
+            $fooProperty,
+            $barProperty
         );
 
-        $setter = function (string $name, $value) {
-            Assert::assertSame('foo', $name);
-            Assert::assertSame('bar', $value);
-        };
+        $this->assertContains($fooProperty, $propertyMappings);
+        $this->assertContains($barProperty, $propertyMappings);
 
-        $mapped->writeData($this, $setter, ['foo' => 'bar']);
+        $this->assertSame($fooProperty, $propertyMappings[0]);
+        $this->assertSame($barProperty, $propertyMappings[1]);
     }
 }

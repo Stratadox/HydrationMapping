@@ -6,7 +6,7 @@ namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
 use RuntimeException;
 use function sprintf;
-use Stratadox\Hydration\UnmappableInput;
+use Stratadox\HydrationMapping\UnmappableInput;
 
 final class NoReferrerFound extends RuntimeException implements UnmappableInput
 {

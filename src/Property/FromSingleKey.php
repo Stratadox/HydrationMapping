@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Stratadox\Hydration\Mapping\Property;
 
 use function array_key_exists;
-use Stratadox\Hydration\MapsProperty;
+use Stratadox\HydrationMapping\MapsProperty;
 
 /**
  * Maps data from a single array position into something else.

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Stratadox\HydrationMapping\Test\Double\Person;
 
-use Stratadox\Hydration\Proxy;
+use Stratadox\Proxy\Proxy;
 
 class PersonProxy extends Person implements Proxy
 {

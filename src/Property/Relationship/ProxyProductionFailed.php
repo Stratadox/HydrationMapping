@@ -6,8 +6,8 @@ namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
 use RuntimeException;
 use function sprintf;
-use Stratadox\Hydration\MapsProperty;
-use Stratadox\Hydration\UnmappableInput;
+use Stratadox\HydrationMapping\MapsProperty;
+use Stratadox\HydrationMapping\UnmappableInput;
 use Throwable;
 
 final class ProxyProductionFailed extends RuntimeException implements UnmappableInput

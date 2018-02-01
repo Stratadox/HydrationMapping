@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
-use Stratadox\Hydration\Hydrates;
-use Stratadox\Hydration\MapsProperty;
+use Stratadox\HydrationMapping\MapsProperty;
+use Stratadox\Hydrator\Hydrates;
 use Throwable;
 
 /**

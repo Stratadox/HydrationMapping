@@ -8,7 +8,7 @@ use Exception;
 use PHPUnit\Framework\MockObject\Matcher\AnyInvokedCount;
 use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use ReflectionClass;
-use Stratadox\Hydration\Hydrates;
+use Stratadox\Hydrator\Hydrates;
 
 trait MockHydrator
 {
