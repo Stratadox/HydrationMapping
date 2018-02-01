@@ -34,6 +34,12 @@ abstract class FromSingleKey implements ExposesDataKey
         return $this->key;
     }
 
+    /**
+     * Retrieve the data that is relevant for this mapping.
+     *
+     * @param array $data The input data.
+     * @return mixed      The value for our key in the input array.
+     */
     protected function my(array $data)
     {
         if (!array_key_exists($this->key, $data)) {
