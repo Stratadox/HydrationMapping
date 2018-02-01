@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Stratadox\Hydration\Mapping\Property;
 
 use function array_key_exists;
-use Stratadox\HydrationMapping\MapsProperty;
+use Stratadox\HydrationMapping\ExposesDataKey;
 
 /**
  * Maps data from a single array position into something else.
@@ -13,7 +13,7 @@ use Stratadox\HydrationMapping\MapsProperty;
  * @package Stratadox\Hydrate
  * @author Stratadox
  */
-abstract class FromSingleKey implements MapsProperty
+abstract class FromSingleKey implements ExposesDataKey
 {
     private $name;
     private $key;
