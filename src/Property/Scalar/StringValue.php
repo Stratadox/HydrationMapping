@@ -12,7 +12,6 @@ namespace Stratadox\Hydration\Mapping\Property\Scalar;
  */
 final class StringValue extends Scalar
 {
-    /** @inheritdoc */
     public function value(array $data, $owner = null) : string
     {
         return (string) $this->my($data);

@@ -11,6 +11,9 @@ use Throwable;
 /**
  * Maps a list of scalars to a collection of objects.
  *
+ * Takes a list of scalars (eg. an array of strings) and maps it to a collection
+ * of single-property objects.
+ *
  * @package Stratadox\Hydrate
  * @author Stratadox
  */
@@ -33,23 +36,31 @@ final class HasManyEmbedded implements MapsProperty
         $this->key = $key;
     }
 
+    /**
+     * Create a new embedded has-many mapping.
+     *
+     * @param string   $name       The name of the property.
+     * @param Hydrates $collection The hydrator for the collection.
+     * @param Hydrates $item       The hydrator for the individual items.
+     * @param string   $key        The array key to assign to the scalars, used
+     *                             by the hydrator for individual items.
+     * @return self                The embedded has-many mapping.
+     */
     public static function inProperty(
-        string $property,
+        string $name,
         Hydrates $collection,
         Hydrates $item,
         string $key = 'key'
     ) : self
     {
-        return new self($property, $collection, $item, $key);
+        return new self($name, $collection, $item, $key);
     }
 
-    /** @inheritdoc */
     public function name() : string
     {
         return $this->name;
     }
 
-    /** @inheritdoc @return mixed|object */
     public function value(array $data, $owner = null)
     {
         $objects = [];

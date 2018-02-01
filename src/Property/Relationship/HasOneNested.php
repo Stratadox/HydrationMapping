@@ -24,6 +24,13 @@ final class HasOneNested extends FromSingleKey
         parent::__construct($name, $dataKey);
     }
 
+    /**
+     * Create a new nested has-one mapping.
+     *
+     * @param string   $name     The name of the property.
+     * @param Hydrates $hydrator The hydrator for the nested object.
+     * @return self              The nested has-one mapping.
+     */
     public static function inProperty(
         string $name,
         Hydrates $hydrator
@@ -32,6 +39,14 @@ final class HasOneNested extends FromSingleKey
         return new self($name, $name, $hydrator);
     }
 
+    /**
+     * Create a new nested has-one mapping, using the data from a specific key.
+     *
+     * @param string   $name     The name of the property.
+     * @param string   $key      The name of the key.
+     * @param Hydrates $hydrator The hydrator for the nested object.
+     * @return self              The nested has-one mapping.
+     */
     public static function inPropertyWithDifferentKey(
         string $name,
         string $key,
@@ -41,7 +56,6 @@ final class HasOneNested extends FromSingleKey
         return new self($name, $key, $hydrator);
     }
 
-    /** @inheritdoc @return mixed|object */
     public function value(array $data, $owner = null)
     {
         try {

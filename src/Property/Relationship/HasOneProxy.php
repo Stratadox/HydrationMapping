@@ -27,6 +27,13 @@ final class HasOneProxy implements MapsProperty
         $this->proxyBuilder = $proxyBuilder;
     }
 
+    /**
+     * Create a new lazily loading has-one mapping.
+     *
+     * @param string          $name         The name of the property.
+     * @param ProducesProxies $proxyBuilder The proxy builder.
+     * @return self                         The lazy has-one mapping.
+     */
     public static function inProperty(
         string $name,
         ProducesProxies $proxyBuilder
@@ -35,7 +42,6 @@ final class HasOneProxy implements MapsProperty
         return new self($name, $proxyBuilder);
     }
 
-    /** @inheritdoc @return mixed|object */
     public function value(array $data, $owner = null)
     {
         try {
@@ -45,7 +51,6 @@ final class HasOneProxy implements MapsProperty
         }
     }
 
-    /** @inheritdoc */
     public function name() : string
     {
         return $this->name;

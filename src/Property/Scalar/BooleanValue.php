@@ -16,7 +16,6 @@ use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
  */
 final class BooleanValue extends Scalar
 {
-    /** @inheritdoc */
     public function value(array $data, $owner = null) : bool
     {
         $value = $this->my($data);

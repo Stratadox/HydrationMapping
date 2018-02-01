@@ -23,24 +23,27 @@ final class HasBackReference implements MapsProperty, ObservesHydration
         $this->name = $name;
     }
 
+    /**
+     * Create a new mapping that refers back to the "owning" object.
+     *
+     * @param string $name The name of both the property.
+     * @return self        The mapping for the bidirectional relationship.
+     */
     public static function inProperty(string $name) : self
     {
         return new self($name);
     }
 
-    /** @inheritdoc */
     public function name() : string
     {
         return $this->name;
     }
 
-    /** @inheritdoc */
     public function hydrating($theInstance) : void
     {
         $this->referenceTo = $theInstance;
     }
 
-    /** @inheritdoc @return mixed|object */
     public function value(array $data, $owner = null)
     {
         if (!isset($this->referenceTo)) {

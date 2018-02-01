@@ -29,6 +29,14 @@ final class CustomTruths implements MapsProperty
         $this->falsehoods = $falsehoods;
     }
 
+    /**
+     * Creates a new custom truth mapping, decorating a @see BooleanValue.
+     *
+     * @param BooleanValue $mapping    The mapping to decorate.
+     * @param array        $truths     The values to consider true.
+     * @param array        $falsehoods The values to consider false.
+     * @return self                    The custom truth boolean mapping.
+     */
     public static function forThe(
         BooleanValue $mapping,
         array $truths,
@@ -38,7 +46,6 @@ final class CustomTruths implements MapsProperty
         return new self($mapping, $truths, $falsehoods);
     }
 
-    /** @inheritdoc */
     public function value(array $data, $owner = null) : bool
     {
         if (in_array($data[$this->for->key()], $this->truths)) {
@@ -50,7 +57,6 @@ final class CustomTruths implements MapsProperty
         return $this->for->value($data, $owner);
     }
 
-    /** @inheritdoc */
     public function name() : string
     {
         return $this->for->name();

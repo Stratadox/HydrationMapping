@@ -31,6 +31,14 @@ final class HasManyProxies extends FromSingleKey
         $this->proxyBuilder = $proxyBuilder;
     }
 
+    /**
+     * Create a new lazily loaded has-many mapping.
+     *
+     * @param string          $name         The name of both the key and the property.
+     * @param Hydrates        $collection   The hydrator for the collection.
+     * @param ProducesProxies $proxyBuilder The proxy builder.
+     * @return self                         The lazy has-many mapping.
+     */
     public static function inProperty(
         string $name,
         Hydrates $collection,
@@ -40,6 +48,16 @@ final class HasManyProxies extends FromSingleKey
         return new self($name, $name, $collection, $proxyBuilder);
     }
 
+    /**
+     * Create a new lazily loading has-many mapping, using the data from a
+     * specific key.
+     *
+     * @param string          $name         The name of both the key and the property.
+     * @param string          $key          The array key to use.
+     * @param Hydrates        $collection   The hydrator for the collection.
+     * @param ProducesProxies $proxyBuilder The proxy builder.
+     * @return self                         The lazy has-many mapping.
+     */
     public static function inPropertyWithDifferentKey(
         string $name,
         string $key,
@@ -50,7 +68,6 @@ final class HasManyProxies extends FromSingleKey
         return new self($name, $key, $collection, $proxyBuilder);
     }
 
-    /** @inheritdoc @return mixed|object */
     public function value(array $data, $owner = null)
     {
         $amount = $this->my($data);

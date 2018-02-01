@@ -25,6 +25,13 @@ final class HasOneEmbedded implements MapsProperty
         $this->hydrate = $hydrate;
     }
 
+    /**
+     * Create a new embedded has-one mapping.
+     *
+     * @param string   $name     The name of the property.
+     * @param Hydrates $hydrator The hydrator for the embedded object.
+     * @return self              The embedded has-one mapping.
+     */
     public static function inProperty(
         string $name,
         Hydrates $hydrator
@@ -33,13 +40,11 @@ final class HasOneEmbedded implements MapsProperty
         return new self($name, $hydrator);
     }
 
-    /** @inheritdoc */
     public function name() : string
     {
         return $this->name;
     }
 
-    /** @inheritdoc @return mixed|object */
     public function value(array $data, $owner = null)
     {
         try {

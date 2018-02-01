@@ -24,18 +24,24 @@ final class ClosureResult implements MapsProperty
         $this->function = $function;
     }
 
+    /**
+     * Create a new mapping that refers back to the "owning" object.
+     *
+     * @param string $name      The name of both the key and the property.
+     * @param Closure $function The function to execute on the data.
+     *                          Receives an array of hydration data as parameter.
+     * @return self             The closure result mapping.
+     */
     public static function inProperty(string $name, Closure $function) : self
     {
         return new self($name, $function);
     }
 
-    /** @inheritdoc */
     public function name() : string
     {
         return $this->property;
     }
 
-    /** @inheritdoc */
     public function value(array $data, $owner = null)
     {
         return $this->function->call($this, $data);

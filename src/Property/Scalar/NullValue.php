@@ -12,7 +12,6 @@ namespace Stratadox\Hydration\Mapping\Property\Scalar;
  */
 final class NullValue extends Scalar
 {
-    /** @inheritdoc */
     public function value(array $data, $owner = null)
     {
         return null;

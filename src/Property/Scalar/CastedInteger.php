@@ -12,7 +12,6 @@ namespace Stratadox\Hydration\Mapping\Property\Scalar;
  */
 final class CastedInteger extends Scalar
 {
-    /** @inheritdoc */
     public function value(array $data, $owner = null) : int
     {
         return (int) $this->my($data);
