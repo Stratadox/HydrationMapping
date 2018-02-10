@@ -6,7 +6,7 @@ namespace Stratadox\HydrationMapping\Test\Double;
 
 use Exception;
 use PHPUnit\Framework\MockObject\Matcher\AnyInvokedCount;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
+use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionClass;
 use Stratadox\Hydrator\Hydrates;
 
@@ -82,14 +82,6 @@ trait MockHydrator
         return $hydrator;
     }
 
-    /**
-     * @return AnyInvokedCount
-     */
-    abstract public static function any();
-
-    /**
-     * @param string $originalClassName
-     * @return MockObject
-     */
-    abstract protected function createMock($originalClassName);
+    abstract public static function any(): AnyInvokedCount;
+    abstract protected function createMock($originalClassName): MockObject;
 }
