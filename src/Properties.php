@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping;
 
-use Closure;
 use Stratadox\HydrationMapping\MapsProperties;
 use Stratadox\HydrationMapping\MapsProperty;
 use Stratadox\ImmutableCollection\ImmutableCollection;
