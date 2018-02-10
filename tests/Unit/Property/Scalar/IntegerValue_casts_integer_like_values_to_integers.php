@@ -16,7 +16,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
  */
 class IntegerValue_casts_integer_like_values_to_integers extends TestCase
 {
-    /** @scenario */
+    /** @test */
     function integer_like_numeric_string_input_become_integer_values()
     {
         $source = ['int' => '123'];
@@ -26,7 +26,7 @@ class IntegerValue_casts_integer_like_values_to_integers extends TestCase
         $this->assertSame(123, $map->value($source));
     }
 
-    /** @scenario */
+    /** @test */
     function negative_integer_like_numeric_string_input_become_integer_values()
     {
         $source = ['int' => '-123'];
@@ -36,7 +36,7 @@ class IntegerValue_casts_integer_like_values_to_integers extends TestCase
         $this->assertSame(-123, $map->value($source));
     }
 
-    /** @scenario */
+    /** @test */
     function number_over_maximum_integer_limit_throws_an_exception()
     {
         $source = ['int' => '99999999999999999999999999999999999999999999999999'];
@@ -47,7 +47,7 @@ class IntegerValue_casts_integer_like_values_to_integers extends TestCase
         $map->value($source);
     }
 
-    /** @scenario */
+    /** @test */
     function number_under_minimum_integer_limit_throws_an_exception()
     {
         $source = ['int' => '-99999999999999999999999999999999999999999999999999'];
@@ -58,7 +58,7 @@ class IntegerValue_casts_integer_like_values_to_integers extends TestCase
         $map->value($source);
     }
 
-    /** @scenario */
+    /** @test */
     function float_like_input_throws_an_exception()
     {
         $source = ['int' => '6.35'];
@@ -69,7 +69,7 @@ class IntegerValue_casts_integer_like_values_to_integers extends TestCase
         $map->value($source);
     }
 
-    /** @scenario */
+    /** @test */
     function non_numeric_input_throws_an_exception()
     {
         $source = ['int' => 'NaN'];
@@ -80,7 +80,7 @@ class IntegerValue_casts_integer_like_values_to_integers extends TestCase
         $map->value($source);
     }
 
-    /** @scenario */
+    /** @test */
     function null_input_throws_an_exception()
     {
         $source = ['int' => null];

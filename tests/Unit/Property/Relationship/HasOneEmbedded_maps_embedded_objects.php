@@ -18,7 +18,7 @@ class HasOneEmbedded_maps_embedded_objects extends TestCase
 {
     use MockHydrator;
 
-    /** @scenario */
+    /** @test */
     function mapping_part_of_a_flat_array_to_a_relationship()
     {
         $bookInformation = [
@@ -38,7 +38,7 @@ class HasOneEmbedded_maps_embedded_objects extends TestCase
         $this->assertInstanceOf(Person::class, $author);
     }
 
-    /** @scenario */
+    /** @test */
     function property_mappers_know_which_property_they_map_to()
     {
         $authorMapping = HasOneEmbedded::inProperty('author',
@@ -48,7 +48,7 @@ class HasOneEmbedded_maps_embedded_objects extends TestCase
         $this->assertSame('author', $authorMapping->name());
     }
 
-    /** @scenario */
+    /** @test */
     function throwing_an_informative_exception_when_the_items_cannot_be_mapped()
     {
         $mapping = HasOneEmbedded::inProperty('foo',

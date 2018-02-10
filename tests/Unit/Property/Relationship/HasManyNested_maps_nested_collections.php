@@ -20,7 +20,7 @@ class HasManyNested_maps_nested_collections extends TestCase
 {
     use MockHydrator;
 
-    /** @scenario */
+    /** @test */
     function mapping_a_nested_array_of_names_to_a_collection_of_Authors()
     {
         $inSourceData = [
@@ -56,7 +56,7 @@ class HasManyNested_maps_nested_collections extends TestCase
         }
     }
 
-    /** @scenario */
+    /** @test */
     function the_source_key_can_differ_from_the_property_name()
     {
         $inSourceData = [
@@ -80,7 +80,7 @@ class HasManyNested_maps_nested_collections extends TestCase
         $this->assertSame('authors', $authorsMapping->name());
     }
 
-    /** @scenario */
+    /** @test */
     function throwing_an_informative_exception_when_the_items_cannot_be_mapped()
     {
         $mapping = HasManyNested::inProperty('foo',
@@ -96,7 +96,7 @@ class HasManyNested_maps_nested_collections extends TestCase
         $mapping->value(['foo' => [[]]]);
     }
 
-    /** @scenario */
+    /** @test */
     function throwing_an_informative_exception_when_the_collection_cannot_be_mapped()
     {
         $mapping = HasManyNested::inProperty('foo',

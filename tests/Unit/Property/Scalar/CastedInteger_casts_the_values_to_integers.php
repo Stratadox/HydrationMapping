@@ -14,7 +14,7 @@ use Stratadox\Hydration\Mapping\Property\Scalar\CastedInteger;
  */
 class CastedInteger_casts_the_values_to_integers extends TestCase
 {
-    /** @scenario */
+    /** @test */
     function integer_like_numeric_string_input_become_integer_values()
     {
         $source = ['int' => '123'];
@@ -24,7 +24,7 @@ class CastedInteger_casts_the_values_to_integers extends TestCase
         $this->assertSame(123, $map->value($source));
     }
 
-    /** @scenario */
+    /** @test */
     function numbers_out_of_range_become_the_highest_possible_integer_value()
     {
         $source = ['int' => '99999999999999999999999999999999999999999999999999'];
@@ -34,7 +34,7 @@ class CastedInteger_casts_the_values_to_integers extends TestCase
         $this->assertSame(PHP_INT_MAX, $map->value($source));
     }
 
-    /** @scenario */
+    /** @test */
     function float_like_values_are_rounded_down()
     {
         $source = ['int' => '6.95'];
@@ -44,7 +44,7 @@ class CastedInteger_casts_the_values_to_integers extends TestCase
         $this->assertSame(6, $map->value($source));
     }
 
-    /** @scenario */
+    /** @test */
     function non_numeric_values_become_zero()
     {
         $source = ['int' => 'NaN'];
@@ -54,7 +54,7 @@ class CastedInteger_casts_the_values_to_integers extends TestCase
         $this->assertSame(0, $map->value($source));
     }
 
-    /** @scenario */
+    /** @test */
     function null_values_become_zero()
     {
         $source = ['int' => null];

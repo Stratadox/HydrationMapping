@@ -24,7 +24,7 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
     use MockHydrator;
     use MockProxyBuilder;
 
-    /** @scenario */
+    /** @test */
     function mapping_missing_data_to_a_collection_of_proxies()
     {
         $inSourceData = ['authors' => 3];
@@ -44,7 +44,7 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
         }
     }
 
-    /** @scenario */
+    /** @test */
     function proxies_receive_information_on_where_they_are_referenced_from()
     {
         $inSourceData = ['authors' => 3];
@@ -64,7 +64,7 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
         }
     }
 
-    /** @scenario */
+    /** @test */
     function proxies_receive_information_on_who_references_them()
     {
         $inSourceData = ['authors' => 2];
@@ -83,7 +83,7 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
         }
     }
 
-    /** @scenario */
+    /** @test */
     function the_source_key_can_differ_from_the_property_name()
     {
         $inSourceData = ['amount' => 3];
@@ -100,7 +100,7 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
         $this->assertSame('authors', $authorsMapping->name());
     }
 
-    /** @scenario */
+    /** @test */
     function throwing_an_informative_exception_when_the_collection_cannot_be_mapped()
     {
         $mapping = HasManyProxies::inProperty('foo',
@@ -116,7 +116,7 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
         $mapping->value(['foo' => 1]);
     }
 
-    /** @scenario */
+    /** @test */
     function throwing_an_informative_exception_when_the_proxies_cannot_be_built()
     {
         $mapping = HasManyProxies::inProperty('foo',

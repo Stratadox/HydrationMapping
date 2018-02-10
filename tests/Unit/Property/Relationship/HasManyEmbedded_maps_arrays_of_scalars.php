@@ -19,7 +19,7 @@ class HasManyEmbedded_maps_arrays_of_scalars extends TestCase
 {
     use MockHydrator;
 
-    /** @scenario */
+    /** @test */
     function mapping_an_array_of_strings_to_a_collection_of_titles()
     {
         $mapping = HasManyEmbedded::inProperty('name',
@@ -36,7 +36,7 @@ class HasManyEmbedded_maps_arrays_of_scalars extends TestCase
         $this->assertSame('baz', $titles[2]->title);
     }
 
-    /** @scenario */
+    /** @test */
     function using_key_as_default_key()
     {
         $mapping = HasManyEmbedded::inProperty('name',
@@ -51,7 +51,7 @@ class HasManyEmbedded_maps_arrays_of_scalars extends TestCase
         $this->assertSame('foo', $titles[0]->key);
     }
 
-    /** @scenario */
+    /** @test */
     function mapping_to_a_property()
     {
         $mapping = HasManyEmbedded::inProperty('foo',
@@ -66,7 +66,7 @@ class HasManyEmbedded_maps_arrays_of_scalars extends TestCase
         );
     }
 
-    /** @scenario */
+    /** @test */
     function throwing_an_informative_exception_when_the_items_cannot_be_mapped()
     {
         $mapping = HasManyEmbedded::inProperty('foo',
@@ -82,7 +82,7 @@ class HasManyEmbedded_maps_arrays_of_scalars extends TestCase
         $mapping->value(['bar']);
     }
 
-    /** @scenario */
+    /** @test */
     function throwing_an_informative_exception_when_the_collection_cannot_be_mapped()
     {
         $mapping = HasManyEmbedded::inProperty('foo',

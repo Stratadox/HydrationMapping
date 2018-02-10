@@ -17,7 +17,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
 class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
 {
     /**
-     * @scenario
+     * @test
      * @dataProvider trueValues
      * @param mixed $true Value that should be considered true
      */
@@ -31,7 +31,7 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
     }
 
     /**
-     * @scenario
+     * @test
      * @dataProvider falseValues
      * @param mixed $false Value that should be considered false
      */
@@ -45,7 +45,7 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
     }
 
     /**
-     * @scenario
+     * @test
      * @dataProvider unacceptableValues
      * @param mixed $itsNotBoolean Value that should throw an exception
      */

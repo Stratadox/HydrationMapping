@@ -17,7 +17,7 @@ class Properties_map_multiple_properties extends TestCase
 {
     use MockHydrator;
 
-    /** @scenario */
+    /** @test */
     function class_mappings_contain_property_mappings()
     {
         $fooProperty = StringValue::inProperty('foo');

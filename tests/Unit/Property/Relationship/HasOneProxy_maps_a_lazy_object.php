@@ -20,7 +20,7 @@ class HasOneProxy_maps_a_lazy_object extends TestCase
 {
     use MockProxyBuilder;
 
-    /** @scenario */
+    /** @test */
     function mapping_an_object_without_any_data()
     {
         $mapping = HasOneProxy::inProperty('author',
@@ -35,7 +35,7 @@ class HasOneProxy_maps_a_lazy_object extends TestCase
         $this->assertSame('Is out of scope', $author->lastName());
     }
 
-    /** @scenario */
+    /** @test */
     function property_mappers_know_which_property_they_map_to()
     {
         $mapping = HasOneProxy::inProperty('author',
@@ -45,7 +45,7 @@ class HasOneProxy_maps_a_lazy_object extends TestCase
         $this->assertSame('author', $mapping->name());
     }
 
-    /** @scenario */
+    /** @test */
     function throwing_an_informative_exception_when_the_proxy_cannot_be_built()
     {
         $mapping = HasOneProxy::inProperty('foo',

@@ -104,7 +104,7 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
         return $hydrator;
     }
 
-    /** @scenario */
+    /** @test */
     function the_humans_have_names()
     {
         $alice = $this->petOwners[0];
@@ -116,7 +116,7 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
         self::assertSame('Charlie', $charlie->name());
     }
 
-    /** @scenario */
+    /** @test */
     function charlie_has_no_pet_food()
     {
         $charlie = $this->petOwners[2];
@@ -125,7 +125,7 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
         self::assertTrue($charlie->hasNoMorePetFood());
     }
 
-    /** @scenario */
+    /** @test */
     function charlie_has_no_pets()
     {
         $charlie = $this->petOwners[2];
@@ -133,7 +133,7 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
         self::assertCount(0, $charlie->pets());
     }
 
-    /** @scenario */
+    /** @test */
     function alice_and_bob_have_pets()
     {
         $alice = $this->petOwners[0];
@@ -143,7 +143,7 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
         self::assertCount(2, $bob->pets());
     }
 
-    /** @scenario */
+    /** @test */
     function alice_has_pet_food()
     {
         $alice = $this->petOwners[0];
@@ -152,7 +152,7 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
         self::assertFalse($alice->hasNoMorePetFood());
     }
 
-    /** @scenario */
+    /** @test */
     function alice_has_a_cat_named_Foo()
     {
         $alice = $this->petOwners[0];
@@ -163,7 +163,7 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
         self::assertFalse($alice->hasHungryPets());
     }
 
-    /** @scenario */
+    /** @test */
     function foo_is_the_cat_of_alice()
     {
         $alice = $this->petOwners[0];
@@ -172,7 +172,7 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
         self::assertSame($alice, $foo->owner());
     }
 
-    /** @scenario */
+    /** @test */
     function bob_has_a_hungry_cat_named_Bar()
     {
         $bob = $this->petOwners[1];
@@ -183,7 +183,7 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
         self::assertTrue($bob->hasHungryPets());
     }
 
-    /** @scenario */
+    /** @test */
     function bob_also_has_a_dog_named_Baz()
     {
         $bob = $this->petOwners[1];
@@ -193,7 +193,7 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
         self::assertFalse($bob->petIsHungry(1));
     }
 
-    /** @scenario */
+    /** @test */
     function bob_has_pet_food()
     {
         $bob = $this->petOwners[1];
@@ -202,7 +202,7 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
         self::assertFalse($bob->hasNoMorePetFood());
     }
 
-    /** @scenario */
+    /** @test */
     function bob_feeds_his_cat()
     {
         $bob = $this->petOwners[1];
@@ -214,7 +214,7 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
         self::assertTrue($bob->hasNoMorePetFood());
     }
 
-    /** @scenario */
+    /** @test */
     function bob_tries_to_feed_his_cat_twice_but_is_short_on_food()
     {
         $bob = $this->petOwners[1];
@@ -231,7 +231,7 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
         $bar->askForFood();
     }
 
-    /** @scenario */
+    /** @test */
     function alice_does_not_feed_bobs_cat()
     {
         $alice = $this->petOwners[0];
@@ -247,7 +247,7 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
         $bar->askForFoodFrom($alice);
     }
 
-    /** @scenario */
+    /** @test */
     function alice_takes_care_of_bobs_cat()
     {
         $alice = $this->petOwners[0];

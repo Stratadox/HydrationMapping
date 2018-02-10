@@ -14,7 +14,7 @@ use Stratadox\Hydration\Mapping\Property\Scalar\StringValue;
  */
 class StringValue_casts_the_values_to_strings extends TestCase
 {
-    /** @scenario */
+    /** @test */
     function integer_values_become_numeric_strings()
     {
         $source = ['string' => 123];
@@ -24,7 +24,7 @@ class StringValue_casts_the_values_to_strings extends TestCase
         $this->assertSame('123', $map->value($source));
     }
 
-    /** @scenario */
+    /** @test */
     function boolean_true_converts_to_1()
     {
         $source = ['string' => true];
@@ -34,7 +34,7 @@ class StringValue_casts_the_values_to_strings extends TestCase
         $this->assertSame('1', $map->value($source));
     }
 
-    /** @scenario */
+    /** @test */
     function boolean_false_converts_to_empty_string()
     {
         $source = ['string' => false];
@@ -44,7 +44,7 @@ class StringValue_casts_the_values_to_strings extends TestCase
         $this->assertSame('', $map->value($source));
     }
 
-    /** @scenario */
+    /** @test */
     function float_values_convert_to_some_approximation()
     {
         $source = ['string' => 10.0002597343609724924];

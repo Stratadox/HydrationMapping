@@ -19,7 +19,7 @@ class HasOneNested_maps_nested_objects extends TestCase
 {
     use MockHydrator;
 
-    /** @scenario */
+    /** @test */
     function mapping_a_nested_array_to_a_HasOne_relationship()
     {
         $inAuthorData = [
@@ -41,7 +41,7 @@ class HasOneNested_maps_nested_objects extends TestCase
         $this->assertSame('Verne', $author->lastName());
     }
 
-    /** @scenario */
+    /** @test */
     function the_source_key_can_differ_from_the_property_name()
     {
         $inAuthorData = [
@@ -62,7 +62,7 @@ class HasOneNested_maps_nested_objects extends TestCase
         $this->assertSame('author', $authorMapping->name());
     }
 
-    /** @scenario */
+    /** @test */
     function throwing_an_informative_exception_when_the_items_cannot_be_mapped()
     {
         $mapping = HasOneNested::inProperty('foo',

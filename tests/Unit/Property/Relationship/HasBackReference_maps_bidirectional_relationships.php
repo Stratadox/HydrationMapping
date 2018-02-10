@@ -15,7 +15,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
  */
 class HasBackReference_maps_bidirectional_relationships extends TestCase
 {
-    /** @scenario */
+    /** @test */
     function mapping_a_bidirectional_association()
     {
         $object = new StdClass;
@@ -29,7 +29,7 @@ class HasBackReference_maps_bidirectional_relationships extends TestCase
         );
     }
 
-    /** @scenario */
+    /** @test */
     function mapping_to_a_property()
     {
         $mapping = HasBackReference::inProperty('foo');
@@ -40,7 +40,7 @@ class HasBackReference_maps_bidirectional_relationships extends TestCase
         );
     }
 
-    /** @scenario */
+    /** @test */
     function throwing_an_exception_if_there_is_no_referrer()
     {
         $mapping = HasBackReference::inProperty('foo');

@@ -18,7 +18,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
 class CustomTruths_defines_what_is_true_and_what_is_false extends TestCase
 {
     /**
-     * @scenario
+     * @test
      * @dataProvider trueValues
      * @param mixed $true
      * @param array $truths
@@ -37,7 +37,7 @@ class CustomTruths_defines_what_is_true_and_what_is_false extends TestCase
     }
 
     /**
-     * @scenario
+     * @test
      * @dataProvider falseValues
      * @param mixed $itsFakeBelieveMe
      * @param array $truths
@@ -56,7 +56,7 @@ class CustomTruths_defines_what_is_true_and_what_is_false extends TestCase
     }
 
     /**
-     * @scenario
+     * @test
      * @dataProvider unacceptableValues
      * @param mixed $itsNotBoolean
      * @param array $truths
@@ -75,7 +75,7 @@ class CustomTruths_defines_what_is_true_and_what_is_false extends TestCase
         $map->value($source);
     }
 
-    /** @scenario */
+    /** @test */
     function custom_truth_mapping_knows_which_property_to_map_to()
     {
         $map = CustomTruths::forThe(BooleanValue::inProperty('boolean'), [], []);

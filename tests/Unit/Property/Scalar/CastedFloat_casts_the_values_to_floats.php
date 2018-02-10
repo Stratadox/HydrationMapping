@@ -14,7 +14,7 @@ use Stratadox\Hydration\Mapping\Property\Scalar\CastedFloat;
  */
 class CastedFloat_casts_the_values_to_floats extends TestCase
 {
-    /** @scenario */
+    /** @test */
     function float_like_strings_become_floats()
     {
         $source = ['float' => '5.2'];
@@ -24,7 +24,7 @@ class CastedFloat_casts_the_values_to_floats extends TestCase
         $this->assertSame(5.2, $map->value($source));
     }
 
-    /** @scenario */
+    /** @test */
     function integer_like_string_input_becomes_a_float()
     {
         $source = ['float' => '6'];
@@ -34,7 +34,7 @@ class CastedFloat_casts_the_values_to_floats extends TestCase
         $this->assertSame(6.0, $map->value($source));
     }
 
-    /** @scenario */
+    /** @test */
     function integers_become_floats()
     {
         $source = ['float' => 3];
@@ -44,7 +44,7 @@ class CastedFloat_casts_the_values_to_floats extends TestCase
         $this->assertSame(3.0, $map->value($source));
     }
 
-    /** @scenario */
+    /** @test */
     function non_numeric_input_becomes_zero()
     {
         $source = ['float' => 'NaN'];

@@ -16,7 +16,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
  */
 class FloatValue_casts_numeric_values_to_floats extends TestCase
 {
-    /** @scenario */
+    /** @test */
     function float_like_strings_become_floats()
     {
         $source = ['float' => '5.2'];
@@ -26,7 +26,7 @@ class FloatValue_casts_numeric_values_to_floats extends TestCase
         $this->assertSame(5.2, $map->value($source));
     }
 
-    /** @scenario */
+    /** @test */
     function integer_like_string_input_becomes_a_float()
     {
         $source = ['float' => '6'];
@@ -36,7 +36,7 @@ class FloatValue_casts_numeric_values_to_floats extends TestCase
         $this->assertSame(6.0, $map->value($source));
     }
 
-    /** @scenario */
+    /** @test */
     function integers_become_floats()
     {
         $source = ['float' => 3];
@@ -46,7 +46,7 @@ class FloatValue_casts_numeric_values_to_floats extends TestCase
         $this->assertSame(3.0, $map->value($source));
     }
 
-    /** @scenario */
+    /** @test */
     function non_numeric_input_throws_an_exception()
     {
         $source = ['float' => 'NaN'];
@@ -57,7 +57,7 @@ class FloatValue_casts_numeric_values_to_floats extends TestCase
         $map->value($source);
     }
 
-    /** @scenario */
+    /** @test */
     function null_input_throws_an_exception()
     {
         $source = ['float' => null];

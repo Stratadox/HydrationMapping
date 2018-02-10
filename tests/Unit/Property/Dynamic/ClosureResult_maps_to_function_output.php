@@ -29,7 +29,7 @@ class ClosureResult_maps_to_function_output extends TestCase
         $this->assertSame('foobar', $output);
     }
 
-    /** @scenario */
+    /** @test */
     function property_mappers_know_which_property_they_map_to()
     {
         $map = ClosureResult::inProperty('concatenate', function (array $data) {

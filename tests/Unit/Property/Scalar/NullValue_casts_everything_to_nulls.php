@@ -14,7 +14,7 @@ use Stratadox\Hydration\Mapping\Property\Scalar\NullValue;
  */
 class NullValue_casts_everything_to_nulls extends TestCase
 {
-    /** @scenario */
+    /** @test */
     function integer_values_convert_to_null()
     {
         $source = ['null' => 123];
@@ -24,7 +24,7 @@ class NullValue_casts_everything_to_nulls extends TestCase
         $this->assertNull($map->value($source));
     }
 
-    /** @scenario */
+    /** @test */
     function boolean_true_converts_to_null()
     {
         $source = ['null' => true];
@@ -34,7 +34,7 @@ class NullValue_casts_everything_to_nulls extends TestCase
         $this->assertNull($map->value($source));
     }
 
-    /** @scenario */
+    /** @test */
     function boolean_false_converts_to_null()
     {
         $source = ['null' => false];
@@ -44,7 +44,7 @@ class NullValue_casts_everything_to_nulls extends TestCase
         $this->assertNull($map->value($source));
     }
 
-    /** @scenario */
+    /** @test */
     function float_values_convert_to_null()
     {
         $source = ['null' => 10.0002597343609724924];
@@ -54,7 +54,7 @@ class NullValue_casts_everything_to_nulls extends TestCase
         $this->assertNull($map->value($source));
     }
 
-    /** @scenario */
+    /** @test */
     function string_values_convert_to_null()
     {
         $source = ['null' => 'Oh no! I will be nullified!'];
