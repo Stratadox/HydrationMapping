@@ -25,7 +25,7 @@ final class ClosureResult implements MapsProperty
     }
 
     /**
-     * Create a new mapping that refers back to the "owning" object.
+     * Create a new mapping that applies a closure on the input data.
      *
      * @param string $name      The name of both the key and the property.
      * @param Closure $function The function to execute on the data.
