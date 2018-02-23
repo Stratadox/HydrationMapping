@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 
 use PHPUnit\Framework\TestCase;
-use StdClass;
+use stdClass;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasBackReference;
 use Stratadox\HydrationMapping\UnmappableInput;
 
@@ -18,7 +18,7 @@ class HasBackReference_maps_bidirectional_relationships extends TestCase
     /** @test */
     function mapping_a_bidirectional_association()
     {
-        $object = new StdClass;
+        $object = new stdClass;
 
         $mapping = HasBackReference::inProperty('foo');
         $mapping->hydrating($object);
