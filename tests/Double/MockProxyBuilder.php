@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Stratadox\HydrationMapping\Test\Double;
 
 use Exception;
+use LogicException;
 use PHPUnit\Framework\MockObject\Matcher\AnyInvokedCount;
 use PHPUnit\Framework\MockObject\MockObject;
 use Stratadox\Proxy\ProducesProxies;
@@ -17,7 +18,7 @@ trait MockProxyBuilder
      * @param string $class
      * @return ProducesProxies|MockObject
      */
-    protected function mockProxyBuilderFor(string $class) : MockObject
+    protected function mockProxyBuilderFor(string $class): ProducesProxies
     {
         $proxyBuilder = $this->createMock(ProducesProxies::class);
 
@@ -30,6 +31,10 @@ trait MockProxyBuilder
                 }
             );
 
+        if (!$proxyBuilder instanceof ProducesProxies) {
+            throw new LogicException;
+        }
+
         return $proxyBuilder;
     }
 
@@ -39,7 +44,7 @@ trait MockProxyBuilder
      * @param string $message
      * @return ProducesProxies|MockObject
      */
-    protected function mockExceptionThrowingProxyBuilder(string $message = '') : MockObject
+    protected function mockExceptionThrowingProxyBuilder(string $message = ''): ProducesProxies
     {
         $proxyBuilder = $this->createMock(ProducesProxies::class);
 
@@ -49,9 +54,13 @@ trait MockProxyBuilder
                 throw new Exception($message);
             });
 
+        if (!$proxyBuilder instanceof ProducesProxies) {
+            throw new LogicException;
+        }
+
         return $proxyBuilder;
     }
 
-    abstract public static function any() : AnyInvokedCount;
-    abstract protected function createMock($originalClassName) : MockObject;
+    abstract public static function any(): AnyInvokedCount;
+    abstract protected function createMock($originalClassName): MockObject;
 }
