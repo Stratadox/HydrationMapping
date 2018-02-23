@@ -4,6 +4,7 @@
 [![Build Status](https://travis-ci.org/Stratadox/HydrationMapping.svg?branch=master)](https://travis-ci.org/Stratadox/HydrationMapping)
 [![Coverage Status](https://coveralls.io/repos/github/Stratadox/HydrationMapping/badge.svg?branch=master)](https://coveralls.io/github/Stratadox/HydrationMapping?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Stratadox/HydrationMapping/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Stratadox/HydrationMapping/?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/cc2585ce303967dd4c7d/maintainability)](https://codeclimate.com/github/Stratadox/HydrationMapping/maintainability)
 [![Latest Stable Version](https://poser.pugx.org/stratadox/hydration-mapping/v/stable)](https://packagist.org/packages/stratadox/hydration-mapping)
 [![License](https://poser.pugx.org/stratadox/hydration-mapping/license)](https://packagist.org/packages/stratadox/hydration-mapping)
 
