@@ -15,7 +15,7 @@ before_script:
 
 script:
   - mkdir -p build/logs
-  - vendor/bin/phpunit -c phpunit.xml
+  - vendor/bin/phpunit -c phpunit.xml --testdox
   - vendor/bin/infection
 
 after_success:
