@@ -37,6 +37,26 @@ class IntegerValue_casts_integer_like_values_to_integers extends TestCase
     }
 
     /** @test */
+    function very_large_integer_input_become_integer_values()
+    {
+        $source = ['int' => PHP_INT_MAX];
+
+        $map = IntegerValue::inProperty('int');
+
+        $this->assertSame(PHP_INT_MAX, $map->value($source));
+    }
+
+    /** @test */
+    function very_small_integer_input_become_integer_values()
+    {
+        $source = ['int' => PHP_INT_MIN];
+
+        $map = IntegerValue::inProperty('int');
+
+        $this->assertSame(PHP_INT_MIN, $map->value($source));
+    }
+
+    /** @test */
     function number_over_maximum_integer_limit_throws_an_exception()
     {
         $source = ['int' => '99999999999999999999999999999999999999999999999999'];
