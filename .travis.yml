@@ -16,7 +16,7 @@ before_script:
 script:
   - mkdir -p build/logs
   - vendor/bin/phpunit -c phpunit.xml --testdox
-  - vendor/bin/infection
+  - vendor/bin/infection --min-msi=100 --min-covered-msi=100
   - vendor/bin/phpstan analyse src tests --level=7 --no-progress
 
 after_success:
