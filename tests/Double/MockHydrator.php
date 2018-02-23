@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Stratadox\HydrationMapping\Test\Double;
 
 use Exception;
+use LogicException;
 use PHPUnit\Framework\MockObject\Matcher\AnyInvokedCount;
 use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionClass;
@@ -18,7 +19,7 @@ trait MockHydrator
      * @param string $class
      * @return Hydrates|MockObject
      */
-    protected function mockCollectionHydratorForThe(string $class) : MockObject
+    protected function mockCollectionHydratorForThe(string $class): Hydrates
     {
         $hydrator = $this->createMock(Hydrates::class);
 
@@ -31,6 +32,10 @@ trait MockHydrator
                 }
             );
 
+        if (!$hydrator instanceof Hydrates) {
+            throw new LogicException;
+        }
+
         return $hydrator;
     }
 
@@ -40,7 +45,7 @@ trait MockHydrator
      * @param string $class
      * @return Hydrates|MockObject
      */
-    protected function mockPublicSetterHydratorForThe(string $class) : MockObject
+    protected function mockPublicSetterHydratorForThe(string $class): Hydrates
     {
         $hydrator = $this->createMock(Hydrates::class);
 
@@ -57,6 +62,10 @@ trait MockHydrator
                 }
             );
 
+        if (!$hydrator instanceof Hydrates) {
+            throw new LogicException;
+        }
+
         return $hydrator;
     }
 
@@ -66,7 +75,7 @@ trait MockHydrator
      * @param string $message
      * @return Hydrates|MockObject
      */
-    protected function mockExceptionThrowingHydrator(string $message = '') : MockObject
+    protected function mockExceptionThrowingHydrator(string $message = ''): Hydrates
     {
         $hydrator = $this->createMock(Hydrates::class);
 
@@ -78,6 +87,10 @@ trait MockHydrator
                     throw new Exception($message);
                 }
             );
+
+        if (!$hydrator instanceof Hydrates) {
+            throw new LogicException;
+        }
 
         return $hydrator;
     }
