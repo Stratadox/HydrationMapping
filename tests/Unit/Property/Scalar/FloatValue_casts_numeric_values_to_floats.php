@@ -54,6 +54,11 @@ class FloatValue_casts_numeric_values_to_floats extends TestCase
         $map = FloatValue::inProperty('float');
 
         $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
+        $this->expectExceptionMessage(
+            'Cannot assign `NaN` to property `float`: it is not clean for ' .
+            'conversion to float.'
+        );
         $map->value($source);
     }
 
@@ -65,6 +70,11 @@ class FloatValue_casts_numeric_values_to_floats extends TestCase
         $map = FloatValue::inProperty('float');
 
         $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
+        $this->expectExceptionMessage(
+            'Cannot assign the NULL to property `float`: it is not clean for ' .
+            'conversion to float.'
+        );
         $map->value($source);
     }
 }

@@ -56,6 +56,7 @@ class HasOneEmbedded_maps_embedded_objects extends TestCase
         );
 
         $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Failed to map the HasOneEmbedded relation of the `foo` property: Original message here.'
         );

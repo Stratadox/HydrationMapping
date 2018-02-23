@@ -53,6 +53,7 @@ class HasOneProxy_maps_a_lazy_object extends TestCase
         );
 
         $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Proxy production for in the `foo` property failed: Original message here.'
         );

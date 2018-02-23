@@ -75,6 +75,7 @@ class HasManyEmbedded_maps_arrays_of_scalars extends TestCase
         );
 
         $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Failed to map the HasManyEmbedded items of the `foo` property: Original message here.'
         );
@@ -91,6 +92,7 @@ class HasManyEmbedded_maps_arrays_of_scalars extends TestCase
         );
 
         $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Failed to map the HasManyEmbedded collection of the `foo` property: Original message here.'
         );

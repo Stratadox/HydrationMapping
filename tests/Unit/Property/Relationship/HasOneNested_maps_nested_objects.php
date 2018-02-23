@@ -70,6 +70,7 @@ class HasOneNested_maps_nested_objects extends TestCase
         );
 
         $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Failed to map the HasOneNested relation of the `foo` property: Original message here.'
         );

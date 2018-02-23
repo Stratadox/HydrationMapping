@@ -89,6 +89,7 @@ class HasManyNested_maps_nested_collections extends TestCase
         );
 
         $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Failed to map the HasManyNested items of the `foo` property: Original message here.'
         );
@@ -105,6 +106,7 @@ class HasManyNested_maps_nested_collections extends TestCase
         );
 
         $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Failed to map the HasManyNested collection of the `foo` property: Original message here.'
         );

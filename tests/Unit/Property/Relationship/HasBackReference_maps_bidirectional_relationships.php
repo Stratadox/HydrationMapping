@@ -46,6 +46,7 @@ class HasBackReference_maps_bidirectional_relationships extends TestCase
         $mapping = HasBackReference::inProperty('foo');
 
         $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Failed to reference back to the `foo` relationship: no referrer found.'
         );

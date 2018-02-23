@@ -56,6 +56,11 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
         $map = BooleanValue::inProperty('boolean');
 
         $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
+        $this->expectExceptionMessage(
+            'Cannot assign `'.$itsNotBoolean.'` to property `boolean`: it is ' .
+            'not clean for conversion to boolean.'
+        );
         $map->value($source);
     }
 

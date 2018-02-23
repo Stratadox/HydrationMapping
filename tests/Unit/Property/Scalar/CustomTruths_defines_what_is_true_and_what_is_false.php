@@ -72,6 +72,11 @@ class CustomTruths_defines_what_is_true_and_what_is_false extends TestCase
         );
 
         $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
+        $this->expectExceptionMessage(
+            'Cannot assign `'.$itsNotBoolean.'` to property `boolean`: it is ' .
+            'not clean for conversion to boolean.'
+        );
         $map->value($source);
     }
 

@@ -44,6 +44,12 @@ class IntegerValue_casts_integer_like_values_to_integers extends TestCase
         $map = IntegerValue::inProperty('int');
 
         $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
+        $this->expectExceptionMessage(
+            'Cannot assign `99999999999999999999999999999999999999999999999999` ' .
+            'to property `int`: it is not clean for conversion to integer. The ' .
+            'value is out of range.'
+        );
         $map->value($source);
     }
 
@@ -55,6 +61,12 @@ class IntegerValue_casts_integer_like_values_to_integers extends TestCase
         $map = IntegerValue::inProperty('int');
 
         $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
+        $this->expectExceptionMessage(
+            'Cannot assign `-99999999999999999999999999999999999999999999999999` ' .
+            'to property `int`: it is not clean for conversion to integer. The ' .
+            'value is out of range.'
+        );
         $map->value($source);
     }
 
@@ -66,6 +78,11 @@ class IntegerValue_casts_integer_like_values_to_integers extends TestCase
         $map = IntegerValue::inProperty('int');
 
         $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
+        $this->expectExceptionMessage(
+            'Cannot assign `6.35` to property `int`: it is not clean for ' .
+            'conversion to integer.'
+        );
         $map->value($source);
     }
 
@@ -77,6 +94,11 @@ class IntegerValue_casts_integer_like_values_to_integers extends TestCase
         $map = IntegerValue::inProperty('int');
 
         $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
+        $this->expectExceptionMessage(
+            'Cannot assign `NaN` to property `int`: it is not clean for ' .
+            'conversion to integer.'
+        );
         $map->value($source);
     }
 
@@ -88,6 +110,11 @@ class IntegerValue_casts_integer_like_values_to_integers extends TestCase
         $map = IntegerValue::inProperty('int');
 
         $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
+        $this->expectExceptionMessage(
+            'Cannot assign the NULL to property `int`: it is not clean for ' .
+            'conversion to integer.'
+        );
         $map->value($source);
     }
 }

@@ -109,6 +109,7 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
         );
 
         $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Failed to map the HasManyProxies collection of the `foo` property: Original message here.'
         );
@@ -125,6 +126,7 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
         );
 
         $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Proxy production for in the `foo` property failed: Original message here.'
         );
