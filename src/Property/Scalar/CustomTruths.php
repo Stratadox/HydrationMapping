@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Stratadox\Hydration\Mapping\Property\Scalar;
 
 use function in_array;
+use Stratadox\HydrationMapping\ExposesDataKey;
 use Stratadox\HydrationMapping\MapsProperty;
 
 /**
@@ -20,7 +21,7 @@ final class CustomTruths implements MapsProperty
     private $falsehoods;
 
     private function __construct(
-        BooleanValue $mapping,
+        ExposesDataKey $mapping,
         array $truths,
         array $falsehoods
     ) {
@@ -32,13 +33,13 @@ final class CustomTruths implements MapsProperty
     /**
      * Creates a new custom truth mapping, decorating a @see BooleanValue.
      *
-     * @param BooleanValue $mapping    The mapping to decorate.
-     * @param array        $truths     The values to consider true.
-     * @param array        $falsehoods The values to consider false.
-     * @return self                    The custom truth boolean mapping.
+     * @param ExposesDataKey $mapping    The mapping to decorate.
+     * @param array          $truths     The values to consider true.
+     * @param array          $falsehoods The values to consider false.
+     * @return self                      The custom truth boolean mapping.
      */
     public static function forThe(
-        BooleanValue $mapping,
+        ExposesDataKey $mapping,
         array $truths,
         array $falsehoods
     ) : self
