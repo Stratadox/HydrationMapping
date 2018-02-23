@@ -17,6 +17,7 @@ script:
   - mkdir -p build/logs
   - vendor/bin/phpunit -c phpunit.xml --testdox
   - vendor/bin/infection
+  - vendor/bin/phpstan analyse src tests --level=7 --no-progress
 
 after_success:
   - travis_retry php vendor/bin/php-coveralls
