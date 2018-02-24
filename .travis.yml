@@ -28,7 +28,7 @@ after_success:
 
 after_failure:
   - touch build/logs/infection-log.txt
-  - less build/logs/infection-log.txt
+  - cat build/logs/infection-log.txt
 
 notifications:
   email: false
