@@ -15,7 +15,6 @@ use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasManyProxies
- * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\CollectionMappingFailed
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\ProxyProductionFailed
  */
@@ -98,6 +97,24 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
 
         $this->assertCount(3, $authors);
         $this->assertSame('authors', $authorsMapping->name());
+    }
+
+    /** @test */
+    function throwing_an_informative_exception_when_the_source_is_missing()
+    {
+        $mapping = HasManyProxies::inProperty('foo',
+            $this->mockCollectionHydratorForThe(Persons::class),
+            $this->mockProxyBuilderFor(PersonProxy::class)
+        );
+
+        $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
+        $this->expectExceptionMessage(
+            'Missing the key `foo` for property `foo` the input data: []; ' .
+            'Mapper: '.HasManyProxies::class
+        );
+
+        $mapping->value([]);
     }
 
     /** @test */

@@ -13,7 +13,6 @@ use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasManyNested
- * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\CollectionMappingFailed
  */
 class HasManyNested_maps_nested_collections extends TestCase
@@ -78,6 +77,24 @@ class HasManyNested_maps_nested_collections extends TestCase
 
         $this->assertCount(3, $authors);
         $this->assertSame('authors', $authorsMapping->name());
+    }
+
+    /** @test */
+    function throwing_an_informative_exception_when_the_source_is_missing()
+    {
+        $mapping = HasManyNested::inProperty('foo',
+            $this->mockCollectionHydratorForThe(Persons::class),
+            $this->mockPublicSetterHydratorForThe(Person::class)
+        );
+
+        $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
+        $this->expectExceptionMessage(
+            'Missing the key `foo` for property `foo` the input data: []; ' .
+            'Mapper: ' .HasManyNested::class
+        );
+
+        $mapping->value([]);
     }
 
     /** @test */
