@@ -13,7 +13,6 @@ use Stratadox\HydrationMapping\UnmappableInput;
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\CustomTruths
  * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
- * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
  */
 class CustomTruths_defines_what_is_true_and_what_is_false extends TestCase
 {

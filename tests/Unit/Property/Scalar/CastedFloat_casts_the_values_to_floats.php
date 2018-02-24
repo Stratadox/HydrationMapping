@@ -10,7 +10,6 @@ use Stratadox\Hydration\Mapping\Property\Scalar\CastedFloat;
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\CastedFloat
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
- * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
  */
 class CastedFloat_casts_the_values_to_floats extends TestCase
 {

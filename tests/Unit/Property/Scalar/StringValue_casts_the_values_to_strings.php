@@ -10,7 +10,6 @@ use Stratadox\Hydration\Mapping\Property\Scalar\StringValue;
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\StringValue
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
- * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
  */
 class StringValue_casts_the_values_to_strings extends TestCase
 {

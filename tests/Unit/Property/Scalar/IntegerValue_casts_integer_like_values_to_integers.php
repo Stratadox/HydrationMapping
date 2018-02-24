@@ -12,7 +12,6 @@ use Stratadox\HydrationMapping\UnmappableInput;
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\IntegerValue
  * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
- * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
  */
 class IntegerValue_casts_integer_like_values_to_integers extends TestCase
 {

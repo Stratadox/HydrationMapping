@@ -10,7 +10,6 @@ use Stratadox\Hydration\Mapping\Property\Scalar\CastedInteger;
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\CastedInteger
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
- * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
  */
 class CastedInteger_casts_the_values_to_integers extends TestCase
 {

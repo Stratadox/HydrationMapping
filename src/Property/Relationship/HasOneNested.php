@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
-use Stratadox\Hydration\Mapping\Property\FromSingleKey;
+use Stratadox\Hydration\Mapping\Property\MissingTheKey;
+use Stratadox\HydrationMapping\ExposesDataKey;
 use Stratadox\Hydrator\Hydrates;
 use Throwable;
 
@@ -14,14 +15,17 @@ use Throwable;
  * @package Stratadox\Hydrate
  * @author Stratadox
  */
-final class HasOneNested extends FromSingleKey
+final class HasOneNested implements ExposesDataKey
 {
+    private $name;
+    private $key;
     private $hydrate;
 
-    protected function __construct(string $name, string $dataKey, Hydrates $hydrator)
+    private function __construct(string $name, string $dataKey, Hydrates $hydrator)
     {
+        $this->name = $name;
+        $this->key = $dataKey;
         $this->hydrate = $hydrator;
-        parent::__construct($name, $dataKey);
     }
 
     /**
@@ -56,10 +60,23 @@ final class HasOneNested extends FromSingleKey
         return new self($name, $key, $hydrator);
     }
 
+    public function name() : string
+    {
+        return $this->name;
+    }
+
+    public function key() : string
+    {
+        return $this->key;
+    }
+
     public function value(array $data, $owner = null)
     {
+        if (!array_key_exists($this->key(), $data)) {
+            throw MissingTheKey::inTheInput($data, $this, $this->key());
+        }
         try {
-            return $this->hydrate->fromArray($this->my($data));
+            return $this->hydrate->fromArray($data[$this->key()]);
         } catch (Throwable $exception) {
             throw ObjectMappingFailed::tryingToMapItem($this, $exception);
         }

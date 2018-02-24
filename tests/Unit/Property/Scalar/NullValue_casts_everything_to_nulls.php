@@ -10,7 +10,6 @@ use Stratadox\Hydration\Mapping\Property\Scalar\NullValue;
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\NullValue
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
- * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
  */
 class NullValue_casts_everything_to_nulls extends TestCase
 {

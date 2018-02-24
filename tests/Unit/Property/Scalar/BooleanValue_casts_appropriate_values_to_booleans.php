@@ -12,7 +12,6 @@ use Stratadox\HydrationMapping\UnmappableInput;
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\BooleanValue
  * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
- * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
  */
 class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
 {

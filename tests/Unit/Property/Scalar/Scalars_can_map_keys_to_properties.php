@@ -10,7 +10,6 @@ use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
- * @covers \Stratadox\Hydration\Mapping\Property\FromSingleKey
  * @covers \Stratadox\Hydration\Mapping\Property\MissingTheKey
  */
 class Scalars_can_map_keys_to_properties extends TestCase

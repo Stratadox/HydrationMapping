@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
-use Stratadox\Hydration\Mapping\Property\FromSingleKey;
+use Stratadox\Hydration\Mapping\Property\MissingTheKey;
+use Stratadox\HydrationMapping\ExposesDataKey;
 use Stratadox\Hydrator\Hydrates;
 use Throwable;
 
@@ -14,18 +15,21 @@ use Throwable;
  * @package Stratadox\Hydrate
  * @author Stratadox
  */
-final class HasManyNested extends FromSingleKey
+final class HasManyNested implements ExposesDataKey
 {
+    private $name;
+    private $key;
     private $collection;
     private $item;
 
-    protected function __construct(
+    private function __construct(
         string $name,
         string $dataKey,
         Hydrates $collection,
         Hydrates $item
     ) {
-        parent::__construct($name, $dataKey);
+        $this->name = $name;
+        $this->key = $dataKey;
         $this->collection = $collection;
         $this->item = $item;
     }
@@ -66,11 +70,24 @@ final class HasManyNested extends FromSingleKey
         return new self($name, $key, $collection, $item);
     }
 
+    public function name() : string
+    {
+        return $this->name;
+    }
+
+    public function key() : string
+    {
+        return $this->key;
+    }
+
     public function value(array $data, $owner = null)
     {
+        if (!array_key_exists($this->key(), $data)) {
+            throw MissingTheKey::inTheInput($data, $this, $this->key());
+        }
         try {
             $objects = [];
-            foreach ($this->my($data) as $objectData) {
+            foreach ($data[$this->key()] as $objectData) {
                 $objects[] = $this->item->fromArray($objectData);
             }
         } catch (Throwable $exception) {

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Scalar;
 
-use Stratadox\Hydration\Mapping\Property\FromSingleKey;
+use Stratadox\Hydration\Mapping\Property\MissingTheKey;
+use Stratadox\HydrationMapping\ExposesDataKey;
 
 /**
  * Maps the data from a single key to a scalar object property.
@@ -12,8 +13,17 @@ use Stratadox\Hydration\Mapping\Property\FromSingleKey;
  * @package Stratadox\Hydrate
  * @author Stratadox
  */
-abstract class Scalar extends FromSingleKey
+abstract class Scalar implements ExposesDataKey
 {
+    private $name;
+    private $key;
+
+    private function __construct(string $name, string $dataKey)
+    {
+        $this->name = $name;
+        $this->key = $dataKey;
+    }
+
     /**
      * Create a new mapping for the called-upon scalar type object property.
      *
@@ -38,5 +48,29 @@ abstract class Scalar extends FromSingleKey
     ) : self
     {
         return new static($name, $key);
+    }
+
+    public function name() : string
+    {
+        return $this->name;
+    }
+
+    public function key() : string
+    {
+        return $this->key;
+    }
+
+    /**
+     * Retrieve the data that is relevant for this mapping.
+     *
+     * @param array $data The input data.
+     * @return mixed      The value for our key in the input array.
+     */
+    protected function my(array $data)
+    {
+        if (!array_key_exists($this->key(), $data)) {
+            throw MissingTheKey::inTheInput($data, $this, $this->key());
+        }
+        return $data[$this->key()];
     }
 }

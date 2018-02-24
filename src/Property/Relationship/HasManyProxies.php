@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
-use Stratadox\Hydration\Mapping\Property\FromSingleKey;
+use Stratadox\Hydration\Mapping\Property\MissingTheKey;
+use Stratadox\HydrationMapping\ExposesDataKey;
 use Stratadox\Hydrator\Hydrates;
 use Stratadox\Proxy\ProducesProxies;
 use Throwable;
@@ -15,18 +16,21 @@ use Throwable;
  * @package Stratadox\Hydrate
  * @author Stratadox
  */
-final class HasManyProxies extends FromSingleKey
+final class HasManyProxies implements ExposesDataKey
 {
+    private $name;
+    private $key;
     private $collection;
     private $proxyBuilder;
 
-    protected function __construct(
+    private function __construct(
         string $name,
         string $dataKey,
         Hydrates $collectionHydrator,
         ProducesProxies $proxyBuilder
     ) {
-        parent::__construct($name, $dataKey);
+        $this->name = $name;
+        $this->key = $dataKey;
         $this->collection = $collectionHydrator;
         $this->proxyBuilder = $proxyBuilder;
     }
@@ -68,9 +72,22 @@ final class HasManyProxies extends FromSingleKey
         return new self($name, $key, $collection, $proxyBuilder);
     }
 
+    public function name() : string
+    {
+        return $this->name;
+    }
+
+    public function key() : string
+    {
+        return $this->key;
+    }
+
     public function value(array $data, $owner = null)
     {
-        $amount = $this->my($data);
+        if (!array_key_exists($this->key(), $data)) {
+            throw MissingTheKey::inTheInput($data, $this, $this->key());
+        }
+        $amount = $data[$this->key()];
         try {
             $proxies = [];
             for ($i = 0; $i < $amount; ++$i) {
