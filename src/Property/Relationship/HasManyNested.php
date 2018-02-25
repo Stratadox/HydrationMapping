@@ -46,8 +46,7 @@ final class HasManyNested implements ExposesDataKey
         string $name,
         Hydrates $collection,
         Hydrates $item
-    ) : self
-    {
+    ): self {
         return new self($name, $name, $collection, $item);
     }
 
@@ -65,8 +64,7 @@ final class HasManyNested implements ExposesDataKey
         string $key,
         Hydrates $collection,
         Hydrates $item
-    ) : self
-    {
+    ): self {
         return new self($name, $key, $collection, $item);
     }
 
@@ -82,14 +80,9 @@ final class HasManyNested implements ExposesDataKey
 
     public function value(array $data, $owner = null)
     {
-        if (!array_key_exists($this->key(), $data)) {
-            throw MissingTheKey::inTheInput($data, $this, $this->key());
-        }
+        $this->mustHaveTheKeyInThe($data);
         try {
-            $objects = [];
-            foreach ($data[$this->key()] as $objectData) {
-                $objects[] = $this->item->fromArray($objectData);
-            }
+            $objects = $this->itemsFromArray($data);
         } catch (Throwable $exception) {
             throw CollectionMappingFailed::tryingToMapItem($this, $exception);
         }
@@ -97,6 +90,22 @@ final class HasManyNested implements ExposesDataKey
             return $this->collection->fromArray($objects);
         } catch (Throwable $exception) {
             throw CollectionMappingFailed::tryingToMapCollection($this, $exception);
+        }
+    }
+
+    private function itemsFromArray(array $data): array
+    {
+        $objects = [];
+        foreach ($data[$this->key()] as $objectData) {
+            $objects[] = $this->item->fromArray($objectData);
+        }
+        return $objects;
+    }
+
+    private function mustHaveTheKeyInThe(array $data): void
+    {
+        if (!array_key_exists($this->key(), $data)) {
+            throw MissingTheKey::inTheInput($data, $this, $this->key());
         }
     }
 }

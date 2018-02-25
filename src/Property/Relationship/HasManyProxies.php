@@ -47,8 +47,7 @@ final class HasManyProxies implements ExposesDataKey
         string $name,
         Hydrates $collection,
         ProducesProxies $proxyBuilder
-    ) : self
-    {
+    ): self {
         return new self($name, $name, $collection, $proxyBuilder);
     }
 
@@ -67,8 +66,7 @@ final class HasManyProxies implements ExposesDataKey
         string $key,
         Hydrates $collection,
         ProducesProxies $proxyBuilder
-    ) : self
-    {
+    ): self {
         return new self($name, $key, $collection, $proxyBuilder);
     }
 
@@ -84,15 +82,10 @@ final class HasManyProxies implements ExposesDataKey
 
     public function value(array $data, $owner = null)
     {
-        if (!array_key_exists($this->key(), $data)) {
-            throw MissingTheKey::inTheInput($data, $this, $this->key());
-        }
+        $this->mustHaveTheKeyInThe($data);
         $amount = $data[$this->key()];
         try {
-            $proxies = [];
-            for ($i = 0; $i < $amount; ++$i) {
-                $proxies[] = $this->proxyBuilder->createFor($owner, $this->name(), $i);
-            }
+            $proxies = $this->makeSomeProxies($amount, $owner);
         } catch (Throwable $exception) {
             throw ProxyProductionFailed::tryingToProduceFor($this, $exception);
         }
@@ -100,6 +93,22 @@ final class HasManyProxies implements ExposesDataKey
             return $this->collection->fromArray($proxies);
         } catch (Throwable $exception) {
             throw CollectionMappingFailed::tryingToMapCollection($this, $exception);
+        }
+    }
+
+    private function makeSomeProxies(int $amount, $owner): array
+    {
+        $proxies = [];
+        for ($i = 0; $i < $amount; ++$i) {
+            $proxies[] = $this->proxyBuilder->createFor($owner, $this->name(), $i);
+        }
+        return $proxies;
+    }
+
+    private function mustHaveTheKeyInThe(array $data): void
+    {
+        if (!array_key_exists($this->key(), $data)) {
+            throw MissingTheKey::inTheInput($data, $this, $this->key());
         }
     }
 }

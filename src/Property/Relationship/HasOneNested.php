@@ -38,8 +38,7 @@ final class HasOneNested implements ExposesDataKey
     public static function inProperty(
         string $name,
         Hydrates $hydrator
-    ) : self
-    {
+    ): self {
         return new self($name, $name, $hydrator);
     }
 
@@ -55,8 +54,7 @@ final class HasOneNested implements ExposesDataKey
         string $name,
         string $key,
         Hydrates $hydrator
-    ) : self
-    {
+    ): self {
         return new self($name, $key, $hydrator);
     }
 
@@ -72,13 +70,18 @@ final class HasOneNested implements ExposesDataKey
 
     public function value(array $data, $owner = null)
     {
-        if (!array_key_exists($this->key(), $data)) {
-            throw MissingTheKey::inTheInput($data, $this, $this->key());
-        }
+        $this->mustHaveTheKeyInThe($data);
         try {
             return $this->hydrate->fromArray($data[$this->key()]);
         } catch (Throwable $exception) {
             throw ObjectMappingFailed::tryingToMapItem($this, $exception);
+        }
+    }
+
+    private function mustHaveTheKeyInThe(array $data): void
+    {
+        if (!array_key_exists($this->key(), $data)) {
+            throw MissingTheKey::inTheInput($data, $this, $this->key());
         }
     }
 }
