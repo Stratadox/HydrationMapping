@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
-use ReflectionClass;
+use function get_class as classOfThe;
 use RuntimeException;
 use function sprintf;
+use Stratadox\Hydration\Mapping\Property\Relationship\CollectionMappingFailed as The;
 use Stratadox\HydrationMapping\MapsProperty;
 use Stratadox\HydrationMapping\UnmappableInput;
+use function strrchr as endOfThe;
+use function substr as justThe;
 use Throwable;
 
 /**
@@ -34,7 +37,7 @@ final class CollectionMappingFailed extends RuntimeException implements Unmappab
         return new self(
             sprintf(
                 'Failed to map the %s items of the `%s` property: %s',
-                (new ReflectionClass($mapping))->getShortName(),
+                The::shortNameOfThe($mapping),
                 $mapping->name(),
                 $exception->getMessage()
             ),
@@ -58,12 +61,17 @@ final class CollectionMappingFailed extends RuntimeException implements Unmappab
         return new self(
             sprintf(
                 'Failed to map the %s collection of the `%s` property: %s',
-                (new ReflectionClass($mapping))->getShortName(),
+                The::shortNameOfThe($mapping),
                 $mapping->name(),
                 $exception->getMessage()
             ),
             0,
             $exception
         );
+    }
+
+    private static function shortNameOfThe(MapsProperty $mapping): string
+    {
+        return justThe(endOfThe(classOfThe($mapping), '\\'), 1);
     }
 }

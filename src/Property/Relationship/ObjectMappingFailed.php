@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
-use ReflectionClass;
+use function get_class as classOfThe;
 use RuntimeException;
 use function sprintf;
 use Stratadox\HydrationMapping\MapsProperty;
 use Stratadox\HydrationMapping\UnmappableInput;
+use function strrchr as endOfThe;
+use function substr as justThe;
 use Throwable;
 
 /**
@@ -34,7 +36,7 @@ final class ObjectMappingFailed extends RuntimeException implements UnmappableIn
         return new self(
             sprintf(
                 'Failed to map the %s relation of the `%s` property: %s',
-                (new ReflectionClass($mapping))->getShortName(),
+                justThe(endOfThe(classOfThe($mapping), '\\'), 1),
                 $mapping->name(),
                 $exception->getMessage()
             ),

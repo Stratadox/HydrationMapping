@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Stratadox\HydrationMapping\Test\Double\Pet;
 
-use ReflectionClass;
+use function get_class as classOfThePoorThingIt;
 use RuntimeException;
+use function strrchr as endOfThe;
+use function substr as justThe;
 
 class NobodyToAskForFood extends RuntimeException
 {
@@ -13,7 +15,7 @@ class NobodyToAskForFood extends RuntimeException
     {
         return new self(sprintf(
             'The %s has the munchies, but no owner to nag.',
-            (new ReflectionClass($isHungry))->getShortName()
+            justThe(endOfThe(classOfThePoorThingIt($isHungry), '\\'), 1)
         ));
     }
 }
