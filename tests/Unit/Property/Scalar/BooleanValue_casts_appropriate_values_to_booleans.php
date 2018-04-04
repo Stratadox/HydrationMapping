@@ -25,7 +25,7 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
 
         $map = BooleanValue::inProperty('boolean');
 
-        $this->assertSame(true, $map->value($source));
+        $this->assertTrue($map->value($source));
     }
 
     /**
@@ -39,7 +39,7 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
 
         $map = BooleanValue::inProperty('boolean');
 
-        $this->assertSame(false, $map->value($source));
+        $this->assertFalse($map->value($source));
     }
 
     /**

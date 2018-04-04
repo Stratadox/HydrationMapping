@@ -31,7 +31,7 @@ class CustomTruths_defines_what_is_true_and_what_is_false extends TestCase
             $falsehoods
         );
 
-        $this->assertSame(true, $map->value($source));
+        $this->assertTrue($map->value($source));
     }
 
     /**
@@ -50,7 +50,7 @@ class CustomTruths_defines_what_is_true_and_what_is_false extends TestCase
             $falsehoods
         );
 
-        $this->assertSame(false, $map->value($source));
+        $this->assertFalse($map->value($source));
     }
 
     /**
