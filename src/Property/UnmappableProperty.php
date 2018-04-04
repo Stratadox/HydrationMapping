@@ -1,9 +1,9 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property;
 
+use function gettype;
 use function sprintf;
 use InvalidArgumentException as InvalidArgument;
 use Stratadox\HydrationMapping\MapsProperty;
@@ -27,8 +27,7 @@ final class UnmappableProperty extends InvalidArgument implements UnmappableInpu
     public static function itMustBeLikeAnInteger(
         MapsProperty $failedToMapTo,
         $value
-    ) : self
-    {
+    ): self {
         return self::inputData($failedToMapTo, 'integer', $value);
     }
 
@@ -42,8 +41,7 @@ final class UnmappableProperty extends InvalidArgument implements UnmappableInpu
     public static function itMustBeInIntegerRange(
         MapsProperty $failedToMapTo,
         $value
-    ) : self
-    {
+    ): self {
         return self::inputData($failedToMapTo, 'integer', $value,
             'The value is out of range.'
         );
@@ -59,8 +57,7 @@ final class UnmappableProperty extends InvalidArgument implements UnmappableInpu
     public static function itMustBeNumeric(
         MapsProperty $failedToMapTo,
         $value
-    ) : self
-    {
+    ): self {
         return self::inputData($failedToMapTo, 'float', $value);
     }
 
@@ -74,8 +71,7 @@ final class UnmappableProperty extends InvalidArgument implements UnmappableInpu
     public static function itMustBeConvertibleToBoolean(
         MapsProperty $failedToMapTo,
         $value
-    ) : self
-    {
+    ): self {
         return self::inputData($failedToMapTo, 'boolean', $value);
     }
 
@@ -85,8 +81,7 @@ final class UnmappableProperty extends InvalidArgument implements UnmappableInpu
         string $type,
         $input,
         string $message = ''
-    ) : self
-    {
+    ): self {
         if (is_scalar($input)) {
             return new self(sprintf(
                 'Cannot assign `%s` to property `%s`: ' .

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Scalar;
@@ -16,7 +15,7 @@ use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
 final class FloatValue extends Scalar
 {
     /** @inheritdoc */
-    public function value(array $data, $owner = null) : float
+    public function value(array $data, $owner = null): float
     {
         $value = $this->my($data);
         if (!is_numeric($value)) {

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\HydrationMapping\Test\Unit\Property\Scalar;
@@ -63,7 +62,7 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
         $map->value($source);
     }
 
-    public function trueValues() : array
+    public function trueValues(): array
     {
         return [
             'true' => [true],
@@ -74,7 +73,7 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
         ];
     }
 
-    public function falseValues() : array
+    public function falseValues(): array
     {
         return [
             'false' => [false],
@@ -84,7 +83,7 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
         ];
     }
 
-    public function unacceptableValues() : array
+    public function unacceptableValues(): array
     {
         return [
             '"true"' => ['true'],

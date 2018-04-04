@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
@@ -35,13 +34,12 @@ final class HasOneEmbedded implements MapsProperty
     public static function inProperty(
         string $name,
         Hydrates $hydrator
-    ) : self
-    {
+    ): self {
         return new self($name, $hydrator);
     }
 
     /** @inheritdoc */
-    public function name() : string
+    public function name(): string
     {
         return $this->name;
     }

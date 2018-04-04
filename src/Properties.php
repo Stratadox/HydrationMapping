@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping;
@@ -29,19 +28,18 @@ final class Properties extends ImmutableCollection implements MapsProperties
      */
     public static function map(
         MapsProperty ...$properties
-    ) : self
-    {
+    ): self {
         return new self(...$properties);
     }
 
     /** @inheritdoc */
-    public function current() : MapsProperty
+    public function current(): MapsProperty
     {
         return parent::current();
     }
 
     /** @inheritdoc */
-    public function offsetGet($offset) : MapsProperty
+    public function offsetGet($offset): MapsProperty
     {
         return parent::offsetGet($offset);
     }

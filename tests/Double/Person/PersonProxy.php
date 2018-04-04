@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\HydrationMapping\Test\Double\Person;
@@ -21,17 +20,17 @@ class PersonProxy extends Person implements Proxy
         $this->position = $position;
     }
 
-    public function firstName() : string
+    public function firstName(): string
     {
         return $this->__load()->firstName();
     }
 
-    public function lastName() : string
+    public function lastName(): string
     {
         return $this->__load()->lastName();
     }
 
-    public function __load() : Person
+    public function __load(): Person
     {
         if (!isset($this->proxyFor)) {
             $this->proxyFor = new Person('Lazy loading', 'Is out of scope');
@@ -39,12 +38,12 @@ class PersonProxy extends Person implements Proxy
         return $this->proxyFor;
     }
 
-    public function property() : string
+    public function property(): string
     {
         return $this->property;
     }
 
-    public function position() : ?int
+    public function position(): ?int
     {
         return $this->position;
     }

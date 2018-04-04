@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Scalar;
@@ -42,13 +41,12 @@ final class CustomTruths implements MapsProperty
         ExposesDataKey $mapping,
         array $truths,
         array $falsehoods
-    ) : self
-    {
+    ): self {
         return new self($mapping, $truths, $falsehoods);
     }
 
     /** @inheritdoc */
-    public function value(array $data, $owner = null) : bool
+    public function value(array $data, $owner = null): bool
     {
         if (in_array($data[$this->for->key()], $this->truths)) {
             return true;
@@ -60,7 +58,7 @@ final class CustomTruths implements MapsProperty
     }
 
     /** @inheritdoc */
-    public function name() : string
+    public function name(): string
     {
         return $this->for->name();
     }

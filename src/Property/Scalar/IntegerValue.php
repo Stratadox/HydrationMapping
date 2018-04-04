@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Scalar;
@@ -16,7 +15,7 @@ use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
 final class IntegerValue extends Scalar
 {
     /** @inheritdoc */
-    public function value(array $data, $owner = null) : int
+    public function value(array $data, $owner = null): int
     {
         $value = $this->my($data);
         if (!preg_match('/^[-+]?\d+$/', (string) $value)) {

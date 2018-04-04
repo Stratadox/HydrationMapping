@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
@@ -31,8 +30,7 @@ final class ObjectMappingFailed extends RuntimeException implements UnmappableIn
     public static function tryingToMapItem(
         MapsProperty $mapping,
         Throwable $exception
-    ) : self
-    {
+    ): self {
         return new self(
             sprintf(
                 'Failed to map the %s relation of the `%s` property: %s',

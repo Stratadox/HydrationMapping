@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Scalar;
@@ -13,7 +12,7 @@ namespace Stratadox\Hydration\Mapping\Property\Scalar;
 final class StringValue extends Scalar
 {
     /** @inheritdoc */
-    public function value(array $data, $owner = null) : string
+    public function value(array $data, $owner = null): string
     {
         return (string) $this->my($data);
     }

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Dynamic;
@@ -32,13 +31,13 @@ final class ClosureResult implements MapsProperty
      *                          Receives an array of hydration data as parameter.
      * @return self             The closure result mapping.
      */
-    public static function inProperty(string $name, Closure $function) : self
+    public static function inProperty(string $name, Closure $function): self
     {
         return new self($name, $function);
     }
 
     /** @inheritdoc */
-    public function name() : string
+    public function name(): string
     {
         return $this->property;
     }

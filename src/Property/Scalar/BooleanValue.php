@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Scalar;
@@ -17,7 +16,7 @@ use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
 final class BooleanValue extends Scalar
 {
     /** @inheritdoc */
-    public function value(array $data, $owner = null) : bool
+    public function value(array $data, $owner = null): bool
     {
         $value = $this->my($data);
         if (is_bool($value)) {

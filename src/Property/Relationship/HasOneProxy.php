@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
@@ -35,8 +34,7 @@ final class HasOneProxy implements MapsProperty
     public static function inProperty(
         string $name,
         ProducesProxies $proxyBuilder
-    ) : self
-    {
+    ): self {
         return new self($name, $proxyBuilder);
     }
 
@@ -51,7 +49,7 @@ final class HasOneProxy implements MapsProperty
     }
 
     /** @inheritdoc */
-    public function name() : string
+    public function name(): string
     {
         return $this->name;
     }

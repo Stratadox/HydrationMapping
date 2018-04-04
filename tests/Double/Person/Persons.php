@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\HydrationMapping\Test\Double\Person;
@@ -13,7 +12,7 @@ class Persons extends ImmutableCollection
         parent::__construct(...$people);
     }
 
-    public function current() : Person
+    public function current(): Person
     {
         return parent::current();
     }

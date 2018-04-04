@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
@@ -28,8 +27,7 @@ final class ProxyProductionFailed extends RuntimeException implements Unmappable
     public static function tryingToProduceFor(
         MapsProperty $mapping,
         Throwable $exception
-    ) : self
-    {
+    ): self {
         return new self(
             sprintf(
                 'Proxy production for in the `%s` property failed: %s',

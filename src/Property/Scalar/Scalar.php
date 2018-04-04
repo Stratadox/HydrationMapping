@@ -1,11 +1,11 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Scalar;
 
 use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\HydrationMapping\ExposesDataKey;
+use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
  * Maps the data from a single key to a scalar object property.
@@ -30,7 +30,7 @@ abstract class Scalar implements ExposesDataKey
      * @param string $name The name of both the key and the property.
      * @return static|self The concrete scalar mapping object.
      */
-    public static function inProperty(string $name) : self
+    public static function inProperty(string $name): self
     {
         return new static($name, $name);
     }
@@ -45,19 +45,18 @@ abstract class Scalar implements ExposesDataKey
      */
     public static function inPropertyWithDifferentKey(
         string $name, string $key
-    ) : self
-    {
+    ): self {
         return new static($name, $key);
     }
 
     /** @inheritdoc */
-    public function name() : string
+    public function name(): string
     {
         return $this->name;
     }
 
     /** @inheritdoc */
-    public function key() : string
+    public function key(): string
     {
         return $this->key;
     }
@@ -67,6 +66,7 @@ abstract class Scalar implements ExposesDataKey
      *
      * @param array $data The input data.
      * @return mixed      The value for our key in the input array.
+     * @throws UnmappableInput
      */
     protected function my(array $data)
     {

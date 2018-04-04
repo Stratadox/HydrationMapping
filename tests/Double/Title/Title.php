@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\HydrationMapping\Test\Double\Title;
@@ -13,7 +12,7 @@ class Title
         $this->title = $title;
     }
 
-    public function get() : string
+    public function get(): string
     {
         return $this->title;
     }

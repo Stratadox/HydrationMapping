@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\HydrationMapping\Test\Double\Title;
@@ -13,7 +12,7 @@ class Titles extends ImmutableCollection
         parent::__construct(...$titles);
     }
 
-    public function current() : Title
+    public function current(): Title
     {
         return parent::current();
     }

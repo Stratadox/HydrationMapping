@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\HydrationMapping\Test\Double\Person;
@@ -15,12 +14,12 @@ class Person
         $this->lastName = $lastName;
     }
 
-    public function firstName() : string
+    public function firstName(): string
     {
         return $this->firstName;
     }
 
-    public function lastName() : string
+    public function lastName(): string
     {
         return $this->lastName;
     }

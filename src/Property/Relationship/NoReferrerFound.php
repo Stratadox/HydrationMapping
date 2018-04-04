@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
@@ -22,7 +21,7 @@ final class NoReferrerFound extends RuntimeException implements UnmappableInput
      * @param string $property The property that refers back to nothing.
      * @return self            The exception object to throw.
      */
-    public static function tryingToHydrateBackReferenceIn(string $property) : self
+    public static function tryingToHydrateBackReferenceIn(string $property): self
     {
         return new self(sprintf(
             'Failed to reference back to the `%s` relationship: no referrer found.',

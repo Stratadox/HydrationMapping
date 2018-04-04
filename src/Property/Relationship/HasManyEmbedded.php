@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
@@ -51,13 +50,12 @@ final class HasManyEmbedded implements MapsProperty
         Hydrates $collection,
         Hydrates $item,
         string $key = 'key'
-    ) : self
-    {
+    ): self {
         return new self($name, $collection, $item, $key);
     }
 
     /** @inheritdoc */
-    public function name() : string
+    public function name(): string
     {
         return $this->name;
     }

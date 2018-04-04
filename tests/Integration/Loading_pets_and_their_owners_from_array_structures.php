@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\HydrationMapping\Test\Integration;
@@ -41,7 +40,7 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
     }
 
     /** @return array[] */
-    private function dataOnPetOwners() : array
+    private function dataOnPetOwners(): array
     {
         return [
             [
@@ -79,7 +78,7 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
         ];
     }
 
-    private function mappedHydrator() : Hydrates
+    private function mappedHydrator(): Hydrates
     {
         $backReference = HasBackReference::inProperty('owner');
         $petMappings = Properties::map(

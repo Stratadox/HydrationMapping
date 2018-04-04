@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property;
@@ -31,8 +30,7 @@ final class MissingTheKey extends InvalidArgument implements UnmappableInput
         array $data,
         MapsProperty $mapping,
         string $key
-    ) : self
-    {
+    ): self {
         return new self(sprintf(
             'Missing the key `%s` for property `%s` the input data: %s; Mapper: %s',
             $key,
