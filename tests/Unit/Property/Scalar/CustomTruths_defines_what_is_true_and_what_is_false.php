@@ -85,6 +85,22 @@ class CustomTruths_defines_what_is_true_and_what_is_false extends TestCase
         $this->assertSame('boolean', $map->name());
     }
 
+    /** @test */
+    function comparing_truths_uses_strict_comparison()
+    {
+        $truths = [0, '1'];
+        $falsehoods = [1, '0'];
+        $map = CustomTruths::forThe(BooleanValue::inProperty('boolean'),
+            $truths,
+            $falsehoods
+        );
+
+        $this->assertFalse($map->value(['boolean' => 1]));
+        $this->assertTrue($map->value(['boolean' => 0]));
+        $this->assertFalse($map->value(['boolean' => '0']));
+        $this->assertTrue($map->value(['boolean' => '1']));
+    }
+
     public function trueValues() : array
     {
         $truths = ['true', 'TRUE', 'y', 'yes'];
