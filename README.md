@@ -36,7 +36,7 @@ Three types of property mappings are available:
 
 ### Scalar Mapping
 
-Built-in scalar types can be mapped using the `*Value` classes.
+Scalar typed properties can be mapped using the `*Value` classes.
 These mappings validate the input before producing a value.
 
 For instance, the `IntegerValue` mapping checks that:
@@ -82,8 +82,8 @@ For additional extension power, custom mapping can be produced by implementing t
 
 This module is part of the [Hydrate Module](https://github.com/Stratadox/Hydrate).
 
-The `Hydrate` package is an umbrella for several related packages.
+The `Hydrate` package is an umbrella for several hydration-related packages.
 Together, they form a powerful toolset for converting input data into an object structure.
 
 Although these package are designed to work together, they can also be used independently.
-The only hard dependencies of this module are a collections library and a set of packages dedicated only to interfaces.
+The only hard dependencies of this `HydrationMapping` module are a collections library and a set of packages dedicated only to interfaces.
