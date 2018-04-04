@@ -70,6 +70,12 @@ final class CollectionMappingFailed extends RuntimeException implements Unmappab
         );
     }
 
+    /**
+     * Retrieves the class name without namespace.
+     *
+     * @param MapsProperty $mapping The failing mapping instance.
+     * @return string               The unqualified (short) class name of the mapping instance.
+     */
     private static function shortNameOfThe(MapsProperty $mapping): string
     {
         return justThe(endOfThe(classOfThe($mapping), '\\'), 1);

@@ -15,6 +15,7 @@ use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
  */
 final class FloatValue extends Scalar
 {
+    /** @inheritdoc */
     public function value(array $data, $owner = null) : float
     {
         $value = $this->my($data);

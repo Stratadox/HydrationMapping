@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
-use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\HydrationMapping\ExposesDataKey;
+use Stratadox\Hydrator\CouldNotHydrate;
 use Stratadox\Hydrator\Hydrates;
 use Throwable;
 
@@ -17,6 +17,8 @@ use Throwable;
  */
 final class HasManyNested implements ExposesDataKey
 {
+    use KeyRequiring;
+
     private $name;
     private $key;
     private $collection;
@@ -35,7 +37,7 @@ final class HasManyNested implements ExposesDataKey
     }
 
     /**
-     * Create a new nested has-many mapping.
+     * Creates a new nested has-many mapping.
      *
      * @param string   $name       The name of both the key and the property.
      * @param Hydrates $collection The hydrator for the collection.
@@ -51,7 +53,7 @@ final class HasManyNested implements ExposesDataKey
     }
 
     /**
-     * Create a new nested has-many mapping, using the data from a specific key.
+     * Creates a new nested has-many mapping, using the data from a specific key.
      *
      * @param string   $name       The name of the property.
      * @param string   $key        The name of the key.
@@ -68,16 +70,19 @@ final class HasManyNested implements ExposesDataKey
         return new self($name, $key, $collection, $item);
     }
 
+    /** @inheritdoc */
     public function name() : string
     {
         return $this->name;
     }
 
+    /** @inheritdoc */
     public function key() : string
     {
         return $this->key;
     }
 
+    /** @inheritdoc */
     public function value(array $data, $owner = null)
     {
         $this->mustHaveTheKeyInThe($data);
@@ -93,6 +98,13 @@ final class HasManyNested implements ExposesDataKey
         }
     }
 
+    /**
+     * Hydrates the instances for in a collection.
+     *
+     * @param array[] $data     Map with a list of maps with instance data.
+     * @return object[]         The hydrated instances for in the collection.
+     * @throws CouldNotHydrate  When one or more items could not be hydrated.
+     */
     private function itemsFromArray(array $data): array
     {
         $objects = [];
@@ -100,12 +112,5 @@ final class HasManyNested implements ExposesDataKey
             $objects[] = $this->item->fromArray($objectData);
         }
         return $objects;
-    }
-
-    private function mustHaveTheKeyInThe(array $data): void
-    {
-        if (!array_key_exists($this->key(), $data)) {
-            throw MissingTheKey::inTheInput($data, $this, $this->key());
-        }
     }
 }

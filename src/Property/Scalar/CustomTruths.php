@@ -47,6 +47,7 @@ final class CustomTruths implements MapsProperty
         return new self($mapping, $truths, $falsehoods);
     }
 
+    /** @inheritdoc */
     public function value(array $data, $owner = null) : bool
     {
         if (in_array($data[$this->for->key()], $this->truths)) {
@@ -58,6 +59,7 @@ final class CustomTruths implements MapsProperty
         return $this->for->value($data, $owner);
     }
 
+    /** @inheritdoc */
     public function name() : string
     {
         return $this->for->name();

@@ -25,7 +25,7 @@ final class ClosureResult implements MapsProperty
     }
 
     /**
-     * Create a new mapping that applies a closure on the input data.
+     * Creates a new mapping that applies a closure on the input data.
      *
      * @param string $name      The name of both the key and the property.
      * @param Closure $function The function to execute on the data.
@@ -37,11 +37,13 @@ final class ClosureResult implements MapsProperty
         return new self($name, $function);
     }
 
+    /** @inheritdoc */
     public function name() : string
     {
         return $this->property;
     }
 
+    /** @inheritdoc */
     public function value(array $data, $owner = null)
     {
         return $this->function->call($this, $data);

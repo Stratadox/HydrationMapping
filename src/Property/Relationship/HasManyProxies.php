@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
-use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\HydrationMapping\ExposesDataKey;
 use Stratadox\Hydrator\Hydrates;
 use Stratadox\Proxy\ProducesProxies;
@@ -18,6 +17,8 @@ use Throwable;
  */
 final class HasManyProxies implements ExposesDataKey
 {
+    use KeyRequiring;
+
     private $name;
     private $key;
     private $collection;
@@ -36,7 +37,7 @@ final class HasManyProxies implements ExposesDataKey
     }
 
     /**
-     * Create a new lazily loaded has-many mapping.
+     * Creates a new lazily loaded has-many mapping.
      *
      * @param string          $name         The name of both the key and the property.
      * @param Hydrates        $collection   The hydrator for the collection.
@@ -52,10 +53,10 @@ final class HasManyProxies implements ExposesDataKey
     }
 
     /**
-     * Create a new lazily loading has-many mapping, using the data from a
+     * Creates a new lazily loading has-many mapping, using the data from a
      * specific key.
      *
-     * @param string          $name         The name of both the key and the property.
+     * @param string          $name         The name of the property.
      * @param string          $key          The array key to use.
      * @param Hydrates        $collection   The hydrator for the collection.
      * @param ProducesProxies $proxyBuilder The proxy builder.
@@ -70,16 +71,19 @@ final class HasManyProxies implements ExposesDataKey
         return new self($name, $key, $collection, $proxyBuilder);
     }
 
+    /** @inheritdoc */
     public function name() : string
     {
         return $this->name;
     }
 
+    /** @inheritdoc */
     public function key() : string
     {
         return $this->key;
     }
 
+    /** @inheritdoc */
     public function value(array $data, $owner = null)
     {
         $this->mustHaveTheKeyInThe($data);
@@ -96,6 +100,13 @@ final class HasManyProxies implements ExposesDataKey
         }
     }
 
+    /**
+     * Produces the proxies for in the collection.
+     *
+     * @param int $amount   The amount of proxies to produce.
+     * @param object $owner The object that holds a reference to the proxy.
+     * @return array        List of proxy objects.
+     */
     private function makeSomeProxies(int $amount, $owner): array
     {
         $proxies = [];
@@ -103,12 +114,5 @@ final class HasManyProxies implements ExposesDataKey
             $proxies[] = $this->proxyBuilder->createFor($owner, $this->name(), $i);
         }
         return $proxies;
-    }
-
-    private function mustHaveTheKeyInThe(array $data): void
-    {
-        if (!array_key_exists($this->key(), $data)) {
-            throw MissingTheKey::inTheInput($data, $this, $this->key());
-        }
     }
 }

@@ -12,6 +12,7 @@ namespace Stratadox\Hydration\Mapping\Property\Scalar;
  */
 final class CastedFloat extends Scalar
 {
+    /** @inheritdoc */
     public function value(array $data, $owner = null) : float
     {
         return (float) $this->my($data);

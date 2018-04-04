@@ -24,7 +24,7 @@ final class Properties extends ImmutableCollection implements MapsProperties
     /**
      * Creates a new list of property mappings.
      *
-     * @param MapsProperty[] ...$properties The property mappings.
+     * @param MapsProperty   ...$properties The property mappings.
      * @return Properties                   The property mapping container.
      */
     public static function map(

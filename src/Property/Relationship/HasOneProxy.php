@@ -19,16 +19,14 @@ final class HasOneProxy implements MapsProperty
     private $name;
     private $proxyBuilder;
 
-    private function __construct(
-        string $name,
-        ProducesProxies $proxyBuilder
-    ) {
+    private function __construct(string $name, ProducesProxies $proxyBuilder)
+    {
         $this->name = $name;
         $this->proxyBuilder = $proxyBuilder;
     }
 
     /**
-     * Create a new lazily loading has-one mapping.
+     * Creates a new lazily loading has-one mapping.
      *
      * @param string          $name         The name of the property.
      * @param ProducesProxies $proxyBuilder The proxy builder.
@@ -42,6 +40,7 @@ final class HasOneProxy implements MapsProperty
         return new self($name, $proxyBuilder);
     }
 
+    /** @inheritdoc */
     public function value(array $data, $owner = null)
     {
         try {
@@ -51,6 +50,7 @@ final class HasOneProxy implements MapsProperty
         }
     }
 
+    /** @inheritdoc */
     public function name() : string
     {
         return $this->name;

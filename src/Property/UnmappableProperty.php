@@ -79,6 +79,7 @@ final class UnmappableProperty extends InvalidArgument implements UnmappableInpu
         return self::inputData($failedToMapTo, 'boolean', $value);
     }
 
+    /** @inheritdoc */
     private static function inputData(
         MapsProperty $mapped,
         string $type,

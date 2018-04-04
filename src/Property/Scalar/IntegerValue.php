@@ -15,6 +15,7 @@ use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
  */
 final class IntegerValue extends Scalar
 {
+    /** @inheritdoc */
     public function value(array $data, $owner = null) : int
     {
         $value = $this->my($data);

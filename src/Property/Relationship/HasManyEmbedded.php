@@ -37,7 +37,7 @@ final class HasManyEmbedded implements MapsProperty
     }
 
     /**
-     * Create a new embedded has-many mapping.
+     * Creates a new embedded has-many mapping.
      *
      * @param string   $name       The name of the property.
      * @param Hydrates $collection The hydrator for the collection.
@@ -56,11 +56,13 @@ final class HasManyEmbedded implements MapsProperty
         return new self($name, $collection, $item, $key);
     }
 
+    /** @inheritdoc */
     public function name() : string
     {
         return $this->name;
     }
 
+    /** @inheritdoc */
     public function value(array $data, $owner = null)
     {
         $objects = [];

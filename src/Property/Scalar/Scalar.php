@@ -25,7 +25,7 @@ abstract class Scalar implements ExposesDataKey
     }
 
     /**
-     * Create a new mapping for the called-upon scalar type object property.
+     * Creates a new mapping for the called-upon scalar type object property.
      *
      * @param string $name The name of both the key and the property.
      * @return static|self The concrete scalar mapping object.
@@ -36,7 +36,7 @@ abstract class Scalar implements ExposesDataKey
     }
 
     /**
-     * Create a new mapping for the called-upon scalar type object property,
+     * Creates a new mapping for the called-upon scalar type object property,
      * using the data from a specific key.
      *
      * @param string $name The name of the property.
@@ -50,18 +50,20 @@ abstract class Scalar implements ExposesDataKey
         return new static($name, $key);
     }
 
+    /** @inheritdoc */
     public function name() : string
     {
         return $this->name;
     }
 
+    /** @inheritdoc */
     public function key() : string
     {
         return $this->key;
     }
 
     /**
-     * Retrieve the data that is relevant for this mapping.
+     * Retrieves the data that is relevant for this mapping.
      *
      * @param array $data The input data.
      * @return mixed      The value for our key in the input array.
