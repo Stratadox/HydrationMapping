@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Stratadox\HydrationMapping\Test\Double;
 
+use function assert;
 use Exception;
 use PHPUnit\Framework\MockObject\Exception as FailedToMock;
 use PHPUnit\Framework\MockObject\Matcher\AnyInvokedCount;
@@ -20,7 +21,6 @@ trait MockProxyBuilder
      */
     protected function mockProxyBuilderFor(string $class): ProducesProxies
     {
-        /** @var ProducesProxies|MockObject $proxyBuilder */
         $proxyBuilder = $this->createMock(ProducesProxies::class);
 
         $proxyBuilder->expects($this->any())
@@ -31,6 +31,8 @@ trait MockProxyBuilder
                     return new $class($owner, $name, $position);
                 }
             );
+
+        assert($proxyBuilder instanceof ProducesProxies);
 
         return $proxyBuilder;
     }
@@ -44,7 +46,6 @@ trait MockProxyBuilder
      */
     protected function mockExceptionThrowingProxyBuilder(string $message = ''): ProducesProxies
     {
-        /** @var ProducesProxies|MockObject $proxyBuilder */
         $proxyBuilder = $this->createMock(ProducesProxies::class);
 
         $proxyBuilder->expects($this->any())
@@ -52,6 +53,8 @@ trait MockProxyBuilder
             ->willReturnCallback(function () use ($message) {
                 throw new Exception($message);
             });
+
+        assert($proxyBuilder instanceof ProducesProxies);
 
         return $proxyBuilder;
     }

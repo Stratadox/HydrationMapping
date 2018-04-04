@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Stratadox\HydrationMapping\Test\Double;
 
+use function assert;
 use Exception;
 use PHPUnit\Framework\MockObject\Exception as FailedToMock;
 use PHPUnit\Framework\MockObject\Matcher\AnyInvokedCount;
@@ -21,7 +22,6 @@ trait MockHydrator
      */
     protected function mockCollectionHydratorForThe(string $class): Hydrates
     {
-        /** @var Hydrates|MockObject $hydrator */
         $hydrator = $this->createMock(Hydrates::class);
 
         $hydrator->expects($this->any())
@@ -32,6 +32,8 @@ trait MockHydrator
                     return new $class(...array_values($data));
                 }
             );
+
+        assert($hydrator instanceof Hydrates);
 
         return $hydrator;
     }
@@ -45,7 +47,6 @@ trait MockHydrator
      */
     protected function mockPublicSetterHydratorForThe(string $class): Hydrates
     {
-        /** @var Hydrates|MockObject $hydrator */
         $hydrator = $this->createMock(Hydrates::class);
 
         $hydrator->expects($this->any())
@@ -61,6 +62,8 @@ trait MockHydrator
                 }
             );
 
+        assert($hydrator instanceof Hydrates);
+
         return $hydrator;
     }
 
@@ -73,7 +76,6 @@ trait MockHydrator
      */
     protected function mockExceptionThrowingHydrator(string $message = ''): Hydrates
     {
-        /** @var Hydrates|MockObject $hydrator */
         $hydrator = $this->createMock(Hydrates::class);
 
         $hydrator->expects($this->any())
@@ -84,6 +86,8 @@ trait MockHydrator
                     throw new Exception($message);
                 }
             );
+
+        assert($hydrator instanceof Hydrates);
 
         return $hydrator;
     }
