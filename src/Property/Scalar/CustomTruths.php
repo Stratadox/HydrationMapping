@@ -48,10 +48,10 @@ final class CustomTruths implements MapsProperty
     /** @inheritdoc */
     public function value(array $data, $owner = null): bool
     {
-        if (in_array($data[$this->for->key()], $this->truths)) {
+        if (in_array($data[$this->for->key()], $this->truths, true)) {
             return true;
         }
-        if (in_array($data[$this->for->key()], $this->falsehoods)) {
+        if (in_array($data[$this->for->key()], $this->falsehoods, true)) {
             return false;
         }
         return $this->for->value($data, $owner);
