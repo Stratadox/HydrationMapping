@@ -18,6 +18,12 @@ abstract class Pet
         $this->name = $name;
     }
 
+    /**
+     * Acknowledges the new caretaker.
+     *
+     * @param Human $petOwner
+     * @throws ThatIsNotMyPet
+     */
     public function getTakenCareOfBy(Human $petOwner): void
     {
         if (isset($this->owner)) {
@@ -31,7 +37,7 @@ abstract class Pet
         $this->owner = $petOwner;
     }
 
-    public function owner()
+    public function owner(): ?Human
     {
         return $this->owner;
     }
@@ -61,7 +67,21 @@ abstract class Pet
         $this->hungry = true;
     }
 
-    abstract public function askForFood();
+    /**
+     * Draws the attention of this pet's owner.
+     *
+     * @throws NoMoreFood
+     * @throws NobodyToAskForFood
+     * @throws ThatIsNotMyPet
+     */
+    abstract public function askForFood(): void;
 
+    /**
+     * Draws the attention of a human.
+     *
+     * @param Human $youMightHaveFood
+     * @throws NoMoreFood
+     * @throws ThatIsNotMyPet
+     */
     abstract public function askForFoodFrom(Human $youMightHaveFood): void;
 }

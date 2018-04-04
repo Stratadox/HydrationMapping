@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Stratadox\HydrationMapping\Test\Double;
 
 use Exception;
-use LogicException;
+use PHPUnit\Framework\MockObject\Exception as FailedToMock;
 use PHPUnit\Framework\MockObject\Matcher\AnyInvokedCount;
 use PHPUnit\Framework\MockObject\MockObject;
 use Stratadox\Proxy\ProducesProxies;
@@ -16,9 +16,11 @@ trait MockProxyBuilder
      *
      * @param string $class
      * @return ProducesProxies|MockObject
+     * @throws FailedToMock
      */
     protected function mockProxyBuilderFor(string $class): ProducesProxies
     {
+        /** @var ProducesProxies|MockObject $proxyBuilder */
         $proxyBuilder = $this->createMock(ProducesProxies::class);
 
         $proxyBuilder->expects($this->any())
@@ -30,10 +32,6 @@ trait MockProxyBuilder
                 }
             );
 
-        if (!$proxyBuilder instanceof ProducesProxies) {
-            throw new LogicException;
-        }
-
         return $proxyBuilder;
     }
 
@@ -42,9 +40,11 @@ trait MockProxyBuilder
      *
      * @param string $message
      * @return ProducesProxies|MockObject
+     * @throws FailedToMock
      */
     protected function mockExceptionThrowingProxyBuilder(string $message = ''): ProducesProxies
     {
+        /** @var ProducesProxies|MockObject $proxyBuilder */
         $proxyBuilder = $this->createMock(ProducesProxies::class);
 
         $proxyBuilder->expects($this->any())
@@ -52,10 +52,6 @@ trait MockProxyBuilder
             ->willReturnCallback(function () use ($message) {
                 throw new Exception($message);
             });
-
-        if (!$proxyBuilder instanceof ProducesProxies) {
-            throw new LogicException;
-        }
 
         return $proxyBuilder;
     }

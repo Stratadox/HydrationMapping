@@ -11,9 +11,4 @@ class Title
     {
         $this->title = $title;
     }
-
-    public function get(): string
-    {
-        return $this->title;
-    }
 }

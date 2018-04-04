@@ -35,12 +35,25 @@ class Human
         return !$this->hasPetFood();
     }
 
+    /**
+     * Adopts a new pet.
+     *
+     * @param Pet $animal
+     * @param string|null $itsNewName
+     * @throws ThatIsNotMyPet
+     */
     public function getANew(Pet $animal, string $itsNewName = null): void
     {
         $animal->getTakenCareOfBy($this);
         $animal->nameIt($itsNewName ?: $animal->name());
     }
 
+    /**
+     * Does something abandon
+     *
+     * @param Pet $animal
+     * @throws ThatIsNotMyPet
+     */
     public function abandon(Pet $animal): void
     {
         if ($this->isNotMy($animal)) {
@@ -65,6 +78,13 @@ class Human
         return $this->pets[$index];
     }
 
+    /**
+     * Notices the sound of a barking dog.
+     *
+     * @param Pet $barkingPet
+     * @throws NoMoreFood
+     * @throws ThatIsNotMyPet
+     */
     public function getBarkedAtBy(Pet $barkingPet): void
     {
         $this->hasBeenBarkedAt = true;
@@ -73,6 +93,13 @@ class Human
         }
     }
 
+    /**
+     * Notices the purring of a nearby cat.
+     *
+     * @param Pet $purringPet
+     * @throws NoMoreFood
+     * @throws ThatIsNotMyPet
+     */
     public function getPurredAtBy(Pet $purringPet): void
     {
         $this->hasBeenPurredAt = true;
@@ -81,6 +108,13 @@ class Human
         }
     }
 
+    /**
+     * Feeds the pet.
+     *
+     * @param Pet $hungryPet
+     * @throws NoMoreFood
+     * @throws ThatIsNotMyPet
+     */
     public function feedThe(Pet $hungryPet): void
     {
         if ($this->isNotMy($hungryPet)) {
