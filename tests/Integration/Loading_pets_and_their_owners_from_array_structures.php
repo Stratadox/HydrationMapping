@@ -106,9 +106,7 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
     /** @test */
     function the_humans_have_names()
     {
-        $alice = $this->petOwners[0];
-        $bob = $this->petOwners[1];
-        $charlie = $this->petOwners[2];
+        [$alice, $bob, $charlie] = $this->petOwners;
 
         self::assertSame('Alice', $alice->name());
         self::assertSame('Bob', $bob->name());
@@ -135,8 +133,7 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
     /** @test */
     function alice_and_bob_have_pets()
     {
-        $alice = $this->petOwners[0];
-        $bob = $this->petOwners[1];
+        [$alice, $bob] = $this->petOwners;
 
         self::assertCount(1, $alice->pets());
         self::assertCount(2, $bob->pets());
@@ -233,8 +230,7 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
     /** @test */
     function alice_does_not_feed_bobs_cat()
     {
-        $alice = $this->petOwners[0];
-        $bob = $this->petOwners[1];
+        [$alice, $bob] = $this->petOwners;
 
         $bar = $bob->pet(0);
 
@@ -249,8 +245,7 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
     /** @test */
     function alice_takes_care_of_bobs_cat()
     {
-        $alice = $this->petOwners[0];
-        $bob = $this->petOwners[1];
+        [$alice, $bob] = $this->petOwners;
 
         $cat = $bob->pet(0);
 
