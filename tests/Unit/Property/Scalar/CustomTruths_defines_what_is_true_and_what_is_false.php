@@ -89,7 +89,7 @@ class CustomTruths_defines_what_is_true_and_what_is_false extends TestCase
     function comparing_truths_uses_strict_comparison()
     {
         $truths = [0, '1'];
-        $falsehoods = [1, '0'];
+        $falsehoods = [1, '0', 7];
         $map = CustomTruths::forThe(BooleanValue::inProperty('boolean'),
             $truths,
             $falsehoods
@@ -99,6 +99,9 @@ class CustomTruths_defines_what_is_true_and_what_is_false extends TestCase
         $this->assertTrue($map->value(['boolean' => 0]));
         $this->assertFalse($map->value(['boolean' => '0']));
         $this->assertTrue($map->value(['boolean' => '1']));
+
+        $this->assertTrue($map->value(['boolean' => '7']));
+        $this->assertFalse($map->value(['boolean' => 7]));
     }
 
     public function trueValues() : array
