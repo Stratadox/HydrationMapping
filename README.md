@@ -80,10 +80,10 @@ For additional extension power, custom mapping can be produced by implementing t
 
 # Hydrate
 
-This module is part of the [Hydrate Module](https://github.com/Stratadox/Hydrate).
+This package is part of the [Hydrate Module](https://github.com/Stratadox/Hydrate).
 
-The `Hydrate` package is an umbrella for several hydration-related packages.
+The `Hydrate` module is an umbrella for several hydration-related packages.
 Together, they form a powerful toolset for converting input data into an object structure.
 
-Although these package are designed to work together, they can also be used independently.
+Although these packages are designed to work together, they can also be used independently.
 The only hard dependencies of this `HydrationMapping` module are a collections library and a set of packages dedicated only to interfaces.
