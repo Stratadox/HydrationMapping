@@ -14,6 +14,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasManyNested
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\CollectionMappingFailed
+ * @covers \Stratadox\Hydration\Mapping\Property\Relationship\KeyRequiring
  */
 class HasManyNested_maps_nested_collections extends TestCase
 {

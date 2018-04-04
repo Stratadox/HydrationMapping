@@ -13,6 +13,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasOneNested
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\ObjectMappingFailed
+ * @covers \Stratadox\Hydration\Mapping\Property\Relationship\KeyRequiring
  */
 class HasOneNested_maps_nested_objects extends TestCase
 {

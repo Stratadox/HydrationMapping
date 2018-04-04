@@ -17,6 +17,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasManyProxies
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\CollectionMappingFailed
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\ProxyProductionFailed
+ * @covers \Stratadox\Hydration\Mapping\Property\Relationship\KeyRequiring
  */
 class HasManyProxies_maps_extra_lazy_collections extends TestCase
 {
