@@ -22,6 +22,7 @@ class HasManyNested_maps_nested_collections extends TestCase
     /** @test */
     function mapping_a_nested_array_of_names_to_a_collection_of_Authors()
     {
+        /** @var string[][][] $inSourceData */
         $inSourceData = [
             'authors' => [
                 ['firstName' => 'Jules',     'lastName' => 'Verne'      ],
@@ -58,6 +59,7 @@ class HasManyNested_maps_nested_collections extends TestCase
     /** @test */
     function the_source_key_can_differ_from_the_property_name()
     {
+        /** @var string[][][] $inSourceData */
         $inSourceData = [
             'these' => [
                 ['firstName' => 'Jules',     'lastName' => 'Verne'      ],
