@@ -27,6 +27,20 @@ Install using composer:
 These mapping objects define the relationship between an object property and the
 source of the data.
 
+## Typical Usage
+
+Typically, hydration mappings are given to [`MappedHydrator`](https://github.com/Stratadox/Hydrator/blob/master/src/MappedHydrator.php) instances.
+Together they form a strong team that solves a single purpose: mapping data to an object graph.
+
+For example:
+```php
+$hydrator = MappedHydrator::forThe(Book::class, Properties::map(
+    StringValue::inProperty('title'),
+    IntegerValue::inProperty('rating'),
+    StringValue::inPropertyWithDifferentKey('isbn', 'id')
+));
+```
+
 ## Mapping
 
 Three types of property mappings are available:
@@ -37,17 +51,34 @@ Three types of property mappings are available:
 ### Scalar Mapping
 
 Scalar typed properties can be mapped using the `*Value` classes.
-These mappings validate the input before producing a value.
+The following scalar mappings are available:
+- `BooleanValue`
+- `FloatValue`
+- `IntegerValue`
+- `StringValue`
+- `NullValue`
 
+Scalar mappings are created through the named constructors:
+- `inProperty`
+    - Usage: `IntegerValue::inProperty('amount')` 
+    - Use when the property name and data key are the same.
+- `inPropertyWithDifferentKey`
+    - Usage: `BooleanValue::inPropertyWithDifferentKey('isBlocked', 'is_blocked')`
+    - Use when the data key differs from the property name.
+
+When appropriate, these mappings validate the input before producing a value.
 For instance, the `IntegerValue` mapping checks that:
 - The input value is formatted as an integer number
 - The value does not exceed the integer boundaries
 
 This process can be skipped by using the `Casted*` mappings instead.
 They provide a minor speed bonus at the cost of decreased integrity.
+`Casted*` mappings are available as:
+- `CastedFloat`
+- `CastedInteger`
 
 Input to a `BooleanValue` must either be numeric or already boolean.
-Numeric input larger than zero become `true`, zero or less becomes `false`.
+Numeric input larger than zero becomes `true`, zero or less becomes `false`.
 Non-numeric strings can be mapped to boolean using the `CustomTruths` wrapper.
 
 ### Relationship Mapping
@@ -59,11 +90,32 @@ Each of these are connected to the input data in one of three ways:
 - As `*Nested` data structures (for loading from a json structure)
 - As `*Proxies` (for loading lazily)
 
-`HasOne*`-type relationships need an object that `Hydrates` the related instance.
+This boils down to the following possibilities:
+- `HasManyEmbedded`
+- `HasManyNested`
+- `HasManyProxies`
+- `HasOneEmbedded`
+- `HasOneNested`
+- `HasOneProxy`
+
+Relationship mappings are created through the named constructors:
+- `inProperty`
+    - Usage: `HasOneEmbedded::inProperty('name', $hydrator)` 
+    - Use when the property name and data key are the same.
+- `inPropertyWithDifferentKey`
+    - Usage: `HasManyNested::inPropertyWithDifferentKey('friends', 'contacts', $collection, $item)`
+    - Use when the data key differs from the property name.
+
+For `*Embedded` classes, there is no `inPropertyWithDifferentKey`
+
+`HasOne*`-type relationships need an object that [`Hydrates`](https://github.com/Stratadox/HydratorContracts/blob/master/src/Hydrates.php) the related instance.
 A `HasMany*` relation require one object that `Hydrates` the collection, and one that `Hydrates` the items.
 
+These hydrators may in turn be `MappedHydrator` instances.
+ 
+
 An exception to the above are `*Proxy` mappings.
-Rather than a hydrator for the related instances, they require a builder that `ProducesProxies`.
+Rather than a hydrator for the related instances, they require a builder that [`ProducesProxies`](https://github.com/Stratadox/ProxyContracts/blob/master/src/ProducesProxies.php).
 
 #### Bidirectional
 
