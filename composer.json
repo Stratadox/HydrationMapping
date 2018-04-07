@@ -19,8 +19,9 @@
     },
     "require": {
         "php": ">=7.1",
-        "stratadox/hydration-mapping-contracts": "^0.1.0",
-        "stratadox/immutable-collection": "^1.0",
+        "stratadox/hydration-mapping-contracts": "^0.1.2",
+        "stratadox/hydrator-contracts": "^0.1.1",
+        "stratadox/immutable-collection": "^1.1",
         "stratadox/proxy-contracts": "^0.1.0"
     },
     "require-dev": {
