@@ -7,7 +7,7 @@ namespace Stratadox\Hydration\Mapping\Property\Scalar;
  * Maps string-like input to a string property in an object property.
  *
  * @package Stratadox\Hydrate
- * @author Stratadox
+ * @author  Stratadox
  */
 final class StringValue extends Scalar
 {

@@ -10,7 +10,7 @@ use Stratadox\Hydrator\ObservesHydration;
  * Maps a back-reference in a bidirectional relationship.
  *
  * @package Stratadox\Hydrate
- * @author Stratadox
+ * @author  Stratadox
  */
 final class HasBackReference implements MapsProperty, ObservesHydration
 {

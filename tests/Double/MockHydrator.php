@@ -27,8 +27,7 @@ trait MockHydrator
         $hydrator->expects($this->any())
             ->method('fromArray')
             ->willReturnCallback(
-                function (array $data) use ($class)
-                {
+                function (array $data) use ($class) {
                     return new $class(...array_values($data));
                 }
             );
@@ -52,8 +51,7 @@ trait MockHydrator
         $hydrator->expects($this->any())
             ->method('fromArray')
             ->willReturnCallback(
-                function (array $data) use ($class)
-                {
+                function (array $data) use ($class) {
                     $inst = (new ReflectionClass($class))->newInstanceWithoutConstructor();
                     foreach ($data as $key => $value) {
                         $inst->$key = $value;
@@ -81,8 +79,7 @@ trait MockHydrator
         $hydrator->expects($this->any())
             ->method('fromArray')
             ->willReturnCallback(
-                function () use ($message)
-                {
+                function () use ($message) {
                     throw new Exception($message);
                 }
             );
@@ -93,5 +90,6 @@ trait MockHydrator
     }
 
     abstract public static function any(): AnyInvokedCount;
+
     abstract protected function createMock($originalClassName): MockObject;
 }

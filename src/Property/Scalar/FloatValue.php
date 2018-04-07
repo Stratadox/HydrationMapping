@@ -10,7 +10,7 @@ use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
  * Maps numeric input to a float property in an object property.
  *
  * @package Stratadox\Hydrate
- * @author Stratadox
+ * @author  Stratadox
  */
 final class FloatValue extends Scalar
 {

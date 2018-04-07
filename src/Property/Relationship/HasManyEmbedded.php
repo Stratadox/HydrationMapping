@@ -14,7 +14,7 @@ use Throwable;
  * of single-property objects.
  *
  * @package Stratadox\Hydrate
- * @author Stratadox
+ * @author  Stratadox
  */
 final class HasManyEmbedded implements MapsProperty
 {

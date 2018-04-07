@@ -93,7 +93,7 @@ class HasManyNested_maps_nested_collections extends TestCase
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Missing the key `foo` for property `foo` the input data: []; ' .
-            'Mapper: ' .HasManyNested::class
+            'Mapper: ' . HasManyNested::class
         );
 
         $mapping->value([]);

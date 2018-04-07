@@ -11,7 +11,7 @@ use Throwable;
  * Maps an embedded data structure to a has-one relation in an object property.
  *
  * @package Stratadox\Hydrate
- * @author Stratadox
+ * @author  Stratadox
  */
 final class HasOneEmbedded implements MapsProperty
 {

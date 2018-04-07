@@ -12,8 +12,8 @@ use Stratadox\HydrationMapping\UnmappableInput;
 /**
  * Notifies the client code when the input is not accepted by the property mapping.
  *
- * @author Stratadox
  * @package Stratadox\Hydrate
+ * @author  Stratadox
  */
 final class UnmappableProperty extends InvalidArgument implements UnmappableInput
 {

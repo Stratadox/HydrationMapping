@@ -38,7 +38,7 @@ class Human
     /**
      * Adopts a new pet.
      *
-     * @param Pet $animal
+     * @param Pet         $animal
      * @param string|null $itsNewName
      * @throws ThatIsNotMyPet
      */

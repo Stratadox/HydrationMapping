@@ -13,7 +13,7 @@ use Throwable;
  * Notifies the client code when the proxy could not be produced.
  *
  * @package Stratadox\Hydrate
- * @author Stratadox
+ * @author  Stratadox
  */
 final class ProxyProductionFailed extends RuntimeException implements UnmappableInput
 {

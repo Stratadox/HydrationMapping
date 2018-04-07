@@ -60,8 +60,11 @@ class CustomTruths_defines_what_is_true_and_what_is_false extends TestCase
      * @param array $truths
      * @param array $falsehoods
      */
-    function unacceptable_input_throws_an_exception($itsNotBoolean, array $truths, array $falsehoods)
-    {
+    function unacceptable_input_throws_an_exception(
+        $itsNotBoolean,
+        array $truths,
+        array $falsehoods
+    ) {
         $source = ['boolean' => $itsNotBoolean];
 
         $map = CustomTruths::forThe(BooleanValue::inProperty('boolean'),
@@ -72,8 +75,8 @@ class CustomTruths_defines_what_is_true_and_what_is_false extends TestCase
         $this->expectException(UnmappableInput::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
-            'Cannot assign `'.$itsNotBoolean.'` to property `boolean`: it is ' .
-            'not clean for conversion to boolean.'
+            'Cannot assign `' . $itsNotBoolean . '` to property `boolean`: ' .
+            'it is not clean for conversion to boolean.'
         );
         $map->value($source);
     }
@@ -104,37 +107,37 @@ class CustomTruths_defines_what_is_true_and_what_is_false extends TestCase
         $this->assertFalse($map->value(['boolean' => 7]));
     }
 
-    public function trueValues() : array
+    public function trueValues(): array
     {
         $truths = ['true', 'TRUE', 'y', 'yes'];
         $falsehoods = ['false', 'FALSE', 'n', 'no'];
         return [
             '"true"' => ['true', $truths, $falsehoods],
             '"TRUE"' => ['TRUE', $truths, $falsehoods],
-            '"y"' => ['y', $truths, $falsehoods],
-            '"yes"' => ['yes', $truths, $falsehoods],
-            '"1"' => ['1', $truths, $falsehoods],
+            '"y"'    => ['y', $truths, $falsehoods],
+            '"yes"'  => ['yes', $truths, $falsehoods],
+            '"1"'    => ['1', $truths, $falsehoods],
         ];
     }
 
-    public function falseValues() : array
+    public function falseValues(): array
     {
         $truths = ['what', 'is', 'truth', 'anyway', '?'];
         $falsehoods = ['CNN', 'Russia', 'nah'];
         return [
-            'CNN' => ['CNN', $truths, $falsehoods],
+            'CNN'    => ['CNN', $truths, $falsehoods],
             'Russia' => ['Russia', $truths, $falsehoods],
-            'nah' => ['nah', $truths, $falsehoods],
-            '"0"' => ['0', $truths, $falsehoods],
+            'nah'    => ['nah', $truths, $falsehoods],
+            '"0"'    => ['0', $truths, $falsehoods],
         ];
     }
 
-    public function unacceptableValues() : array
+    public function unacceptableValues(): array
     {
         $truths = ['TRUE', 'ok!', 'yeah', 'why not?'];
         $falsehoods = ['FALSE', 'no way', 'nope'];
         return [
-            '"true"' => ['true', $truths, $falsehoods],
+            '"true"'  => ['true', $truths, $falsehoods],
             '"false"' => ['false', $truths, $falsehoods],
             '"maybe"' => ['maybe', $truths, $falsehoods],
         ];

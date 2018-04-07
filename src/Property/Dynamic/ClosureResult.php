@@ -10,7 +10,7 @@ use Stratadox\HydrationMapping\MapsProperty;
  * Maps to the result of a closure that runs against the input data.
  *
  * @package Stratadox\Hydrate
- * @author Stratadox
+ * @author  Stratadox
  */
 final class ClosureResult implements MapsProperty
 {
@@ -26,7 +26,7 @@ final class ClosureResult implements MapsProperty
     /**
      * Creates a new mapping that applies a closure on the input data.
      *
-     * @param string $name      The name of both the key and the property.
+     * @param string  $name     The name of both the key and the property.
      * @param Closure $function The function to execute on the data.
      *                          Receives an array of hydration data as parameter.
      * @return self             The closure result mapping.

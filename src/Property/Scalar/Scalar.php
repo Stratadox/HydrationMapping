@@ -11,7 +11,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
  * Maps the data from a single key to a scalar object property.
  *
  * @package Stratadox\Hydrate
- * @author Stratadox
+ * @author  Stratadox
  */
 abstract class Scalar implements ExposesDataKey
 {
@@ -44,7 +44,8 @@ abstract class Scalar implements ExposesDataKey
      * @return static|self
      */
     public static function inPropertyWithDifferentKey(
-        string $name, string $key
+        string $name,
+        string $key
     ): self {
         return new static($name, $key);
     }

@@ -11,7 +11,7 @@ use Throwable;
  * Maps a nested data structure to a has-one relation in an object property.
  *
  * @package Stratadox\Hydrate
- * @author Stratadox
+ * @author  Stratadox
  */
 final class HasOneNested implements ExposesDataKey
 {
@@ -59,13 +59,13 @@ final class HasOneNested implements ExposesDataKey
     }
 
     /** @inheritdoc */
-    public function name() : string
+    public function name(): string
     {
         return $this->name;
     }
 
     /** @inheritdoc */
-    public function key() : string
+    public function key(): string
     {
         return $this->key;
     }

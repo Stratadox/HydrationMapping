@@ -8,6 +8,12 @@ use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\HydrationMapping\ExposesDataKey;
 use Stratadox\HydrationMapping\UnmappableInput;
 
+/**
+ * Behaviour to assert that the key is present in the data.
+ *
+ * @package Stratadox\Hydrate
+ * @author  Stratadox
+ */
 trait KeyRequiring
 {
     /**

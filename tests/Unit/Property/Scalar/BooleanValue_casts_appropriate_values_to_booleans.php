@@ -56,8 +56,8 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
         $this->expectException(UnmappableInput::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
-            'Cannot assign `'.$itsNotBoolean.'` to property `boolean`: it is ' .
-            'not clean for conversion to boolean.'
+            'Cannot assign `' . $itsNotBoolean . '` to property `boolean`: ' .
+            'it is not clean for conversion to boolean.'
         );
         $map->value($source);
     }
@@ -65,10 +65,10 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
     public function trueValues(): array
     {
         return [
-            'true' => [true],
-            '1' => [1],
-            '"1"' => ['1'],
-            '0.1' => [0.1],
+            'true'  => [true],
+            '1'     => [1],
+            '"1"'   => ['1'],
+            '0.1'   => [0.1],
             '"7.2"' => ['7.2'],
         ];
     }
@@ -77,16 +77,16 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
     {
         return [
             'false' => [false],
-            '0' => [0],
-            '"0"' => ['0'],
-            '-3.9' => [-3.9],
+            '0'     => [0],
+            '"0"'   => ['0'],
+            '-3.9'  => [-3.9],
         ];
     }
 
     public function unacceptableValues(): array
     {
         return [
-            '"true"' => ['true'],
+            '"true"'  => ['true'],
             '"false"' => ['false'],
             '"maybe"' => ['maybe'],
         ];

@@ -49,8 +49,8 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
                 'pets' => [
                     [
                         'species' => 'cat',
-                        'hungry' => 'no',
-                        'name' => 'Foo',
+                        'hungry'  => 'no',
+                        'name'    => 'Foo',
                     ],
                 ],
             ],
@@ -60,13 +60,13 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
                 'pets' => [
                     [
                         'species' => 'cat',
-                        'hungry' => 'yeah',
-                        'name' => 'Bar',
+                        'hungry'  => 'yeah',
+                        'name'    => 'Bar',
                     ],
                     [
                         'species' => 'dog',
-                        'hungry' => 'nah',
-                        'name' => 'Baz',
+                        'hungry'  => 'nah',
+                        'name'    => 'Baz',
                     ],
                 ],
             ],

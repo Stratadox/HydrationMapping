@@ -12,7 +12,7 @@ use Throwable;
  * Maps a number to a collection of proxies in an object property.
  *
  * @package Stratadox\Hydrate
- * @author Stratadox
+ * @author  Stratadox
  */
 final class HasManyProxies implements ExposesDataKey
 {
@@ -71,13 +71,13 @@ final class HasManyProxies implements ExposesDataKey
     }
 
     /** @inheritdoc */
-    public function name() : string
+    public function name(): string
     {
         return $this->name;
     }
 
     /** @inheritdoc */
-    public function key() : string
+    public function key(): string
     {
         return $this->key;
     }
@@ -102,9 +102,9 @@ final class HasManyProxies implements ExposesDataKey
     /**
      * Produces the proxies for in the collection.
      *
-     * @param int $amount   The amount of proxies to produce.
-     * @param object $owner The object that holds a reference to the proxy.
-     * @return array        List of proxy objects.
+     * @param int    $amount The amount of proxies to produce.
+     * @param object $owner  The object that holds a reference to the proxy.
+     * @return array         List of proxy objects.
      */
     private function makeSomeProxies(int $amount, $owner): array
     {

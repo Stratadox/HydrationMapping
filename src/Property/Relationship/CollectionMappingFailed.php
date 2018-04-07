@@ -17,7 +17,7 @@ use Throwable;
  * Notifies the client code when the collection could not be mapped.
  *
  * @package Stratadox\Hydrate
- * @author Stratadox
+ * @author  Stratadox
  */
 final class CollectionMappingFailed extends RuntimeException implements UnmappableInput
 {

@@ -111,7 +111,7 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Missing the key `foo` for property `foo` the input data: []; ' .
-            'Mapper: '.HasManyProxies::class
+            'Mapper: ' . HasManyProxies::class
         );
 
         $mapping->value([]);

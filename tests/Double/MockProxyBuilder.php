@@ -26,8 +26,7 @@ trait MockProxyBuilder
         $proxyBuilder->expects($this->any())
             ->method('createFor')
             ->willReturnCallback(
-                function ($owner, $name, $position = null) use ($class)
-                {
+                function ($owner, $name, $position = null) use ($class) {
                     return new $class($owner, $name, $position);
                 }
             );
@@ -60,5 +59,6 @@ trait MockProxyBuilder
     }
 
     abstract public static function any(): AnyInvokedCount;
+
     abstract protected function createMock($originalClassName): MockObject;
 }

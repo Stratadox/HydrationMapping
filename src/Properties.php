@@ -11,7 +11,7 @@ use Stratadox\ImmutableCollection\ImmutableCollection;
  * Defines how to map a specific structure of data to an object.
  *
  * @package Stratadox\Hydrate
- * @author Stratadox
+ * @author  Stratadox
  */
 final class Properties extends ImmutableCollection implements MapsProperties
 {
@@ -23,7 +23,7 @@ final class Properties extends ImmutableCollection implements MapsProperties
     /**
      * Creates a new list of property mappings.
      *
-     * @param MapsProperty   ...$properties The property mappings.
+     * @param MapsProperty[] ...$properties The property mappings.
      * @return Properties                   The property mapping container.
      */
     public static function map(

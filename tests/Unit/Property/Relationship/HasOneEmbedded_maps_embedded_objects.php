@@ -22,8 +22,8 @@ class HasOneEmbedded_maps_embedded_objects extends TestCase
     {
         $bookInformation = [
             'firstName' => 'Elle',
-            'lastName' => 'Garner',
-            'title' => 'Fruit Infused Water: 50 Quick & Easy Recipes for ' .
+            'lastName'  => 'Garner',
+            'title'     => 'Fruit Infused Water: 50 Quick & Easy Recipes for ' .
                 'Delicious & Healthy Hydration'
         ];
 

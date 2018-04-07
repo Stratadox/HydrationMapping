@@ -11,7 +11,7 @@ use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
  * Maps boolean-like input to a boolean property in an object property.
  *
  * @package Stratadox\Hydrate
- * @author Stratadox
+ * @author  Stratadox
  */
 final class BooleanValue extends Scalar
 {

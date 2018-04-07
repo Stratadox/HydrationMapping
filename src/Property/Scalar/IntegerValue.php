@@ -10,7 +10,7 @@ use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
  * Maps integer-like input to an integer property in an object property.
  *
  * @package Stratadox\Hydrate
- * @author Stratadox
+ * @author  Stratadox
  */
 final class IntegerValue extends Scalar
 {

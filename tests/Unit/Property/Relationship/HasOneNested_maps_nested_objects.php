@@ -24,7 +24,7 @@ class HasOneNested_maps_nested_objects extends TestCase
         $inAuthorData = [
             'author' => [
                 'firstName' => 'Jules',
-                'lastName' => 'Verne'
+                'lastName'  => 'Verne'
             ]
         ];
 
@@ -46,7 +46,7 @@ class HasOneNested_maps_nested_objects extends TestCase
         $inAuthorData = [
             'person' => [
                 'firstName' => 'Jules',
-                'lastName' => 'Verne'
+                'lastName'  => 'Verne'
             ]
         ];
 
@@ -72,7 +72,7 @@ class HasOneNested_maps_nested_objects extends TestCase
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Missing the key `foo` for property `foo` the input data: []; ' .
-            'Mapper: ' .HasOneNested::class
+            'Mapper: ' . HasOneNested::class
         );
 
         $mapping->value([]);

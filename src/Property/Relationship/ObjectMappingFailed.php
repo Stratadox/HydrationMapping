@@ -16,7 +16,7 @@ use Throwable;
  * Notifies the client code when the object could not be mapped.
  *
  * @package Stratadox\Hydrate
- * @author Stratadox
+ * @author  Stratadox
  */
 final class ObjectMappingFailed extends RuntimeException implements UnmappableInput
 {

@@ -14,7 +14,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
  * Notifies the client code when the input key was not found.
  *
  * @package Stratadox\Hydrate
- * @author Stratadox
+ * @author  Stratadox
  */
 final class MissingTheKey extends InvalidArgument implements UnmappableInput
 {

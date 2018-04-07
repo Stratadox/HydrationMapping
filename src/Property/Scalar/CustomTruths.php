@@ -11,7 +11,7 @@ use Stratadox\HydrationMapping\MapsProperty;
  * Decorates @see BooleanValue with custom true/false declarations.
  *
  * @package Stratadox\Hydrate
- * @author Stratadox
+ * @author  Stratadox
  */
 final class CustomTruths implements MapsProperty
 {
