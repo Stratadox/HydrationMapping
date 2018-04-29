@@ -77,9 +77,17 @@ They provide a minor speed bonus at the cost of decreased integrity.
 - `CastedFloat`
 - `CastedInteger`
 
+To skip the entire typecasting process, the `OriginalValue` can be used.
+
 Input to a `BooleanValue` must either be numeric or already boolean.
 Numeric input larger than zero becomes `true`, zero or less becomes `false`.
 Non-numeric strings can be mapped to boolean using the `CustomTruths` wrapper.
+
+Each of the above mappings can be made *nullable* by wrapping the mapping with
+`CanBeNull`.
+
+For example, instead of `IntegerValue::inProperty('foo')`, to make
+the `foo` property *nullable*: `CanBeNull::or(IntegerValue::inProperty('foo'))`
 
 ### Relationship Mapping
 
@@ -121,6 +129,8 @@ Rather than a hydrator for the related instances, they require a builder that [`
 
 Bidirectional relationships can be mapped using the `HasBackReference` mapping.
 This mapping acts as an observer to the hydrator for the owning side.
+
+Only `one-to-many` and `one-to-one` bidirectional mappings are currently supported.
 
 ### Extension
 
