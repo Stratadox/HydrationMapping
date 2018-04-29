@@ -77,7 +77,7 @@ They provide a minor speed bonus at the cost of decreased integrity.
 - `CastedFloat`
 - `CastedInteger`
 
-To skip the entire typecasting process, the `OriginalValue` can be used.
+To skip the entire typecasting process, the `OriginalValue` mapping can be used.
 
 Input to a `BooleanValue` must either be numeric or already boolean.
 Numeric input larger than zero becomes `true`, zero or less becomes `false`.
@@ -86,8 +86,8 @@ Non-numeric strings can be mapped to boolean using the `CustomTruths` wrapper.
 Each of the above mappings can be made *nullable* by wrapping the mapping with
 `CanBeNull`.
 
-For example, instead of `IntegerValue::inProperty('foo')`, to make
-the `foo` property *nullable*: `CanBeNull::or(IntegerValue::inProperty('foo'))`
+For example, instead of `IntegerValue::inProperty('foo')`, the `foo` property 
+can be made *nullable* with: `CanBeNull::or(IntegerValue::inProperty('foo'))`
 
 ### Relationship Mapping
 
