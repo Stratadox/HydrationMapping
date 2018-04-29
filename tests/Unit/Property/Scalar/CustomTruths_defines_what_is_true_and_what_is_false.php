@@ -89,6 +89,17 @@ class CustomTruths_defines_what_is_true_and_what_is_false extends TestCase
     }
 
     /** @test */
+    function custom_truth_mapping_can_itself_also_be_wrapped()
+    {
+        $map = CustomTruths::forThe(
+            BooleanValue::inPropertyWithDifferentKey('boolean', 'bool'),
+            ['yes'],
+            ['no']
+        );
+        $this->assertSame('bool', $map->key());
+    }
+
+    /** @test */
     function comparing_truths_uses_strict_comparison()
     {
         $truths = [0, '1'];

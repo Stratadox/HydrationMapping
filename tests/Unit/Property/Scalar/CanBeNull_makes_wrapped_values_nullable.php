@@ -86,4 +86,13 @@ class CanBeNull_makes_wrapped_values_nullable extends TestCase
         $map = CanBeNull::or(BooleanValue::inProperty('boolean'));
         $this->assertSame('boolean', $map->name());
     }
+
+    /** @test */
+    function nullable_type_mapping_can_itself_also_be_wrapped()
+    {
+        $map = CanBeNull::or(
+            BooleanValue::inPropertyWithDifferentKey('bool', 'key')
+        );
+        $this->assertSame('key', $map->key());
+    }
 }
