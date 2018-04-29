@@ -5,7 +5,6 @@ namespace Stratadox\Hydration\Mapping\Property\Scalar;
 
 use function in_array;
 use Stratadox\HydrationMapping\ExposesDataKey;
-use Stratadox\HydrationMapping\MapsProperty;
 
 /**
  * Decorates @see BooleanValue with custom true/false declarations.
@@ -13,7 +12,7 @@ use Stratadox\HydrationMapping\MapsProperty;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class CustomTruths implements MapsProperty
+final class CustomTruths implements ExposesDataKey
 {
     private $for;
     private $truths;
@@ -61,5 +60,11 @@ final class CustomTruths implements MapsProperty
     public function name(): string
     {
         return $this->for->name();
+    }
+
+    /** @inheritdoc */
+    public function key(): string
+    {
+        return $this->for->key();
     }
 }

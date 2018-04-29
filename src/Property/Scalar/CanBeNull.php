@@ -5,7 +5,6 @@ namespace Stratadox\Hydration\Mapping\Property\Scalar;
 
 use function is_null;
 use Stratadox\HydrationMapping\ExposesDataKey;
-use Stratadox\HydrationMapping\MapsProperty;
 
 /**
  * Decorates scalar type declaration with a nullable property.
@@ -13,7 +12,7 @@ use Stratadox\HydrationMapping\MapsProperty;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class CanBeNull implements MapsProperty
+final class CanBeNull implements ExposesDataKey
 {
     private $or;
 
@@ -46,5 +45,11 @@ final class CanBeNull implements MapsProperty
     public function name(): string
     {
         return $this->or->name();
+    }
+
+    /** @inheritdoc */
+    public function key(): string
+    {
+        return $this->or->key();
     }
 }
