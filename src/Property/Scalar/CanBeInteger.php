@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Scalar;
 
-use function is_null;
+use function array_key_exists;
+use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\HydrationMapping\ExposesDataKey;
+use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
  * Decorates scalar type declaration with a possibly integer property.
@@ -35,7 +37,7 @@ final class CanBeInteger implements ExposesDataKey
     /** @inheritdoc */
     public function value(array $data, $owner = null)
     {
-        $value = $data[$this->or->key()];
+        $value = $this->my($data);
         if ($this->looksLikeAnInteger($value)) {
             return (int) $value;
         }
@@ -52,6 +54,16 @@ final class CanBeInteger implements ExposesDataKey
     public function key(): string
     {
         return $this->or->key();
+    }
+
+    /** @throws UnmappableInput */
+    private function my(array $data)
+    {
+        $key = $this->or->key();
+        if (array_key_exists($key, $data)) {
+            return $data[$key];
+        }
+        throw MissingTheKey::inTheInput($data, $this, $key);
     }
 
     private function looksLikeAnInteger($value): bool
