@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace Stratadox\HydrationMapping\Test\Unit\Property\Scalar;
 
+use function bcadd;
+use function bcsub;
+use const PHP_INT_MAX;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Scalar\CanBeInteger;
 use Stratadox\Hydration\Mapping\Property\Scalar\FloatValue;
@@ -26,6 +29,36 @@ class CanBeInteger_casts_the_value_to_int_if_possible extends TestCase
     }
 
     /** @test */
+    function keeping_integers_as_they_are()
+    {
+        $source = ['number' => PHP_INT_MAX];
+
+        $map = CanBeInteger::or(FloatValue::inProperty('number'));
+
+        $this->assertInternalType('integer', $map->value($source));
+    }
+
+    /** @test */
+    function mapping_large_integer_like_values_to_integers()
+    {
+        $source = ['number' => (string) PHP_INT_MAX];
+
+        $map = CanBeInteger::or(FloatValue::inProperty('number'));
+
+        $this->assertInternalType('integer', $map->value($source));
+    }
+
+    /** @test */
+    function mapping_very_small_integer_like_values_to_integers()
+    {
+        $source = ['number' => (string) PHP_INT_MIN];
+
+        $map = CanBeInteger::or(FloatValue::inProperty('number'));
+
+        $this->assertInternalType('integer', $map->value($source));
+    }
+
+    /** @test */
     function falling_back_to_the_alternative_if_the_input_is_not_an_integer()
     {
         $source = ['number' => '1.6'];
@@ -38,11 +71,21 @@ class CanBeInteger_casts_the_value_to_int_if_possible extends TestCase
     /** @test */
     function falling_back_to_the_alternative_if_the_input_is_too_large_for_an_integer()
     {
-        $source = ['number' => '9999999999999999999999'];
+        $source = ['number' => bcadd((string) PHP_INT_MAX, '1')];
 
         $map = CanBeInteger::or(FloatValue::inProperty('number'));
 
-        $this->assertSame(9999999999999999999999.0, $map->value($source));
+        $this->assertInternalType('float', $map->value($source));
+    }
+
+    /** @test */
+    function falling_back_to_the_alternative_if_the_input_is_too_small_for_an_integer()
+    {
+        $source = ['number' => bcsub((string) PHP_INT_MIN, '1')];
+
+        $map = CanBeInteger::or(FloatValue::inProperty('number'));
+
+        $this->assertInternalType('float', $map->value($source));
     }
 
     /** @test */
