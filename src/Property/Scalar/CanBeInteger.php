@@ -79,7 +79,7 @@ final class CanBeInteger implements ExposesDataKey
         if (!preg_match('/^[-+]?\d+$/', (string) $value)) {
             return false;
         }
-        if ($value > PHP_INT_MAX || $value < PHP_INT_MIN) {
+        if ($value > (string) PHP_INT_MAX || $value < (string) PHP_INT_MIN) {
             return false;
         }
         return true;
