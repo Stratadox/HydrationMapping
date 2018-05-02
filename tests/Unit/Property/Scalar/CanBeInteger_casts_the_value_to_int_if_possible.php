@@ -6,6 +6,7 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Scalar;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Scalar\CanBeInteger;
 use Stratadox\Hydration\Mapping\Property\Scalar\FloatValue;
+use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\CanBeInteger
@@ -44,9 +45,23 @@ class CanBeInteger_casts_the_value_to_int_if_possible extends TestCase
     function retrieving_the_key_to_use_for_the_input_data()
     {
         $map = CanBeInteger::or(
-            FloatValue::inPropertyWithDifferentKey('bool', 'key')
+            FloatValue::inPropertyWithDifferentKey('number', 'key')
         );
 
         $this->assertSame('key', $map->key());
+    }
+
+    /** @test */
+    function missing_input_throws_an_exception()
+    {
+        $map = CanBeInteger::or(FloatValue::inProperty('number'));
+
+        $this->expectException(UnmappableInput::class);
+        $this->expectExceptionMessage(
+            'Missing the key `number` for property `number` the ' .
+            'input data: []; Mapper: ' . CanBeInteger::class
+        );
+
+        $map->value([]);
     }
 }
