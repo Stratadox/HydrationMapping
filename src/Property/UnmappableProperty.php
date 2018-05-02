@@ -4,10 +4,12 @@ declare(strict_types=1);
 namespace Stratadox\Hydration\Mapping\Property;
 
 use function gettype;
+use function is_scalar;
 use function sprintf;
 use InvalidArgumentException as InvalidArgument;
 use Stratadox\HydrationMapping\MapsProperty;
 use Stratadox\HydrationMapping\UnmappableInput;
+use function trim;
 
 /**
  * Notifies the client code when the input is not accepted by the property mapping.
@@ -75,6 +77,24 @@ final class UnmappableProperty extends InvalidArgument implements UnmappableInpu
         return self::inputData($failedToMapTo, 'boolean', $value);
     }
 
+    /**
+     * Something something addAlternativeTypeInformation.
+     *
+     * @param string          $type
+     * @param UnmappableInput $exception
+     * @return UnmappableInput
+     */
+    public static function addAlternativeTypeInformation(
+        string $type,
+        UnmappableInput $exception
+    ): UnmappableInput {
+        return new self(sprintf(
+            '%s It could not be mapped to %s either.',
+            $exception->getMessage(),
+            $type
+        ), 0, $exception);
+    }
+
     /** @inheritdoc */
     private static function inputData(
         MapsProperty $mapped,
@@ -83,16 +103,16 @@ final class UnmappableProperty extends InvalidArgument implements UnmappableInpu
         string $message = ''
     ): self {
         if (is_scalar($input)) {
-            return new self(sprintf(
+            return new self(trim(sprintf(
                 'Cannot assign `%s` to property `%s`: ' .
                 'it is not clean for conversion to %s. %s',
                 $input, $mapped->name(), $type, $message
-            ));
+            )));
         }
-        return new self(sprintf(
+        return new self(trim(sprintf(
             'Cannot assign the %s to property `%s`: ' .
             'it is not clean for conversion to %s. %s',
             gettype($input), $mapped->name(), $type, $message
-        ));
+        )));
     }
 }

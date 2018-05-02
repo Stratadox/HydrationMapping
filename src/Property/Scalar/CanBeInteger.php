@@ -5,6 +5,7 @@ namespace Stratadox\Hydration\Mapping\Property\Scalar;
 
 use function array_key_exists;
 use Stratadox\Hydration\Mapping\Property\MissingTheKey;
+use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
 use Stratadox\HydrationMapping\ExposesDataKey;
 use Stratadox\HydrationMapping\UnmappableInput;
 
@@ -41,7 +42,14 @@ final class CanBeInteger implements ExposesDataKey
         if ($this->looksLikeAnInteger($value)) {
             return (int) $value;
         }
-        return $this->or->value($data, $owner);
+        try {
+            return $this->or->value($data, $owner);
+        } catch (UnmappableInput $exception) {
+            throw UnmappableProperty::addAlternativeTypeInformation(
+                'integer',
+                $exception
+            );
+        }
     }
 
     /** @inheritdoc */
