@@ -36,6 +36,16 @@ class CanBeInteger_casts_the_value_to_int_if_possible extends TestCase
     }
 
     /** @test */
+    function falling_back_to_the_alternative_if_the_input_is_too_large_for_an_integer()
+    {
+        $source = ['number' => '9999999999999999999999'];
+
+        $map = CanBeInteger::or(FloatValue::inProperty('number'));
+
+        $this->assertSame(9999999999999999999999.0, $map->value($source));
+    }
+
+    /** @test */
     function retrieving_which_property_to_map_to()
     {
         $map = CanBeInteger::or(FloatValue::inProperty('number'));
