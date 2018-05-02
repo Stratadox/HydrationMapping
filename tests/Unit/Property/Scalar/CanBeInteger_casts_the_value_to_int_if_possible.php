@@ -10,6 +10,8 @@ use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Scalar\CanBeInteger
+ * @covers \Stratadox\Hydration\Mapping\Property\MissingTheKey
+ * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
  */
 class CanBeInteger_casts_the_value_to_int_if_possible extends TestCase
 {
@@ -57,11 +59,29 @@ class CanBeInteger_casts_the_value_to_int_if_possible extends TestCase
         $map = CanBeInteger::or(FloatValue::inProperty('number'));
 
         $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Missing the key `number` for property `number` the ' .
             'input data: []; Mapper: ' . CanBeInteger::class
         );
 
         $map->value([]);
+    }
+
+    /** @test */
+    function adding_to_the_exception_message_of_the_wrapped_mapping()
+    {
+        $source = ['number' => 'NaN'];
+
+        $map = CanBeInteger::or(FloatValue::inProperty('number'));
+
+        $this->expectException(UnmappableInput::class);
+        $this->expectExceptionCode(0);
+        $this->expectExceptionMessage(
+            'Cannot assign `NaN` to property `number`: it is not clean for ' .
+            'conversion to float. It could not be mapped to integer either.'
+        );
+
+        $map->value($source);
     }
 }
