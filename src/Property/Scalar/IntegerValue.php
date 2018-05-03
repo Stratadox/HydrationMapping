@@ -21,7 +21,7 @@ final class IntegerValue extends Scalar
         if (!preg_match('/^[-+]?\d+$/', (string) $value)) {
             throw UnmappableProperty::itMustBeLikeAnInteger($this, $value);
         }
-        if ($value > PHP_INT_MAX || $value < PHP_INT_MIN) {
+        if ($value > (string) PHP_INT_MAX || $value < (string) PHP_INT_MIN) {
             throw UnmappableProperty::itMustBeInIntegerRange($this, $value);
         }
         return (int) $value;
