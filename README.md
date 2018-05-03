@@ -13,8 +13,10 @@
 [![Latest Stable Version](https://poser.pugx.org/stratadox/hydration-mapping-contracts/v/stable)](https://packagist.org/packages/stratadox/hydration-mapping-contracts)
 [![License](https://poser.pugx.org/stratadox/hydration-mapping-contracts/license)](https://packagist.org/packages/stratadox/hydration-mapping-contracts)
 
-Mappings for hydration purposes; maps array or array-like data structures to 
-object properties, in order to assemble the objects that model a business domain.
+Mappings for hydration purposes.
+
+Maps array or array-like data structures to object properties, in order to 
+assemble the objects that model a business domain.
 
 ## Installation
 
@@ -29,7 +31,7 @@ source of the data.
 
 ## Typical Usage
 
-Typically, hydration mappings are given to [`MappedHydrator`](https://github.com/Stratadox/Hydrator/blob/master/src/MappedHydrator.php) instances.
+Typically, hydration mappings are given to [`Mapped`]()[`Hydrator`](https://github.com/Stratadox/Hydrator/blob/master/src/MappedHydrator.php) instances.
 Together they form a strong team that solves a single purpose: mapping data to an object graph.
 
 For example:
@@ -66,6 +68,8 @@ Scalar mappings are created through the named constructors:
     - Usage: `BooleanValue::inPropertyWithDifferentKey('isBlocked', 'is_blocked')`
     - Use when the data key differs from the property name.
 
+#### Basic Validation
+
 When appropriate, these mappings validate the input before producing a value.
 For instance, the `IntegerValue` mapping checks that:
 - The input value is formatted as an integer number
@@ -81,17 +85,41 @@ To skip the entire typecasting process, the `OriginalValue` mapping can be used.
 
 Input to a `BooleanValue` must either be numeric or already boolean.
 Numeric input larger than zero becomes `true`, zero or less becomes `false`.
-Non-numeric strings can be mapped to boolean using the `CustomTruths` wrapper.
+Non-numeric strings can be mapped to boolean using the `CustomTruths` wrapper:
+```php
+$myProperty = CustomTruths::forThe(BooleanValue::inProperty('foo'), 
+    ['yes', 'y', 'Y'], 
+    ['no', 'n', 'N']
+);
+```
+
+#### Nullable- and Mixed values
 
 Each of the above mappings can be made *nullable* by wrapping the mapping with
 `CanBeNull`.
 
 For example, instead of `IntegerValue::inProperty('foo')`, the `foo` property 
-can be made *nullable* with: `CanBeNull::or(IntegerValue::inProperty('foo'))`
+can be made *nullable* with: `CanBeNull::or(IntegerValue::inProperty('foo'))`.
+
+In the same style, mixed value types can be configured. To map a value that 
+could be either an int or a float, as numeric PHP values are often found, 
+`CanBeInteger` can be used: `CanBeInteger::or(FloatValue::inProperty('foo')))`.
+This mapping will first check if the value can safely be transformed into an
+integer, and fall back to a floating point value. Non-numeric values will result
+in an exception, denoting where and why the input data could not be mapped.
+
+These mixed mapping can be combined (as is customary for [decorators](https://sourcemaking.com/design_patterns/decorator))
+to produce, for instance, mapping configurations that first attempt to map the 
+value as an integer, if that cannot be done to cast it to a floating point, and
+if it's not numeric at all, make it a string:
+```php
+$theProperty = CanBeInteger::or(CanBeFloat::or(StringValue::inProperty('bar')));
+```
 
 ### Relationship Mapping
 
-Relationships can be mapped with a monogamous `HasOne*` or polygamist `HasMany*` mapping.
+Relationships can be mapped with a monogamous `HasOne*` or polygamist `HasMany*` 
+mapping.
 
 Each of these are connected to the input data in one of three ways:
 - As `*Embedded` values (for loading from tabular data)
@@ -108,29 +136,75 @@ This boils down to the following possibilities:
 
 Relationship mappings are created through the named constructors:
 - `inProperty`
-    - Usage: `HasOneEmbedded::inProperty('name', $hydrator)` 
+    - Usage:
+    `HasOneEmbedded::inProperty('name', $hydrator)` 
     - Use when the property name and data key are the same.
 - `inPropertyWithDifferentKey`
-    - Usage: `HasManyNested::inPropertyWithDifferentKey('friends', 'contacts', $collection, $item)`
+    - Usage: 
+    `HasOneNested::inPropertyWithDifferentKey('friends', 'contacts', $hydrator)`
     - Use when the data key differs from the property name.
 
-For `*Embedded` classes, there is no `inPropertyWithDifferentKey`
+In this context, the term `key` refers to the key of the associative array from
+which the object data is mapped, also known as `offset`, `index` or `position`.
 
-`HasOne*`-type relationships need an object that [`Hydrates`](https://github.com/Stratadox/HydratorContracts/blob/master/src/Hydrates.php) the related instance.
-A `HasMany*` relation require one object that `Hydrates` the collection, and one that `Hydrates` the items.
+#### Nested vs Embedded
 
-These hydrators may in turn be `MappedHydrator` instances.
- 
+For `*Embedded` classes, there is no `inPropertyWithDifferentKey`. Instead of
+relying on an embedded array in the key, they are given the original input array
+and compose their attributes from one or more of its values.
 
-An exception to the above are `*Proxy` mappings.
-Rather than a hydrator for the related instances, they require a builder that [`ProducesProxies`](https://github.com/Stratadox/ProxyContracts/blob/master/src/ProducesProxies.php).
+##### Has One
+
+`HasOne*`-type relationships are each given an object that [`Hydrates`](https://github.com/Stratadox/HydratorContracts/blob/master/src/Hydrates.php) 
+the related instance.
+
+A `HasOneNested` receives the value that was found in the original input for the 
+given `key`. This value must be an array, presumably associative.
+
+`HasOneEmbedded` mappings take a different approach: they produce a new object
+from the data in the original input array. This approach is useful when mapping,
+for example, [embedded values](https://martinfowler.com/eaaCatalog/embeddedValue.html).
+
+##### Has Many
+
+A `HasMany*` relation requires one object that `Hydrates` the collection, and 
+one that `Hydrates` the items.
+
+This approach allows for a lot of freedom in the way collections are mapped.
+The available [hydrators](https://github.com/Stratadox/Hydrator) can map the
+collection either as plain array or to a custom collection object.
+
+While `HasManyNested` maps the array associated with its `key` into a collection
+of objects, the `HasManyEmbedded` is used when the input array itself consists
+of a list of scalars. The latter is mostly useful within nested structures.
+
+These hydrators may in turn be `MappedHydrator` instances. The combination is 
+able to map entire structures of objects in all kinds and shapes.
+
+##### Proxies
+
+[`Proxies`](https://github.com/Stratadox/Proxy) are used to allow for lazy 
+loading. Rather than hydrators, they take a factory to create objects that, in 
+turn, load the "real" object in place of the proxy.
+
+Lazy has-one relations can be mapped with the `HasOneProxy` mapping.
+Lazy has-many relationships have the option to be normally lazy, or extra lazy.
+For extra lazy relations, the `HasManyProxies` mapping is used. When the 
+relation is "regular" lazy, it is mapped as `HasOneProxy`, where "one" refers to
+one collection.
+
+The latter only works when the collection is contained in a collection object.
+In cases where objects that are contained in an array should be lazy-loaded, a
+`HasManyProxies` mapping should be used, where each proxy is configured to load
+the entire array when called upon. 
 
 #### Bidirectional
 
-Bidirectional relationships can be mapped using the `HasBackReference` mapping.
-This mapping acts as an observer to the hydrator for the owning side.
+Bidirectional `one-to-many` and `one-to-one` relationships can be mapped using 
+the `HasBackReference` mapping.
 
-Only `one-to-many` and `one-to-one` bidirectional mappings are currently supported.
+This mapping acts as an observer to the hydrator for the owning side, assigning
+the reference of the "owner" object to the given property.
 
 ### Extension
 
