@@ -39,7 +39,7 @@ final class CanBeInteger implements ExposesDataKey
     public function value(array $data, $owner = null)
     {
         $value = $this->my($data);
-        if ($this->looksLikeAnInteger($value)) {
+        if ($this->looksLikeAnInteger((string) $value)) {
             return (int) $value;
         }
         try {
@@ -74,9 +74,9 @@ final class CanBeInteger implements ExposesDataKey
         throw MissingTheKey::inTheInput($data, $this, $key);
     }
 
-    private function looksLikeAnInteger($value): bool
+    private function looksLikeAnInteger(string $value): bool
     {
-        if (!preg_match('/^[-+]?\d+$/', (string) $value)) {
+        if (!preg_match('/^[-+]?\d+$/', $value)) {
             return false;
         }
         if ($value > (string) PHP_INT_MAX || $value < (string) PHP_INT_MIN) {
