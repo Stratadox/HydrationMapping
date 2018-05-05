@@ -3,13 +3,12 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property;
 
-use function gettype;
-use function is_scalar;
+use function get_class;
+use function is_object;
 use function sprintf;
 use InvalidArgumentException as InvalidArgument;
 use Stratadox\HydrationMapping\MapsProperty;
 use Stratadox\HydrationMapping\UnmappableInput;
-use function trim;
 
 /**
  * Notifies the client code when the input is not accepted by the constraint.
@@ -30,6 +29,14 @@ final class UnsatisfiedConstraint extends InvalidArgument implements UnmappableI
         MapsProperty $property,
         $value
     ): self {
+        if (is_object($value)) {
+            return new self(sprintf(
+                'Cannot assign the `%s` to property `%s`: ' .
+                'The value did not satisfy the specifications.',
+                get_class($value),
+                $property->name()
+            ));
+        }
         return new self(sprintf(
             'Cannot assign `%s` to property `%s`: ' .
             'The value did not satisfy the specifications.',
