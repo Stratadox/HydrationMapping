@@ -4,7 +4,9 @@ declare(strict_types=1);
 namespace Stratadox\Hydration\Mapping\Property\Scalar;
 
 use function is_null;
+use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\HydrationMapping\ExposesDataKey;
+use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
  * Decorates scalar type declaration with a nullable property.
@@ -25,7 +27,7 @@ final class CanBeNull implements ExposesDataKey
      * Creates a new nullable type wrapper.
      *
      * @param ExposesDataKey $mapping    The mapping to decorate.
-     * @return self                      The custom truth boolean mapping.
+     * @return self                      The nullable mapping.
      */
     public static function or(ExposesDataKey $mapping): self
     {
@@ -35,7 +37,7 @@ final class CanBeNull implements ExposesDataKey
     /** @inheritdoc */
     public function value(array $data, $owner = null)
     {
-        if (is_null($data[$this->or->key()])) {
+        if (is_null($this->my($data))) {
             return null;
         }
         return $this->or->value($data, $owner);
@@ -51,5 +53,15 @@ final class CanBeNull implements ExposesDataKey
     public function key(): string
     {
         return $this->or->key();
+    }
+
+    /** @throws UnmappableInput */
+    private function my(array $data)
+    {
+        $key = $this->or->key();
+        if (array_key_exists($key, $data)) {
+            return $data[$key];
+        }
+        throw MissingTheKey::inTheInput($data, $this, $key);
     }
 }

@@ -32,7 +32,8 @@ final class MissingTheKey extends InvalidArgument implements UnmappableInput
         string $key
     ): self {
         return new self(sprintf(
-            'Missing the key `%s` for property `%s` the input data: %s; Mapper: %s',
+            'Missing the key `%s` for property `%s` in the input data: %s; ' .
+            'Mapper: %s',
             $key,
             $mapping->name(),
             json_encode($data),
