@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2e218321d10fcaba981699fc2649da36",
+    "content-hash": "74445bc24051f8c5d050e4996e64099c",
     "packages": [
         {
             "name": "stratadox/collection-contracts",
@@ -2828,6 +2828,67 @@
                 }
             ],
             "time": "2018-04-15T23:02:59+00:00"
+        },
+        {
+            "name": "stratadox/specification",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Stratadox/Specification.git",
+                "reference": "aed6e5c119064ecdf2038d97fca60e641e43988d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Stratadox/Specification/zipball/aed6e5c119064ecdf2038d97fca60e641e43988d",
+                "reference": "aed6e5c119064ecdf2038d97fca60e641e43988d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0",
+                "stratadox/specification-interfaces": "^1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.2",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Stratadox\\Specification\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stratadox",
+                    "homepage": "http://www.stratadox.com/"
+                }
+            ],
+            "description": "An implementation of the Specification Pattern for Php7",
+            "keywords": [
+                "PHP7",
+                "Specifications",
+                "condition",
+                "ddd",
+                "filter",
+                "filters",
+                "isSatisfiedBy",
+                "pattern",
+                "satisfiable",
+                "satisfied",
+                "satisfiedBy",
+                "satisfying",
+                "select",
+                "selector",
+                "specification",
+                "specifier",
+                "specifying",
+                "stratadox"
+            ],
+            "time": "2017-12-20T02:36:29+00:00"
         },
         {
             "name": "symfony/config",
