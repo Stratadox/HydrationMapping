@@ -3,10 +3,13 @@ declare(strict_types=1);
 
 namespace Stratadox\HydrationMapping\Test\Double\Constraint;
 
-use Stratadox\Specification\Specification;
+use Stratadox\Specification\Contract\Specifies;
+use Stratadox\Specification\Specifying;
 
-class ItIsNotMore extends Specification
+class ItIsNotMore implements Specifies
 {
+    use Specifying;
+
     private $maximum;
 
     private function __construct(int $maximum)

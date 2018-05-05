@@ -31,7 +31,7 @@ source of the data.
 
 ## Typical Usage
 
-Typically, hydration mappings are given to [`Mapped`]()[`Hydrator`](https://github.com/Stratadox/Hydrator/blob/master/src/MappedHydrator.php) instances.
+Typically, hydration mappings are given to [`Mapped`](https://github.com/Stratadox/Hydrator/blob/master/src/MappedHydrator.php)[`Hydrator`](https://github.com/Stratadox/Hydrator) instances.
 Together they form a strong team that solves a single purpose: mapping data to an object graph.
 
 For example:
@@ -206,20 +206,94 @@ the `HasBackReference` mapping.
 This mapping acts as an observer to the hydrator for the owning side, assigning
 the reference of the "owner" object to the given property.
 
+### Advanced validation
+
+Advanced input validation can be applied with `Check`. A `Check` will produce 
+the value of the mapping if the [specification](https://github.com/Stratadox/Specification)
+is satisfied with it, or throw an exception otherwise.
+
+For example, a check on whether a rating is between 1 and 5 might look like this:
+```php
+Check::that(
+    ItIsNotLess::than(1)->and(ItIsNotMore::than(5)),
+    IntegerValue::inProperty('rating')
+)
+```
+The constraints themselves implement the (minimal) interface [`Satisfiable`](https://github.com/Stratadox/SpecificationInterfaces/blob/master/src/Satisfiable.php),
+which mandates only the method `isSatisfiedBy($input)`.
+
+The recommended way to implement custom constraints is by extending the abstract 
+[`Specification`](https://github.com/Stratadox/Specification/blob/master/src/Specification.php) class:
+```php
+use Stratadox\Specification\Specification;
+
+class ItIsNotLess extends Specification
+{
+    private $minimum;
+
+    private function __construct(int $minimum)
+    {
+        $this->minimum = $minimum;
+    }
+
+    public static function than(int $minimum): self
+    {
+        return new self($minimum);
+    }
+
+    public function isSatisfiedBy($number): bool
+    {
+        return $number >= $this->minimum;
+    }
+}
+```
+Or by using the [`Specifying`](https://github.com/Stratadox/Specification/blob/master/src/Specifying.php)
+trait:
+```php
+use Stratadox\Specification\Contract\Specifies;
+use Stratadox\Specification\Specifying;
+
+class ItIsNotMore implements Specifies
+{
+    use Specifying;
+
+    private $maximum;
+
+    private function __construct(int $maximum)
+    {
+        $this->maximum = $maximum;
+    }
+
+    public static function than(int $maximum): self
+    {
+        return new self($maximum);
+    }
+
+    public function isSatisfiedBy($number): bool
+    {
+        return $number <= $this->maximum;
+    }
+}
+```
+
 ### Extension
 
 The `ClosureResult` mapping provides an easy extension point.
 It takes in an anonymous function as constructor parameter.
 This function is called with the input data to produce the mapped result.
 
-For additional extension power, custom mapping can be produced by implementing the `MapsProperty` interface.
+For additional extension power, custom mapping can be produced by implementing 
+the `MapsProperty` interface.
 
 # Hydrate
 
 This package is part of the [Hydrate Module](https://github.com/Stratadox/Hydrate).
 
 The `Hydrate` module is an umbrella for several hydration-related packages.
-Together, they form a powerful toolset for converting input data into an object structure.
+Together, they form a powerful toolset for converting input data into an object 
+structure.
 
-Although these packages are designed to work together, they can also be used independently.
-The only hard dependencies of this `HydrationMapping` module are a collections library and a set of packages dedicated only to interfaces.
+Although these packages are designed to work together, they can also be used 
+independently.
+The only hard dependencies of this `HydrationMapping` module are a collections 
+library and a set of packages dedicated only to interfaces.
