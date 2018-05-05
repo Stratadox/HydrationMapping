@@ -16,7 +16,7 @@ final class Check implements MapsProperty
     private $constraint;
     private $mapping;
 
-    public function __construct(Specifies $constraint, MapsProperty $mapping)
+    private function __construct(Specifies $constraint, MapsProperty $mapping)
     {
         $this->constraint = $constraint;
         $this->mapping = $mapping;
