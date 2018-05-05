@@ -17,7 +17,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
 class CanBeFloat_casts_the_value_to_float_if_possible extends TestCase
 {
     /** @test */
-    function mapping_integer_like_values_to_integers()
+    function mapping_numeric_values_to_floats()
     {
         $source = ['mixed' => '16'];
 
