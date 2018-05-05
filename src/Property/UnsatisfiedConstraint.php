@@ -21,8 +21,8 @@ final class UnsatisfiedConstraint extends InvalidArgument implements UnmappableI
     /**
      * Notifies the client code when the input is not accepted by the constraint.
      *
-     * @param MapsProperty $property
-     * @param              $value
+     * @param MapsProperty $property The property mapping that denied the input.
+     * @param mixed        $value    The input value that was rejected.
      * @return UnsatisfiedConstraint The exception to throw.
      */
     public static function itIsNotConsideredValid(
