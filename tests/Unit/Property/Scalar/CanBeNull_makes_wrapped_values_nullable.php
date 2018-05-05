@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Stratadox\HydrationMapping\Test\Unit\Property\Scalar;
 
 use PHPUnit\Framework\TestCase;
+use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\Hydration\Mapping\Property\Scalar\BooleanValue;
 use Stratadox\Hydration\Mapping\Property\Scalar\CanBeNull;
 use Stratadox\Hydration\Mapping\Property\Scalar\FloatValue;
@@ -94,5 +95,15 @@ class CanBeNull_makes_wrapped_values_nullable extends TestCase
             BooleanValue::inPropertyWithDifferentKey('bool', 'key')
         );
         $this->assertSame('key', $map->key());
+    }
+
+    /** @test */
+    function throwing_an_exception_when_the_data_is_missing()
+    {
+        $map = CanBeNull::or(BooleanValue::inProperty('boolean'));
+
+        $this->expectException(MissingTheKey::class);
+
+        $map->value([]);
     }
 }

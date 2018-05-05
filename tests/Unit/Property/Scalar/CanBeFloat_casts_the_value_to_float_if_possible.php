@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Stratadox\HydrationMapping\Test\Unit\Property\Scalar;
 
 use PHPUnit\Framework\TestCase;
+use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\Hydration\Mapping\Property\Scalar\BooleanValue;
 use Stratadox\Hydration\Mapping\Property\Scalar\CanBeFloat;
 use Stratadox\Hydration\Mapping\Property\Scalar\StringValue;
@@ -59,12 +60,7 @@ class CanBeFloat_casts_the_value_to_float_if_possible extends TestCase
     {
         $map = CanBeFloat::or(StringValue::inProperty('mixed'));
 
-        $this->expectException(UnmappableInput::class);
-        $this->expectExceptionCode(0);
-        $this->expectExceptionMessage(
-            'Missing the key `mixed` for property `mixed` the ' .
-            'input data: []; Mapper: ' . CanBeFloat::class
-        );
+        $this->expectException(MissingTheKey::class);
 
         $map->value([]);
     }

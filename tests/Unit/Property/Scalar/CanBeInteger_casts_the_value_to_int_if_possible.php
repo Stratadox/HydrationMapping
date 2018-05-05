@@ -114,7 +114,7 @@ class CanBeInteger_casts_the_value_to_int_if_possible extends TestCase
         $this->expectException(UnmappableInput::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
-            'Missing the key `number` for property `number` the ' .
+            'Missing the key `number` for property `number` in the ' .
             'input data: []; Mapper: ' . CanBeInteger::class
         );
 

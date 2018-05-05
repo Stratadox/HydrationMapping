@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 
 use PHPUnit\Framework\TestCase;
+use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneNested;
 use Stratadox\HydrationMapping\Test\Double\Person\Person;
 use Stratadox\HydrationMapping\Test\Double\MockHydrator;
@@ -62,18 +63,13 @@ class HasOneNested_maps_nested_objects extends TestCase
     }
 
     /** @test */
-    function throwing_an_informative_exception_when_the_source_is_missing()
+    function throwing_an_exception_when_the_source_is_missing()
     {
         $mapping = HasOneNested::inProperty('foo',
             $this->mockPublicSetterHydratorForThe(Person::class)
         );
 
-        $this->expectException(UnmappableInput::class);
-        $this->expectExceptionCode(0);
-        $this->expectExceptionMessage(
-            'Missing the key `foo` for property `foo` the input data: []; ' .
-            'Mapper: ' . HasOneNested::class
-        );
+        $this->expectException(MissingTheKey::class);
 
         $mapping->value([]);
     }

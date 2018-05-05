@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 
 use PHPUnit\Framework\TestCase;
+use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasManyProxies;
 use Stratadox\HydrationMapping\Test\Double\Person\Person;
 use Stratadox\HydrationMapping\Test\Double\Person\PersonProxy;
@@ -100,19 +101,14 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
     }
 
     /** @test */
-    function throwing_an_informative_exception_when_the_source_is_missing()
+    function throwing_an_exception_when_the_source_is_missing()
     {
         $mapping = HasManyProxies::inProperty('foo',
             $this->mockCollectionHydratorForThe(Persons::class),
             $this->mockProxyBuilderFor(PersonProxy::class)
         );
 
-        $this->expectException(UnmappableInput::class);
-        $this->expectExceptionCode(0);
-        $this->expectExceptionMessage(
-            'Missing the key `foo` for property `foo` the input data: []; ' .
-            'Mapper: ' . HasManyProxies::class
-        );
+        $this->expectException(MissingTheKey::class);
 
         $mapping->value([]);
     }
