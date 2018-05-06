@@ -1,18 +1,18 @@
 <?php
 declare(strict_types=1);
 
-namespace Stratadox\HydrationMapping\Test\Unit\Property\Scalar;
+namespace Stratadox\HydrationMapping\Test\Unit\Property\Type;
 
 use function bcadd;
 use function bcsub;
 use const PHP_INT_MAX;
 use PHPUnit\Framework\TestCase;
-use Stratadox\Hydration\Mapping\Property\Scalar\CanBeInteger;
-use Stratadox\Hydration\Mapping\Property\Scalar\FloatValue;
+use Stratadox\Hydration\Mapping\Property\Type\CanBeInteger;
+use Stratadox\Hydration\Mapping\Property\Type\FloatValue;
 use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
- * @covers \Stratadox\Hydration\Mapping\Property\Scalar\CanBeInteger
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\CanBeInteger
  * @covers \Stratadox\Hydration\Mapping\Property\MissingTheKey
  * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
  */

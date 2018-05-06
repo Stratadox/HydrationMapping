@@ -5,8 +5,8 @@ namespace Stratadox\HydrationMapping\Test\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Properties;
-use Stratadox\Hydration\Mapping\Property\Scalar\IntegerValue;
-use Stratadox\Hydration\Mapping\Property\Scalar\StringValue;
+use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
+use Stratadox\Hydration\Mapping\Property\Type\StringValue;
 use Stratadox\HydrationMapping\Test\Double\MockHydrator;
 
 /**

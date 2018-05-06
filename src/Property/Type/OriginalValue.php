@@ -1,19 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace Stratadox\Hydration\Mapping\Property\Scalar;
+namespace Stratadox\Hydration\Mapping\Property\Type;
 
 /**
- * Maps whatever you give it to null in an object property.
+ * Maps the value directly onto an object property.
  *
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class NullValue extends Scalar
+final class OriginalValue extends Scalar
 {
     /** @inheritdoc */
     public function value(array $data, $owner = null)
     {
-        return null;
+        return $this->my($data);
     }
 }

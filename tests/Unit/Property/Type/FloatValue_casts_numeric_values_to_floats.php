@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace Stratadox\HydrationMapping\Test\Unit\Property\Scalar;
+namespace Stratadox\HydrationMapping\Test\Unit\Property\Type;
 
 use PHPUnit\Framework\TestCase;
-use Stratadox\Hydration\Mapping\Property\Scalar\FloatValue;
+use Stratadox\Hydration\Mapping\Property\Type\FloatValue;
 use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
- * @covers \Stratadox\Hydration\Mapping\Property\Scalar\FloatValue
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\FloatValue
  * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
- * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\Scalar
  */
 class FloatValue_casts_numeric_values_to_floats extends TestCase
 {

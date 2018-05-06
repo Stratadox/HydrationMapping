@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace Stratadox\HydrationMapping\Test\Unit\Property\Scalar;
+namespace Stratadox\HydrationMapping\Test\Unit\Property\Type;
 
 use PHPUnit\Framework\TestCase;
-use Stratadox\Hydration\Mapping\Property\Scalar\BooleanValue;
-use Stratadox\Hydration\Mapping\Property\Scalar\CustomTruths;
+use Stratadox\Hydration\Mapping\Property\Type\BooleanValue;
+use Stratadox\Hydration\Mapping\Property\Type\CustomTruths;
 use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
- * @covers \Stratadox\Hydration\Mapping\Property\Scalar\CustomTruths
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\CustomTruths
  * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
- * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\Scalar
  */
 class CustomTruths_defines_what_is_true_and_what_is_false extends TestCase
 {

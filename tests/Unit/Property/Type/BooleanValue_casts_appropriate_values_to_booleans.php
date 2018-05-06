@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace Stratadox\HydrationMapping\Test\Unit\Property\Scalar;
+namespace Stratadox\HydrationMapping\Test\Unit\Property\Type;
 
 use PHPUnit\Framework\TestCase;
-use Stratadox\Hydration\Mapping\Property\Scalar\BooleanValue;
+use Stratadox\Hydration\Mapping\Property\Type\BooleanValue;
 use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
- * @covers \Stratadox\Hydration\Mapping\Property\Scalar\BooleanValue
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\BooleanValue
  * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
- * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\Scalar
  */
 class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
 {

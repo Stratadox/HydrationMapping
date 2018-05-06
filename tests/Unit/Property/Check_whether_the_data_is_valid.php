@@ -6,9 +6,9 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Check;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneEmbedded;
-use Stratadox\Hydration\Mapping\Property\Scalar\FloatValue;
-use Stratadox\Hydration\Mapping\Property\Scalar\IntegerValue;
-use Stratadox\Hydration\Mapping\Property\Scalar\StringValue;
+use Stratadox\Hydration\Mapping\Property\Type\FloatValue;
+use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
+use Stratadox\Hydration\Mapping\Property\Type\StringValue;
 use Stratadox\HydrationMapping\Test\Double\Constraint\FirstNameIsLonger;
 use Stratadox\HydrationMapping\Test\Double\Constraint\ItIsNotLess;
 use Stratadox\HydrationMapping\Test\Double\Constraint\ItIsNotMore;
@@ -67,7 +67,7 @@ class Check_whether_the_data_is_valid extends TestCase
     function banning_illegal_person_names_from_being_mapped_with($firstName, $lastName)
     {
         $map = Check::that(
-            FirstNameIsLonger::than(1)->and(LastNameIsLonger::than(2)),
+            FirstNameIsLonger::than(1)->and(LastNameIsLonger::than(1)),
             HasOneEmbedded::inProperty('person',
                 $this->mockPublicSetterHydratorForThe(Person::class)
             )

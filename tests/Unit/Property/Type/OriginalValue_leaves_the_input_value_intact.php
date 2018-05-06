@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Stratadox\HydrationMapping\Test\Unit\Property\Scalar;
+namespace Stratadox\HydrationMapping\Test\Unit\Property\Type;
 
 use PHPUnit\Framework\TestCase;
-use Stratadox\Hydration\Mapping\Property\Scalar\OriginalValue;
+use Stratadox\Hydration\Mapping\Property\Type\OriginalValue;
 
 /**
- * @covers \Stratadox\Hydration\Mapping\Property\Scalar\OriginalValue
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\OriginalValue
  */
 class OriginalValue_leaves_the_input_value_intact extends TestCase
 {

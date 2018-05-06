@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Stratadox\HydrationMapping\Test\Unit\Property\Scalar;
+namespace Stratadox\HydrationMapping\Test\Unit\Property\Type;
 
 use PHPUnit\Framework\TestCase;
-use Stratadox\Hydration\Mapping\Property\Scalar\NullValue;
+use Stratadox\Hydration\Mapping\Property\Type\NullValue;
 
 /**
- * @covers \Stratadox\Hydration\Mapping\Property\Scalar\NullValue
- * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\NullValue
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\Scalar
  */
 class NullValue_casts_everything_to_nulls extends TestCase
 {

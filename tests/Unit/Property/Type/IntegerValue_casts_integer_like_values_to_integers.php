@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace Stratadox\HydrationMapping\Test\Unit\Property\Scalar;
+namespace Stratadox\HydrationMapping\Test\Unit\Property\Type;
 
 use PHPUnit\Framework\TestCase;
-use Stratadox\Hydration\Mapping\Property\Scalar\IntegerValue;
+use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
 use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
- * @covers \Stratadox\Hydration\Mapping\Property\Scalar\IntegerValue
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\IntegerValue
  * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
- * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\Scalar
  */
 class IntegerValue_casts_integer_like_values_to_integers extends TestCase
 {

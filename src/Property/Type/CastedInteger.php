@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Stratadox\Hydration\Mapping\Property\Scalar;
+namespace Stratadox\Hydration\Mapping\Property\Type;
 
 /**
  * Maps scalar input to an integer property in an object property.

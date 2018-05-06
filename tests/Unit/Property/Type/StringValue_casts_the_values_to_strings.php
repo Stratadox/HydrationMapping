@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Stratadox\HydrationMapping\Test\Unit\Property\Scalar;
+namespace Stratadox\HydrationMapping\Test\Unit\Property\Type;
 
 use PHPUnit\Framework\TestCase;
-use Stratadox\Hydration\Mapping\Property\Scalar\StringValue;
+use Stratadox\Hydration\Mapping\Property\Type\StringValue;
 
 /**
- * @covers \Stratadox\Hydration\Mapping\Property\Scalar\StringValue
- * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\StringValue
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\Scalar
  */
 class StringValue_casts_the_values_to_strings extends TestCase
 {

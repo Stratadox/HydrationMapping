@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Stratadox\Hydration\Mapping\Property\Scalar;
+namespace Stratadox\Hydration\Mapping\Property\Type;
 
 /**
  * Maps string-like input to a string property in an object property.

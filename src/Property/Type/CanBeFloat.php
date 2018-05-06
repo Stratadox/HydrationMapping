@@ -1,20 +1,22 @@
 <?php
 declare(strict_types=1);
 
-namespace Stratadox\Hydration\Mapping\Property\Scalar;
+namespace Stratadox\Hydration\Mapping\Property\Type;
 
-use function is_null;
+use function array_key_exists;
+use function is_numeric;
 use Stratadox\Hydration\Mapping\Property\MissingTheKey;
+use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
 use Stratadox\HydrationMapping\ExposesDataKey;
 use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
- * Decorates scalar type declaration with a nullable property.
+ * Decorates scalar type declaration with a possibly integer property.
  *
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class CanBeNull implements ExposesDataKey
+final class CanBeFloat implements ExposesDataKey
 {
     private $or;
 
@@ -24,10 +26,10 @@ final class CanBeNull implements ExposesDataKey
     }
 
     /**
-     * Creates a new nullable type wrapper.
+     * Creates a new possibly float type wrapper.
      *
-     * @param ExposesDataKey $mapping    The mapping to decorate.
-     * @return self                      The nullable mapping.
+     * @param ExposesDataKey $mapping The mapping to decorate.
+     * @return self                   The possibly float mapping.
      */
     public static function or(ExposesDataKey $mapping): self
     {
@@ -37,10 +39,18 @@ final class CanBeNull implements ExposesDataKey
     /** @inheritdoc */
     public function value(array $data, $owner = null)
     {
-        if (is_null($this->my($data))) {
-            return null;
+        $value = $this->my($data);
+        if (is_numeric($value)) {
+            return (float) $value;
         }
-        return $this->or->value($data, $owner);
+        try {
+            return $this->or->value($data, $owner);
+        } catch (UnmappableInput $exception) {
+            throw UnmappableProperty::addAlternativeTypeInformation(
+                'float',
+                $exception
+            );
+        }
     }
 
     /** @inheritdoc */

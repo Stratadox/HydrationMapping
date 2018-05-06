@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Stratadox\HydrationMapping\Test\Unit\Property\Scalar;
+namespace Stratadox\HydrationMapping\Test\Unit\Property\Type;
 
 use PHPUnit\Framework\TestCase;
-use Stratadox\Hydration\Mapping\Property\Scalar\StringValue;
+use Stratadox\Hydration\Mapping\Property\Type\StringValue;
 use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
- * @covers \Stratadox\Hydration\Mapping\Property\Scalar\Scalar
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\Scalar
  * @covers \Stratadox\Hydration\Mapping\Property\MissingTheKey
  */
 class Scalars_can_map_keys_to_properties extends TestCase

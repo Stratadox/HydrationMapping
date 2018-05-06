@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Stratadox\Hydration\Mapping\Property\Scalar;
+namespace Stratadox\Hydration\Mapping\Property\Type;
 
 use function array_key_exists;
 use Stratadox\Hydration\Mapping\Property\MissingTheKey;

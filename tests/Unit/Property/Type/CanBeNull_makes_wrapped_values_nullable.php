@@ -1,19 +1,19 @@
 <?php
 declare(strict_types=1);
 
-namespace Stratadox\HydrationMapping\Test\Unit\Property\Scalar;
+namespace Stratadox\HydrationMapping\Test\Unit\Property\Type;
 
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\MissingTheKey;
-use Stratadox\Hydration\Mapping\Property\Scalar\BooleanValue;
-use Stratadox\Hydration\Mapping\Property\Scalar\CanBeNull;
-use Stratadox\Hydration\Mapping\Property\Scalar\FloatValue;
-use Stratadox\Hydration\Mapping\Property\Scalar\IntegerValue;
-use Stratadox\Hydration\Mapping\Property\Scalar\StringValue;
+use Stratadox\Hydration\Mapping\Property\Type\BooleanValue;
+use Stratadox\Hydration\Mapping\Property\Type\CanBeNull;
+use Stratadox\Hydration\Mapping\Property\Type\FloatValue;
+use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
+use Stratadox\Hydration\Mapping\Property\Type\StringValue;
 use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
- * @covers \Stratadox\Hydration\Mapping\Property\Scalar\CanBeNull
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\CanBeNull
  * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
  */
 class CanBeNull_makes_wrapped_values_nullable extends TestCase

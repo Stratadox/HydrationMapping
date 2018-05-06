@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
 
-namespace Stratadox\HydrationMapping\Test\Unit\Property\Scalar;
+namespace Stratadox\HydrationMapping\Test\Unit\Property\Type;
 
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\MissingTheKey;
-use Stratadox\Hydration\Mapping\Property\Scalar\BooleanValue;
-use Stratadox\Hydration\Mapping\Property\Scalar\CanBeFloat;
-use Stratadox\Hydration\Mapping\Property\Scalar\StringValue;
+use Stratadox\Hydration\Mapping\Property\Type\BooleanValue;
+use Stratadox\Hydration\Mapping\Property\Type\CanBeFloat;
+use Stratadox\Hydration\Mapping\Property\Type\StringValue;
 use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
- * @covers \Stratadox\Hydration\Mapping\Property\Scalar\CanBeFloat
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\CanBeFloat
  * @covers \Stratadox\Hydration\Mapping\Property\MissingTheKey
  * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
  */
