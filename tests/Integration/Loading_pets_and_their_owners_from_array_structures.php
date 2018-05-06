@@ -8,7 +8,7 @@ use Stratadox\Hydration\Mapping\Properties;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasBackReference;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasManyNested;
 use Stratadox\Hydration\Mapping\Property\Type\BooleanValue;
-use Stratadox\Hydration\Mapping\Property\Type\CustomTruths;
+use Stratadox\Hydration\Mapping\Property\Type\CanBeBoolean;
 use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
 use Stratadox\Hydration\Mapping\Property\Type\StringValue;
 use Stratadox\HydrationMapping\Test\Double\Pet\Cat;
@@ -82,10 +82,13 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
     {
         $backReference = HasBackReference::inProperty('owner');
         $petMappings = Properties::map(
-            CustomTruths::forThe(BooleanValue::inProperty('hungry'),
-                ['yes', 'yeah'],
-                ['no', 'nah']
-            ),
+            BooleanValue::inProperty('hungry', [
+                'yes',
+                'yeah'
+            ], [
+                'no',
+                'nah'
+            ]),
             $backReference,
             StringValue::inProperty('name')
         );

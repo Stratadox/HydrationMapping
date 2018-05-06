@@ -4,7 +4,9 @@ declare(strict_types=1);
 namespace Stratadox\Hydration\Mapping\Property\Type;
 
 use function in_array;
+use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
 use Stratadox\HydrationMapping\ExposesDataKey;
+use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
  * Decorates @see BooleanValue with custom true/false declarations.
@@ -12,9 +14,9 @@ use Stratadox\HydrationMapping\ExposesDataKey;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class CustomTruths implements ExposesDataKey
+final class CanBeBoolean implements ExposesDataKey
 {
-    private $for;
+    private $or;
     private $truths;
     private $falsehoods;
 
@@ -23,7 +25,7 @@ final class CustomTruths implements ExposesDataKey
         array $truths,
         array $falsehoods
     ) {
-        $this->for = $mapping;
+        $this->or = $mapping;
         $this->truths = $truths;
         $this->falsehoods = $falsehoods;
     }
@@ -36,35 +38,42 @@ final class CustomTruths implements ExposesDataKey
      * @param array          $falsehoods The values to consider false.
      * @return self                      The custom truth boolean mapping.
      */
-    public static function forThe(
+    public static function or(
         ExposesDataKey $mapping,
-        array $truths,
-        array $falsehoods
+        array $truths = [true, 1, '1'],
+        array $falsehoods = [false, 0, '0']
     ): self {
         return new self($mapping, $truths, $falsehoods);
     }
 
     /** @inheritdoc */
-    public function value(array $data, $owner = null): bool
+    public function value(array $data, $owner = null)
     {
-        if (in_array($data[$this->for->key()], $this->truths, true)) {
+        if (in_array($data[$this->or->key()], $this->truths, true)) {
             return true;
         }
-        if (in_array($data[$this->for->key()], $this->falsehoods, true)) {
+        if (in_array($data[$this->or->key()], $this->falsehoods, true)) {
             return false;
         }
-        return $this->for->value($data, $owner);
+        try {
+            return $this->or->value($data, $owner);
+        } catch (UnmappableInput $exception) {
+            throw UnmappableProperty::addAlternativeTypeInformation(
+                'boolean',
+                $exception
+            );
+        }
     }
 
     /** @inheritdoc */
     public function name(): string
     {
-        return $this->for->name();
+        return $this->or->name();
     }
 
     /** @inheritdoc */
     public function key(): string
     {
-        return $this->for->key();
+        return $this->or->key();
     }
 }
