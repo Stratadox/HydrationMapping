@@ -6,7 +6,7 @@ namespace Stratadox\HydrationMapping\Test\Double\Constraint;
 use Stratadox\Specification\Contract\Specifies;
 use Stratadox\Specification\Specifying;
 
-class ItIsNotMore implements Specifies
+class IsNotMore implements Specifies
 {
     use Specifying;
 

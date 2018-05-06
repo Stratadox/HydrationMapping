@@ -29,7 +29,7 @@ final class Check implements MapsProperty
      * @param MapsProperty $mapping    The mapping for the property.
      * @return MapsProperty            The checked property mapping.
      */
-    public static function that(
+    public static function thatIt(
         Satisfiable $constraint,
         MapsProperty $mapping
     ): MapsProperty {

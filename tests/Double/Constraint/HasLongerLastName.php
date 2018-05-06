@@ -7,7 +7,7 @@ use Stratadox\HydrationMapping\Test\Double\Person\Person;
 use Stratadox\Specification\Specification;
 use function strlen;
 
-class LastNameIsLonger extends Specification
+class HasLongerLastName extends Specification
 {
     private $minimum;
 

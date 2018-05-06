@@ -9,10 +9,10 @@ use Stratadox\Hydration\Mapping\Property\Relationship\HasOneEmbedded;
 use Stratadox\Hydration\Mapping\Property\Type\FloatValue;
 use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
 use Stratadox\Hydration\Mapping\Property\Type\StringValue;
-use Stratadox\HydrationMapping\Test\Double\Constraint\FirstNameIsLonger;
-use Stratadox\HydrationMapping\Test\Double\Constraint\ItIsNotLess;
-use Stratadox\HydrationMapping\Test\Double\Constraint\ItIsNotMore;
-use Stratadox\HydrationMapping\Test\Double\Constraint\LastNameIsLonger;
+use Stratadox\HydrationMapping\Test\Double\Constraint\HasLongerFirstName;
+use Stratadox\HydrationMapping\Test\Double\Constraint\IsNotLess;
+use Stratadox\HydrationMapping\Test\Double\Constraint\IsNotMore;
+use Stratadox\HydrationMapping\Test\Double\Constraint\HasLongerLastName;
 use Stratadox\HydrationMapping\Test\Double\MockHydrator;
 use Stratadox\HydrationMapping\Test\Double\Person\Person;
 use Stratadox\HydrationMapping\UnmappableInput;
@@ -31,8 +31,8 @@ class Check_whether_the_data_is_valid extends TestCase
      */
     function allowing_valid_data_to_be_mapped_with($input)
     {
-        $map = Check::that(
-            ItIsNotLess::than(5)->and(ItIsNotMore::than(10)),
+        $map = Check::thatIt(
+            IsNotLess::than(5)->and(IsNotMore::than(10)),
             IntegerValue::inProperty('foo')
         );
 
@@ -45,8 +45,8 @@ class Check_whether_the_data_is_valid extends TestCase
      */
     function banning_invalid_data_from_being_mapped_with($input)
     {
-        $map = Check::that(
-            ItIsNotLess::than(5)->and(ItIsNotMore::than(10)),
+        $map = Check::thatIt(
+            IsNotLess::than(5)->and(IsNotMore::than(10)),
             StringValue::inProperty('foo')
         );
 
@@ -66,8 +66,8 @@ class Check_whether_the_data_is_valid extends TestCase
      */
     function banning_illegal_person_names_from_being_mapped_with($firstName, $lastName)
     {
-        $map = Check::that(
-            FirstNameIsLonger::than(1)->and(LastNameIsLonger::than(1)),
+        $map = Check::thatIt(
+            HasLongerFirstName::than(1)->and(HasLongerLastName::than(1)),
             HasOneEmbedded::inProperty('person',
                 $this->mockPublicSetterHydratorForThe(Person::class)
             )
@@ -89,7 +89,7 @@ class Check_whether_the_data_is_valid extends TestCase
     /** @test */
     function knowing_which_property_to_map_to()
     {
-        $map = Check::that(ItIsNotMore::than(10), FloatValue::inProperty('foo'));
+        $map = Check::thatIt(IsNotMore::than(10), FloatValue::inProperty('foo'));
 
         $this->assertSame('foo', $map->name());
     }

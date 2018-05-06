@@ -3,9 +3,11 @@ declare(strict_types=1);
 
 namespace Stratadox\HydrationMapping\Test\Double\Constraint;
 
+use Stratadox\HydrationMapping\Test\Double\Person\Person;
 use Stratadox\Specification\Specification;
+use function strlen;
 
-class ItIsNotLess extends Specification
+class HasLongerFirstName extends Specification
 {
     private $minimum;
 
@@ -19,8 +21,9 @@ class ItIsNotLess extends Specification
         return new self($minimum);
     }
 
-    public function isSatisfiedBy($number): bool
+    public function isSatisfiedBy($person): bool
     {
-        return $number >= $this->minimum;
+        return $person instanceof Person
+            && strlen($person->firstName()) > $this->minimum;
     }
 }
