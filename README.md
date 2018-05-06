@@ -83,14 +83,10 @@ They provide a minor speed bonus at the cost of decreased integrity.
 
 To skip the entire typecasting process, the `OriginalValue` mapping can be used.
 
-Input to a `BooleanValue` must either be numeric or already boolean.
-Numeric input larger than zero becomes `true`, zero or less becomes `false`.
-Non-numeric strings can be mapped to boolean using the `CustomTruths` wrapper:
+Input to a `BooleanValue` must either be 0, 1 or already boolean typed.
+Custom true/false values can be provided as optional parameters:
 ```php
-$myProperty = CustomTruths::forThe(BooleanValue::inProperty('foo'), 
-    ['yes', 'y', 'Y'], 
-    ['no', 'n', 'N']
-);
+$myProperty =BooleanValue::inProperty('foo', ['yes', 'y'], ['no', 'n']);
 ```
 
 #### Nullable- and Mixed values
@@ -110,10 +106,16 @@ in an exception, denoting where and why the input data could not be mapped.
 
 These mixed mapping can be combined (as is customary for [decorators](https://sourcemaking.com/design_patterns/decorator))
 to produce, for instance, mapping configurations that first attempt to map the 
-value as an integer, if that cannot be done to cast it to a floating point, and
-if it's not numeric at all, make it a string:
+value to a boolean, otherwise as an integer, if that cannot be done to cast it 
+to a floating point, and if all else fails, make it a string:
 ```php
-$theProperty = CanBeInteger::or(CanBeFloat::or(StringValue::inProperty('bar')));
+$theProperty = CanBeBoolean::or(
+    CanBeInteger::or(
+        CanBeFloat::or(
+            StringValue::inProperty('bar')
+        )
+    ), ['TRUE'], ['FALSE']
+);
 ```
 
 ### Relationship Mapping
@@ -214,8 +216,8 @@ is satisfied with it, or throw an exception otherwise.
 
 For example, a check on whether a rating is between 1 and 5 might look like this:
 ```php
-Check::that(
-    ItIsNotLess::than(1)->and(ItIsNotMore::than(5)),
+Check::thatIt(
+    IsNotLess::than(1)->and(IsNotMore::than(5)),
     IntegerValue::inProperty('rating')
 )
 ```
@@ -227,7 +229,7 @@ The recommended way to implement custom constraints is by extending the abstract
 ```php
 use Stratadox\Specification\Specification;
 
-class ItIsNotLess extends Specification
+class IsNotLess extends Specification
 {
     private $minimum;
 
@@ -253,7 +255,7 @@ trait:
 use Stratadox\Specification\Contract\Specifies;
 use Stratadox\Specification\Specifying;
 
-class ItIsNotMore implements Specifies
+class IsNotMore implements Specifies
 {
     use Specifying;
 
@@ -264,9 +266,9 @@ class ItIsNotMore implements Specifies
         $this->maximum = $maximum;
     }
 
-    public static function than(int $maximum): self
+    public static function than(int $maximum): Specifies
     {
-        return new self($maximum);
+        return new IsNotMore($maximum);
     }
 
     public function isSatisfiedBy($number): bool
