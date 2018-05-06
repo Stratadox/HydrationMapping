@@ -278,6 +278,11 @@ class IsNotMore implements Specifies
 }
 ```
 
+### Default values
+
+To honour the PHP spirit, a class is available that loads a default value rather
+than propagating the exception: `Defaults::to(-1, IntegerValue::inProperty('foo'))`
+
 ### Extension
 
 The `ClosureResult` mapping provides an easy extension point.
