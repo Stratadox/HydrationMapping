@@ -9,6 +9,7 @@ use InvalidArgumentException as InvalidArgument;
 use function sprintf;
 use Stratadox\HydrationMapping\MapsProperty;
 use Stratadox\HydrationMapping\UnmappableInput;
+use Throwable;
 
 /**
  * Notifies the client code when the input key was not found.
@@ -24,13 +25,13 @@ final class MissingTheKey extends InvalidArgument implements UnmappableInput
      * @param array        $data    The data that was provided.
      * @param MapsProperty $mapping The mapping that was expecting a key.
      * @param string       $key     The key that was expected.
-     * @return self                 The exception to throw.
+     * @return Throwable            The exception to throw.
      */
     public static function inTheInput(
         array $data,
         MapsProperty $mapping,
         string $key
-    ): self {
+    ): Throwable {
         return new self(sprintf(
             'Missing the key `%s` for property `%s` in the input data: %s; ' .
             'Mapper: %s',

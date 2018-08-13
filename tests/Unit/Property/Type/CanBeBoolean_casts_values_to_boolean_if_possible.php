@@ -13,7 +13,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Type\CanBeBoolean
  * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
- * @covers \Stratadox\Hydration\Mapping\Property\Type\Scalar
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\ScalarValue
  */
 class CanBeBoolean_casts_values_to_boolean_if_possible extends TestCase
 {

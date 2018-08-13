@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Defaults;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneEmbedded;
 use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
-use Stratadox\HydrationMapping\Test\Double\MockHydrator;
+use Stratadox\HydrationMapping\Test\Double\MockDeserializer;
 use Stratadox\HydrationMapping\Test\Double\Title\Title;
 
 /**
@@ -19,7 +19,7 @@ use Stratadox\HydrationMapping\Test\Double\Title\Title;
  */
 class Defaults_when_an_element_could_not_be_mapped extends TestCase
 {
-    use MockHydrator;
+    use MockDeserializer;
 
     /**
      * @test
@@ -62,7 +62,7 @@ class Defaults_when_an_element_could_not_be_mapped extends TestCase
             new Title('Unknown Title'),
             HasOneEmbedded::inProperty(
                 'title',
-                $this->mockExceptionThrowingHydrator()
+                $this->exceptionThrowingDeserializer()
             )
         );
 
@@ -84,7 +84,7 @@ class Defaults_when_an_element_could_not_be_mapped extends TestCase
             'String 1.5'              => ['1.5'],
             'String 1.0'              => ['1.0'],
             'Float 1.5'               => [1.5],
-            'Float 1.0'               => [1.0],
+            'Float 0.99'              => [0.99],
             'String foo'              => ['foo'],
             'String bar'              => ['bar'],
             'String PHP_INT_MAX + 1'  => [bcadd((string) PHP_INT_MAX, '1')],

@@ -9,6 +9,7 @@ use function sprintf;
 use InvalidArgumentException as InvalidArgument;
 use Stratadox\HydrationMapping\MapsProperty;
 use Stratadox\HydrationMapping\UnmappableInput;
+use Throwable;
 use function trim;
 
 /**
@@ -24,12 +25,12 @@ final class UnmappableProperty extends InvalidArgument implements UnmappableInpu
      *
      * @param MapsProperty $failedToMapTo The property that denied the input.
      * @param mixed        $value         The input value that was rejected.
-     * @return self                       The exception to throw.
+     * @return Throwable                  The exception to throw.
      */
     public static function itMustBeLikeAnInteger(
         MapsProperty $failedToMapTo,
         $value
-    ): self {
+    ): Throwable {
         return self::inputData($failedToMapTo, 'integer', $value);
     }
 
@@ -38,12 +39,12 @@ final class UnmappableProperty extends InvalidArgument implements UnmappableInpu
      *
      * @param MapsProperty $failedToMapTo The property that denied the input.
      * @param mixed        $value         The input value that was rejected.
-     * @return self                       The exception to throw.
+     * @return Throwable                  The exception to throw.
      */
     public static function itMustBeInIntegerRange(
         MapsProperty $failedToMapTo,
         $value
-    ): self {
+    ): Throwable {
         return self::inputData($failedToMapTo, 'integer', $value,
             'The value is out of range.'
         );
@@ -54,12 +55,12 @@ final class UnmappableProperty extends InvalidArgument implements UnmappableInpu
      *
      * @param MapsProperty $failedToMapTo The property that denied the input.
      * @param mixed        $value         The input value that was rejected.
-     * @return self                       The exception to throw.
+     * @return Throwable                  The exception to throw.
      */
     public static function itMustBeNumeric(
         MapsProperty $failedToMapTo,
         $value
-    ): self {
+    ): Throwable {
         return self::inputData($failedToMapTo, 'float', $value);
     }
 
@@ -68,21 +69,21 @@ final class UnmappableProperty extends InvalidArgument implements UnmappableInpu
      *
      * @param MapsProperty $failedToMapTo The property that denied the input.
      * @param mixed        $value         The input value that was rejected.
-     * @return self                       The exception to throw.
+     * @return Throwable                  The exception to throw.
      */
     public static function itMustBeConvertibleToBoolean(
         MapsProperty $failedToMapTo,
         $value
-    ): self {
+    ): Throwable {
         return self::inputData($failedToMapTo, 'boolean', $value);
     }
 
     /**
-     * Something something addAlternativeTypeInformation.
+     * Add the alternative type information to the original exception.
      *
-     * @param string          $type
-     * @param UnmappableInput $exception
-     * @return UnmappableInput
+     * @param string          $type      The alternative type.
+     * @param UnmappableInput $exception The original exception.
+     * @return UnmappableInput           The exception to throw.
      */
     public static function addAlternativeTypeInformation(
         string $type,
@@ -95,13 +96,21 @@ final class UnmappableProperty extends InvalidArgument implements UnmappableInpu
         ), 0, $exception);
     }
 
-    /** @inheritdoc */
+    /**
+     * Notifies the client code when the input is not mappable.
+     *
+     * @param MapsProperty $mapped  The mapping that failed.
+     * @param string       $type    The type of data that was expected.
+     * @param mixed        $input   The input that could not be mapped.
+     * @param string       $message Optional extra message.
+     * @return Throwable            The exception to throw.
+     */
     private static function inputData(
         MapsProperty $mapped,
         string $type,
         $input,
         string $message = ''
-    ): self {
+    ): Throwable {
         if (is_scalar($input)) {
             return new self(trim(sprintf(
                 'Cannot assign `%s` to property `%s`: ' .

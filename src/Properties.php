@@ -24,11 +24,11 @@ final class Properties extends ImmutableCollection implements MapsProperties
      * Creates a new list of property mappings.
      *
      * @param MapsProperty[] ...$properties The property mappings.
-     * @return Properties                   The property mapping container.
+     * @return MapsProperties               The property mapping container.
      */
     public static function map(
         MapsProperty ...$properties
-    ): self {
+    ): MapsProperties {
         return new self(...$properties);
     }
 

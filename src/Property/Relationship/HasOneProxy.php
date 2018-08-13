@@ -29,12 +29,12 @@ final class HasOneProxy implements MapsProperty
      *
      * @param string          $name         The name of the property.
      * @param ProducesProxies $proxyBuilder The proxy builder.
-     * @return self                         The lazy has-one mapping.
+     * @return MapsProperty                 The lazy has-one mapping.
      */
     public static function inProperty(
         string $name,
         ProducesProxies $proxyBuilder
-    ): self {
+    ): MapsProperty {
         return new self($name, $proxyBuilder);
     }
 

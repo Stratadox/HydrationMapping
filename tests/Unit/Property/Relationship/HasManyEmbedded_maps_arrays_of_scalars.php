@@ -8,7 +8,7 @@ use Stratadox\Hydration\Mapping\Property\Relationship\HasManyEmbedded;
 use Stratadox\HydrationMapping\UnmappableInput;
 use Stratadox\HydrationMapping\Test\Double\Title\Title;
 use Stratadox\HydrationMapping\Test\Double\Title\Titles;
-use Stratadox\HydrationMapping\Test\Double\MockHydrator;
+use Stratadox\HydrationMapping\Test\Double\MockDeserializer;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasManyEmbedded
@@ -16,14 +16,14 @@ use Stratadox\HydrationMapping\Test\Double\MockHydrator;
  */
 class HasManyEmbedded_maps_arrays_of_scalars extends TestCase
 {
-    use MockHydrator;
+    use MockDeserializer;
 
     /** @test */
     function mapping_an_array_of_strings_to_a_collection_of_titles()
     {
         $mapping = HasManyEmbedded::inProperty('name',
-            $this->mockCollectionHydratorForThe(Titles::class),
-            $this->mockPublicSetterHydratorForThe(Title::class),
+            $this->collectionDeserializerForThe(Titles::class),
+            $this->deserializerForThe(Title::class),
             'title'
         );
 
@@ -39,8 +39,8 @@ class HasManyEmbedded_maps_arrays_of_scalars extends TestCase
     function using_key_as_default_key()
     {
         $mapping = HasManyEmbedded::inProperty('name',
-            $this->mockCollectionHydratorForThe(Titles::class),
-            $this->mockPublicSetterHydratorForThe(Title::class)
+            $this->collectionDeserializerForThe(Titles::class),
+            $this->deserializerForThe(Title::class)
         );
 
         /** @var Titles $titles */
@@ -54,8 +54,8 @@ class HasManyEmbedded_maps_arrays_of_scalars extends TestCase
     function mapping_to_a_property()
     {
         $mapping = HasManyEmbedded::inProperty('foo',
-            $this->mockCollectionHydratorForThe(Titles::class),
-            $this->mockPublicSetterHydratorForThe(Title::class),
+            $this->collectionDeserializerForThe(Titles::class),
+            $this->deserializerForThe(Title::class),
             'title'
         );
 
@@ -69,8 +69,8 @@ class HasManyEmbedded_maps_arrays_of_scalars extends TestCase
     function throwing_an_informative_exception_when_the_items_cannot_be_mapped()
     {
         $mapping = HasManyEmbedded::inProperty('foo',
-            $this->mockCollectionHydratorForThe(Titles::class),
-            $this->mockExceptionThrowingHydrator('Original message here.')
+            $this->collectionDeserializerForThe(Titles::class),
+            $this->exceptionThrowingDeserializer('Original message here.')
         );
 
         $this->expectException(UnmappableInput::class);
@@ -86,8 +86,8 @@ class HasManyEmbedded_maps_arrays_of_scalars extends TestCase
     function throwing_an_informative_exception_when_the_collection_cannot_be_mapped()
     {
         $mapping = HasManyEmbedded::inProperty('foo',
-            $this->mockExceptionThrowingHydrator('Original message here.'),
-            $this->mockPublicSetterHydratorForThe(Title::class)
+            $this->exceptionThrowingCollectionDeserializer('Original message here.'),
+            $this->deserializerForThe(Title::class)
         );
 
         $this->expectException(UnmappableInput::class);

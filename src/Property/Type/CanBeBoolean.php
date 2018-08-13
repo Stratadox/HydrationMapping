@@ -36,13 +36,13 @@ final class CanBeBoolean implements ExposesDataKey
      * @param ExposesDataKey $mapping    The mapping to decorate.
      * @param array          $truths     The values to consider true.
      * @param array          $falsehoods The values to consider false.
-     * @return self                      The custom truth boolean mapping.
+     * @return ExposesDataKey            The custom truth boolean mapping.
      */
     public static function or(
         ExposesDataKey $mapping,
         array $truths = [true, 1, '1'],
         array $falsehoods = [false, 0, '0']
-    ): self {
+    ): ExposesDataKey {
         return new self($mapping, $truths, $falsehoods);
     }
 

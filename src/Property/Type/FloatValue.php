@@ -12,7 +12,7 @@ use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class FloatValue extends Scalar
+final class FloatValue extends ScalarValue
 {
     /** @inheritdoc */
     public function value(array $data, $owner = null): float

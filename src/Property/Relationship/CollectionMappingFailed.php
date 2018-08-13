@@ -26,12 +26,12 @@ final class CollectionMappingFailed extends RuntimeException implements Unmappab
      *
      * @param MapsProperty $mapping   The item mapping that failed.
      * @param Throwable    $exception The exception that was encountered.
-     * @return self                   The collection mapping failure.
+     * @return Throwable              The collection mapping failure.
      */
-    public static function tryingToMapItem(
+    public static function forItem(
         MapsProperty $mapping,
         Throwable $exception
-    ): self {
+    ): Throwable {
         return new self(
             sprintf(
                 'Failed to map the %s items of the `%s` property: %s',
@@ -49,12 +49,12 @@ final class CollectionMappingFailed extends RuntimeException implements Unmappab
      *
      * @param MapsProperty $mapping   The collection mapping that failed.
      * @param Throwable    $exception The exception that was encountered.
-     * @return self                   The collection mapping failure.
+     * @return Throwable              The collection mapping failure.
      */
-    public static function tryingToMapCollection(
+    public static function forCollection(
         MapsProperty $mapping,
         Throwable $exception
-    ): self {
+    ): Throwable {
         return new self(
             sprintf(
                 'Failed to map the %s collection of the `%s` property: %s',
@@ -71,7 +71,8 @@ final class CollectionMappingFailed extends RuntimeException implements Unmappab
      * Retrieves the class name without namespace.
      *
      * @param MapsProperty $mapping The failing mapping instance.
-     * @return string               The unqualified (short) class name of the mapping instance.
+     * @return string               The unqualified (short) class name of the
+     *                              mapping instance.
      */
     private static function shortNameOfThe(MapsProperty $mapping): string
     {

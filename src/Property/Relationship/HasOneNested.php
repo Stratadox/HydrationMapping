@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
+use Stratadox\Deserializer\Deserializes;
 use Stratadox\HydrationMapping\ExposesDataKey;
-use Stratadox\Hydrator\Hydrates;
 use Throwable;
 
 /**
@@ -19,43 +19,46 @@ final class HasOneNested implements ExposesDataKey
 
     private $name;
     private $key;
-    private $hydrate;
+    private $deserialize;
 
-    private function __construct(string $name, string $dataKey, Hydrates $hydrator)
-    {
+    private function __construct(
+        string $name,
+        string $dataKey,
+        Deserializes $deserializer
+    ) {
         $this->name = $name;
         $this->key = $dataKey;
-        $this->hydrate = $hydrator;
+        $this->deserialize = $deserializer;
     }
 
     /**
      * Creates a new nested has-one mapping.
      *
-     * @param string   $name     The name of the property.
-     * @param Hydrates $hydrator The hydrator for the nested object.
-     * @return self              The nested has-one mapping.
+     * @param string       $name         The name of both property and key.
+     * @param Deserializes $deserializer The deserializer for the nested object.
+     * @return ExposesDataKey            The nested has-one mapping.
      */
     public static function inProperty(
         string $name,
-        Hydrates $hydrator
-    ): self {
-        return new self($name, $name, $hydrator);
+        Deserializes $deserializer
+    ): ExposesDataKey {
+        return new self($name, $name, $deserializer);
     }
 
     /**
      * Creates a new nested has-one mapping, using the data from a specific key.
      *
-     * @param string   $name     The name of the property.
-     * @param string   $key      The name of the key.
-     * @param Hydrates $hydrator The hydrator for the nested object.
-     * @return self              The nested has-one mapping.
+     * @param string       $name         The name of the property.
+     * @param string       $key          The name of the key.
+     * @param Deserializes $deserializer The deserializer for the nested object.
+     * @return ExposesDataKey            The nested has-one mapping.
      */
     public static function inPropertyWithDifferentKey(
         string $name,
         string $key,
-        Hydrates $hydrator
-    ): self {
-        return new self($name, $key, $hydrator);
+        Deserializes $deserializer
+    ): ExposesDataKey {
+        return new self($name, $key, $deserializer);
     }
 
     /** @inheritdoc */
@@ -75,7 +78,7 @@ final class HasOneNested implements ExposesDataKey
     {
         $this->mustHaveTheKeyInThe($data);
         try {
-            return $this->hydrate->fromArray($data[$this->key()]);
+            return $this->deserialize->from($data[$this->key()]);
         } catch (Throwable $exception) {
             throw ObjectMappingFailed::tryingToMapItem($this, $exception);
         }

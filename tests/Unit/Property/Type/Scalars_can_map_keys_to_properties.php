@@ -8,7 +8,7 @@ use Stratadox\Hydration\Mapping\Property\Type\StringValue;
 use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
- * @covers \Stratadox\Hydration\Mapping\Property\Type\Scalar
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\ScalarValue
  * @covers \Stratadox\Hydration\Mapping\Property\MissingTheKey
  */
 class Scalars_can_map_keys_to_properties extends TestCase

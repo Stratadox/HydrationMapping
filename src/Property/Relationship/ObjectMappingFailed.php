@@ -25,12 +25,12 @@ final class ObjectMappingFailed extends RuntimeException implements UnmappableIn
      *
      * @param MapsProperty $mapping   The object mapping that failed.
      * @param Throwable    $exception The exception that was encountered.
-     * @return self                   The object mapping failure.
+     * @return Throwable              The object mapping failure.
      */
     public static function tryingToMapItem(
         MapsProperty $mapping,
         Throwable $exception
-    ): self {
+    ): Throwable {
         return new self(
             sprintf(
                 'Failed to map the %s relation of the `%s` property: %s',

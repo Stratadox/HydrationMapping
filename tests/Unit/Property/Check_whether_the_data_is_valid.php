@@ -13,7 +13,7 @@ use Stratadox\HydrationMapping\Test\Double\Constraint\HasLongerFirstName;
 use Stratadox\HydrationMapping\Test\Double\Constraint\IsNotLess;
 use Stratadox\HydrationMapping\Test\Double\Constraint\IsNotMore;
 use Stratadox\HydrationMapping\Test\Double\Constraint\HasLongerLastName;
-use Stratadox\HydrationMapping\Test\Double\MockHydrator;
+use Stratadox\HydrationMapping\Test\Double\MockDeserializer;
 use Stratadox\HydrationMapping\Test\Double\Person\Person;
 use Stratadox\HydrationMapping\UnmappableInput;
 
@@ -23,7 +23,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
  */
 class Check_whether_the_data_is_valid extends TestCase
 {
-    use MockHydrator;
+    use MockDeserializer;
 
     /**
      * @test
@@ -69,7 +69,7 @@ class Check_whether_the_data_is_valid extends TestCase
         $map = Check::thatIt(
             HasLongerFirstName::than(1)->and(HasLongerLastName::than(1)),
             HasOneEmbedded::inProperty('person',
-                $this->mockPublicSetterHydratorForThe(Person::class)
+                $this->deserializerForThe(Person::class)
             )
         );
 

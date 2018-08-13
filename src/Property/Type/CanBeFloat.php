@@ -29,9 +29,9 @@ final class CanBeFloat implements ExposesDataKey
      * Creates a new possibly float type wrapper.
      *
      * @param ExposesDataKey $mapping The mapping to decorate.
-     * @return self                   The possibly float mapping.
+     * @return ExposesDataKey         The possibly float mapping.
      */
-    public static function or(ExposesDataKey $mapping): self
+    public static function or(ExposesDataKey $mapping): ExposesDataKey
     {
         return new self($mapping);
     }

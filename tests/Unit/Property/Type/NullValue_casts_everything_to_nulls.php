@@ -8,7 +8,7 @@ use Stratadox\Hydration\Mapping\Property\Type\NullValue;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Type\NullValue
- * @covers \Stratadox\Hydration\Mapping\Property\Type\Scalar
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\ScalarValue
  */
 class NullValue_casts_everything_to_nulls extends TestCase
 {

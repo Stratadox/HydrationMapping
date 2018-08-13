@@ -9,7 +9,7 @@ namespace Stratadox\Hydration\Mapping\Property\Type;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class NullValue extends Scalar
+final class NullValue extends ScalarValue
 {
     /** @inheritdoc */
     public function value(array $data, $owner = null)

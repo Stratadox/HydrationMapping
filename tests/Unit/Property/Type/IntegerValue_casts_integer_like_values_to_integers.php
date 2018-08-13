@@ -10,7 +10,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Type\IntegerValue
  * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
- * @covers \Stratadox\Hydration\Mapping\Property\Type\Scalar
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\ScalarValue
  */
 class IntegerValue_casts_integer_like_values_to_integers extends TestCase
 {

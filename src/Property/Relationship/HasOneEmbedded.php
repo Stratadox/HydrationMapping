@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
+use Stratadox\Deserializer\Deserializes;
 use Stratadox\HydrationMapping\MapsProperty;
-use Stratadox\Hydrator\Hydrates;
 use Throwable;
 
 /**
@@ -16,26 +16,27 @@ use Throwable;
 final class HasOneEmbedded implements MapsProperty
 {
     private $name;
-    private $hydrate;
+    private $deserialize;
 
-    private function __construct(string $name, Hydrates $hydrate)
+    private function __construct(string $name, Deserializes $deserializer)
     {
         $this->name = $name;
-        $this->hydrate = $hydrate;
+        $this->deserialize = $deserializer;
     }
 
     /**
      * Creates a new embedded has-one mapping.
      *
-     * @param string   $name     The name of the property.
-     * @param Hydrates $hydrator The hydrator for the embedded object.
-     * @return self              The embedded has-one mapping.
+     * @param string       $name         The name of the property.
+     * @param Deserializes $deserializer The deserializer for the embedded
+     *                                   object.
+     * @return MapsProperty              The embedded has-one mapping.
      */
     public static function inProperty(
         string $name,
-        Hydrates $hydrator
-    ): self {
-        return new self($name, $hydrator);
+        Deserializes $deserializer
+    ): MapsProperty {
+        return new self($name, $deserializer);
     }
 
     /** @inheritdoc */
@@ -48,7 +49,7 @@ final class HasOneEmbedded implements MapsProperty
     public function value(array $data, $owner = null)
     {
         try {
-            return $this->hydrate->fromArray($data);
+            return $this->deserialize->from($data);
         } catch (Throwable $exception) {
             throw ObjectMappingFailed::tryingToMapItem($this, $exception);
         }

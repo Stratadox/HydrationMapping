@@ -8,7 +8,7 @@ use Stratadox\Hydration\Mapping\Property\Type\CastedInteger;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Type\CastedInteger
- * @covers \Stratadox\Hydration\Mapping\Property\Type\Scalar
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\ScalarValue
  */
 class CastedInteger_casts_the_values_to_integers extends TestCase
 {

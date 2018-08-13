@@ -8,7 +8,7 @@ use Stratadox\Hydration\Mapping\Property\Type\CastedFloat;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Type\CastedFloat
- * @covers \Stratadox\Hydration\Mapping\Property\Type\Scalar
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\ScalarValue
  */
 class CastedFloat_casts_the_values_to_floats extends TestCase
 {

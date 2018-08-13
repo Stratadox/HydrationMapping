@@ -10,7 +10,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Type\FloatValue
  * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
- * @covers \Stratadox\Hydration\Mapping\Property\Type\Scalar
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\ScalarValue
  */
 class FloatValue_casts_numeric_values_to_floats extends TestCase
 {

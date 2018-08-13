@@ -15,12 +15,12 @@ use Stratadox\HydrationMapping\UnmappableInput;
 class HasBackReference_maps_bidirectional_relationships extends TestCase
 {
     /** @test */
-    function mapping_a_bidirectional_association()
+    function remembering_the_observed_object()
     {
         $object = new stdClass;
 
         $mapping = HasBackReference::inProperty('foo');
-        $mapping->hydrating($object);
+        $mapping->hydrating($object, []);
 
         $this->assertSame(
             $object,

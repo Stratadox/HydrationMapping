@@ -8,7 +8,7 @@ use Stratadox\Hydration\Mapping\Property\Type\StringValue;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Type\StringValue
- * @covers \Stratadox\Hydration\Mapping\Property\Type\Scalar
+ * @covers \Stratadox\Hydration\Mapping\Property\Type\ScalarValue
  */
 class StringValue_casts_the_values_to_strings extends TestCase
 {

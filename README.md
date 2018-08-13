@@ -86,7 +86,7 @@ To skip the entire typecasting process, the `OriginalValue` mapping can be used.
 Input to a `BooleanValue` must either be 0, 1 or already boolean typed.
 Custom true/false values can be provided as optional parameters:
 ```php
-$myProperty =BooleanValue::inProperty('foo', ['yes', 'y'], ['no', 'n']);
+$myProperty = BooleanValue::inProperty('foo', ['yes', 'y'], ['no', 'n']);
 ```
 
 #### Nullable- and Mixed values

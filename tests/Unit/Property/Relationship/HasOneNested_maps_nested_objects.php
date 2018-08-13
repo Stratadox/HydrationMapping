@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneNested;
 use Stratadox\HydrationMapping\Test\Double\Person\Person;
-use Stratadox\HydrationMapping\Test\Double\MockHydrator;
+use Stratadox\HydrationMapping\Test\Double\MockDeserializer;
 use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
@@ -17,7 +17,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
  */
 class HasOneNested_maps_nested_objects extends TestCase
 {
-    use MockHydrator;
+    use MockDeserializer;
 
     /** @test */
     function mapping_a_nested_array_to_a_HasOne_relationship()
@@ -30,7 +30,7 @@ class HasOneNested_maps_nested_objects extends TestCase
         ];
 
         $authorMapping = HasOneNested::inProperty('author',
-            $this->mockPublicSetterHydratorForThe(Person::class)
+            $this->deserializerForThe(Person::class)
         );
 
         /** @var Person $author */
@@ -53,7 +53,7 @@ class HasOneNested_maps_nested_objects extends TestCase
 
         $authorMapping = HasOneNested::inPropertyWithDifferentKey('author',
             'person',
-            $this->mockPublicSetterHydratorForThe(Person::class)
+            $this->deserializerForThe(Person::class)
         );
 
         $author = $authorMapping->value($inAuthorData);
@@ -66,7 +66,7 @@ class HasOneNested_maps_nested_objects extends TestCase
     function throwing_an_exception_when_the_source_is_missing()
     {
         $mapping = HasOneNested::inProperty('foo',
-            $this->mockPublicSetterHydratorForThe(Person::class)
+            $this->deserializerForThe(Person::class)
         );
 
         $this->expectException(MissingTheKey::class);
@@ -78,7 +78,7 @@ class HasOneNested_maps_nested_objects extends TestCase
     function throwing_an_informative_exception_when_the_items_cannot_be_mapped()
     {
         $mapping = HasOneNested::inProperty('foo',
-            $this->mockExceptionThrowingHydrator('Original message here.')
+            $this->exceptionThrowingDeserializer('Original message here.')
         );
 
         $this->expectException(UnmappableInput::class);

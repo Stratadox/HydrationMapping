@@ -40,7 +40,7 @@ final class HasBackReference implements MapsProperty, ObservesHydration
     }
 
     /** @inheritdoc */
-    public function hydrating($theInstance): void
+    public function hydrating(object $theInstance, array $theData): void
     {
         $this->referenceTo = $theInstance;
     }

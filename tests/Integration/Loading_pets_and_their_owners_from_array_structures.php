@@ -4,11 +4,15 @@ declare(strict_types=1);
 namespace Stratadox\HydrationMapping\Test\Integration;
 
 use PHPUnit\Framework\TestCase;
+use Stratadox\Deserializer\ArrayDeserializer;
+use Stratadox\Deserializer\Condition\HaveTheDiscriminatorValue;
+use Stratadox\Deserializer\ForDataSets;
+use Stratadox\Deserializer\ObjectDeserializer;
+use Stratadox\Deserializer\OneOfThese;
 use Stratadox\Hydration\Mapping\Properties;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasBackReference;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasManyNested;
 use Stratadox\Hydration\Mapping\Property\Type\BooleanValue;
-use Stratadox\Hydration\Mapping\Property\Type\CanBeBoolean;
 use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
 use Stratadox\Hydration\Mapping\Property\Type\StringValue;
 use Stratadox\HydrationMapping\Test\Double\Pet\Cat;
@@ -16,10 +20,11 @@ use Stratadox\HydrationMapping\Test\Double\Pet\Dog;
 use Stratadox\HydrationMapping\Test\Double\Pet\Human;
 use Stratadox\HydrationMapping\Test\Double\Pet\NoMoreFood;
 use Stratadox\HydrationMapping\Test\Double\Pet\ThatIsNotMyPet;
-use Stratadox\Hydrator\ArrayHydrator;
 use Stratadox\Hydrator\Hydrates;
-use Stratadox\Hydrator\MappedHydrator;
-use Stratadox\Hydrator\OneOfTheseHydrators;
+use Stratadox\Hydrator\Mapping;
+use Stratadox\Hydrator\ObjectHydrator;
+use Stratadox\Hydrator\ObserveBefore;
+use Stratadox\Instantiator\Instantiator;
 
 /**
  * @coversNothing
@@ -31,11 +36,14 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
 
     protected function setUp()
     {
-        $hydrator = $this->mappedHydrator();
+        $deserializer = ObjectDeserializer::using(
+            Instantiator::forThe(Human::class),
+            $this->mappedHydrator()
+        );
 
         $this->petOwners = [];
         foreach ($this->dataOnPetOwners() as $petOwnerData) {
-            $this->petOwners[] = $hydrator->fromArray($petOwnerData);
+            $this->petOwners[] = $deserializer->from($petOwnerData);
         }
     }
 
@@ -81,7 +89,7 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
     private function mappedHydrator(): Hydrates
     {
         $backReference = HasBackReference::inProperty('owner');
-        $petMappings = Properties::map(
+        $petMappings = Mapping::for(ObjectHydrator::default(), Properties::map(
             BooleanValue::inProperty('hungry', [
                 'yes',
                 'yeah'
@@ -91,18 +99,33 @@ class Loading_pets_and_their_owners_from_array_structures extends TestCase
             ]),
             $backReference,
             StringValue::inProperty('name')
+        ));
+        $hydrator = ObserveBefore::hydrating(
+            Mapping::for(ObjectHydrator::default(), Properties::map(
+                StringValue::inProperty('name'),
+                IntegerValue::inProperty('food'),
+                HasManyNested::inProperty('pets',
+                    ArrayDeserializer::make(),
+                    OneOfThese::deserializers(
+                        ForDataSets::that(
+                            HaveTheDiscriminatorValue::of('species', 'cat'),
+                            ObjectDeserializer::using(
+                                Instantiator::forThe(Cat::class),
+                                $petMappings
+                            )
+                        ),
+                        ForDataSets::that(
+                            HaveTheDiscriminatorValue::of('species', 'dog'),
+                            ObjectDeserializer::using(
+                                Instantiator::forThe(Dog::class),
+                                $petMappings
+                            )
+                        )
+                    )
+                )
+            )),
+            $backReference
         );
-        $hydrator = MappedHydrator::forThe(Human::class, Properties::map(
-            StringValue::inProperty('name'),
-            IntegerValue::inProperty('food'),
-            HasManyNested::inProperty('pets',
-                ArrayHydrator::create(),
-                OneOfTheseHydrators::decideBasedOnThe('species', [
-                    'cat' => MappedHydrator::forThe(Cat::class, $petMappings),
-                    'dog' => MappedHydrator::forThe(Dog::class, $petMappings),
-                ])
-            )
-        ), null, $backReference);
         return $hydrator;
     }
 

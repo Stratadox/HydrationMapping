@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Type;
 
+use function array_key_exists;
 use function is_null;
 use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\HydrationMapping\ExposesDataKey;
@@ -27,9 +28,9 @@ final class CanBeNull implements ExposesDataKey
      * Creates a new nullable type wrapper.
      *
      * @param ExposesDataKey $mapping    The mapping to decorate.
-     * @return self                      The nullable mapping.
+     * @return ExposesDataKey            The nullable mapping.
      */
-    public static function or(ExposesDataKey $mapping): self
+    public static function or(ExposesDataKey $mapping): ExposesDataKey
     {
         return new self($mapping);
     }

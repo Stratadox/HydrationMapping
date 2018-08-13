@@ -6,7 +6,7 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneEmbedded;
 use Stratadox\HydrationMapping\Test\Double\Person\Person;
-use Stratadox\HydrationMapping\Test\Double\MockHydrator;
+use Stratadox\HydrationMapping\Test\Double\MockDeserializer;
 use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
@@ -15,7 +15,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
  */
 class HasOneEmbedded_maps_embedded_objects extends TestCase
 {
-    use MockHydrator;
+    use MockDeserializer;
 
     /** @test */
     function mapping_part_of_a_flat_array_to_a_relationship()
@@ -28,7 +28,7 @@ class HasOneEmbedded_maps_embedded_objects extends TestCase
         ];
 
         $authorMapping = HasOneEmbedded::inProperty('author',
-            $this->mockPublicSetterHydratorForThe(Person::class)
+            $this->deserializerForThe(Person::class)
         );
 
         /** @var Person $author */
@@ -41,7 +41,7 @@ class HasOneEmbedded_maps_embedded_objects extends TestCase
     function property_mappers_know_which_property_they_map_to()
     {
         $authorMapping = HasOneEmbedded::inProperty('author',
-            $this->mockPublicSetterHydratorForThe(Person::class)
+            $this->deserializerForThe(Person::class)
         );
 
         $this->assertSame('author', $authorMapping->name());
@@ -51,7 +51,7 @@ class HasOneEmbedded_maps_embedded_objects extends TestCase
     function throwing_an_informative_exception_when_the_items_cannot_be_mapped()
     {
         $mapping = HasOneEmbedded::inProperty('foo',
-            $this->mockExceptionThrowingHydrator('Original message here.')
+            $this->exceptionThrowingDeserializer('Original message here.')
         );
 
         $this->expectException(UnmappableInput::class);

@@ -9,7 +9,7 @@ use Stratadox\Hydration\Mapping\Property\Relationship\HasManyProxies;
 use Stratadox\HydrationMapping\Test\Double\Person\Person;
 use Stratadox\HydrationMapping\Test\Double\Person\PersonProxy;
 use Stratadox\HydrationMapping\Test\Double\Person\Persons;
-use Stratadox\HydrationMapping\Test\Double\MockHydrator;
+use Stratadox\HydrationMapping\Test\Double\MockDeserializer;
 use Stratadox\HydrationMapping\Test\Double\MockProxyBuilder;
 use Stratadox\HydrationMapping\UnmappableInput;
 
@@ -21,7 +21,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
  */
 class HasManyProxies_maps_extra_lazy_collections extends TestCase
 {
-    use MockHydrator;
+    use MockDeserializer;
     use MockProxyBuilder;
 
     /** @test */
@@ -30,7 +30,7 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
         $inSourceData = ['authors' => 3];
 
         $authorsMapping = HasManyProxies::inProperty('authors',
-            $this->mockCollectionHydratorForThe(Persons::class),
+            $this->collectionDeserializerForThe(Persons::class),
             $this->mockProxyBuilderFor(PersonProxy::class)
         );
 
@@ -50,7 +50,7 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
         $inSourceData = ['authors' => 3];
 
         $authorsMapping = HasManyProxies::inProperty('authors',
-            $this->mockCollectionHydratorForThe(Persons::class),
+            $this->collectionDeserializerForThe(Persons::class),
             $this->mockProxyBuilderFor(PersonProxy::class)
         );
 
@@ -70,7 +70,7 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
         $inSourceData = ['authors' => 2];
 
         $authorsMapping = HasManyProxies::inProperty('authors',
-            $this->mockCollectionHydratorForThe(Persons::class),
+            $this->collectionDeserializerForThe(Persons::class),
             $this->mockProxyBuilderFor(PersonProxy::class)
         );
 
@@ -89,7 +89,7 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
         $inSourceData = ['amount' => 3];
 
         $authorsMapping = HasManyProxies::inPropertyWithDifferentKey('authors', 'amount',
-            $this->mockCollectionHydratorForThe(Persons::class),
+            $this->collectionDeserializerForThe(Persons::class),
             $this->mockProxyBuilderFor(PersonProxy::class)
         );
 
@@ -104,7 +104,7 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
     function throwing_an_exception_when_the_source_is_missing()
     {
         $mapping = HasManyProxies::inProperty('foo',
-            $this->mockCollectionHydratorForThe(Persons::class),
+            $this->collectionDeserializerForThe(Persons::class),
             $this->mockProxyBuilderFor(PersonProxy::class)
         );
 
@@ -117,7 +117,7 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
     function throwing_an_informative_exception_when_the_collection_cannot_be_mapped()
     {
         $mapping = HasManyProxies::inProperty('foo',
-            $this->mockExceptionThrowingHydrator('Original message here.'),
+            $this->exceptionThrowingCollectionDeserializer('Original message here.'),
             $this->mockProxyBuilderFor(PersonProxy::class)
         );
 
@@ -134,7 +134,7 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
     function throwing_an_informative_exception_when_the_proxies_cannot_be_built()
     {
         $mapping = HasManyProxies::inProperty('foo',
-            $this->mockCollectionHydratorForThe(Persons::class),
+            $this->collectionDeserializerForThe(Persons::class),
             $this->mockExceptionThrowingProxyBuilder('Original message here.')
         );
 

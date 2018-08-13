@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Type;
 
+use function array_key_exists;
 use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\HydrationMapping\ExposesDataKey;
 use Stratadox\HydrationMapping\UnmappableInput;
@@ -13,7 +14,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-abstract class Scalar implements ExposesDataKey
+abstract class ScalarValue implements ExposesDataKey
 {
     private $name;
     private $key;
@@ -27,10 +28,10 @@ abstract class Scalar implements ExposesDataKey
     /**
      * Creates a new mapping for the called-upon scalar type object property.
      *
-     * @param string $name The name of both the key and the property.
-     * @return static|self The concrete scalar mapping object.
+     * @param string $name    The name of both the key and the property.
+     * @return ExposesDataKey The scalar mapping object.
      */
-    public static function inProperty(string $name): self
+    public static function inProperty(string $name): ExposesDataKey
     {
         return new static($name, $name);
     }
@@ -39,14 +40,14 @@ abstract class Scalar implements ExposesDataKey
      * Creates a new mapping for the called-upon scalar type object property,
      * using the data from a specific key.
      *
-     * @param string $name The name of the property.
-     * @param string $key  The array key to use.
-     * @return static|self
+     * @param string $name    The name of the property.
+     * @param string $key     The array key to use.
+     * @return ExposesDataKey The scalar mapping object.
      */
     public static function inPropertyWithDifferentKey(
         string $name,
         string $key
-    ): self {
+    ): ExposesDataKey {
         return new static($name, $key);
     }
 
@@ -65,9 +66,9 @@ abstract class Scalar implements ExposesDataKey
     /**
      * Retrieves the data that is relevant for this mapping.
      *
-     * @param array $data The input data.
-     * @return mixed      The value for our key in the input array.
-     * @throws UnmappableInput
+     * @param array $data      The input data.
+     * @return mixed           The value for our key in the input array.
+     * @throws UnmappableInput When the key is missing in the input.
      */
     protected function my(array $data)
     {

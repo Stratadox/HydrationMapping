@@ -17,16 +17,28 @@ final class Defaults implements MapsProperty
         $this->mapping = $mapping;
     }
 
-    public static function to($defaultValue, MapsProperty $mapping): self
-    {
+    /**
+     * Sets up a default value for a property mapping.
+     *
+     * @param mixed        $defaultValue The value to assign if the original
+     *                                   mapping failed.
+     * @param MapsProperty $mapping      The original mapping, to try first.
+     * @return MapsProperty              The property mapping with default.
+     */
+    public static function to(
+        $defaultValue,
+        MapsProperty $mapping
+    ): MapsProperty {
         return new self($defaultValue, $mapping);
     }
 
+    /** @inheritdoc */
     public function name(): string
     {
         return $this->mapping->name();
     }
 
+    /** @inheritdoc */
     public function value(array $data, $owner = null)
     {
         try {

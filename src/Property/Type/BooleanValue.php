@@ -6,6 +6,7 @@ namespace Stratadox\Hydration\Mapping\Property\Type;
 use function assert;
 use function in_array;
 use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
+use Stratadox\HydrationMapping\ExposesDataKey;
 
 /**
  * Maps boolean-like input to a boolean property in an object property.
@@ -13,7 +14,7 @@ use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class BooleanValue extends Scalar
+final class BooleanValue extends ScalarValue
 {
     private $truths = [];
     private $falsehoods = [];
@@ -21,16 +22,16 @@ final class BooleanValue extends Scalar
     /**
      * Creates a new mapping for the boolean type object property.
      *
-     * @param string     $name       The name of both the key and the property.
-     * @param array|null $truths     The values that should be considered true.
-     * @param array|null $falsehoods The values that should be considered false.
-     * @return Scalar|BooleanValue   The boolean mapping object.
+     * @param string $name       The name of both the key and the property.
+     * @param array  $truths     The values that should be considered true.
+     * @param array  $falsehoods The values that should be considered false.
+     * @return ExposesDataKey    The boolean mapping object.
      */
     public static function inProperty(
         string $name,
         array $truths = [true, 1, '1'],
         array $falsehoods = [false, 0, '0']
-    ): Scalar {
+    ): ExposesDataKey {
         $instance = parent::inProperty($name);
 
         assert($instance instanceof BooleanValue);
@@ -44,18 +45,18 @@ final class BooleanValue extends Scalar
      * Creates a new mapping for the boolean type object property, using the
      * data from a specific key.
      *
-     * @param string     $name       The name of the property.
-     * @param string     $key        The array key to use.
-     * @param array|null $truths     The values that should be considered true.
-     * @param array|null $falsehoods The values that should be considered false.
-     * @return Scalar|BooleanValue   The boolean mapping object.
+     * @param string $name       The name of the property.
+     * @param string $key        The array key to use.
+     * @param array  $truths     The values that should be considered true.
+     * @param array  $falsehoods The values that should be considered false.
+     * @return ExposesDataKey    The boolean mapping object.
      */
     public static function inPropertyWithDifferentKey(
         string $name,
         string $key,
         array $truths = [true, 1, '1'],
         array $falsehoods = [false, 0, '0']
-    ): Scalar {
+    ): ExposesDataKey {
         $instance = parent::inPropertyWithDifferentKey($name, $key);
 
         assert($instance instanceof BooleanValue);
