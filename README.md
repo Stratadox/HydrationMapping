@@ -31,16 +31,23 @@ source of the data.
 
 ## Typical Usage
 
-Typically, hydration mappings are given to [`Mapped`](https://github.com/Stratadox/Hydrator/blob/master/src/MappedHydrator.php)[`Hydrator`](https://github.com/Stratadox/Hydrator) instances.
+Typically, hydration mappings are given to [`Mapped`](https://github.com/Stratadox/Hydrator/blob/master/src/Mapping.php)[`Hydrator`](https://github.com/Stratadox/Hydrator) instances.
 Together they form a strong team that solves a single purpose: mapping data to an object graph.
 
 For example:
 ```php
-$hydrator = MappedHydrator::forThe(Book::class, Properties::map(
+$hydrator = Mapping::for(ObjectHydrator::default(), Properties::map(
     StringValue::inProperty('title'),
     IntegerValue::inProperty('rating'),
     StringValue::inPropertyWithDifferentKey('isbn', 'id')
 ));
+
+$book = new Book;
+$hydrator->writeTo($book, [
+    'title'  => 'This is a book.',
+    'rating' => 3,
+    'isbn'   => '0000000001'
+]);
 ```
 
 ## Mapping
