@@ -146,11 +146,11 @@ This boils down to the following possibilities:
 Relationship mappings are created through the named constructors:
 - `inProperty`
     - Usage:
-    `HasOneEmbedded::inProperty('name', $hydrator)` 
+    `HasOneNested::inProperty('name', $deserializer)` 
     - Use when the property name and data key are the same.
 - `inPropertyWithDifferentKey`
     - Usage: 
-    `HasOneNested::inPropertyWithDifferentKey('friends', 'contacts', $hydrator)`
+    `HasOneNested::inPropertyWithDifferentKey('friends', 'contacts', $deserializer)`
     - Use when the data key differs from the property name.
 
 In this context, the term `key` refers to the key of the associative array from
@@ -164,7 +164,7 @@ and compose their attributes from one or more of its values.
 
 ##### Has One
 
-`HasOne*`-type relationships are each given an object that [`Hydrates`](https://github.com/Stratadox/HydratorContracts/blob/master/src/Hydrates.php) 
+`HasOne*`-type relationships are each given an object that [`Deserializes`](https://github.com/Stratadox/DeserializerContracts/blob/master/src/Deserializes.php) 
 the related instance.
 
 A `HasOneNested` receives the value that was found in the original input for the 
@@ -176,25 +176,25 @@ for example, [embedded values](https://martinfowler.com/eaaCatalog/embeddedValue
 
 ##### Has Many
 
-A `HasMany*` relation requires one object that `Hydrates` the collection, and 
-one that `Hydrates` the items.
+A `HasMany*` relation requires one object that `Deserializes` the collection, 
+and one that `Deserializes` the items.
 
 This approach allows for a lot of freedom in the way collections are mapped.
-The available [hydrators](https://github.com/Stratadox/Hydrator) can map the
-collection either as plain array or to a custom collection object.
+The available [deserializers](https://github.com/Stratadox/Deserializer) can map 
+the collection either as plain array or to a custom collection object.
 
 While `HasManyNested` maps the array associated with its `key` into a collection
 of objects, the `HasManyEmbedded` is used when the input array itself consists
 of a list of scalars. The latter is mostly useful within nested structures.
 
-These hydrators may in turn be `MappedHydrator` instances. The combination is 
-able to map entire structures of objects in all kinds and shapes.
+These deserializers may in turn use mapped hydrator instances. The combination  
+is able to map entire structures of objects in all kinds and shapes.
 
 ##### Proxies
 
 [`Proxies`](https://github.com/Stratadox/Proxy) are used to allow for lazy 
-loading. Rather than hydrators, they take a factory to create objects that, in 
-turn, load the "real" object in place of the proxy.
+loading. Rather than deserializers, they take a factory to create objects that, 
+in turn, load the "real" object in place of the proxy whenever called upon.
 
 Lazy has-one relations can be mapped with the `HasOneProxy` mapping.
 Lazy has-many relationships have the option to be normally lazy, or extra lazy.
@@ -206,6 +206,9 @@ The latter only works when the collection is contained in a collection object.
 In cases where objects that are contained in an array should be lazy-loaded, a
 `HasManyProxies` mapping should be used, where each proxy is configured to load
 the entire array when called upon. 
+
+Using this mechanism, both lazy and extra-lazy loading is supported through any 
+type of collection, whether it be an array or a collection object.
 
 #### Bidirectional
 
