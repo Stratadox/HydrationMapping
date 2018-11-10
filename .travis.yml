@@ -2,7 +2,6 @@ language:
   php
 
 php:
-  - '7.1'
   - '7.2'
   - nightly
 
@@ -20,7 +19,7 @@ script:
   - mkdir -p build/logs
   - vendor/bin/phpunit -c phpunit.xml --testdox
   - vendor/bin/phpstan analyse src tests --level=7
-  - ./infection.phar --min-msi=100 --min-covered-msi=100
+  - ./infection.phar --min-covered-msi=100
 
 after_success:
   - travis_retry php vendor/bin/php-coveralls
