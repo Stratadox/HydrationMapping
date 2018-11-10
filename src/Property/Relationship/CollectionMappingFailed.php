@@ -26,12 +26,12 @@ final class CollectionMappingFailed extends RuntimeException implements Unmappab
      *
      * @param MapsProperty $mapping   The item mapping that failed.
      * @param Throwable    $exception The exception that was encountered.
-     * @return Throwable              The collection mapping failure.
+     * @return UnmappableInput        The collection mapping failure.
      */
     public static function forItem(
         MapsProperty $mapping,
         Throwable $exception
-    ): Throwable {
+    ): UnmappableInput {
         return new self(
             sprintf(
                 'Failed to map the %s items of the `%s` property: %s',
@@ -49,12 +49,12 @@ final class CollectionMappingFailed extends RuntimeException implements Unmappab
      *
      * @param MapsProperty $mapping   The collection mapping that failed.
      * @param Throwable    $exception The exception that was encountered.
-     * @return Throwable              The collection mapping failure.
+     * @return UnmappableInput        The collection mapping failure.
      */
     public static function forCollection(
         MapsProperty $mapping,
         Throwable $exception
-    ): Throwable {
+    ): UnmappableInput {
         return new self(
             sprintf(
                 'Failed to map the %s collection of the `%s` property: %s',

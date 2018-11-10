@@ -19,10 +19,11 @@ final class NoReferrerFound extends RuntimeException implements UnmappableInput
      * Notifies the client code when an item could not be hydrated.
      *
      * @param string $property The property that refers back to nothing.
-     * @return self            The exception object to throw.
+     * @return UnmappableInput The exception object to throw.
      */
-    public static function tryingToHydrateBackReferenceIn(string $property): self
-    {
+    public static function tryingToHydrateBackReferenceIn(
+        string $property
+    ): UnmappableInput {
         return new self(sprintf(
             'Failed to reference back to the `%s` relationship: no referrer found.',
             $property
