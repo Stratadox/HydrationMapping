@@ -50,6 +50,24 @@ $hydrator->writeTo($book, [
 ]);
 ```
 
+More often, the mapped hydrator is given to a [`deserializer`](https://github.com/Stratadox/Deserializer):
+```php
+$deserialize = ObjectDeserializer::using(
+    Instantiator::forThe(Book::class),
+    Mapping::for(ObjectHydrator::default(), Properties::map(
+        StringValue::inProperty('title'),
+        IntegerValue::inProperty('rating'),
+        StringValue::inPropertyWithDifferentKey('isbn', 'id')
+    )
+);
+
+$book = $deserialize->from([
+   'title'  => 'This is a book.',
+   'rating' => 3,
+   'isbn'   => '0000000001'
+]);
+```
+
 ## Mapping
 
 Three types of property mappings are available:
