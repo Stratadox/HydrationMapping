@@ -9,7 +9,7 @@
 [![Latest Stable Version](https://poser.pugx.org/stratadox/hydration-mapping/v/stable)](https://packagist.org/packages/stratadox/hydration-mapping)
 [![License](https://poser.pugx.org/stratadox/hydration-mapping/license)](https://packagist.org/packages/stratadox/hydration-mapping)
 
-[![Implements](https://img.shields.io/badge/inferfaces-github-blue.svg)](https://github.com/Stratadox/HydrationMapperContracts)
+[![Implements](https://img.shields.io/badge/inferfaces-github-blue.svg)](https://github.com/Stratadox/HydrationMappingContracts)
 [![Latest Stable Version](https://poser.pugx.org/stratadox/hydration-mapping-contracts/v/stable)](https://packagist.org/packages/stratadox/hydration-mapping-contracts)
 [![License](https://poser.pugx.org/stratadox/hydration-mapping-contracts/license)](https://packagist.org/packages/stratadox/hydration-mapping-contracts)
 
