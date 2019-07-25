@@ -22,12 +22,12 @@ final class ProxyProductionFailed extends RuntimeException implements Unmappable
      *
      * @param MapsProperty $mapping   The proxy mapping that failed.
      * @param Throwable    $exception The exception that was encountered.
-     * @return Throwable              The proxy production failure.
+     * @return UnmappableInput        The proxy production failure.
      */
     public static function tryingToProduceFor(
         MapsProperty $mapping,
         Throwable $exception
-    ): Throwable {
+    ): UnmappableInput {
         return new self(
             sprintf(
                 'Proxy production for in the `%s` property failed: %s',
