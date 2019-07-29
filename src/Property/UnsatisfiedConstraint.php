@@ -9,7 +9,6 @@ use function sprintf;
 use InvalidArgumentException as InvalidArgument;
 use Stratadox\HydrationMapping\MapsProperty;
 use Stratadox\HydrationMapping\UnmappableInput;
-use Throwable;
 
 /**
  * Notifies the client code when the input is not accepted by the constraint.
@@ -24,12 +23,12 @@ final class UnsatisfiedConstraint extends InvalidArgument implements UnmappableI
      *
      * @param MapsProperty $property The property mapping that denied the input.
      * @param mixed        $value    The input value that was rejected.
-     * @return Throwable             The exception to throw.
+     * @return UnmappableInput       The exception to throw.
      */
     public static function itIsNotConsideredValid(
         MapsProperty $property,
         $value
-    ): Throwable {
+    ): UnmappableInput {
         if (is_object($value)) {
             return new self(sprintf(
                 'Cannot assign the `%s` to property `%s`: ' .
