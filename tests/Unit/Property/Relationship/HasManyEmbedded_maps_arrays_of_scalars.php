@@ -8,7 +8,7 @@ use Stratadox\Hydration\Mapping\Property\Relationship\HasManyEmbedded;
 use Stratadox\HydrationMapping\UnmappableInput;
 use Stratadox\HydrationMapping\Test\Double\Title\Title;
 use Stratadox\HydrationMapping\Test\Double\Title\Titles;
-use Stratadox\HydrationMapping\Test\Double\MockDeserializer;
+use Stratadox\HydrationMapping\Test\Double\Deserializers;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasManyEmbedded
@@ -16,7 +16,7 @@ use Stratadox\HydrationMapping\Test\Double\MockDeserializer;
  */
 class HasManyEmbedded_maps_arrays_of_scalars extends TestCase
 {
-    use MockDeserializer;
+    use Deserializers;
 
     /** @test */
     function mapping_an_array_of_strings_to_a_collection_of_titles()

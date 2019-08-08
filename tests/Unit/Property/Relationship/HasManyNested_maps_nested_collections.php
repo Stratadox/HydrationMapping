@@ -8,7 +8,7 @@ use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasManyNested;
 use Stratadox\HydrationMapping\Test\Double\Person\Person;
 use Stratadox\HydrationMapping\Test\Double\Person\Persons;
-use Stratadox\HydrationMapping\Test\Double\MockDeserializer;
+use Stratadox\HydrationMapping\Test\Double\Deserializers;
 use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
@@ -18,7 +18,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
  */
 class HasManyNested_maps_nested_collections extends TestCase
 {
-    use MockDeserializer;
+    use Deserializers;
 
     /** @test */
     function mapping_a_nested_array_of_names_to_a_collection_of_Authors()

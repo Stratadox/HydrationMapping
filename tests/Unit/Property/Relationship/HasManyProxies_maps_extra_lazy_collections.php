@@ -4,13 +4,16 @@ declare(strict_types=1);
 namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 
 use PHPUnit\Framework\TestCase;
+use stdClass;
 use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasManyProxies;
 use Stratadox\HydrationMapping\Test\Double\Person\Person;
 use Stratadox\HydrationMapping\Test\Double\Person\PersonProxy;
+use Stratadox\HydrationMapping\Test\Double\Person\PersonProxyLoader;
 use Stratadox\HydrationMapping\Test\Double\Person\Persons;
-use Stratadox\HydrationMapping\Test\Double\MockDeserializer;
-use Stratadox\HydrationMapping\Test\Double\MockProxyBuilder;
+use Stratadox\HydrationMapping\Test\Double\Deserializers;
+use Stratadox\HydrationMapping\Test\Double\ProxyFactories;
+use Stratadox\HydrationMapping\Test\Double\SpyingLoader;
 use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
@@ -21,17 +24,26 @@ use Stratadox\HydrationMapping\UnmappableInput;
  */
 class HasManyProxies_maps_extra_lazy_collections extends TestCase
 {
-    use MockDeserializer;
-    use MockProxyBuilder;
+    /** @var SpyingLoader */
+    private $loader;
+
+    use Deserializers;
+    use ProxyFactories;
+
+    protected function setUp(): void
+    {
+        $this->loader = new SpyingLoader(new PersonProxyLoader());
+    }
 
     /** @test */
     function mapping_missing_data_to_a_collection_of_proxies()
     {
         $inSourceData = ['authors' => 3];
 
-        $authorsMapping = HasManyProxies::inProperty('authors',
+        $authorsMapping = HasManyProxies::inProperty(
+            'authors',
             $this->collectionDeserializerForThe(Persons::class),
-            $this->mockProxyBuilderFor(PersonProxy::class)
+            $this->proxyFactoryFor(PersonProxy::class)
         );
 
         /** @var Persons|Person[] $authors */
@@ -49,37 +61,25 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
     {
         $inSourceData = ['authors' => 3];
 
-        $authorsMapping = HasManyProxies::inProperty('authors',
+        $authorsMapping = HasManyProxies::inProperty(
+            'authors',
             $this->collectionDeserializerForThe(Persons::class),
-            $this->mockProxyBuilderFor(PersonProxy::class)
+            $this->proxyFactoryFor(PersonProxy::class)
         );
 
+        $owner = new stdClass();
+
         /** @var Persons|PersonProxy[] $authors */
-        $authors = $authorsMapping->value($inSourceData);
+        $authors = $authorsMapping->value($inSourceData, $owner);
 
         $this->assertCount(3, $authors);
         foreach ($authors as $i => $author) {
-            $this->assertSame('authors', $author->property());
-            $this->assertSame($i, $author->position());
-        }
-    }
-
-    /** @test */
-    function proxies_receive_information_on_who_references_them()
-    {
-        $inSourceData = ['authors' => 2];
-
-        $authorsMapping = HasManyProxies::inProperty('authors',
-            $this->collectionDeserializerForThe(Persons::class),
-            $this->mockProxyBuilderFor(PersonProxy::class)
-        );
-
-        /** @var Persons|PersonProxy[] $authors */
-        $authors = $authorsMapping->value($inSourceData, $this);
-
-        $this->assertCount(2, $authors);
-        foreach ($authors as $i => $author) {
-            $this->assertSame($this, $author->owner());
+            $author->firstName(); // trigger proxy loading
+            $this->assertSame([
+                'owner' => $owner,
+                'property' => 'authors',
+                'offset' => $i,
+            ], $this->loader->data($i));
         }
     }
 
@@ -88,9 +88,11 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
     {
         $inSourceData = ['amount' => 3];
 
-        $authorsMapping = HasManyProxies::inPropertyWithDifferentKey('authors', 'amount',
+        $authorsMapping = HasManyProxies::inPropertyWithDifferentKey(
+            'authors',
+            'amount',
             $this->collectionDeserializerForThe(Persons::class),
-            $this->mockProxyBuilderFor(PersonProxy::class)
+            $this->proxyFactoryFor(PersonProxy::class)
         );
 
         /** @var Persons|Person[] $authors */
@@ -103,9 +105,10 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
     /** @test */
     function throwing_an_exception_when_the_source_is_missing()
     {
-        $mapping = HasManyProxies::inProperty('foo',
+        $mapping = HasManyProxies::inProperty(
+            'foo',
             $this->collectionDeserializerForThe(Persons::class),
-            $this->mockProxyBuilderFor(PersonProxy::class)
+            $this->proxyFactoryFor(PersonProxy::class)
         );
 
         $this->expectException(MissingTheKey::class);
@@ -116,9 +119,10 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
     /** @test */
     function throwing_an_informative_exception_when_the_collection_cannot_be_mapped()
     {
-        $mapping = HasManyProxies::inProperty('foo',
+        $mapping = HasManyProxies::inProperty(
+            'foo',
             $this->exceptionThrowingCollectionDeserializer('Original message here.'),
-            $this->mockProxyBuilderFor(PersonProxy::class)
+            $this->proxyFactoryFor(PersonProxy::class)
         );
 
         $this->expectException(UnmappableInput::class);
@@ -133,9 +137,10 @@ class HasManyProxies_maps_extra_lazy_collections extends TestCase
     /** @test */
     function throwing_an_informative_exception_when_the_proxies_cannot_be_built()
     {
-        $mapping = HasManyProxies::inProperty('foo',
+        $mapping = HasManyProxies::inProperty(
+            'foo',
             $this->collectionDeserializerForThe(Persons::class),
-            $this->mockExceptionThrowingProxyBuilder('Original message here.')
+            $this->exceptionThrowingProxyFactory('Original message here.')
         );
 
         $this->expectException(UnmappableInput::class);

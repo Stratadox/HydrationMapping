@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
 use Stratadox\HydrationMapping\MapsProperty;
-use Stratadox\Proxy\ProducesProxies;
+use Stratadox\Proxy\ProxyFactory;
 use Throwable;
 
 /**
@@ -16,33 +16,36 @@ use Throwable;
 final class HasOneProxy implements MapsProperty
 {
     private $name;
-    private $proxyBuilder;
+    private $proxyFactory;
 
-    private function __construct(string $name, ProducesProxies $proxyBuilder)
+    private function __construct(string $name, ProxyFactory $proxyFactory)
     {
         $this->name = $name;
-        $this->proxyBuilder = $proxyBuilder;
+        $this->proxyFactory = $proxyFactory;
     }
 
     /**
      * Creates a new lazily loading has-one mapping.
      *
-     * @param string          $name         The name of the property.
-     * @param ProducesProxies $proxyBuilder The proxy builder.
-     * @return MapsProperty                 The lazy has-one mapping.
+     * @param string       $name         The name of the property.
+     * @param ProxyFactory $proxyFactory The proxy builder.
+     * @return MapsProperty              The lazy has-one mapping.
      */
     public static function inProperty(
         string $name,
-        ProducesProxies $proxyBuilder
+        ProxyFactory $proxyFactory
     ): MapsProperty {
-        return new self($name, $proxyBuilder);
+        return new self($name, $proxyFactory);
     }
 
     /** @inheritdoc */
     public function value(array $data, $owner = null)
     {
         try {
-            return $this->proxyBuilder->createFor($owner, $this->name);
+            return $this->proxyFactory->create([
+                'owner' => $owner,
+                'property' => $this->name
+            ]);
         } catch (Throwable $exception) {
             throw ProxyProductionFailed::tryingToProduceFor($this, $exception);
         }

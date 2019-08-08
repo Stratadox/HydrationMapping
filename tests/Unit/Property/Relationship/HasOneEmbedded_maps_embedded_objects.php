@@ -6,7 +6,7 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneEmbedded;
 use Stratadox\HydrationMapping\Test\Double\Person\Person;
-use Stratadox\HydrationMapping\Test\Double\MockDeserializer;
+use Stratadox\HydrationMapping\Test\Double\Deserializers;
 use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
@@ -15,7 +15,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
  */
 class HasOneEmbedded_maps_embedded_objects extends TestCase
 {
-    use MockDeserializer;
+    use Deserializers;
 
     /** @test */
     function mapping_part_of_a_flat_array_to_a_relationship()

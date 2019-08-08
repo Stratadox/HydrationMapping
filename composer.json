@@ -22,7 +22,7 @@
         "stratadox/hydration-mapping-contracts": "^0.1.3",
         "stratadox/hydrator-contracts": "^0.6",
         "stratadox/immutable-collection": "^1.1",
-        "stratadox/proxy-contracts": "^0.1.0",
+        "stratadox/proxy-contracts": "^0.3.0",
         "stratadox/specification-interfaces": "^1.0",
         "stratadox/deserializer-contracts": "^0.1.0"
     },
@@ -31,7 +31,8 @@
         "phpunit/phpunit": "^7.1",
         "php-coveralls/php-coveralls": "^2.1",
         "stratadox/deserializer": "^0.1.0",
-        "stratadox/specification": "^1.0"
+        "stratadox/specification": "^1.0",
+        "stratadox/proxy": "^0.3.1"
     },
     "suggest": {
         "stratadox/hydrator": "For hydrating the objects",

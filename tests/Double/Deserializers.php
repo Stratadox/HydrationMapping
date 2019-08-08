@@ -5,73 +5,42 @@ namespace Stratadox\HydrationMapping\Test\Double;
 
 use function assert;
 use Exception;
-use PHPUnit\Framework\MockObject\Exception as FailedToMock;
 use PHPUnit\Framework\MockObject\Matcher\AnyInvokedCount;
 use PHPUnit\Framework\MockObject\MockObject;
-use ReflectionClass;
+use Stratadox\Deserializer\CollectionDeserializer;
 use Stratadox\Deserializer\DeserializesCollections;
 use Stratadox\Deserializer\DeserializesObjects;
+use Stratadox\Deserializer\ObjectDeserializer;
 
-trait MockDeserializer
+trait Deserializers
 {
     /**
-     * Mocks a simple collection deserializer. It simply calls the constructor.
+     * Makes a simple collection deserializer.
      *
      * @param string $class
-     * @return DeserializesCollections|MockObject
-     * @throws FailedToMock
+     * @return DeserializesCollections
      */
     protected function collectionDeserializerForThe(string $class): DeserializesCollections
     {
-        $deserializer = $this->createMock(DeserializesCollections::class);
-
-        $deserializer->expects($this->any())
-            ->method('from')
-            ->willReturnCallback(
-                function (array $data) use ($class) {
-                    return new $class(...array_values($data));
-                }
-            );
-
-        assert($deserializer instanceof DeserializesCollections);
-
-        return $deserializer;
+        return CollectionDeserializer::forThe($class);
     }
 
     /**
-     * Mocks a simple dumb deserializer. It essentially just sets public properties.
+     * Makes a simple object deserializer.
      *
      * @param string $class
-     * @return DeserializesObjects|MockObject
-     * @throws FailedToMock
+     * @return DeserializesObjects
      */
     protected function deserializerForThe(string $class): DeserializesObjects
     {
-        $deserializer = $this->createMock(DeserializesObjects::class);
-
-        $deserializer->expects($this->any())
-            ->method('from')
-            ->willReturnCallback(
-                function (array $data) use ($class) {
-                    $inst = (new ReflectionClass($class))->newInstanceWithoutConstructor();
-                    foreach ($data as $key => $value) {
-                        $inst->$key = $value;
-                    }
-                    return $inst;
-                }
-            );
-
-        assert($deserializer instanceof DeserializesObjects);
-
-        return $deserializer;
+        return ObjectDeserializer::forThe($class);
     }
 
     /**
      * Mocks a simple deserializer which will throw an @see UnmappableInput exception.
      *
      * @param string $message
-     * @return DeserializesObjects|MockObject
-     * @throws FailedToMock
+     * @return DeserializesObjects
      */
     protected function exceptionThrowingDeserializer(string $message = ''): DeserializesObjects
     {
@@ -94,8 +63,7 @@ trait MockDeserializer
      * Mocks a simple deserializer which will throw an @see UnmappableInput exception.
      *
      * @param string $message
-     * @return DeserializesCollections|MockObject
-     * @throws FailedToMock
+     * @return DeserializesCollections
      */
     protected function exceptionThrowingCollectionDeserializer(string $message = ''): DeserializesCollections
     {

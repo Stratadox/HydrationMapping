@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Defaults;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneEmbedded;
 use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
-use Stratadox\HydrationMapping\Test\Double\MockDeserializer;
+use Stratadox\HydrationMapping\Test\Double\Deserializers;
 use Stratadox\HydrationMapping\Test\Double\Title\Title;
 
 /**
@@ -19,7 +19,7 @@ use Stratadox\HydrationMapping\Test\Double\Title\Title;
  */
 class Defaults_when_an_element_could_not_be_mapped extends TestCase
 {
-    use MockDeserializer;
+    use Deserializers;
 
     /**
      * @test

@@ -7,14 +7,14 @@ use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Properties;
 use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
 use Stratadox\Hydration\Mapping\Property\Type\StringValue;
-use Stratadox\HydrationMapping\Test\Double\MockDeserializer;
+use Stratadox\HydrationMapping\Test\Double\Deserializers;
 
 /**
  * @covers \Stratadox\Hydration\Mapping\Properties
  */
 class Properties_map_multiple_properties extends TestCase
 {
-    use MockDeserializer;
+    use Deserializers;
 
     /** @test */
     function class_mappings_contain_property_mappings()

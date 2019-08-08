@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneNested;
 use Stratadox\HydrationMapping\Test\Double\Person\Person;
-use Stratadox\HydrationMapping\Test\Double\MockDeserializer;
+use Stratadox\HydrationMapping\Test\Double\Deserializers;
 use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
@@ -17,7 +17,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
  */
 class HasOneNested_maps_nested_objects extends TestCase
 {
-    use MockDeserializer;
+    use Deserializers;
 
     /** @test */
     function mapping_a_nested_array_to_a_HasOne_relationship()
