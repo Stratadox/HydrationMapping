@@ -13,6 +13,8 @@ use Stratadox\Proxy\ProxyFactory;
 
 trait ProxyFactories
 {
+    private $loader;
+
     /**
      * Mocks a simple proxy builder. It essentially just calls the constructor.
      *
