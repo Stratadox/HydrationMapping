@@ -3,18 +3,17 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Type;
 
-use function array_key_exists;
-use function preg_match;
 use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
 use Stratadox\HydrationMapping\KeyedMapping;
 use Stratadox\HydrationMapping\MappingFailure;
+use function array_key_exists;
+use function preg_match;
 
 /**
  * Decorates scalar type declaration with a possibly integer property.
  *
- * @package Stratadox\Hydrate
- * @author  Stratadox
+ * @author Stratadox
  */
 final class CanBeInteger implements KeyedMapping
 {

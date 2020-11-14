@@ -6,8 +6,7 @@ namespace Stratadox\Hydration\Mapping\Property\Type;
 /**
  * Maps the value directly onto an object property.
  *
- * @package Stratadox\Hydrate
- * @author  Stratadox
+ * @author Stratadox
  */
 final class OriginalValue extends ScalarValue
 {

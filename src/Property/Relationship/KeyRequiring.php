@@ -11,8 +11,7 @@ use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 /**
  * Behaviour to assert that the key is present in the data.
  *
- * @package Stratadox\Hydrate
- * @author  Stratadox
+ * @author Stratadox
  */
 trait KeyRequiring
 {

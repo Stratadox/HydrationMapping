@@ -6,8 +6,7 @@ namespace Stratadox\Hydration\Mapping\Property\Type;
 /**
  * Maps whatever you give it to null in an object property.
  *
- * @package Stratadox\Hydrate
- * @author  Stratadox
+ * @author Stratadox
  */
 final class NullValue extends ScalarValue
 {

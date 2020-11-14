@@ -11,8 +11,7 @@ use function in_array;
 /**
  * Maps boolean-like input to a boolean property in an object property.
  *
- * @package Stratadox\Hydrate
- * @author  Stratadox
+ * @author Stratadox
  */
 final class BooleanValue extends ScalarValue
 {

@@ -6,8 +6,7 @@ namespace Stratadox\Hydration\Mapping\Property\Type;
 /**
  * Maps scalar input to an integer property in an object property.
  *
- * @package Stratadox\Hydrate
- * @author  Stratadox
+ * @author Stratadox
  */
 final class CastedInteger extends ScalarValue
 {

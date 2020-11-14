@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property;
 
-use InvalidArgumentException as InvalidArgument;
+use InvalidArgumentException;
 use Stratadox\HydrationMapping\Mapping;
 use Stratadox\HydrationMapping\MappingFailure;
 use function get_class;
@@ -13,10 +13,9 @@ use function sprintf;
 /**
  * Notifies the client code when the input is not accepted by the constraint.
  *
- * @package Stratadox\Hydrate
- * @author  Stratadox
+ * @author Stratadox
  */
-final class UnsatisfiedConstraint extends InvalidArgument implements MappingFailure
+final class UnsatisfiedConstraint extends InvalidArgumentException implements MappingFailure
 {
     /**
      * Notifies the client code when the input is not accepted by the constraint.

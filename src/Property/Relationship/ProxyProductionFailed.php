@@ -6,14 +6,13 @@ namespace Stratadox\Hydration\Mapping\Property\Relationship;
 use RuntimeException;
 use Stratadox\HydrationMapping\Mapping;
 use Stratadox\HydrationMapping\MappingFailure;
-use function sprintf;
 use Throwable;
+use function sprintf;
 
 /**
  * Notifies the client code when the proxy could not be produced.
  *
- * @package Stratadox\Hydrate
- * @author  Stratadox
+ * @author Stratadox
  */
 final class ProxyProductionFailed extends RuntimeException implements MappingFailure
 {

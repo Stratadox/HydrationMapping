@@ -11,8 +11,7 @@ use Stratadox\HydrationMapping\MappingFailure;
 /**
  * Decorates @see BooleanValue with custom true/false declarations.
  *
- * @package Stratadox\Hydrate
- * @author  Stratadox
+ * @author Stratadox
  */
 final class CanBeBoolean implements KeyedMapping
 {
@@ -34,8 +33,8 @@ final class CanBeBoolean implements KeyedMapping
      * Creates a new custom truth mapping, decorating a @see BooleanValue.
      *
      * @param KeyedMapping $mapping    The mapping to decorate.
-     * @param array          $truths     The values to consider true.
-     * @param array          $falsehoods The values to consider false.
+     * @param array        $truths     The values to consider true.
+     * @param array        $falsehoods The values to consider false.
      * @return KeyedMapping            The custom truth boolean mapping.
      */
     public static function or(

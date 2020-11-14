@@ -3,17 +3,16 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Type;
 
-use function array_key_exists;
-use function is_null;
 use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\HydrationMapping\KeyedMapping;
 use Stratadox\HydrationMapping\MappingFailure;
+use function array_key_exists;
+use function is_null;
 
 /**
  * Decorates scalar type declaration with a nullable property.
  *
- * @package Stratadox\Hydrate
- * @author  Stratadox
+ * @author Stratadox
  */
 final class CanBeNull implements KeyedMapping
 {
@@ -27,8 +26,8 @@ final class CanBeNull implements KeyedMapping
     /**
      * Creates a new nullable type wrapper.
      *
-     * @param KeyedMapping $mapping    The mapping to decorate.
-     * @return KeyedMapping            The nullable mapping.
+     * @param KeyedMapping $mapping The mapping to decorate.
+     * @return KeyedMapping         The nullable mapping.
      */
     public static function or(KeyedMapping $mapping): KeyedMapping
     {

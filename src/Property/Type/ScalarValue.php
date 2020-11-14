@@ -3,16 +3,15 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Type;
 
+use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\HydrationMapping\KeyedMapping;
 use Stratadox\HydrationMapping\MappingFailure;
 use function array_key_exists;
-use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 
 /**
  * Maps the data from a single key to a scalar object property.
  *
- * @package Stratadox\Hydrate
- * @author  Stratadox
+ * @author Stratadox
  */
 abstract class ScalarValue implements KeyedMapping
 {

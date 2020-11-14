@@ -7,25 +7,24 @@ use RuntimeException;
 use Stratadox\HydrationMapping\Mapping;
 use Stratadox\HydrationMapping\MappingFailure;
 use Throwable;
-use function get_class as classOfThe;
+use function get_class;
 use function sprintf;
-use function strrchr as endOfThe;
-use function substr as justThe;
+use function strrchr;
+use function substr;
 
 /**
  * Notifies the client code when the collection could not be mapped.
  *
- * @package Stratadox\Hydrate
- * @author  Stratadox
+ * @author Stratadox
  */
 final class CollectionMappingFailed extends RuntimeException implements MappingFailure
 {
     /**
      * Notifies the client code when a collection item could not be hydrated.
      *
-     * @param Mapping $mapping   The item mapping that failed.
-     * @param Throwable    $exception The exception that was encountered.
-     * @return MappingFailure        The collection mapping failure.
+     * @param Mapping   $mapping   The item mapping that failed.
+     * @param Throwable $exception The exception that was encountered.
+     * @return MappingFailure      The collection mapping failure.
      */
     public static function forItem(
         Mapping $mapping,
@@ -46,9 +45,9 @@ final class CollectionMappingFailed extends RuntimeException implements MappingF
     /**
      * Notifies the client code when a collection class could not be hydrated.
      *
-     * @param Mapping $mapping   The collection mapping that failed.
-     * @param Throwable    $exception The exception that was encountered.
-     * @return MappingFailure        The collection mapping failure.
+     * @param Mapping   $mapping   The collection mapping that failed.
+     * @param Throwable $exception The exception that was encountered.
+     * @return MappingFailure      The collection mapping failure.
      */
     public static function forCollection(
         Mapping $mapping,
@@ -70,11 +69,11 @@ final class CollectionMappingFailed extends RuntimeException implements MappingF
      * Retrieves the class name without namespace.
      *
      * @param Mapping $mapping The failing mapping instance.
-     * @return string               The unqualified (short) class name of the
-     *                              mapping instance.
+     * @return string          The unqualified (short) class name of the mapping
+     *                         instance.
      */
     private static function shortNameOfThe(Mapping $mapping): string
     {
-        return justThe(endOfThe(classOfThe($mapping), '\\'), 1);
+        return substr(strrchr(get_class($mapping), '\\'), 1);
     }
 }

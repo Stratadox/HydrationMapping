@@ -6,6 +6,12 @@ namespace Stratadox\Hydration\Mapping\Property;
 use Stratadox\HydrationMapping\Mapping;
 use Throwable;
 
+/**
+ * Sets up a default value for when the input could not be mapped.
+ * @todo add logger?
+ *
+ * @author Stratadox
+ */
 final class Defaults implements Mapping
 {
     private $defaultValue;

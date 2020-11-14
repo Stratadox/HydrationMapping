@@ -10,8 +10,7 @@ use function sprintf;
 /**
  * Notifies the client code when the referrer was not specified.
  *
- * @package Stratadox\Hydrate
- * @author  Stratadox
+ * @author Stratadox
  */
 final class NoReferrerFound extends RuntimeException implements MappingFailure
 {

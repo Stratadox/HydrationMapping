@@ -10,8 +10,7 @@ use Throwable;
 /**
  * Maps a proxy to a has-one relation in an object property.
  *
- * @package Stratadox\Hydrate
- * @author  Stratadox
+ * @author Stratadox
  */
 final class HasOneProxy implements Mapping
 {

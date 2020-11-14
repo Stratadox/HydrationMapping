@@ -11,8 +11,7 @@ use Throwable;
 /**
  * Maps a nested data structure to a collection in an object property.
  *
- * @package Stratadox\Hydrate
- * @author  Stratadox
+ * @author Stratadox
  */
 final class HasManyNested implements KeyedMapping
 {

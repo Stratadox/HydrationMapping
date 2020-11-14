@@ -14,8 +14,7 @@ use function trim;
 /**
  * Notifies the client code when the input is not accepted by the property mapping.
  *
- * @package Stratadox\Hydrate
- * @author  Stratadox
+ * @author Stratadox
  */
 final class UnmappableProperty extends InvalidArgumentException implements MappingFailure
 {

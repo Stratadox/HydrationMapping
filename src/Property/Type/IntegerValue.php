@@ -3,14 +3,13 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Type;
 
-use function preg_match;
 use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
+use function preg_match;
 
 /**
  * Maps integer-like input to an integer property in an object property.
  *
- * @package Stratadox\Hydrate
- * @author  Stratadox
+ * @author Stratadox
  */
 final class IntegerValue extends ScalarValue
 {

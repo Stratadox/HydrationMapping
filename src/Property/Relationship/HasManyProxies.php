@@ -12,8 +12,7 @@ use Throwable;
 /**
  * Maps a number to a collection of proxies in an object property.
  *
- * @package Stratadox\Hydrate
- * @author  Stratadox
+ * @author Stratadox
  */
 final class HasManyProxies implements KeyedMapping
 {

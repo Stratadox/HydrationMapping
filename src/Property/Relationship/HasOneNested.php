@@ -10,8 +10,7 @@ use Throwable;
 /**
  * Maps a nested data structure to a has-one relation in an object property.
  *
- * @package Stratadox\Hydrate
- * @author  Stratadox
+ * @author Stratadox
  */
 final class HasOneNested implements KeyedMapping
 {
@@ -36,7 +35,7 @@ final class HasOneNested implements KeyedMapping
      *
      * @param string       $name         The name of both property and key.
      * @param Deserializer $deserializer The deserializer for the nested object.
-     * @return KeyedMapping            The nested has-one mapping.
+     * @return KeyedMapping              The nested has-one mapping.
      */
     public static function inProperty(
         string $name,
@@ -51,7 +50,7 @@ final class HasOneNested implements KeyedMapping
      * @param string       $name         The name of the property.
      * @param string       $key          The name of the key.
      * @param Deserializer $deserializer The deserializer for the nested object.
-     * @return KeyedMapping            The nested has-one mapping.
+     * @return KeyedMapping              The nested has-one mapping.
      */
     public static function inPropertyWithDifferentKey(
         string $name,

@@ -9,8 +9,7 @@ use Stratadox\HydrationMapping\Mapping;
 /**
  * Maps to the result of a closure that runs against the input data.
  *
- * @package Stratadox\Hydrate
- * @author  Stratadox
+ * @author Stratadox
  */
 final class ClosureResult implements Mapping
 {
