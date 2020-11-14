@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property;
 
+use InvalidArgumentException;
+use Stratadox\HydrationMapping\Mapping;
+use Stratadox\HydrationMapping\MappingFailure;
 use function gettype;
 use function is_scalar;
 use function sprintf;
-use InvalidArgumentException as InvalidArgument;
-use Stratadox\HydrationMapping\MapsProperty;
-use Stratadox\HydrationMapping\UnmappableInput;
 use function trim;
 
 /**
@@ -17,33 +17,33 @@ use function trim;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class UnmappableProperty extends InvalidArgument implements UnmappableInput
+final class UnmappableProperty extends InvalidArgumentException implements MappingFailure
 {
     /**
      * Notifies the client code when the input is not formatted as integer.
      *
-     * @param MapsProperty $failedToMapTo The property that denied the input.
-     * @param mixed        $value         The input value that was rejected.
-     * @return UnmappableInput            The exception to throw.
+     * @param Mapping $failedToMapTo The property that denied the input.
+     * @param mixed   $value         The input value that was rejected.
+     * @return MappingFailure        The exception to throw.
      */
     public static function itMustBeLikeAnInteger(
-        MapsProperty $failedToMapTo,
+        Mapping $failedToMapTo,
         $value
-    ): UnmappableInput {
+    ): MappingFailure {
         return self::inputData($failedToMapTo, 'integer', $value);
     }
 
     /**
      * Notifies the client code when the input is not in integer range.
      *
-     * @param MapsProperty $failedToMapTo The property that denied the input.
-     * @param mixed        $value         The input value that was rejected.
-     * @return UnmappableInput            The exception to throw.
+     * @param Mapping $failedToMapTo The property that denied the input.
+     * @param mixed   $value         The input value that was rejected.
+     * @return MappingFailure        The exception to throw.
      */
     public static function itMustBeInIntegerRange(
-        MapsProperty $failedToMapTo,
+        Mapping $failedToMapTo,
         $value
-    ): UnmappableInput {
+    ): MappingFailure {
         return self::inputData($failedToMapTo, 'integer', $value,
             'The value is out of range.'
         );
@@ -52,42 +52,42 @@ final class UnmappableProperty extends InvalidArgument implements UnmappableInpu
     /**
      * Notifies the client code when the input is not formatted as number.
      *
-     * @param MapsProperty $failedToMapTo The property that denied the input.
-     * @param mixed        $value         The input value that was rejected.
-     * @return UnmappableInput            The exception to throw.
+     * @param Mapping $failedToMapTo The property that denied the input.
+     * @param mixed   $value         The input value that was rejected.
+     * @return MappingFailure        The exception to throw.
      */
     public static function itMustBeNumeric(
-        MapsProperty $failedToMapTo,
+        Mapping $failedToMapTo,
         $value
-    ): UnmappableInput {
+    ): MappingFailure {
         return self::inputData($failedToMapTo, 'float', $value);
     }
 
     /**
      * Notifies the client code when the input is not recognised as boolean.
      *
-     * @param MapsProperty $failedToMapTo The property that denied the input.
-     * @param mixed        $value         The input value that was rejected.
-     * @return UnmappableInput            The exception to throw.
+     * @param Mapping $failedToMapTo The property that denied the input.
+     * @param mixed   $value         The input value that was rejected.
+     * @return MappingFailure        The exception to throw.
      */
     public static function itMustBeConvertibleToBoolean(
-        MapsProperty $failedToMapTo,
+        Mapping $failedToMapTo,
         $value
-    ): UnmappableInput {
+    ): MappingFailure {
         return self::inputData($failedToMapTo, 'boolean', $value);
     }
 
     /**
      * Add the alternative type information to the original exception.
      *
-     * @param string          $type      The alternative type.
-     * @param UnmappableInput $exception The original exception.
-     * @return UnmappableInput           The exception to throw.
+     * @param string         $type      The alternative type.
+     * @param MappingFailure $exception The original exception.
+     * @return MappingFailure           The exception to throw.
      */
     public static function addAlternativeTypeInformation(
         string $type,
-        UnmappableInput $exception
-    ): UnmappableInput {
+        MappingFailure $exception
+    ): MappingFailure {
         return new self(sprintf(
             '%s It could not be mapped to %s either.',
             $exception->getMessage(),
@@ -98,18 +98,18 @@ final class UnmappableProperty extends InvalidArgument implements UnmappableInpu
     /**
      * Notifies the client code when the input is not mappable.
      *
-     * @param MapsProperty $mapped  The mapping that failed.
-     * @param string       $type    The type of data that was expected.
-     * @param mixed        $input   The input that could not be mapped.
-     * @param string       $message Optional extra message.
-     * @return UnmappableInput      The exception to throw.
+     * @param Mapping $mapped  The mapping that failed.
+     * @param string  $type    The type of data that was expected.
+     * @param mixed   $input   The input that could not be mapped.
+     * @param string  $message Optional extra message.
+     * @return MappingFailure  The exception to throw.
      */
     private static function inputData(
-        MapsProperty $mapped,
+        Mapping $mapped,
         string $type,
         $input,
         string $message = ''
-    ): UnmappableInput {
+    ): MappingFailure {
         if (is_scalar($input)) {
             return new self(trim(sprintf(
                 'Cannot assign `%s` to property `%s`: ' .

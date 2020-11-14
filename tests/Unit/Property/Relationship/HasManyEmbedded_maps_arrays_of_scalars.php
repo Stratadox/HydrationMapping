@@ -5,15 +5,11 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasManyEmbedded;
-use Stratadox\HydrationMapping\UnmappableInput;
+use Stratadox\HydrationMapping\MappingFailure;
 use Stratadox\HydrationMapping\Test\Double\Title\Title;
 use Stratadox\HydrationMapping\Test\Double\Title\Titles;
 use Stratadox\HydrationMapping\Test\Double\Deserializers;
 
-/**
- * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasManyEmbedded
- * @covers \Stratadox\Hydration\Mapping\Property\Relationship\CollectionMappingFailed
- */
 class HasManyEmbedded_maps_arrays_of_scalars extends TestCase
 {
     use Deserializers;
@@ -22,7 +18,7 @@ class HasManyEmbedded_maps_arrays_of_scalars extends TestCase
     function mapping_an_array_of_strings_to_a_collection_of_titles()
     {
         $mapping = HasManyEmbedded::inProperty('name',
-            $this->collectionDeserializerForThe(Titles::class),
+            $this->immutableCollectionDeserializerFor(Titles::class),
             $this->deserializerForThe(Title::class),
             'title'
         );
@@ -30,36 +26,36 @@ class HasManyEmbedded_maps_arrays_of_scalars extends TestCase
         /** @var Titles $titles */
         $titles = $mapping->value(['foo', 'bar', 'baz']);
 
-        $this->assertSame('foo', $titles[0]->title);
-        $this->assertSame('bar', $titles[1]->title);
-        $this->assertSame('baz', $titles[2]->title);
+        self::assertSame('foo', $titles[0]->title);
+        self::assertSame('bar', $titles[1]->title);
+        self::assertSame('baz', $titles[2]->title);
     }
 
     /** @test */
     function using_key_as_default_key()
     {
         $mapping = HasManyEmbedded::inProperty('name',
-            $this->collectionDeserializerForThe(Titles::class),
+            $this->immutableCollectionDeserializerFor(Titles::class),
             $this->deserializerForThe(Title::class)
         );
 
         /** @var Titles $titles */
         $titles = $mapping->value(['foo']);
 
-        $this->assertNull($titles[0]->title);
-        $this->assertSame('foo', $titles[0]->key);
+        self::assertNull($titles[0]->title);
+        self::assertSame('foo', $titles[0]->key);
     }
 
     /** @test */
     function mapping_to_a_property()
     {
         $mapping = HasManyEmbedded::inProperty('foo',
-            $this->collectionDeserializerForThe(Titles::class),
+            $this->immutableCollectionDeserializerFor(Titles::class),
             $this->deserializerForThe(Title::class),
             'title'
         );
 
-        $this->assertSame(
+        self::assertSame(
             'foo',
             $mapping->name()
         );
@@ -69,11 +65,11 @@ class HasManyEmbedded_maps_arrays_of_scalars extends TestCase
     function throwing_an_informative_exception_when_the_items_cannot_be_mapped()
     {
         $mapping = HasManyEmbedded::inProperty('foo',
-            $this->collectionDeserializerForThe(Titles::class),
+            $this->immutableCollectionDeserializerFor(Titles::class),
             $this->exceptionThrowingDeserializer('Original message here.')
         );
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Failed to map the HasManyEmbedded items of the `foo` property: Original message here.'
@@ -90,7 +86,7 @@ class HasManyEmbedded_maps_arrays_of_scalars extends TestCase
             $this->deserializerForThe(Title::class)
         );
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Failed to map the HasManyEmbedded collection of the `foo` property: Original message here.'

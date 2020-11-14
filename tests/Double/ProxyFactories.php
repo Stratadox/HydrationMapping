@@ -13,8 +13,6 @@ use Stratadox\Proxy\ProxyFactory;
 
 trait ProxyFactories
 {
-    private $loader;
-
     /**
      * Mocks a simple proxy builder. It essentially just calls the constructor.
      *
@@ -36,7 +34,7 @@ trait ProxyFactories
     {
         $proxyBuilder = $this->createMock(ProxyFactory::class);
 
-        $proxyBuilder->expects($this->any())
+        $proxyBuilder
             ->method('create')
             ->willReturnCallback(function () use ($message) {
                 throw new Exception($message);

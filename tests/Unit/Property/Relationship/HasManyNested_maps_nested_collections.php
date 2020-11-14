@@ -6,16 +6,11 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasManyNested;
+use Stratadox\HydrationMapping\MappingFailure;
 use Stratadox\HydrationMapping\Test\Double\Person\Person;
 use Stratadox\HydrationMapping\Test\Double\Person\Persons;
 use Stratadox\HydrationMapping\Test\Double\Deserializers;
-use Stratadox\HydrationMapping\UnmappableInput;
 
-/**
- * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasManyNested
- * @covers \Stratadox\Hydration\Mapping\Property\Relationship\CollectionMappingFailed
- * @covers \Stratadox\Hydration\Mapping\Property\Relationship\KeyRequiring
- */
 class HasManyNested_maps_nested_collections extends TestCase
 {
     use Deserializers;
@@ -40,20 +35,20 @@ class HasManyNested_maps_nested_collections extends TestCase
         ];
 
         $authorsMapping = HasManyNested::inProperty('authors',
-            $this->collectionDeserializerForThe(Persons::class),
+            $this->immutableCollectionDeserializerFor(Persons::class),
             $this->deserializerForThe(Person::class)
         );
 
         /** @var Persons|Person[] $authors */
         $authors = $authorsMapping->value($inSourceData);
 
-        $this->assertInstanceOf(Persons::class, $authors);
-        $this->assertCount(10, $authors);
+        self::assertInstanceOf(Persons::class, $authors);
+        self::assertCount(10, $authors);
         foreach ($inSourceData['authors'] as $who => $authorData) {
             $author = $authors[$who];
-            $this->assertInstanceOf(Person::class, $author);
-            $this->assertSame($authorData['firstName'], $author->firstName());
-            $this->assertSame($authorData['lastName'], $author->lastName());
+            self::assertInstanceOf(Person::class, $author);
+            self::assertSame($authorData['firstName'], $author->firstName());
+            self::assertSame($authorData['lastName'], $author->lastName());
         }
     }
 
@@ -71,22 +66,22 @@ class HasManyNested_maps_nested_collections extends TestCase
 
         $authorsMapping = HasManyNested::inPropertyWithDifferentKey('authors',
             'these',
-            $this->collectionDeserializerForThe(Persons::class),
+            $this->immutableCollectionDeserializerFor(Persons::class),
             $this->deserializerForThe(Person::class)
         );
 
         /** @var Persons|Person[] $authors */
         $authors = $authorsMapping->value($inSourceData);
 
-        $this->assertCount(3, $authors);
-        $this->assertSame('authors', $authorsMapping->name());
+        self::assertCount(3, $authors);
+        self::assertSame('authors', $authorsMapping->name());
     }
 
     /** @test */
     function throwing_an_exception_when_the_source_is_missing()
     {
         $mapping = HasManyNested::inProperty('foo',
-            $this->collectionDeserializerForThe(Persons::class),
+            $this->immutableCollectionDeserializerFor(Persons::class),
             $this->deserializerForThe(Person::class)
         );
 
@@ -99,11 +94,11 @@ class HasManyNested_maps_nested_collections extends TestCase
     function throwing_an_informative_exception_when_the_items_cannot_be_mapped()
     {
         $mapping = HasManyNested::inProperty('foo',
-            $this->collectionDeserializerForThe(Persons::class),
+            $this->immutableCollectionDeserializerFor(Persons::class),
             $this->exceptionThrowingDeserializer('Original message here.')
         );
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Failed to map the HasManyNested items of the `foo` property: Original message here.'
@@ -120,7 +115,7 @@ class HasManyNested_maps_nested_collections extends TestCase
             $this->deserializerForThe(Person::class)
         );
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Failed to map the HasManyNested collection of the `foo` property: Original message here.'

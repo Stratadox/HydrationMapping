@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
-use Stratadox\Deserializer\Deserializes;
-use Stratadox\HydrationMapping\ExposesDataKey;
+use Stratadox\Deserializer\Deserializer;
+use Stratadox\HydrationMapping\KeyedMapping;
 use Throwable;
 
 /**
@@ -13,7 +13,7 @@ use Throwable;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class HasOneNested implements ExposesDataKey
+final class HasOneNested implements KeyedMapping
 {
     use KeyRequiring;
 
@@ -24,7 +24,7 @@ final class HasOneNested implements ExposesDataKey
     private function __construct(
         string $name,
         string $dataKey,
-        Deserializes $deserializer
+        Deserializer $deserializer
     ) {
         $this->name = $name;
         $this->key = $dataKey;
@@ -35,13 +35,13 @@ final class HasOneNested implements ExposesDataKey
      * Creates a new nested has-one mapping.
      *
      * @param string       $name         The name of both property and key.
-     * @param Deserializes $deserializer The deserializer for the nested object.
-     * @return ExposesDataKey            The nested has-one mapping.
+     * @param Deserializer $deserializer The deserializer for the nested object.
+     * @return KeyedMapping            The nested has-one mapping.
      */
     public static function inProperty(
         string $name,
-        Deserializes $deserializer
-    ): ExposesDataKey {
+        Deserializer $deserializer
+    ): KeyedMapping {
         return new self($name, $name, $deserializer);
     }
 
@@ -50,14 +50,14 @@ final class HasOneNested implements ExposesDataKey
      *
      * @param string       $name         The name of the property.
      * @param string       $key          The name of the key.
-     * @param Deserializes $deserializer The deserializer for the nested object.
-     * @return ExposesDataKey            The nested has-one mapping.
+     * @param Deserializer $deserializer The deserializer for the nested object.
+     * @return KeyedMapping            The nested has-one mapping.
      */
     public static function inPropertyWithDifferentKey(
         string $name,
         string $key,
-        Deserializes $deserializer
-    ): ExposesDataKey {
+        Deserializer $deserializer
+    ): KeyedMapping {
         return new self($name, $key, $deserializer);
     }
 

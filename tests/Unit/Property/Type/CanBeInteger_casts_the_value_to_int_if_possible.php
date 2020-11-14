@@ -9,13 +9,8 @@ use const PHP_INT_MAX;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Type\CanBeInteger;
 use Stratadox\Hydration\Mapping\Property\Type\FloatValue;
-use Stratadox\HydrationMapping\UnmappableInput;
+use Stratadox\HydrationMapping\MappingFailure;
 
-/**
- * @covers \Stratadox\Hydration\Mapping\Property\Type\CanBeInteger
- * @covers \Stratadox\Hydration\Mapping\Property\MissingTheKey
- * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
- */
 class CanBeInteger_casts_the_value_to_int_if_possible extends TestCase
 {
     /** @test */
@@ -25,7 +20,7 @@ class CanBeInteger_casts_the_value_to_int_if_possible extends TestCase
 
         $map = CanBeInteger::or(FloatValue::inProperty('number'));
 
-        $this->assertSame(16, $map->value($source));
+        self::assertSame(16, $map->value($source));
     }
 
     /** @test */
@@ -35,7 +30,7 @@ class CanBeInteger_casts_the_value_to_int_if_possible extends TestCase
 
         $map = CanBeInteger::or(FloatValue::inProperty('number'));
 
-        $this->assertInternalType('integer', $map->value($source));
+        self::assertInternalType('integer', $map->value($source));
     }
 
     /** @test */
@@ -45,7 +40,7 @@ class CanBeInteger_casts_the_value_to_int_if_possible extends TestCase
 
         $map = CanBeInteger::or(FloatValue::inProperty('number'));
 
-        $this->assertInternalType('integer', $map->value($source));
+        self::assertInternalType('integer', $map->value($source));
     }
 
     /** @test */
@@ -55,7 +50,7 @@ class CanBeInteger_casts_the_value_to_int_if_possible extends TestCase
 
         $map = CanBeInteger::or(FloatValue::inProperty('number'));
 
-        $this->assertInternalType('integer', $map->value($source));
+        self::assertInternalType('integer', $map->value($source));
     }
 
     /** @test */
@@ -65,7 +60,7 @@ class CanBeInteger_casts_the_value_to_int_if_possible extends TestCase
 
         $map = CanBeInteger::or(FloatValue::inProperty('number'));
 
-        $this->assertSame(1.6, $map->value($source));
+        self::assertSame(1.6, $map->value($source));
     }
 
     /** @test */
@@ -75,7 +70,7 @@ class CanBeInteger_casts_the_value_to_int_if_possible extends TestCase
 
         $map = CanBeInteger::or(FloatValue::inProperty('number'));
 
-        $this->assertInternalType('float', $map->value($source));
+        self::assertInternalType('float', $map->value($source));
     }
 
     /** @test */
@@ -85,7 +80,7 @@ class CanBeInteger_casts_the_value_to_int_if_possible extends TestCase
 
         $map = CanBeInteger::or(FloatValue::inProperty('number'));
 
-        $this->assertInternalType('float', $map->value($source));
+        self::assertInternalType('float', $map->value($source));
     }
 
     /** @test */
@@ -93,7 +88,7 @@ class CanBeInteger_casts_the_value_to_int_if_possible extends TestCase
     {
         $map = CanBeInteger::or(FloatValue::inProperty('number'));
 
-        $this->assertSame('number', $map->name());
+        self::assertSame('number', $map->name());
     }
 
     /** @test */
@@ -103,7 +98,7 @@ class CanBeInteger_casts_the_value_to_int_if_possible extends TestCase
             FloatValue::inPropertyWithDifferentKey('number', 'key')
         );
 
-        $this->assertSame('key', $map->key());
+        self::assertSame('key', $map->key());
     }
 
     /** @test */
@@ -111,7 +106,7 @@ class CanBeInteger_casts_the_value_to_int_if_possible extends TestCase
     {
         $map = CanBeInteger::or(FloatValue::inProperty('number'));
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Missing the key `number` for property `number` in the ' .
@@ -128,7 +123,7 @@ class CanBeInteger_casts_the_value_to_int_if_possible extends TestCase
 
         $map = CanBeInteger::or(FloatValue::inProperty('number'));
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Cannot assign `NaN` to property `number`: it is not clean for ' .

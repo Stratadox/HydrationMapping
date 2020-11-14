@@ -6,10 +6,6 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Type;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Type\NullValue;
 
-/**
- * @covers \Stratadox\Hydration\Mapping\Property\Type\NullValue
- * @covers \Stratadox\Hydration\Mapping\Property\Type\ScalarValue
- */
 class NullValue_casts_everything_to_nulls extends TestCase
 {
     /** @test */
@@ -19,7 +15,7 @@ class NullValue_casts_everything_to_nulls extends TestCase
 
         $map = NullValue::inProperty('null');
 
-        $this->assertNull($map->value($source));
+        self::assertNull($map->value($source));
     }
 
     /** @test */
@@ -29,7 +25,7 @@ class NullValue_casts_everything_to_nulls extends TestCase
 
         $map = NullValue::inProperty('null');
 
-        $this->assertNull($map->value($source));
+        self::assertNull($map->value($source));
     }
 
     /** @test */
@@ -39,7 +35,7 @@ class NullValue_casts_everything_to_nulls extends TestCase
 
         $map = NullValue::inProperty('null');
 
-        $this->assertNull($map->value($source));
+        self::assertNull($map->value($source));
     }
 
     /** @test */
@@ -49,7 +45,7 @@ class NullValue_casts_everything_to_nulls extends TestCase
 
         $map = NullValue::inProperty('null');
 
-        $this->assertNull($map->value($source));
+        self::assertNull($map->value($source));
     }
 
     /** @test */
@@ -59,6 +55,6 @@ class NullValue_casts_everything_to_nulls extends TestCase
 
         $map = NullValue::inProperty('null');
 
-        $this->assertNull($map->value($source));
+        self::assertNull($map->value($source));
     }
 }

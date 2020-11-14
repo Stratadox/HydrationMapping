@@ -5,13 +5,8 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Type;
 
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Type\BooleanValue;
-use Stratadox\HydrationMapping\UnmappableInput;
+use Stratadox\HydrationMapping\MappingFailure;
 
-/**
- * @covers \Stratadox\Hydration\Mapping\Property\Type\BooleanValue
- * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
- * @covers \Stratadox\Hydration\Mapping\Property\Type\ScalarValue
- */
 class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
 {
     /**
@@ -24,7 +19,7 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
 
         $map = BooleanValue::inProperty('boolean');
 
-        $this->assertTrue($map->value($source));
+        self::assertTrue($map->value($source));
     }
 
     /**
@@ -37,7 +32,7 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
 
         $map = BooleanValue::inProperty('boolean');
 
-        $this->assertFalse($map->value($source));
+        self::assertFalse($map->value($source));
     }
 
     /**
@@ -53,7 +48,7 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
 
         $map = BooleanValue::inProperty('boolean', $truths, $falsehoods);
 
-        $this->assertTrue($map->value($source));
+        self::assertTrue($map->value($source));
     }
 
     /**
@@ -69,7 +64,7 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
 
         $map = BooleanValue::inProperty('boolean', $truths, $falsehoods);
 
-        $this->assertFalse($map->value($source));
+        self::assertFalse($map->value($source));
     }
 
     /**
@@ -90,8 +85,8 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
             $falsehoods
         );
 
-        $this->assertTrue($map->value($source));
-        $this->assertSame('bool', $map->name());
+        self::assertTrue($map->value($source));
+        self::assertSame('bool', $map->name());
     }
 
     /**
@@ -112,8 +107,8 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
             $falsehoods
         );
 
-        $this->assertFalse($map->value($source));
-        $this->assertSame('bool', $map->name());
+        self::assertFalse($map->value($source));
+        self::assertSame('bool', $map->name());
     }
 
     /**
@@ -127,7 +122,7 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
 
         $map = BooleanValue::inProperty('boolean');
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Cannot assign `' . $itsNotBoolean . '` to property `boolean`: ' .

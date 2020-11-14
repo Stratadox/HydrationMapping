@@ -8,13 +8,9 @@ use Stratadox\Hydration\Mapping\Property\Relationship\HasOneProxy;
 use Stratadox\HydrationMapping\Test\Double\Person\Person;
 use Stratadox\HydrationMapping\Test\Double\Person\PersonProxy;
 use Stratadox\HydrationMapping\Test\Double\ProxyFactories;
-use Stratadox\HydrationMapping\UnmappableInput;
+use Stratadox\HydrationMapping\MappingFailure;
 use Stratadox\Proxy\Proxy;
 
-/**
- * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasOneProxy
- * @covers \Stratadox\Hydration\Mapping\Property\Relationship\ProxyProductionFailed
- */
 class HasOneProxy_maps_a_lazy_object extends TestCase
 {
     use ProxyFactories;
@@ -29,9 +25,9 @@ class HasOneProxy_maps_a_lazy_object extends TestCase
         /** @var Person|PersonProxy $author */
         $author = $mapping->value([]);
 
-        $this->assertInstanceOf(Proxy::class, $author);
-        $this->assertSame('Lazy loading', $author->firstName());
-        $this->assertSame('Is out of scope', $author->lastName());
+        self::assertInstanceOf(Proxy::class, $author);
+        self::assertSame('Lazy loading', $author->firstName());
+        self::assertSame('Is out of scope', $author->lastName());
     }
 
     /** @test */
@@ -41,7 +37,7 @@ class HasOneProxy_maps_a_lazy_object extends TestCase
             $this->proxyFactoryFor(PersonProxy::class)
         );
 
-        $this->assertSame('author', $mapping->name());
+        self::assertSame('author', $mapping->name());
     }
 
     /** @test */
@@ -51,7 +47,7 @@ class HasOneProxy_maps_a_lazy_object extends TestCase
             $this->exceptionThrowingProxyFactory('Original message here.')
         );
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Proxy production for in the `foo` property failed: Original message here.'

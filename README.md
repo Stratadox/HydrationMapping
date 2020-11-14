@@ -36,11 +36,17 @@ Together they form a strong team that solves a single purpose: mapping data to a
 
 For example:
 ```php
-$hydrator = Mapping::for(ObjectHydrator::default(), Properties::map(
+use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
+use Stratadox\Hydration\Mapping\Property\Type\StringValue;
+use Stratadox\Hydrator\MappedHydrator;
+use Stratadox\Hydrator\ObjectHydrator;
+
+$hydrator = MappedHydrator::using(
+    ObjectHydrator::default(),
     StringValue::inProperty('title'),
     IntegerValue::inProperty('rating'),
     StringValue::inPropertyWithDifferentKey('isbn', 'id')
-));
+);
 
 $book = new Book;
 $hydrator->writeTo($book, [
@@ -52,9 +58,17 @@ $hydrator->writeTo($book, [
 
 More often, the mapped hydrator is given to a [`deserializer`](https://github.com/Stratadox/Deserializer):
 ```php
+use Stratadox\Deserializer\ObjectDeserializer;
+use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
+use Stratadox\Hydration\Mapping\Property\Type\StringValue;
+use Stratadox\Hydrator\MappedHydrator;
+use Stratadox\Hydrator\ObjectHydrator;
+use Stratadox\Instantiator\ObjectInstantiator;
+
 $deserialize = ObjectDeserializer::using(
-    Instantiator::forThe(Book::class),
-    Mapping::for(ObjectHydrator::default(), Properties::map(
+    ObjectInstantiator::forThe(Book::class),
+    MappedHydrator::using(
+        ObjectHydrator::default(),
         StringValue::inProperty('title'),
         IntegerValue::inProperty('rating'),
         StringValue::inPropertyWithDifferentKey('isbn', 'id')
@@ -111,6 +125,8 @@ To skip the entire typecasting process, the `OriginalValue` mapping can be used.
 Input to a `BooleanValue` must either be 0, 1 or already boolean typed.
 Custom true/false values can be provided as optional parameters:
 ```php
+use Stratadox\Hydration\Mapping\Property\Type\BooleanValue;
+
 $myProperty = BooleanValue::inProperty('foo', ['yes', 'y'], ['no', 'n']);
 ```
 
@@ -134,6 +150,11 @@ to produce, for instance, mapping configurations that first attempt to map the
 value to a boolean, otherwise as an integer, if that cannot be done to cast it 
 to a floating point, and if all else fails, make it a string:
 ```php
+use Stratadox\Hydration\Mapping\Property\Type\CanBeBoolean;
+use Stratadox\Hydration\Mapping\Property\Type\CanBeInteger;
+use Stratadox\Hydration\Mapping\Property\Type\CanBeFloat;
+use Stratadox\Hydration\Mapping\Property\Type\StringValue;
+
 $theProperty = CanBeBoolean::or(
     CanBeInteger::or(
         CanBeFloat::or(
@@ -244,10 +265,15 @@ is satisfied with it, or throw an exception otherwise.
 
 For example, a check on whether a rating is between 1 and 5 might look like this:
 ```php
+use Stratadox\Hydration\Mapping\Property\Check;
+use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
+use Stratadox\HydrationMapping\Test\Double\Constraint\IsNotLess;
+use Stratadox\HydrationMapping\Test\Double\Constraint\IsNotMore;
+
 Check::thatIt(
     IsNotLess::than(1)->and(IsNotMore::than(5)),
     IntegerValue::inProperty('rating')
-)
+);
 ```
 The constraints themselves implement the (minimal) interface [`Satisfiable`](https://github.com/Stratadox/SpecificationInterfaces/blob/master/src/Satisfiable.php),
 which mandates only the method `isSatisfiedBy($input)`.
@@ -294,9 +320,9 @@ class IsNotMore implements Specifies
         $this->maximum = $maximum;
     }
 
-    public static function than(int $maximum): Specifies
+    public static function than(int $maximum): self
     {
-        return new IsNotMore($maximum);
+        return new self($maximum);
     }
 
     public function isSatisfiedBy($number): bool
@@ -319,16 +345,3 @@ This function is called with the input data to produce the mapped result.
 
 For additional extension power, custom mapping can be produced by implementing 
 the `MapsProperty` interface.
-
-# Hydrate
-
-This package is part of the [Hydrate Module](https://github.com/Stratadox/Hydrate).
-
-The `Hydrate` module is an umbrella for several hydration-related packages.
-Together, they form a powerful toolset for converting input data into an object 
-structure.
-
-Although these packages are designed to work together, they can also be used 
-independently.
-The only hard dependencies of this `HydrationMapping` module are a collections 
-library and a set of packages dedicated only to interfaces.

@@ -5,13 +5,8 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Type;
 
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
-use Stratadox\HydrationMapping\UnmappableInput;
+use Stratadox\HydrationMapping\MappingFailure;
 
-/**
- * @covers \Stratadox\Hydration\Mapping\Property\Type\IntegerValue
- * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
- * @covers \Stratadox\Hydration\Mapping\Property\Type\ScalarValue
- */
 class IntegerValue_casts_integer_like_values_to_integers extends TestCase
 {
     /** @test */
@@ -21,7 +16,7 @@ class IntegerValue_casts_integer_like_values_to_integers extends TestCase
 
         $map = IntegerValue::inProperty('int');
 
-        $this->assertSame(123, $map->value($source));
+        self::assertSame(123, $map->value($source));
     }
 
     /** @test */
@@ -31,7 +26,7 @@ class IntegerValue_casts_integer_like_values_to_integers extends TestCase
 
         $map = IntegerValue::inProperty('int');
 
-        $this->assertSame(-123, $map->value($source));
+        self::assertSame(-123, $map->value($source));
     }
 
     /** @test */
@@ -41,7 +36,7 @@ class IntegerValue_casts_integer_like_values_to_integers extends TestCase
 
         $map = IntegerValue::inProperty('int');
 
-        $this->assertSame(PHP_INT_MAX, $map->value($source));
+        self::assertSame(PHP_INT_MAX, $map->value($source));
     }
 
     /** @test */
@@ -51,7 +46,7 @@ class IntegerValue_casts_integer_like_values_to_integers extends TestCase
 
         $map = IntegerValue::inProperty('int');
 
-        $this->assertSame(PHP_INT_MIN, $map->value($source));
+        self::assertSame(PHP_INT_MIN, $map->value($source));
     }
 
     /** @test */
@@ -62,7 +57,7 @@ class IntegerValue_casts_integer_like_values_to_integers extends TestCase
 
         $map = IntegerValue::inProperty('int');
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Cannot assign `' . $tooBig . '` to property `int`: ' .
@@ -80,7 +75,7 @@ class IntegerValue_casts_integer_like_values_to_integers extends TestCase
 
         $map = IntegerValue::inProperty('int');
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Cannot assign `' . $tooSmall . '` to property `int`: ' .
@@ -97,7 +92,7 @@ class IntegerValue_casts_integer_like_values_to_integers extends TestCase
 
         $map = IntegerValue::inProperty('int');
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Cannot assign `6.35` to property `int`: ' .
@@ -113,7 +108,7 @@ class IntegerValue_casts_integer_like_values_to_integers extends TestCase
 
         $map = IntegerValue::inProperty('int');
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Cannot assign `NaN` to property `int`: ' .
@@ -129,7 +124,7 @@ class IntegerValue_casts_integer_like_values_to_integers extends TestCase
 
         $map = IntegerValue::inProperty('int');
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Cannot assign the NULL to property `int`: ' .

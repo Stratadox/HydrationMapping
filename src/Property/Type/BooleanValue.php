@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Type;
 
+use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
+use Stratadox\HydrationMapping\KeyedMapping;
 use function assert;
 use function in_array;
-use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
-use Stratadox\HydrationMapping\ExposesDataKey;
 
 /**
  * Maps boolean-like input to a boolean property in an object property.
@@ -25,13 +25,13 @@ final class BooleanValue extends ScalarValue
      * @param string $name       The name of both the key and the property.
      * @param array  $truths     The values that should be considered true.
      * @param array  $falsehoods The values that should be considered false.
-     * @return ExposesDataKey    The boolean mapping object.
+     * @return KeyedMapping      The boolean mapping object.
      */
     public static function inProperty(
         string $name,
         array $truths = [true, 1, '1'],
         array $falsehoods = [false, 0, '0']
-    ): ExposesDataKey {
+    ): KeyedMapping {
         $instance = parent::inProperty($name);
 
         assert($instance instanceof BooleanValue);
@@ -49,14 +49,14 @@ final class BooleanValue extends ScalarValue
      * @param string $key        The array key to use.
      * @param array  $truths     The values that should be considered true.
      * @param array  $falsehoods The values that should be considered false.
-     * @return ExposesDataKey    The boolean mapping object.
+     * @return KeyedMapping      The boolean mapping object.
      */
     public static function inPropertyWithDifferentKey(
         string $name,
         string $key,
         array $truths = [true, 1, '1'],
         array $falsehoods = [false, 0, '0']
-    ): ExposesDataKey {
+    ): KeyedMapping {
         $instance = parent::inPropertyWithDifferentKey($name, $key);
 
         assert($instance instanceof BooleanValue);

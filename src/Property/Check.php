@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property;
 
-use Stratadox\HydrationMapping\MapsProperty;
+use Stratadox\HydrationMapping\Mapping;
 use Stratadox\Specification\Contract\Satisfiable;
 
 /**
@@ -11,12 +11,12 @@ use Stratadox\Specification\Contract\Satisfiable;
  *
  * @author Stratadox
  */
-final class Check implements MapsProperty
+final class Check implements Mapping
 {
     private $constraint;
     private $mapping;
 
-    private function __construct(Satisfiable $constraint, MapsProperty $mapping)
+    private function __construct(Satisfiable $constraint, Mapping $mapping)
     {
         $this->constraint = $constraint;
         $this->mapping = $mapping;
@@ -25,14 +25,14 @@ final class Check implements MapsProperty
     /**
      * Creates a check for on a property mapping.
      *
-     * @param Satisfiable  $constraint The constraint for the property.
-     * @param MapsProperty $mapping    The mapping for the property.
-     * @return MapsProperty            The checked property mapping.
+     * @param Satisfiable $constraint The constraint for the property.
+     * @param Mapping     $mapping    The mapping for the property.
+     * @return Mapping                The checked property mapping.
      */
     public static function thatIt(
         Satisfiable $constraint,
-        MapsProperty $mapping
-    ): MapsProperty {
+        Mapping $mapping
+    ): Mapping {
         return new Check($constraint, $mapping);
     }
 

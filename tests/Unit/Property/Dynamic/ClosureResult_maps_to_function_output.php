@@ -6,9 +6,6 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Dynamic;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Dynamic\ClosureResult;
 
-/**
- * @covers \Stratadox\Hydration\Mapping\Property\Dynamic\ClosureResult
- */
 class ClosureResult_maps_to_function_output extends TestCase
 {
     /** @test */
@@ -25,7 +22,7 @@ class ClosureResult_maps_to_function_output extends TestCase
 
         $output = $map->value($source);
 
-        $this->assertSame('foobar', $output);
+        self::assertSame('foobar', $output);
     }
 
     /** @test */
@@ -35,6 +32,6 @@ class ClosureResult_maps_to_function_output extends TestCase
             return $data['value1'] . $data['value2'];
         });
 
-        $this->assertSame('concatenate', $map->name());
+        self::assertSame('concatenate', $map->name());
     }
 }

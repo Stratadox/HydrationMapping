@@ -7,8 +7,8 @@ use function array_key_exists;
 use function is_numeric;
 use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
-use Stratadox\HydrationMapping\ExposesDataKey;
-use Stratadox\HydrationMapping\UnmappableInput;
+use Stratadox\HydrationMapping\KeyedMapping;
+use Stratadox\HydrationMapping\MappingFailure;
 
 /**
  * Decorates scalar type declaration with a possibly integer property.
@@ -16,11 +16,11 @@ use Stratadox\HydrationMapping\UnmappableInput;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class CanBeFloat implements ExposesDataKey
+final class CanBeFloat implements KeyedMapping
 {
     private $or;
 
-    private function __construct(ExposesDataKey $mapping)
+    private function __construct(KeyedMapping $mapping)
     {
         $this->or = $mapping;
     }
@@ -28,10 +28,10 @@ final class CanBeFloat implements ExposesDataKey
     /**
      * Creates a new possibly float type wrapper.
      *
-     * @param ExposesDataKey $mapping The mapping to decorate.
-     * @return ExposesDataKey         The possibly float mapping.
+     * @param KeyedMapping $mapping The mapping to decorate.
+     * @return KeyedMapping         The possibly float mapping.
      */
-    public static function or(ExposesDataKey $mapping): ExposesDataKey
+    public static function or(KeyedMapping $mapping): KeyedMapping
     {
         return new self($mapping);
     }
@@ -45,7 +45,7 @@ final class CanBeFloat implements ExposesDataKey
         }
         try {
             return $this->or->value($data, $owner);
-        } catch (UnmappableInput $exception) {
+        } catch (MappingFailure $exception) {
             throw UnmappableProperty::addAlternativeTypeInformation(
                 'float',
                 $exception
@@ -65,7 +65,7 @@ final class CanBeFloat implements ExposesDataKey
         return $this->or->key();
     }
 
-    /** @throws UnmappableInput */
+    /** @throws MappingFailure */
     private function my(array $data)
     {
         $key = $this->or->key();

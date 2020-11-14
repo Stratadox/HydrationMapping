@@ -3,20 +3,17 @@ declare(strict_types=1);
 
 namespace Stratadox\HydrationMapping\Test\Unit\Property;
 
-use function bcadd;
-use function bcsub;
-use const PHP_INT_MAX;
-use const PHP_INT_MIN;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Defaults;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneEmbedded;
 use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
 use Stratadox\HydrationMapping\Test\Double\Deserializers;
 use Stratadox\HydrationMapping\Test\Double\Title\Title;
+use function bcadd;
+use function bcsub;
+use const PHP_INT_MAX;
+use const PHP_INT_MIN;
 
-/**
- * @covers \Stratadox\Hydration\Mapping\Property\Defaults
- */
 class Defaults_when_an_element_could_not_be_mapped extends TestCase
 {
     use Deserializers;
@@ -31,7 +28,7 @@ class Defaults_when_an_element_could_not_be_mapped extends TestCase
 
         $mapping = Defaults::to(-1, IntegerValue::inProperty('integer'));
 
-        $this->assertSame(-1, $mapping->value($source));
+        self::assertSame(-1, $mapping->value($source));
     }
 
     /** @test */
@@ -39,7 +36,7 @@ class Defaults_when_an_element_could_not_be_mapped extends TestCase
     {
         $mapping = Defaults::to(-1, IntegerValue::inProperty('integer'));
 
-        $this->assertSame(-1, $mapping->value([]));
+        self::assertSame(-1, $mapping->value([]));
     }
 
     /**
@@ -52,7 +49,7 @@ class Defaults_when_an_element_could_not_be_mapped extends TestCase
 
         $mapping = Defaults::to(-1, IntegerValue::inProperty('integer'));
 
-        $this->assertSame((int) $integer, $mapping->value($source));
+        self::assertSame((int) $integer, $mapping->value($source));
     }
 
     /** @test */
@@ -66,7 +63,7 @@ class Defaults_when_an_element_could_not_be_mapped extends TestCase
             )
         );
 
-        $this->assertEquals(new Title('Unknown Title'), $mapping->value([]));
+        self::assertEquals(new Title('Unknown Title'), $mapping->value([]));
     }
 
     /** @test */
@@ -74,7 +71,7 @@ class Defaults_when_an_element_could_not_be_mapped extends TestCase
     {
         $mapping = Defaults::to(-1, IntegerValue::inProperty('integer'));
 
-        $this->assertSame('integer', $mapping->name());
+        self::assertSame('integer', $mapping->name());
     }
 
     public function nonIntegers(): array

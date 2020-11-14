@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
 use RuntimeException;
+use Stratadox\HydrationMapping\Mapping;
+use Stratadox\HydrationMapping\MappingFailure;
 use function sprintf;
-use Stratadox\HydrationMapping\MapsProperty;
-use Stratadox\HydrationMapping\UnmappableInput;
 use Throwable;
 
 /**
@@ -15,19 +15,19 @@ use Throwable;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class ProxyProductionFailed extends RuntimeException implements UnmappableInput
+final class ProxyProductionFailed extends RuntimeException implements MappingFailure
 {
     /**
      * Notifies the client code when an item could not be hydrated.
      *
-     * @param MapsProperty $mapping   The proxy mapping that failed.
-     * @param Throwable    $exception The exception that was encountered.
-     * @return UnmappableInput        The proxy production failure.
+     * @param Mapping   $mapping   The proxy mapping that failed.
+     * @param Throwable $exception The exception that was encountered.
+     * @return MappingFailure      The proxy production failure.
      */
     public static function tryingToProduceFor(
-        MapsProperty $mapping,
+        Mapping $mapping,
         Throwable $exception
-    ): UnmappableInput {
+    ): MappingFailure {
         return new self(
             sprintf(
                 'Proxy production for in the `%s` property failed: %s',

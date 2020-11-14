@@ -5,11 +5,10 @@ namespace Stratadox\HydrationMapping\Test\Feature\Data;
 
 use Stratadox\Deserializer\ArrayDeserializer;
 use Stratadox\Deserializer\Condition\HaveTheDiscriminatorValue;
-use Stratadox\Deserializer\Deserializes;
+use Stratadox\Deserializer\Deserializer;
 use Stratadox\Deserializer\ForDataSets;
 use Stratadox\Deserializer\ObjectDeserializer;
 use Stratadox\Deserializer\OneOfThese;
-use Stratadox\Hydration\Mapping\Properties;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasBackReference;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasManyNested;
 use Stratadox\Hydration\Mapping\Property\Type\BooleanValue;
@@ -18,10 +17,10 @@ use Stratadox\Hydration\Mapping\Property\Type\StringValue;
 use Stratadox\HydrationMapping\Test\Double\Pet\Cat;
 use Stratadox\HydrationMapping\Test\Double\Pet\Dog;
 use Stratadox\HydrationMapping\Test\Double\Pet\Human;
-use Stratadox\Hydrator\Mapping;
+use Stratadox\Hydrator\MappedHydrator;
 use Stratadox\Hydrator\ObjectHydrator;
 use Stratadox\Hydrator\ObserveBefore;
-use Stratadox\Instantiator\Instantiator;
+use Stratadox\Instantiator\ObjectInstantiator;
 
 trait PetsWithOwners
 {
@@ -68,10 +67,11 @@ trait PetsWithOwners
         ];
     }
 
-    private function nestedPetsArrayDeserializer(): Deserializes
+    private function nestedPetsArrayDeserializer(): Deserializer
     {
         $referBackToTheOwner = HasBackReference::inProperty('owner');
-        $petMappings = Mapping::for(ObjectHydrator::default(), Properties::map(
+        $petMappings = MappedHydrator::using(
+            ObjectHydrator::default(),
             BooleanValue::inProperty('hungry', [
                 'yes',
                 'yeah'
@@ -81,12 +81,13 @@ trait PetsWithOwners
             ]),
             $referBackToTheOwner,
             StringValue::inProperty('name')
-        ));
+        );
 
         return ObjectDeserializer::using(
-            Instantiator::forThe(Human::class),
+            ObjectInstantiator::forThe(Human::class),
             ObserveBefore::hydrating(
-                Mapping::for(ObjectHydrator::default(), Properties::map(
+                MappedHydrator::using(
+                    ObjectHydrator::default(),
                     StringValue::inProperty('name'),
                     IntegerValue::inProperty('food'),
                     HasManyNested::inProperty(
@@ -96,20 +97,20 @@ trait PetsWithOwners
                             ForDataSets::that(
                                 HaveTheDiscriminatorValue::of('species', 'cat'),
                                 ObjectDeserializer::using(
-                                    Instantiator::forThe(Cat::class),
+                                    ObjectInstantiator::forThe(Cat::class),
                                     $petMappings
                                 )
                             ),
                             ForDataSets::that(
                                 HaveTheDiscriminatorValue::of('species', 'dog'),
                                 ObjectDeserializer::using(
-                                    Instantiator::forThe(Dog::class),
+                                    ObjectInstantiator::forThe(Dog::class),
                                     $petMappings
                                 )
                             )
                         )
                     )
-                )),
+                ),
                 $referBackToTheOwner
             )
         );

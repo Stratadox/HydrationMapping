@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property;
 
+use InvalidArgumentException as InvalidArgument;
+use Stratadox\HydrationMapping\Mapping;
+use Stratadox\HydrationMapping\MappingFailure;
 use function get_class;
 use function is_object;
 use function sprintf;
-use InvalidArgumentException as InvalidArgument;
-use Stratadox\HydrationMapping\MapsProperty;
-use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
  * Notifies the client code when the input is not accepted by the constraint.
@@ -16,19 +16,19 @@ use Stratadox\HydrationMapping\UnmappableInput;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class UnsatisfiedConstraint extends InvalidArgument implements UnmappableInput
+final class UnsatisfiedConstraint extends InvalidArgument implements MappingFailure
 {
     /**
      * Notifies the client code when the input is not accepted by the constraint.
      *
-     * @param MapsProperty $property The property mapping that denied the input.
-     * @param mixed        $value    The input value that was rejected.
-     * @return UnmappableInput       The exception to throw.
+     * @param Mapping $property The property mapping that denied the input.
+     * @param mixed   $value    The input value that was rejected.
+     * @return MappingFailure   The exception to throw.
      */
     public static function itIsNotConsideredValid(
-        MapsProperty $property,
+        Mapping $property,
         $value
-    ): UnmappableInput {
+    ): MappingFailure {
         if (is_object($value)) {
             return new self(sprintf(
                 'Cannot assign the `%s` to property `%s`: ' .

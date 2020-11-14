@@ -8,13 +8,8 @@ use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneNested;
 use Stratadox\HydrationMapping\Test\Double\Person\Person;
 use Stratadox\HydrationMapping\Test\Double\Deserializers;
-use Stratadox\HydrationMapping\UnmappableInput;
+use Stratadox\HydrationMapping\MappingFailure;
 
-/**
- * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasOneNested
- * @covers \Stratadox\Hydration\Mapping\Property\Relationship\ObjectMappingFailed
- * @covers \Stratadox\Hydration\Mapping\Property\Relationship\KeyRequiring
- */
 class HasOneNested_maps_nested_objects extends TestCase
 {
     use Deserializers;
@@ -36,9 +31,9 @@ class HasOneNested_maps_nested_objects extends TestCase
         /** @var Person $author */
         $author = $authorMapping->value($inAuthorData);
 
-        $this->assertInstanceOf(Person::class, $author);
-        $this->assertSame('Jules', $author->firstName());
-        $this->assertSame('Verne', $author->lastName());
+        self::assertInstanceOf(Person::class, $author);
+        self::assertSame('Jules', $author->firstName());
+        self::assertSame('Verne', $author->lastName());
     }
 
     /** @test */
@@ -58,8 +53,8 @@ class HasOneNested_maps_nested_objects extends TestCase
 
         $author = $authorMapping->value($inAuthorData);
 
-        $this->assertInstanceOf(Person::class, $author);
-        $this->assertSame('author', $authorMapping->name());
+        self::assertInstanceOf(Person::class, $author);
+        self::assertSame('author', $authorMapping->name());
     }
 
     /** @test */
@@ -81,7 +76,7 @@ class HasOneNested_maps_nested_objects extends TestCase
             $this->exceptionThrowingDeserializer('Original message here.')
         );
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Failed to map the HasOneNested relation of the `foo` property: Original message here.'

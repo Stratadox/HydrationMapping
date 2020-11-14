@@ -6,10 +6,6 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Type;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Type\CastedFloat;
 
-/**
- * @covers \Stratadox\Hydration\Mapping\Property\Type\CastedFloat
- * @covers \Stratadox\Hydration\Mapping\Property\Type\ScalarValue
- */
 class CastedFloat_casts_the_values_to_floats extends TestCase
 {
     /** @test */
@@ -19,7 +15,7 @@ class CastedFloat_casts_the_values_to_floats extends TestCase
 
         $map = CastedFloat::inProperty('float');
 
-        $this->assertSame(5.2, $map->value($source));
+        self::assertSame(5.2, $map->value($source));
     }
 
     /** @test */
@@ -29,7 +25,7 @@ class CastedFloat_casts_the_values_to_floats extends TestCase
 
         $map = CastedFloat::inProperty('float');
 
-        $this->assertSame(6.0, $map->value($source));
+        self::assertSame(6.0, $map->value($source));
     }
 
     /** @test */
@@ -39,7 +35,7 @@ class CastedFloat_casts_the_values_to_floats extends TestCase
 
         $map = CastedFloat::inProperty('float');
 
-        $this->assertSame(3.0, $map->value($source));
+        self::assertSame(3.0, $map->value($source));
     }
 
     /** @test */
@@ -49,6 +45,6 @@ class CastedFloat_casts_the_values_to_floats extends TestCase
 
         $map = CastedFloat::inProperty('float');
 
-        $this->assertSame(0.0, $map->value($source));
+        self::assertSame(0.0, $map->value($source));
     }
 }

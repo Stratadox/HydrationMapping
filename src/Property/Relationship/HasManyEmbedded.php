@@ -3,9 +3,8 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
-use Stratadox\Deserializer\Deserializes;
-use Stratadox\Deserializer\DeserializesCollections;
-use Stratadox\HydrationMapping\MapsProperty;
+use Stratadox\Deserializer\Deserializer;
+use Stratadox\HydrationMapping\Mapping;
 use Throwable;
 
 /**
@@ -17,7 +16,7 @@ use Throwable;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class HasManyEmbedded implements MapsProperty
+final class HasManyEmbedded implements Mapping
 {
     private $name;
     private $collection;
@@ -26,8 +25,8 @@ final class HasManyEmbedded implements MapsProperty
 
     private function __construct(
         string $name,
-        DeserializesCollections $collection,
-        Deserializes $item,
+        Deserializer $collection,
+        Deserializer $item,
         string $key
     ) {
         $this->name = $name;
@@ -39,23 +38,20 @@ final class HasManyEmbedded implements MapsProperty
     /**
      * Creates a new embedded has-many mapping.
      *
-     * @param string                  $name       The name of the property.
-     * @param DeserializesCollections $collection The deserializer for the
-     *                                            collection.
-     * @param Deserializes            $item       The deserializer for the
-     *                                            individual items.
-     * @param string                  $key        The array key to assign to
-     *                                            the scalars, used by the
-     *                                            deserializer for individual
-     *                                            items.
-     * @return MapsProperty                       The embedded has-many mapping.
+     * @param string       $name       The name of the property.
+     * @param Deserializer $collection The deserializer for the collection.
+     * @param Deserializer $item       The deserializer for the individual items.
+     * @param string       $key        The array key to assign to the scalars,
+     *                                 used by the deserializer for individual
+     *                                 items.
+     * @return Mapping                 The embedded has-many mapping.
      */
     public static function inProperty(
         string $name,
-        DeserializesCollections $collection,
-        Deserializes $item,
+        Deserializer $collection,
+        Deserializer $item,
         string $key = 'key'
-    ): MapsProperty {
+    ): Mapping {
         return new self($name, $collection, $item, $key);
     }
 

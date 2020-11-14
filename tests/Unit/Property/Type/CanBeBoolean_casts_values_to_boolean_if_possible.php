@@ -8,13 +8,8 @@ use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Type\BooleanValue;
 use Stratadox\Hydration\Mapping\Property\Type\CanBeBoolean;
 use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
-use Stratadox\HydrationMapping\UnmappableInput;
+use Stratadox\HydrationMapping\MappingFailure;
 
-/**
- * @covers \Stratadox\Hydration\Mapping\Property\Type\CanBeBoolean
- * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
- * @covers \Stratadox\Hydration\Mapping\Property\Type\ScalarValue
- */
 class CanBeBoolean_casts_values_to_boolean_if_possible extends TestCase
 {
     /** @test */
@@ -24,7 +19,7 @@ class CanBeBoolean_casts_values_to_boolean_if_possible extends TestCase
 
         $map = CanBeBoolean::or(IntegerValue::inProperty('mixed'));
 
-        $this->assertFalse($map->value($source));
+        self::assertFalse($map->value($source));
     }
 
     /** @test */
@@ -34,7 +29,7 @@ class CanBeBoolean_casts_values_to_boolean_if_possible extends TestCase
 
         $map = CanBeBoolean::or(IntegerValue::inProperty('mixed'));
 
-        $this->assertTrue($map->value($source));
+        self::assertTrue($map->value($source));
     }
 
     /** @test */
@@ -44,7 +39,7 @@ class CanBeBoolean_casts_values_to_boolean_if_possible extends TestCase
 
         $map = CanBeBoolean::or(IntegerValue::inProperty('mixed'));
 
-        $this->assertFalse($map->value($source));
+        self::assertFalse($map->value($source));
     }
 
     /** @test */
@@ -54,7 +49,7 @@ class CanBeBoolean_casts_values_to_boolean_if_possible extends TestCase
 
         $map = CanBeBoolean::or(IntegerValue::inProperty('mixed'));
 
-        $this->assertTrue($map->value($source));
+        self::assertTrue($map->value($source));
     }
 
     /** @test */
@@ -64,7 +59,7 @@ class CanBeBoolean_casts_values_to_boolean_if_possible extends TestCase
 
         $map = CanBeBoolean::or(IntegerValue::inProperty('mixed'));
 
-        $this->assertFalse($map->value($source));
+        self::assertFalse($map->value($source));
     }
 
     /** @test */
@@ -74,7 +69,7 @@ class CanBeBoolean_casts_values_to_boolean_if_possible extends TestCase
 
         $map = CanBeBoolean::or(IntegerValue::inProperty('mixed'));
 
-        $this->assertTrue($map->value($source));
+        self::assertTrue($map->value($source));
     }
 
     /** @test */
@@ -84,7 +79,7 @@ class CanBeBoolean_casts_values_to_boolean_if_possible extends TestCase
 
         $map = CanBeBoolean::or(IntegerValue::inProperty('mixed'));
 
-        $this->assertSame(2, $map->value($source));
+        self::assertSame(2, $map->value($source));
     }
 
     /**
@@ -103,7 +98,7 @@ class CanBeBoolean_casts_values_to_boolean_if_possible extends TestCase
             $falsehoods
         );
 
-        $this->assertTrue($map->value($source));
+        self::assertTrue($map->value($source));
     }
 
     /**
@@ -122,7 +117,7 @@ class CanBeBoolean_casts_values_to_boolean_if_possible extends TestCase
             $falsehoods
         );
 
-        $this->assertFalse($map->value($source));
+        self::assertFalse($map->value($source));
     }
 
     /**
@@ -141,7 +136,7 @@ class CanBeBoolean_casts_values_to_boolean_if_possible extends TestCase
             $falsehoods
         );
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Cannot assign `' . $itsNotBoolean . '` to property `mixed`: ' .
@@ -155,7 +150,7 @@ class CanBeBoolean_casts_values_to_boolean_if_possible extends TestCase
     function custom_truth_mapping_knows_which_property_to_map_to()
     {
         $map = CanBeBoolean::or(BooleanValue::inProperty('boolean'), [], []);
-        $this->assertSame('boolean', $map->name());
+        self::assertSame('boolean', $map->name());
     }
 
     /** @test */
@@ -166,7 +161,7 @@ class CanBeBoolean_casts_values_to_boolean_if_possible extends TestCase
             ['yes'],
             ['no']
         );
-        $this->assertSame('bool', $map->key());
+        self::assertSame('bool', $map->key());
     }
 
     /** @test */
@@ -179,13 +174,13 @@ class CanBeBoolean_casts_values_to_boolean_if_possible extends TestCase
             $falsehoods
         );
 
-        $this->assertFalse($map->value(['boolean' => 1]));
-        $this->assertTrue($map->value(['boolean' => 0]));
-        $this->assertFalse($map->value(['boolean' => '0']));
-        $this->assertTrue($map->value(['boolean' => '1']));
+        self::assertFalse($map->value(['boolean' => 1]));
+        self::assertTrue($map->value(['boolean' => 0]));
+        self::assertFalse($map->value(['boolean' => '0']));
+        self::assertTrue($map->value(['boolean' => '1']));
 
-        $this->assertNotFalse($map->value(['boolean' => '7']));
-        $this->assertFalse($map->value(['boolean' => 7]));
+        self::assertNotFalse($map->value(['boolean' => '7']));
+        self::assertFalse($map->value(['boolean' => 7]));
     }
 
     public function trueValues(): array

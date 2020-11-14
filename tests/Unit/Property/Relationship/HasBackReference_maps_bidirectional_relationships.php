@@ -6,12 +6,8 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Relationship;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasBackReference;
-use Stratadox\HydrationMapping\UnmappableInput;
+use Stratadox\HydrationMapping\MappingFailure;
 
-/**
- * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasBackReference
- * @covers \Stratadox\Hydration\Mapping\Property\Relationship\NoReferrerFound
- */
 class HasBackReference_maps_bidirectional_relationships extends TestCase
 {
     /** @test */
@@ -22,7 +18,7 @@ class HasBackReference_maps_bidirectional_relationships extends TestCase
         $mapping = HasBackReference::inProperty('foo');
         $mapping->hydrating($object, []);
 
-        $this->assertSame(
+        self::assertSame(
             $object,
             $mapping->value([])
         );
@@ -33,7 +29,7 @@ class HasBackReference_maps_bidirectional_relationships extends TestCase
     {
         $mapping = HasBackReference::inProperty('foo');
 
-        $this->assertSame(
+        self::assertSame(
             'foo',
             $mapping->name()
         );
@@ -44,7 +40,7 @@ class HasBackReference_maps_bidirectional_relationships extends TestCase
     {
         $mapping = HasBackReference::inProperty('foo');
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Failed to reference back to the `foo` relationship: no referrer found.'

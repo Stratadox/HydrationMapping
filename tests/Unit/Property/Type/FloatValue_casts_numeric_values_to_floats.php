@@ -5,13 +5,8 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Type;
 
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Type\FloatValue;
-use Stratadox\HydrationMapping\UnmappableInput;
+use Stratadox\HydrationMapping\MappingFailure;
 
-/**
- * @covers \Stratadox\Hydration\Mapping\Property\Type\FloatValue
- * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
- * @covers \Stratadox\Hydration\Mapping\Property\Type\ScalarValue
- */
 class FloatValue_casts_numeric_values_to_floats extends TestCase
 {
     /** @test */
@@ -21,7 +16,7 @@ class FloatValue_casts_numeric_values_to_floats extends TestCase
 
         $map = FloatValue::inProperty('float');
 
-        $this->assertSame(5.2, $map->value($source));
+        self::assertSame(5.2, $map->value($source));
     }
 
     /** @test */
@@ -31,7 +26,7 @@ class FloatValue_casts_numeric_values_to_floats extends TestCase
 
         $map = FloatValue::inProperty('float');
 
-        $this->assertSame(6.0, $map->value($source));
+        self::assertSame(6.0, $map->value($source));
     }
 
     /** @test */
@@ -41,7 +36,7 @@ class FloatValue_casts_numeric_values_to_floats extends TestCase
 
         $map = FloatValue::inProperty('float');
 
-        $this->assertSame(3.0, $map->value($source));
+        self::assertSame(3.0, $map->value($source));
     }
 
     /** @test */
@@ -51,7 +46,7 @@ class FloatValue_casts_numeric_values_to_floats extends TestCase
 
         $map = FloatValue::inProperty('float');
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Cannot assign `NaN` to property `float`: ' .
@@ -67,7 +62,7 @@ class FloatValue_casts_numeric_values_to_floats extends TestCase
 
         $map = FloatValue::inProperty('float');
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Cannot assign the NULL to property `float`: ' .

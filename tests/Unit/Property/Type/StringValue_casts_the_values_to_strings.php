@@ -6,10 +6,6 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Type;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Type\StringValue;
 
-/**
- * @covers \Stratadox\Hydration\Mapping\Property\Type\StringValue
- * @covers \Stratadox\Hydration\Mapping\Property\Type\ScalarValue
- */
 class StringValue_casts_the_values_to_strings extends TestCase
 {
     /** @test */
@@ -19,7 +15,7 @@ class StringValue_casts_the_values_to_strings extends TestCase
 
         $map = StringValue::inProperty('string');
 
-        $this->assertSame('123', $map->value($source));
+        self::assertSame('123', $map->value($source));
     }
 
     /** @test */
@@ -29,7 +25,7 @@ class StringValue_casts_the_values_to_strings extends TestCase
 
         $map = StringValue::inProperty('string');
 
-        $this->assertSame('1', $map->value($source));
+        self::assertSame('1', $map->value($source));
     }
 
     /** @test */
@@ -39,7 +35,7 @@ class StringValue_casts_the_values_to_strings extends TestCase
 
         $map = StringValue::inProperty('string');
 
-        $this->assertSame('', $map->value($source));
+        self::assertSame('', $map->value($source));
     }
 
     /** @test */
@@ -49,6 +45,6 @@ class StringValue_casts_the_values_to_strings extends TestCase
 
         $map = StringValue::inProperty('string');
 
-        $this->assertSame('10.000259734361', $map->value($source));
+        self::assertSame('10.000259734361', $map->value($source));
     }
 }

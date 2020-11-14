@@ -7,12 +7,8 @@ use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneEmbedded;
 use Stratadox\HydrationMapping\Test\Double\Person\Person;
 use Stratadox\HydrationMapping\Test\Double\Deserializers;
-use Stratadox\HydrationMapping\UnmappableInput;
+use Stratadox\HydrationMapping\MappingFailure;
 
-/**
- * @covers \Stratadox\Hydration\Mapping\Property\Relationship\HasOneEmbedded
- * @covers \Stratadox\Hydration\Mapping\Property\Relationship\ObjectMappingFailed
- */
 class HasOneEmbedded_maps_embedded_objects extends TestCase
 {
     use Deserializers;
@@ -34,7 +30,7 @@ class HasOneEmbedded_maps_embedded_objects extends TestCase
         /** @var Person $author */
         $author = $authorMapping->value($bookInformation);
 
-        $this->assertInstanceOf(Person::class, $author);
+        self::assertInstanceOf(Person::class, $author);
     }
 
     /** @test */
@@ -44,7 +40,7 @@ class HasOneEmbedded_maps_embedded_objects extends TestCase
             $this->deserializerForThe(Person::class)
         );
 
-        $this->assertSame('author', $authorMapping->name());
+        self::assertSame('author', $authorMapping->name());
     }
 
     /** @test */
@@ -54,7 +50,7 @@ class HasOneEmbedded_maps_embedded_objects extends TestCase
             $this->exceptionThrowingDeserializer('Original message here.')
         );
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Failed to map the HasOneEmbedded relation of the `foo` property: Original message here.'

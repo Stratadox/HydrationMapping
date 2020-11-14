@@ -3,15 +3,14 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
-use function get_class as classOfThe;
 use RuntimeException;
+use Stratadox\HydrationMapping\Mapping;
+use Stratadox\HydrationMapping\MappingFailure;
+use Throwable;
+use function get_class as classOfThe;
 use function sprintf;
-use Stratadox\Hydration\Mapping\Property\Relationship\CollectionMappingFailed as The;
-use Stratadox\HydrationMapping\MapsProperty;
-use Stratadox\HydrationMapping\UnmappableInput;
 use function strrchr as endOfThe;
 use function substr as justThe;
-use Throwable;
 
 /**
  * Notifies the client code when the collection could not be mapped.
@@ -19,23 +18,23 @@ use Throwable;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class CollectionMappingFailed extends RuntimeException implements UnmappableInput
+final class CollectionMappingFailed extends RuntimeException implements MappingFailure
 {
     /**
      * Notifies the client code when a collection item could not be hydrated.
      *
-     * @param MapsProperty $mapping   The item mapping that failed.
+     * @param Mapping $mapping   The item mapping that failed.
      * @param Throwable    $exception The exception that was encountered.
-     * @return UnmappableInput        The collection mapping failure.
+     * @return MappingFailure        The collection mapping failure.
      */
     public static function forItem(
-        MapsProperty $mapping,
+        Mapping $mapping,
         Throwable $exception
-    ): UnmappableInput {
+    ): MappingFailure {
         return new self(
             sprintf(
                 'Failed to map the %s items of the `%s` property: %s',
-                The::shortNameOfThe($mapping),
+                self::shortNameOfThe($mapping),
                 $mapping->name(),
                 $exception->getMessage()
             ),
@@ -47,18 +46,18 @@ final class CollectionMappingFailed extends RuntimeException implements Unmappab
     /**
      * Notifies the client code when a collection class could not be hydrated.
      *
-     * @param MapsProperty $mapping   The collection mapping that failed.
+     * @param Mapping $mapping   The collection mapping that failed.
      * @param Throwable    $exception The exception that was encountered.
-     * @return UnmappableInput        The collection mapping failure.
+     * @return MappingFailure        The collection mapping failure.
      */
     public static function forCollection(
-        MapsProperty $mapping,
+        Mapping $mapping,
         Throwable $exception
-    ): UnmappableInput {
+    ): MappingFailure {
         return new self(
             sprintf(
                 'Failed to map the %s collection of the `%s` property: %s',
-                The::shortNameOfThe($mapping),
+                self::shortNameOfThe($mapping),
                 $mapping->name(),
                 $exception->getMessage()
             ),
@@ -70,11 +69,11 @@ final class CollectionMappingFailed extends RuntimeException implements Unmappab
     /**
      * Retrieves the class name without namespace.
      *
-     * @param MapsProperty $mapping The failing mapping instance.
+     * @param Mapping $mapping The failing mapping instance.
      * @return string               The unqualified (short) class name of the
      *                              mapping instance.
      */
-    private static function shortNameOfThe(MapsProperty $mapping): string
+    private static function shortNameOfThe(Mapping $mapping): string
     {
         return justThe(endOfThe(classOfThe($mapping), '\\'), 1);
     }

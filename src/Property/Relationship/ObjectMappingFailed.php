@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
-use function get_class as classOfThe;
 use RuntimeException;
-use function sprintf;
-use Stratadox\HydrationMapping\MapsProperty;
-use Stratadox\HydrationMapping\UnmappableInput;
-use function strrchr as endOfThe;
-use function substr as justThe;
+use Stratadox\HydrationMapping\Mapping;
+use Stratadox\HydrationMapping\MappingFailure;
 use Throwable;
+use function get_class;
+use function sprintf;
+use function strrchr;
+use function substr;
 
 /**
  * Notifies the client code when the object could not be mapped.
@@ -18,23 +18,23 @@ use Throwable;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class ObjectMappingFailed extends RuntimeException implements UnmappableInput
+final class ObjectMappingFailed extends RuntimeException implements MappingFailure
 {
     /**
      * Notifies the client code when an object could not be hydrated.
      *
-     * @param MapsProperty $mapping   The object mapping that failed.
-     * @param Throwable    $exception The exception that was encountered.
-     * @return UnmappableInput        The object mapping failure.
+     * @param Mapping   $mapping   The object mapping that failed.
+     * @param Throwable $exception The exception that was encountered.
+     * @return MappingFailure      The object mapping failure.
      */
     public static function tryingToMapItem(
-        MapsProperty $mapping,
+        Mapping $mapping,
         Throwable $exception
-    ): UnmappableInput {
+    ): MappingFailure {
         return new self(
             sprintf(
                 'Failed to map the %s relation of the `%s` property: %s',
-                justThe(endOfThe(classOfThe($mapping), '\\'), 1),
+                substr(strrchr(get_class($mapping), '\\'), 1),
                 $mapping->name(),
                 $exception->getMessage()
             ),

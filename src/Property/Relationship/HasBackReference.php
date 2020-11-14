@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
-use Stratadox\HydrationMapping\MapsProperty;
-use Stratadox\Hydrator\ObservesHydration;
+use Stratadox\HydrationMapping\Mapping;
+use Stratadox\Hydrator\HydrationObserver;
 
 /**
  * Maps a back-reference in a bidirectional relationship.
@@ -12,7 +12,7 @@ use Stratadox\Hydrator\ObservesHydration;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class HasBackReference implements MapsProperty, ObservesHydration
+final class HasBackReference implements Mapping, HydrationObserver
 {
     private $name;
     private $referenceTo;

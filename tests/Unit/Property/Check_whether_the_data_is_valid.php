@@ -9,18 +9,15 @@ use Stratadox\Hydration\Mapping\Property\Relationship\HasOneEmbedded;
 use Stratadox\Hydration\Mapping\Property\Type\FloatValue;
 use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
 use Stratadox\Hydration\Mapping\Property\Type\StringValue;
+use Stratadox\HydrationMapping\MappingFailure;
 use Stratadox\HydrationMapping\Test\Double\Constraint\HasLongerFirstName;
 use Stratadox\HydrationMapping\Test\Double\Constraint\IsNotLess;
 use Stratadox\HydrationMapping\Test\Double\Constraint\IsNotMore;
 use Stratadox\HydrationMapping\Test\Double\Constraint\HasLongerLastName;
 use Stratadox\HydrationMapping\Test\Double\Deserializers;
 use Stratadox\HydrationMapping\Test\Double\Person\Person;
-use Stratadox\HydrationMapping\UnmappableInput;
+use function compact;
 
-/**
- * @covers \Stratadox\Hydration\Mapping\Property\Check
- * @covers \Stratadox\Hydration\Mapping\Property\UnsatisfiedConstraint
- */
 class Check_whether_the_data_is_valid extends TestCase
 {
     use Deserializers;
@@ -36,7 +33,7 @@ class Check_whether_the_data_is_valid extends TestCase
             IntegerValue::inProperty('foo')
         );
 
-        $this->assertSame((int) $input, $map->value(['foo' => $input]));
+        self::assertSame((int) $input, $map->value(['foo' => $input]));
     }
 
     /**
@@ -50,7 +47,7 @@ class Check_whether_the_data_is_valid extends TestCase
             StringValue::inProperty('foo')
         );
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Cannot assign `' . $input . '` to property `foo`: ' .
@@ -73,17 +70,14 @@ class Check_whether_the_data_is_valid extends TestCase
             )
         );
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Cannot assign the `' . Person::class . '` to property `person`: ' .
             'The value did not satisfy the specifications.'
         );
 
-        $map->value([
-            'firstName' => $firstName,
-            'lastName' => $lastName,
-        ]);
+        $map->value(compact('firstName', 'lastName'));
     }
 
     /** @test */
@@ -91,7 +85,7 @@ class Check_whether_the_data_is_valid extends TestCase
     {
         $map = Check::thatIt(IsNotMore::than(10), FloatValue::inProperty('foo'));
 
-        $this->assertSame('foo', $map->name());
+        self::assertSame('foo', $map->name());
     }
 
     public function validData(): array

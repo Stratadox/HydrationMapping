@@ -6,10 +6,6 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Type;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Type\CastedInteger;
 
-/**
- * @covers \Stratadox\Hydration\Mapping\Property\Type\CastedInteger
- * @covers \Stratadox\Hydration\Mapping\Property\Type\ScalarValue
- */
 class CastedInteger_casts_the_values_to_integers extends TestCase
 {
     /** @test */
@@ -19,7 +15,7 @@ class CastedInteger_casts_the_values_to_integers extends TestCase
 
         $map = CastedInteger::inProperty('int');
 
-        $this->assertSame(123, $map->value($source));
+        self::assertSame(123, $map->value($source));
     }
 
     /** @test */
@@ -29,7 +25,7 @@ class CastedInteger_casts_the_values_to_integers extends TestCase
 
         $map = CastedInteger::inProperty('int');
 
-        $this->assertSame(PHP_INT_MAX, $map->value($source));
+        self::assertSame(PHP_INT_MAX, $map->value($source));
     }
 
     /** @test */
@@ -39,7 +35,7 @@ class CastedInteger_casts_the_values_to_integers extends TestCase
 
         $map = CastedInteger::inProperty('int');
 
-        $this->assertSame(6, $map->value($source));
+        self::assertSame(6, $map->value($source));
     }
 
     /** @test */
@@ -49,7 +45,7 @@ class CastedInteger_casts_the_values_to_integers extends TestCase
 
         $map = CastedInteger::inProperty('int');
 
-        $this->assertSame(0, $map->value($source));
+        self::assertSame(0, $map->value($source));
     }
 
     /** @test */
@@ -59,6 +55,6 @@ class CastedInteger_casts_the_values_to_integers extends TestCase
 
         $map = CastedInteger::inProperty('int');
 
-        $this->assertSame(0, $map->value($source));
+        self::assertSame(0, $map->value($source));
     }
 }

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
-use Stratadox\HydrationMapping\MapsProperty;
+use Stratadox\HydrationMapping\Mapping;
 use Stratadox\Proxy\ProxyFactory;
 use Throwable;
 
@@ -13,7 +13,7 @@ use Throwable;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class HasOneProxy implements MapsProperty
+final class HasOneProxy implements Mapping
 {
     private $name;
     private $proxyFactory;
@@ -29,12 +29,12 @@ final class HasOneProxy implements MapsProperty
      *
      * @param string       $name         The name of the property.
      * @param ProxyFactory $proxyFactory The proxy builder.
-     * @return MapsProperty              The lazy has-one mapping.
+     * @return Mapping                   The lazy has-one mapping.
      */
     public static function inProperty(
         string $name,
         ProxyFactory $proxyFactory
-    ): MapsProperty {
+    ): Mapping {
         return new self($name, $proxyFactory);
     }
 

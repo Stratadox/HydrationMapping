@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Type;
 
+use Stratadox\HydrationMapping\KeyedMapping;
 use function in_array;
 use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
-use Stratadox\HydrationMapping\ExposesDataKey;
-use Stratadox\HydrationMapping\UnmappableInput;
+use Stratadox\HydrationMapping\MappingFailure;
 
 /**
  * Decorates @see BooleanValue with custom true/false declarations.
@@ -14,14 +14,14 @@ use Stratadox\HydrationMapping\UnmappableInput;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class CanBeBoolean implements ExposesDataKey
+final class CanBeBoolean implements KeyedMapping
 {
     private $or;
     private $truths;
     private $falsehoods;
 
     private function __construct(
-        ExposesDataKey $mapping,
+        KeyedMapping $mapping,
         array $truths,
         array $falsehoods
     ) {
@@ -33,16 +33,16 @@ final class CanBeBoolean implements ExposesDataKey
     /**
      * Creates a new custom truth mapping, decorating a @see BooleanValue.
      *
-     * @param ExposesDataKey $mapping    The mapping to decorate.
+     * @param KeyedMapping $mapping    The mapping to decorate.
      * @param array          $truths     The values to consider true.
      * @param array          $falsehoods The values to consider false.
-     * @return ExposesDataKey            The custom truth boolean mapping.
+     * @return KeyedMapping            The custom truth boolean mapping.
      */
     public static function or(
-        ExposesDataKey $mapping,
+        KeyedMapping $mapping,
         array $truths = [true, 1, '1'],
         array $falsehoods = [false, 0, '0']
-    ): ExposesDataKey {
+    ): KeyedMapping {
         return new self($mapping, $truths, $falsehoods);
     }
 
@@ -57,7 +57,7 @@ final class CanBeBoolean implements ExposesDataKey
         }
         try {
             return $this->or->value($data, $owner);
-        } catch (UnmappableInput $exception) {
+        } catch (MappingFailure $exception) {
             throw UnmappableProperty::addAlternativeTypeInformation(
                 'boolean',
                 $exception

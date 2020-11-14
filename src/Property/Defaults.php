@@ -3,15 +3,15 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property;
 
-use Stratadox\HydrationMapping\MapsProperty;
+use Stratadox\HydrationMapping\Mapping;
 use Throwable;
 
-final class Defaults implements MapsProperty
+final class Defaults implements Mapping
 {
     private $defaultValue;
     private $mapping;
 
-    private function __construct($defaultValue, MapsProperty $mapping)
+    private function __construct($defaultValue, Mapping $mapping)
     {
         $this->defaultValue = $defaultValue;
         $this->mapping = $mapping;
@@ -20,15 +20,15 @@ final class Defaults implements MapsProperty
     /**
      * Sets up a default value for a property mapping.
      *
-     * @param mixed        $defaultValue The value to assign if the original
-     *                                   mapping failed.
-     * @param MapsProperty $mapping      The original mapping, to try first.
-     * @return MapsProperty              The property mapping with default.
+     * @param mixed $defaultValue   The value to assign if the original mapping
+     *                              failed.
+     * @param Mapping $mapping      The original mapping, to try first.
+     * @return Mapping              The property mapping with default.
      */
     public static function to(
         $defaultValue,
-        MapsProperty $mapping
-    ): MapsProperty {
+        Mapping $mapping
+    ): Mapping {
         return new self($defaultValue, $mapping);
     }
 

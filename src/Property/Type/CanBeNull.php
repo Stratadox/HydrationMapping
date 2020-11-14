@@ -6,8 +6,8 @@ namespace Stratadox\Hydration\Mapping\Property\Type;
 use function array_key_exists;
 use function is_null;
 use Stratadox\Hydration\Mapping\Property\MissingTheKey;
-use Stratadox\HydrationMapping\ExposesDataKey;
-use Stratadox\HydrationMapping\UnmappableInput;
+use Stratadox\HydrationMapping\KeyedMapping;
+use Stratadox\HydrationMapping\MappingFailure;
 
 /**
  * Decorates scalar type declaration with a nullable property.
@@ -15,11 +15,11 @@ use Stratadox\HydrationMapping\UnmappableInput;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class CanBeNull implements ExposesDataKey
+final class CanBeNull implements KeyedMapping
 {
     private $or;
 
-    private function __construct(ExposesDataKey $mapping)
+    private function __construct(KeyedMapping $mapping)
     {
         $this->or = $mapping;
     }
@@ -27,10 +27,10 @@ final class CanBeNull implements ExposesDataKey
     /**
      * Creates a new nullable type wrapper.
      *
-     * @param ExposesDataKey $mapping    The mapping to decorate.
-     * @return ExposesDataKey            The nullable mapping.
+     * @param KeyedMapping $mapping    The mapping to decorate.
+     * @return KeyedMapping            The nullable mapping.
      */
-    public static function or(ExposesDataKey $mapping): ExposesDataKey
+    public static function or(KeyedMapping $mapping): KeyedMapping
     {
         return new self($mapping);
     }
@@ -56,7 +56,7 @@ final class CanBeNull implements ExposesDataKey
         return $this->or->key();
     }
 
-    /** @throws UnmappableInput */
+    /** @throws MappingFailure */
     private function my(array $data)
     {
         $key = $this->or->key();

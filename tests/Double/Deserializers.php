@@ -3,13 +3,12 @@ declare(strict_types=1);
 
 namespace Stratadox\HydrationMapping\Test\Double;
 
+use Stratadox\Deserializer\Deserializer;
 use function assert;
 use Exception;
 use PHPUnit\Framework\MockObject\Matcher\AnyInvokedCount;
 use PHPUnit\Framework\MockObject\MockObject;
 use Stratadox\Deserializer\CollectionDeserializer;
-use Stratadox\Deserializer\DeserializesCollections;
-use Stratadox\Deserializer\DeserializesObjects;
 use Stratadox\Deserializer\ObjectDeserializer;
 
 trait Deserializers
@@ -18,20 +17,20 @@ trait Deserializers
      * Makes a simple collection deserializer.
      *
      * @param string $class
-     * @return DeserializesCollections
+     * @return Deserializer
      */
-    protected function collectionDeserializerForThe(string $class): DeserializesCollections
+    protected function immutableCollectionDeserializerFor(string $class): Deserializer
     {
-        return CollectionDeserializer::forThe($class);
+        return CollectionDeserializer::forImmutable($class);
     }
 
     /**
      * Makes a simple object deserializer.
      *
      * @param string $class
-     * @return DeserializesObjects
+     * @return Deserializer
      */
-    protected function deserializerForThe(string $class): DeserializesObjects
+    protected function deserializerForThe(string $class): Deserializer
     {
         return ObjectDeserializer::forThe($class);
     }
@@ -40,13 +39,13 @@ trait Deserializers
      * Mocks a simple deserializer which will throw an @see UnmappableInput exception.
      *
      * @param string $message
-     * @return DeserializesObjects
+     * @return Deserializer
      */
-    protected function exceptionThrowingDeserializer(string $message = ''): DeserializesObjects
+    protected function exceptionThrowingDeserializer(string $message = ''): Deserializer
     {
-        $deserializer = $this->createMock(DeserializesObjects::class);
+        $deserializer = $this->createMock(Deserializer::class);
 
-        $deserializer->expects($this->any())
+        $deserializer
             ->method('from')
             ->willReturnCallback(
                 function () use ($message) {
@@ -54,7 +53,7 @@ trait Deserializers
                 }
             );
 
-        assert($deserializer instanceof DeserializesObjects);
+        assert($deserializer instanceof Deserializer);
 
         return $deserializer;
     }
@@ -63,13 +62,13 @@ trait Deserializers
      * Mocks a simple deserializer which will throw an @see UnmappableInput exception.
      *
      * @param string $message
-     * @return DeserializesCollections
+     * @return Deserializer
      */
-    protected function exceptionThrowingCollectionDeserializer(string $message = ''): DeserializesCollections
+    protected function exceptionThrowingCollectionDeserializer(string $message = ''): Deserializer
     {
-        $deserializer = $this->createMock(DeserializesCollections::class);
+        $deserializer = $this->createMock(Deserializer::class);
 
-        $deserializer->expects($this->any())
+        $deserializer
             ->method('from')
             ->willReturnCallback(
                 function () use ($message) {
@@ -77,7 +76,7 @@ trait Deserializers
                 }
             );
 
-        assert($deserializer instanceof DeserializesCollections);
+        assert($deserializer instanceof Deserializer);
 
         return $deserializer;
     }

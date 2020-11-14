@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Stratadox\HydrationMapping\Test\Feature;
 
 use PHPUnit\Framework\TestCase;
-use Stratadox\Deserializer\Deserializes;
+use Stratadox\Deserializer\Deserializer;
 use Stratadox\HydrationMapping\Test\Double\Pet\Cat;
 use Stratadox\HydrationMapping\Test\Double\Pet\Dog;
 use Stratadox\HydrationMapping\Test\Double\Pet\Human;
@@ -12,9 +12,6 @@ use Stratadox\HydrationMapping\Test\Double\Pet\NoMoreFood;
 use Stratadox\HydrationMapping\Test\Double\Pet\ThatIsNotMyPet;
 use Stratadox\HydrationMapping\Test\Feature\Data\PetsWithOwners;
 
-/**
- * @coversNothing
- */
 class Loading_pets_and_their_owners_from_various_structures extends TestCase
 {
     use PetsWithOwners;
@@ -23,7 +20,7 @@ class Loading_pets_and_their_owners_from_various_structures extends TestCase
      * @test
      * @dataProvider petsWithOwners
      */
-    function the_humans_have_names(Deserializes $petOwner, array $fromData)
+    function the_humans_have_names(Deserializer $petOwner, array $fromData)
     {
         $alice = $this->instantiate($petOwner, 1, $fromData);
         $bob = $this->instantiate($petOwner, 2, $fromData);
@@ -38,7 +35,7 @@ class Loading_pets_and_their_owners_from_various_structures extends TestCase
      * @test
      * @dataProvider petsWithOwners
      */
-    function charlie_has_no_pet_food(Deserializes $petOwner, array $fromData)
+    function charlie_has_no_pet_food(Deserializer $petOwner, array $fromData)
     {
         $charlie = $this->instantiate($petOwner, 3, $fromData);
 
@@ -50,7 +47,7 @@ class Loading_pets_and_their_owners_from_various_structures extends TestCase
      * @test
      * @dataProvider petsWithOwners
      */
-    function charlie_has_no_pets(Deserializes $petOwner, array $fromData)
+    function charlie_has_no_pets(Deserializer $petOwner, array $fromData)
     {
         $charlie = $this->instantiate($petOwner, 3, $fromData);
 
@@ -61,7 +58,7 @@ class Loading_pets_and_their_owners_from_various_structures extends TestCase
      * @test
      * @dataProvider petsWithOwners
      */
-    function alice_and_bob_have_pets(Deserializes $petOwner, array $fromData)
+    function alice_and_bob_have_pets(Deserializer $petOwner, array $fromData)
     {
         $alice = $this->instantiate($petOwner, 1, $fromData);
         $bob = $this->instantiate($petOwner, 2, $fromData);
@@ -74,7 +71,7 @@ class Loading_pets_and_their_owners_from_various_structures extends TestCase
      * @test
      * @dataProvider petsWithOwners
      */
-    function alice_has_pet_food(Deserializes $petOwner, array $fromData)
+    function alice_has_pet_food(Deserializer $petOwner, array $fromData)
     {
         $alice = $this->instantiate($petOwner, 1, $fromData);
 
@@ -86,7 +83,7 @@ class Loading_pets_and_their_owners_from_various_structures extends TestCase
      * @test
      * @dataProvider petsWithOwners
      */
-    function alice_has_a_cat_named_Foo(Deserializes $petOwner, array $fromData)
+    function alice_has_a_cat_named_Foo(Deserializer $petOwner, array $fromData)
     {
         $alice = $this->instantiate($petOwner, 1, $fromData);
 
@@ -100,7 +97,7 @@ class Loading_pets_and_their_owners_from_various_structures extends TestCase
      * @test
      * @dataProvider petsWithOwners
      */
-    function foo_is_the_cat_of_alice(Deserializes $petOwner, array $fromData)
+    function foo_is_the_cat_of_alice(Deserializer $petOwner, array $fromData)
     {
         $alice = $this->instantiate($petOwner, 1, $fromData);
         $foo = $alice->pet(0);
@@ -112,7 +109,7 @@ class Loading_pets_and_their_owners_from_various_structures extends TestCase
      * @test
      * @dataProvider petsWithOwners
      */
-    function bob_has_a_hungry_cat_named_Bar(Deserializes $petOwner, array $fromData)
+    function bob_has_a_hungry_cat_named_Bar(Deserializer $petOwner, array $fromData)
     {
         $bob = $this->instantiate($petOwner, 2, $fromData);
 
@@ -126,7 +123,7 @@ class Loading_pets_and_their_owners_from_various_structures extends TestCase
      * @test
      * @dataProvider petsWithOwners
      */
-    function bob_also_has_a_dog_named_Baz(Deserializes $petOwner, array $fromData)
+    function bob_also_has_a_dog_named_Baz(Deserializer $petOwner, array $fromData)
     {
         $bob = $this->instantiate($petOwner, 2, $fromData);
 
@@ -139,7 +136,7 @@ class Loading_pets_and_their_owners_from_various_structures extends TestCase
      * @test
      * @dataProvider petsWithOwners
      */
-    function bob_has_pet_food(Deserializes $petOwner, array $fromData)
+    function bob_has_pet_food(Deserializer $petOwner, array $fromData)
     {
         $bob = $this->instantiate($petOwner, 2, $fromData);
 
@@ -151,7 +148,7 @@ class Loading_pets_and_their_owners_from_various_structures extends TestCase
      * @test
      * @dataProvider petsWithOwners
      */
-    function bob_feeds_his_cat(Deserializes $petOwner, array $fromData)
+    function bob_feeds_his_cat(Deserializer $petOwner, array $fromData)
     {
         $bob = $this->instantiate($petOwner, 2, $fromData);
         $bar = $bob->pet(0);
@@ -166,7 +163,7 @@ class Loading_pets_and_their_owners_from_various_structures extends TestCase
      * @test
      * @dataProvider petsWithOwners
      */
-    function bob_tries_to_feed_his_cat_twice_but_is_short_on_food(Deserializes $petOwner, array $fromData)
+    function bob_tries_to_feed_his_cat_twice_but_is_short_on_food(Deserializer $petOwner, array $fromData)
     {
         $bob = $this->instantiate($petOwner, 2, $fromData);
         $bar = $bob->pet(0);
@@ -186,7 +183,7 @@ class Loading_pets_and_their_owners_from_various_structures extends TestCase
      * @test
      * @dataProvider petsWithOwners
      */
-    function alice_does_not_feed_bobs_cat(Deserializes $petOwner, array $fromData)
+    function alice_does_not_feed_bobs_cat(Deserializer $petOwner, array $fromData)
     {
         $alice = $this->instantiate($petOwner, 1, $fromData);
         $bob = $this->instantiate($petOwner, 2, $fromData);
@@ -205,7 +202,7 @@ class Loading_pets_and_their_owners_from_various_structures extends TestCase
      * @test
      * @dataProvider petsWithOwners
      */
-    function alice_takes_care_of_bobs_cat(Deserializes $petOwner, array $fromData)
+    function alice_takes_care_of_bobs_cat(Deserializer $petOwner, array $fromData)
     {
         $alice = $this->instantiate($petOwner, 1, $fromData);
         $bob = $this->instantiate($petOwner, 2, $fromData);
@@ -223,7 +220,7 @@ class Loading_pets_and_their_owners_from_various_structures extends TestCase
     }
 
     private function instantiate(
-        Deserializes $petOwner,
+        Deserializer $petOwner,
         int $number,
         array $dataSet
     ): Human {

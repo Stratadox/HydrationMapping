@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
-use Stratadox\Deserializer\Deserializes;
-use Stratadox\HydrationMapping\MapsProperty;
+use Stratadox\Deserializer\Deserializer;
+use Stratadox\HydrationMapping\Mapping;
 use Throwable;
 
 /**
@@ -13,12 +13,12 @@ use Throwable;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class HasOneEmbedded implements MapsProperty
+final class HasOneEmbedded implements Mapping
 {
     private $name;
     private $deserialize;
 
-    private function __construct(string $name, Deserializes $deserializer)
+    private function __construct(string $name, Deserializer $deserializer)
     {
         $this->name = $name;
         $this->deserialize = $deserializer;
@@ -28,14 +28,13 @@ final class HasOneEmbedded implements MapsProperty
      * Creates a new embedded has-one mapping.
      *
      * @param string       $name         The name of the property.
-     * @param Deserializes $deserializer The deserializer for the embedded
-     *                                   object.
-     * @return MapsProperty              The embedded has-one mapping.
+     * @param Deserializer $deserializer The deserializer for the embedded object.
+     * @return Mapping                   The embedded has-one mapping.
      */
     public static function inProperty(
         string $name,
-        Deserializes $deserializer
-    ): MapsProperty {
+        Deserializer $deserializer
+    ): Mapping {
         return new self($name, $deserializer);
     }
 

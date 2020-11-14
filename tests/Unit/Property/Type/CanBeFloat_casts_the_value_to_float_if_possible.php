@@ -8,13 +8,8 @@ use Stratadox\Hydration\Mapping\Property\MissingTheKey;
 use Stratadox\Hydration\Mapping\Property\Type\BooleanValue;
 use Stratadox\Hydration\Mapping\Property\Type\CanBeFloat;
 use Stratadox\Hydration\Mapping\Property\Type\StringValue;
-use Stratadox\HydrationMapping\UnmappableInput;
+use Stratadox\HydrationMapping\MappingFailure;
 
-/**
- * @covers \Stratadox\Hydration\Mapping\Property\Type\CanBeFloat
- * @covers \Stratadox\Hydration\Mapping\Property\MissingTheKey
- * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
- */
 class CanBeFloat_casts_the_value_to_float_if_possible extends TestCase
 {
     /** @test */
@@ -24,7 +19,7 @@ class CanBeFloat_casts_the_value_to_float_if_possible extends TestCase
 
         $map = CanBeFloat::or(StringValue::inProperty('mixed'));
 
-        $this->assertSame(16.0, $map->value($source));
+        self::assertSame(16.0, $map->value($source));
     }
 
     /** @test */
@@ -34,7 +29,7 @@ class CanBeFloat_casts_the_value_to_float_if_possible extends TestCase
 
         $map = CanBeFloat::or(StringValue::inProperty('mixed'));
 
-        $this->assertSame('NaN', $map->value($source));
+        self::assertSame('NaN', $map->value($source));
     }
 
     /** @test */
@@ -42,7 +37,7 @@ class CanBeFloat_casts_the_value_to_float_if_possible extends TestCase
     {
         $map = CanBeFloat::or(StringValue::inProperty('mixed'));
 
-        $this->assertSame('mixed', $map->name());
+        self::assertSame('mixed', $map->name());
     }
 
     /** @test */
@@ -52,7 +47,7 @@ class CanBeFloat_casts_the_value_to_float_if_possible extends TestCase
             StringValue::inPropertyWithDifferentKey('mixed', 'key')
         );
 
-        $this->assertSame('key', $map->key());
+        self::assertSame('key', $map->key());
     }
 
     /** @test */
@@ -72,7 +67,7 @@ class CanBeFloat_casts_the_value_to_float_if_possible extends TestCase
 
         $map = CanBeFloat::or(BooleanValue::inProperty('mixed'));
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Cannot assign `NaN` to property `mixed`: it is not clean for ' .

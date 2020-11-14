@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
-use Stratadox\Deserializer\DeserializesCollections;
-use Stratadox\HydrationMapping\ExposesDataKey;
+use Stratadox\Deserializer\Deserializer;
+use Stratadox\HydrationMapping\KeyedMapping;
 use Stratadox\Proxy\ProxyFactory;
 use Stratadox\Proxy\ProxyProductionFailed as ProxyException;
 use Throwable;
@@ -15,7 +15,7 @@ use Throwable;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class HasManyProxies implements ExposesDataKey
+final class HasManyProxies implements KeyedMapping
 {
     use KeyRequiring;
 
@@ -27,7 +27,7 @@ final class HasManyProxies implements ExposesDataKey
     private function __construct(
         string $name,
         string $dataKey,
-        DeserializesCollections $collection,
+        Deserializer $collection,
         ProxyFactory $proxyFactory
     ) {
         $this->name = $name;
@@ -39,18 +39,16 @@ final class HasManyProxies implements ExposesDataKey
     /**
      * Creates a new lazily loaded has-many mapping.
      *
-     * @param string                  $name         The name of both the key and
-     *                                              the property.
-     * @param DeserializesCollections $collection   The deserializer for the
-     *                                              collection.
-     * @param ProxyFactory            $proxyFactory The proxy factory.
-     * @return ExposesDataKey                       The lazy has-many mapping.
+     * @param string       $name         The name of both the key and the property.
+     * @param Deserializer $collection   The deserializer for the collection.
+     * @param ProxyFactory $proxyFactory The proxy factory.
+     * @return KeyedMapping              The lazy has-many mapping.
      */
     public static function inProperty(
         string $name,
-        DeserializesCollections $collection,
+        Deserializer $collection,
         ProxyFactory $proxyFactory
-    ): ExposesDataKey {
+    ): KeyedMapping {
         return new self($name, $name, $collection, $proxyFactory);
     }
 
@@ -58,19 +56,18 @@ final class HasManyProxies implements ExposesDataKey
      * Creates a new lazily loading has-many mapping, using the data from a
      * specific key.
      *
-     * @param string                  $name         The name of the property.
-     * @param string                  $key          The array key to use.
-     * @param DeserializesCollections $collection   The deserializer for the
-     *                                              collection.
-     * @param ProxyFactory            $proxyFactory The proxy factory.
-     * @return ExposesDataKey                       The lazy has-many mapping.
+     * @param string       $name         The name of the property.
+     * @param string       $key          The array key to use.
+     * @param Deserializer $collection   The deserializer for the collection.
+     * @param ProxyFactory $proxyFactory The proxy factory.
+     * @return KeyedMapping              The lazy has-many mapping.
      */
     public static function inPropertyWithDifferentKey(
         string $name,
         string $key,
-        DeserializesCollections $collection,
+        Deserializer $collection,
         ProxyFactory $proxyFactory
-    ): ExposesDataKey {
+    ): KeyedMapping {
         return new self($name, $key, $collection, $proxyFactory);
     }
 
@@ -107,8 +104,7 @@ final class HasManyProxies implements ExposesDataKey
      * Produces the proxies for in the collection.
      *
      * @param int         $amount The amount of proxies to produce.
-     * @param object|null $owner  The object that holds a reference to the
-     *                            proxy.
+     * @param object|null $owner  The object that holds a reference to the proxy.
      * @return array              List of proxy objects.
      * @throws ProxyException
      */

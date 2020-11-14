@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Stratadox\Hydration\Mapping\Property\Dynamic;
 
 use Closure;
-use Stratadox\HydrationMapping\MapsProperty;
+use Stratadox\HydrationMapping\Mapping;
 
 /**
  * Maps to the result of a closure that runs against the input data.
@@ -12,7 +12,7 @@ use Stratadox\HydrationMapping\MapsProperty;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-final class ClosureResult implements MapsProperty
+final class ClosureResult implements Mapping
 {
     private $property;
     private $function;

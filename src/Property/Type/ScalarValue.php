@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Type;
 
+use Stratadox\HydrationMapping\KeyedMapping;
+use Stratadox\HydrationMapping\MappingFailure;
 use function array_key_exists;
 use Stratadox\Hydration\Mapping\Property\MissingTheKey;
-use Stratadox\HydrationMapping\ExposesDataKey;
-use Stratadox\HydrationMapping\UnmappableInput;
 
 /**
  * Maps the data from a single key to a scalar object property.
@@ -14,7 +14,7 @@ use Stratadox\HydrationMapping\UnmappableInput;
  * @package Stratadox\Hydrate
  * @author  Stratadox
  */
-abstract class ScalarValue implements ExposesDataKey
+abstract class ScalarValue implements KeyedMapping
 {
     private $name;
     private $key;
@@ -28,10 +28,10 @@ abstract class ScalarValue implements ExposesDataKey
     /**
      * Creates a new mapping for the called-upon scalar type object property.
      *
-     * @param string $name    The name of both the key and the property.
-     * @return ExposesDataKey The scalar mapping object.
+     * @param string $name  The name of both the key and the property.
+     * @return KeyedMapping The scalar mapping object.
      */
-    public static function inProperty(string $name): ExposesDataKey
+    public static function inProperty(string $name): KeyedMapping
     {
         return new static($name, $name);
     }
@@ -40,14 +40,14 @@ abstract class ScalarValue implements ExposesDataKey
      * Creates a new mapping for the called-upon scalar type object property,
      * using the data from a specific key.
      *
-     * @param string $name    The name of the property.
-     * @param string $key     The array key to use.
-     * @return ExposesDataKey The scalar mapping object.
+     * @param string $name  The name of the property.
+     * @param string $key   The array key to use.
+     * @return KeyedMapping The scalar mapping object.
      */
     public static function inPropertyWithDifferentKey(
         string $name,
         string $key
-    ): ExposesDataKey {
+    ): KeyedMapping {
         return new static($name, $key);
     }
 
@@ -66,9 +66,9 @@ abstract class ScalarValue implements ExposesDataKey
     /**
      * Retrieves the data that is relevant for this mapping.
      *
-     * @param array $data      The input data.
-     * @return mixed           The value for our key in the input array.
-     * @throws UnmappableInput When the key is missing in the input.
+     * @param array $data     The input data.
+     * @return mixed          The value for our key in the input array.
+     * @throws MappingFailure When the key is missing in the input.
      */
     protected function my(array $data)
     {

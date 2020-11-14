@@ -6,9 +6,6 @@ namespace Stratadox\HydrationMapping\Test\Unit\Property\Type;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Hydration\Mapping\Property\Type\OriginalValue;
 
-/**
- * @covers \Stratadox\Hydration\Mapping\Property\Type\OriginalValue
- */
 class OriginalValue_leaves_the_input_value_intact extends TestCase
 {
     /** @test */
@@ -18,7 +15,7 @@ class OriginalValue_leaves_the_input_value_intact extends TestCase
 
         $map = OriginalValue::inProperty('any');
 
-        $this->assertNull($map->value($source));
+        self::assertNull($map->value($source));
     }
 
     /** @test */
@@ -28,7 +25,7 @@ class OriginalValue_leaves_the_input_value_intact extends TestCase
 
         $map = OriginalValue::inProperty('any');
 
-        $this->assertSame('foo', $map->value($source));
+        self::assertSame('foo', $map->value($source));
     }
 
     /** @test */
@@ -38,13 +35,13 @@ class OriginalValue_leaves_the_input_value_intact extends TestCase
 
         $map = OriginalValue::inProperty('any');
 
-        $this->assertSame($this, $map->value($source));
+        self::assertSame($this, $map->value($source));
     }
 
     /** @test */
     function original_value_mapping_knows_which_property_to_map_to()
     {
         $map = OriginalValue::inProperty('any');
-        $this->assertSame('any', $map->name());
+        self::assertSame('any', $map->name());
     }
 }

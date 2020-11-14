@@ -10,12 +10,8 @@ use Stratadox\Hydration\Mapping\Property\Type\CanBeNull;
 use Stratadox\Hydration\Mapping\Property\Type\FloatValue;
 use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
 use Stratadox\Hydration\Mapping\Property\Type\StringValue;
-use Stratadox\HydrationMapping\UnmappableInput;
+use Stratadox\HydrationMapping\MappingFailure;
 
-/**
- * @covers \Stratadox\Hydration\Mapping\Property\Type\CanBeNull
- * @covers \Stratadox\Hydration\Mapping\Property\UnmappableProperty
- */
 class CanBeNull_makes_wrapped_values_nullable extends TestCase
 {
     /** @test */
@@ -25,7 +21,7 @@ class CanBeNull_makes_wrapped_values_nullable extends TestCase
 
         $map = CanBeNull::or(StringValue::inProperty('string'));
 
-        $this->assertNull($map->value($source));
+        self::assertNull($map->value($source));
     }
 
     /** @test */
@@ -35,7 +31,7 @@ class CanBeNull_makes_wrapped_values_nullable extends TestCase
 
         $map = CanBeNull::or(IntegerValue::inProperty('int'));
 
-        $this->assertNull($map->value($source));
+        self::assertNull($map->value($source));
     }
 
     /** @test */
@@ -45,7 +41,7 @@ class CanBeNull_makes_wrapped_values_nullable extends TestCase
 
         $map = CanBeNull::or(IntegerValue::inProperty('int'));
 
-        $this->assertSame(123, $map->value($source));
+        self::assertSame(123, $map->value($source));
     }
 
     /** @test */
@@ -55,7 +51,7 @@ class CanBeNull_makes_wrapped_values_nullable extends TestCase
 
         $map = CanBeNull::or(IntegerValue::inProperty('int'));
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Cannot assign `99999999999999999999999999999999999999999999999999` ' .
@@ -72,7 +68,7 @@ class CanBeNull_makes_wrapped_values_nullable extends TestCase
 
         $map = CanBeNull::or(FloatValue::inProperty('float'));
 
-        $this->expectException(UnmappableInput::class);
+        $this->expectException(MappingFailure::class);
         $this->expectExceptionCode(0);
         $this->expectExceptionMessage(
             'Cannot assign `NaN` to property `float`: it is not clean for ' .
@@ -85,7 +81,7 @@ class CanBeNull_makes_wrapped_values_nullable extends TestCase
     function nullable_type_mapping_knows_which_property_to_map_to()
     {
         $map = CanBeNull::or(BooleanValue::inProperty('boolean'));
-        $this->assertSame('boolean', $map->name());
+        self::assertSame('boolean', $map->name());
     }
 
     /** @test */
@@ -94,7 +90,7 @@ class CanBeNull_makes_wrapped_values_nullable extends TestCase
         $map = CanBeNull::or(
             BooleanValue::inPropertyWithDifferentKey('bool', 'key')
         );
-        $this->assertSame('key', $map->key());
+        self::assertSame('key', $map->key());
     }
 
     /** @test */
