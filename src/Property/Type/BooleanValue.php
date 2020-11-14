@@ -16,9 +16,9 @@ use function in_array;
 final class BooleanValue extends ScalarValue
 {
     /** @var mixed[] */
-    private $truths = [];
+    private $truths = [true, 1, '1'];
     /** @var mixed[] */
-    private $falsehoods = [];
+    private $falsehoods = [false, 0, '0'];
 
     /**
      * Creates a new mapping for the boolean type object property.
@@ -28,10 +28,10 @@ final class BooleanValue extends ScalarValue
      * @param array  $falsehoods The values that should be considered false.
      * @return KeyedMapping      The boolean mapping object.
      */
-    public static function inProperty(
+    public static function withCustomTruths(
         string $name,
-        array $truths = [true, 1, '1'],
-        array $falsehoods = [false, 0, '0']
+        array $truths,
+        array $falsehoods
     ): KeyedMapping {
         $instance = parent::inProperty($name);
 
@@ -52,11 +52,11 @@ final class BooleanValue extends ScalarValue
      * @param array  $falsehoods The values that should be considered false.
      * @return KeyedMapping      The boolean mapping object.
      */
-    public static function inPropertyWithDifferentKey(
+    public static function withCustomTruthsAndKey(
         string $name,
         string $key,
-        array $truths = [true, 1, '1'],
-        array $falsehoods = [false, 0, '0']
+        array $truths,
+        array $falsehoods
     ): KeyedMapping {
         $instance = parent::inPropertyWithDifferentKey($name, $key);
 

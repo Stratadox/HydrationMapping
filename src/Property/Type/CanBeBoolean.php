@@ -33,17 +33,29 @@ final class CanBeBoolean implements KeyedMapping
     }
 
     /**
-     * Creates a new custom truth mapping, decorating a @see BooleanValue.
+     * Creates a new potentially boolean mapping, decorating a @see BooleanValue.
+     *
+     * @param KeyedMapping $mapping    The mapping to decorate.
+     * @return KeyedMapping            The custom truth boolean mapping.
+     */
+    public static function or(KeyedMapping $mapping): KeyedMapping
+    {
+        return new self($mapping, [true, 1, '1'], [false, 0, '0']);
+    }
+
+    /**
+     * Creates a new potentially mapping with custom truths, decorating a
+     * @see BooleanValue.
      *
      * @param KeyedMapping $mapping    The mapping to decorate.
      * @param array        $truths     The values to consider true.
      * @param array        $falsehoods The values to consider false.
      * @return KeyedMapping            The custom truth boolean mapping.
      */
-    public static function or(
+    public static function orCustom(
         KeyedMapping $mapping,
-        array $truths = [true, 1, '1'],
-        array $falsehoods = [false, 0, '0']
+        array $truths,
+        array $falsehoods
     ): KeyedMapping {
         return new self($mapping, $truths, $falsehoods);
     }

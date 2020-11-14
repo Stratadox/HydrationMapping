@@ -46,7 +46,7 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
     ) {
         $source = ['boolean' => $true];
 
-        $map = BooleanValue::inProperty('boolean', $truths, $falsehoods);
+        $map = BooleanValue::withCustomTruths('boolean', $truths, $falsehoods);
 
         self::assertTrue($map->value($source));
     }
@@ -62,7 +62,7 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
     ) {
         $source = ['boolean' => $false];
 
-        $map = BooleanValue::inProperty('boolean', $truths, $falsehoods);
+        $map = BooleanValue::withCustomTruths('boolean', $truths, $falsehoods);
 
         self::assertFalse($map->value($source));
     }
@@ -78,7 +78,7 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
     ) {
         $source = ['boolean' => $true];
 
-        $map = BooleanValue::inPropertyWithDifferentKey(
+        $map = BooleanValue::withCustomTruthsAndKey(
             'bool',
             'boolean',
             $truths,
@@ -100,7 +100,7 @@ class BooleanValue_casts_appropriate_values_to_booleans extends TestCase
     ) {
         $source = ['boolean' => $false];
 
-        $map = BooleanValue::inPropertyWithDifferentKey(
+        $map = BooleanValue::withCustomTruthsAndKey(
             'bool',
             'boolean',
             $truths,

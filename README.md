@@ -127,7 +127,7 @@ Custom true/false values can be provided as optional parameters:
 ```php
 use Stratadox\Hydration\Mapping\Property\Type\BooleanValue;
 
-$myProperty = BooleanValue::inProperty('foo', ['yes', 'y'], ['no', 'n']);
+$myProperty = BooleanValue::withCustomTruths('foo', ['yes', 'y'], ['no', 'n']);
 ```
 
 #### Nullable- and Mixed values
@@ -155,7 +155,7 @@ use Stratadox\Hydration\Mapping\Property\Type\CanBeInteger;
 use Stratadox\Hydration\Mapping\Property\Type\CanBeFloat;
 use Stratadox\Hydration\Mapping\Property\Type\StringValue;
 
-$theProperty = CanBeBoolean::or(
+$theProperty = CanBeBoolean::orCustom(
     CanBeInteger::or(
         CanBeFloat::or(
             StringValue::inProperty('bar')

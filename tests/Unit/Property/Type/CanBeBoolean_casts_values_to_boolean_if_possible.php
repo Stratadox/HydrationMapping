@@ -93,7 +93,7 @@ class CanBeBoolean_casts_values_to_boolean_if_possible extends TestCase
     ) {
         $source = ['mixed' => $true];
 
-        $map = CanBeBoolean::or(IntegerValue::inProperty('mixed'),
+        $map = CanBeBoolean::orCustom(IntegerValue::inProperty('mixed'),
             $truths,
             $falsehoods
         );
@@ -112,7 +112,7 @@ class CanBeBoolean_casts_values_to_boolean_if_possible extends TestCase
     ) {
         $source = ['mixed' => $itsFakeBelieveMe];
 
-        $map = CanBeBoolean::or(IntegerValue::inProperty('mixed'),
+        $map = CanBeBoolean::orCustom(IntegerValue::inProperty('mixed'),
             $truths,
             $falsehoods
         );
@@ -131,7 +131,7 @@ class CanBeBoolean_casts_values_to_boolean_if_possible extends TestCase
     ) {
         $source = ['mixed' => $itsNotBoolean];
 
-        $map = CanBeBoolean::or(IntegerValue::inProperty('mixed'),
+        $map = CanBeBoolean::orCustom(IntegerValue::inProperty('mixed'),
             $truths,
             $falsehoods
         );
@@ -149,14 +149,14 @@ class CanBeBoolean_casts_values_to_boolean_if_possible extends TestCase
     /** @test */
     function custom_truth_mapping_knows_which_property_to_map_to()
     {
-        $map = CanBeBoolean::or(BooleanValue::inProperty('boolean'), [], []);
+        $map = CanBeBoolean::or(BooleanValue::inProperty('boolean'));
         self::assertSame('boolean', $map->name());
     }
 
     /** @test */
     function custom_truth_mapping_can_itself_also_be_wrapped()
     {
-        $map = CanBeBoolean::or(
+        $map = CanBeBoolean::orCustom(
             BooleanValue::inPropertyWithDifferentKey('boolean', 'bool'),
             ['yes'],
             ['no']
@@ -169,7 +169,7 @@ class CanBeBoolean_casts_values_to_boolean_if_possible extends TestCase
     {
         $truths = [0, '1'];
         $falsehoods = [1, '0', 7];
-        $map = CanBeBoolean::or(IntegerValue::inProperty('boolean'),
+        $map = CanBeBoolean::orCustom(IntegerValue::inProperty('boolean'),
             $truths,
             $falsehoods
         );

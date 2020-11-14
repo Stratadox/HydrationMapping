@@ -72,7 +72,7 @@ trait PetsWithOwners
         $referBackToTheOwner = HasBackReference::inProperty('owner');
         $petMappings = MappedHydrator::using(
             ObjectHydrator::default(),
-            BooleanValue::inProperty('hungry', [
+            BooleanValue::withCustomTruths('hungry', [
                 'yes',
                 'yeah'
             ], [
