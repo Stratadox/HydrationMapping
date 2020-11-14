@@ -15,7 +15,9 @@ use function in_array;
  */
 final class BooleanValue extends ScalarValue
 {
+    /** @var mixed[] */
     private $truths = [];
+    /** @var mixed[] */
     private $falsehoods = [];
 
     /**

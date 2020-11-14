@@ -14,9 +14,12 @@ use Throwable;
  */
 final class Defaults implements Mapping
 {
+    /** @var mixed */
     private $defaultValue;
+    /** @var Mapping */
     private $mapping;
 
+    /** @param mixed $defaultValue */
     private function __construct($defaultValue, Mapping $mapping)
     {
         $this->defaultValue = $defaultValue;

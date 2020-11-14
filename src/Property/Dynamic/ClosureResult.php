@@ -13,7 +13,9 @@ use Stratadox\HydrationMapping\Mapping;
  */
 final class ClosureResult implements Mapping
 {
+    /** @var string */
     private $property;
+    /** @var Closure */
     private $function;
 
     private function __construct(string $property, Closure $function)

@@ -17,9 +17,13 @@ use Throwable;
  */
 final class HasManyEmbedded implements Mapping
 {
+    /** @var string */
     private $name;
+    /** @var Deserializer */
     private $collection;
+    /** @var Deserializer */
     private $item;
+    /** @var string */
     private $key;
 
     private function __construct(

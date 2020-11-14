@@ -18,9 +18,13 @@ final class HasManyProxies implements KeyedMapping
 {
     use KeyRequiring;
 
+    /** @var string */
     private $name;
+    /** @var string */
     private $key;
+    /** @var Deserializer */
     private $collection;
+    /** @var ProxyFactory */
     private $proxyFactory;
 
     private function __construct(

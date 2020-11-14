@@ -74,6 +74,6 @@ final class CollectionMappingFailed extends RuntimeException implements MappingF
      */
     private static function shortNameOfThe(Mapping $mapping): string
     {
-        return substr(strrchr(get_class($mapping), '\\'), 1);
+        return substr(strrchr(get_class($mapping), '\\') ?: '', 1);
     }
 }

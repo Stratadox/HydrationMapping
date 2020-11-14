@@ -33,7 +33,7 @@ final class ObjectMappingFailed extends RuntimeException implements MappingFailu
         return new self(
             sprintf(
                 'Failed to map the %s relation of the `%s` property: %s',
-                substr(strrchr(get_class($mapping), '\\'), 1),
+                substr(strrchr(get_class($mapping), '\\') ?: '', 1),
                 $mapping->name(),
                 $exception->getMessage()
             ),

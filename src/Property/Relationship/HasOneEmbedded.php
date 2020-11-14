@@ -14,7 +14,9 @@ use Throwable;
  */
 final class HasOneEmbedded implements Mapping
 {
+    /** @var string */
     private $name;
+    /** @var Deserializer */
     private $deserialize;
 
     private function __construct(string $name, Deserializer $deserializer)

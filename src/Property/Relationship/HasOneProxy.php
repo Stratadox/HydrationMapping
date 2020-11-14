@@ -14,7 +14,9 @@ use Throwable;
  */
 final class HasOneProxy implements Mapping
 {
+    /** @var string */
     private $name;
+    /** @var ProxyFactory */
     private $proxyFactory;
 
     private function __construct(string $name, ProxyFactory $proxyFactory)

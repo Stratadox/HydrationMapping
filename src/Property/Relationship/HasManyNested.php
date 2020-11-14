@@ -17,9 +17,13 @@ final class HasManyNested implements KeyedMapping
 {
     use KeyRequiring;
 
+    /** @var string */
     private $name;
+    /** @var string */
     private $key;
+    /** @var Deserializer */
     private $collection;
+    /** @var Deserializer */
     private $item;
 
     private function __construct(

@@ -15,10 +15,12 @@ use function array_key_exists;
  */
 abstract class ScalarValue implements KeyedMapping
 {
+    /** @var string */
     private $name;
+    /** @var string */
     private $key;
 
-    private function __construct(string $name, string $dataKey)
+    final private function __construct(string $name, string $dataKey)
     {
         $this->name = $name;
         $this->key = $dataKey;
@@ -69,7 +71,7 @@ abstract class ScalarValue implements KeyedMapping
      * @return mixed          The value for our key in the input array.
      * @throws MappingFailure When the key is missing in the input.
      */
-    protected function my(array $data)
+    final protected function my(array $data)
     {
         if (!array_key_exists($this->key(), $data)) {
             throw MissingTheKey::inTheInput($data, $this, $this->key());

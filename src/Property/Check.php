@@ -13,7 +13,9 @@ use Stratadox\Specification\Contract\Satisfiable;
  */
 final class Check implements Mapping
 {
+    /** @var Satisfiable */
     private $constraint;
+    /** @var Mapping */
     private $mapping;
 
     private function __construct(Satisfiable $constraint, Mapping $mapping)

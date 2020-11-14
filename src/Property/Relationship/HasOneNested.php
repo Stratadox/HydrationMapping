@@ -16,8 +16,11 @@ final class HasOneNested implements KeyedMapping
 {
     use KeyRequiring;
 
+    /** @var string */
     private $name;
+    /** @var string */
     private $key;
+    /** @var Deserializer */
     private $deserialize;
 
     private function __construct(

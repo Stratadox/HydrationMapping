@@ -15,8 +15,11 @@ use Stratadox\HydrationMapping\MappingFailure;
  */
 final class CanBeBoolean implements KeyedMapping
 {
+    /** @var KeyedMapping */
     private $or;
+    /** @var mixed[] */
     private $truths;
+    /** @var mixed[] */
     private $falsehoods;
 
     private function __construct(

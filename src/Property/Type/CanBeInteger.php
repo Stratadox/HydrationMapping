@@ -17,6 +17,7 @@ use function preg_match;
  */
 final class CanBeInteger implements KeyedMapping
 {
+    /** @var KeyedMapping */
     private $or;
 
     private function __construct(KeyedMapping $mapping)
@@ -64,7 +65,10 @@ final class CanBeInteger implements KeyedMapping
         return $this->or->key();
     }
 
-    /** @throws MappingFailure */
+    /**
+     * @throws MappingFailure
+     * @return mixed
+     */
     private function my(array $data)
     {
         $key = $this->or->key();

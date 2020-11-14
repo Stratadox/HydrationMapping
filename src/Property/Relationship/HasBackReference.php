@@ -13,7 +13,9 @@ use Stratadox\Hydrator\HydrationObserver;
  */
 final class HasBackReference implements Mapping, HydrationObserver
 {
+    /** @var string */
     private $name;
+    /** @var null|object */
     private $referenceTo;
 
     private function __construct(string $name)
@@ -47,7 +49,7 @@ final class HasBackReference implements Mapping, HydrationObserver
     /** @inheritdoc */
     public function value(array $data, $owner = null)
     {
-        if (!isset($this->referenceTo)) {
+        if (null === $this->referenceTo) {
             throw NoReferrerFound::tryingToHydrateBackReferenceIn($this->name);
         }
         return $this->referenceTo;
