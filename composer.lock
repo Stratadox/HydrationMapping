@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0d5b8ab18c6c091eb1ad412c6deb382",
+    "content-hash": "fb84a10640827164bb7e35e69c3f424b",
     "packages": [
         {
             "name": "stratadox/deserializer-contracts",
@@ -3720,10 +3720,11 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.2"
+        "php": ">=7.2",
+        "ext-json": "*"
     },
     "platform-dev": {
-        "ext-json": "*"
+        "ext-bcmath": "*"
     },
     "plugin-api-version": "2.0.0"
 }

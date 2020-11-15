@@ -13,6 +13,7 @@ use Throwable;
  * Takes a list of scalars (eg. an array of strings) and maps it to a collection
  * of single-property objects.
  *
+ * @deprecated Because quite useless, really
  * @author Stratadox
  */
 final class HasManyEmbedded implements Mapping
