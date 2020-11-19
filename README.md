@@ -175,7 +175,7 @@ Each of these are connected to the input data in one of three ways:
 - As `*Proxies` (for loading lazily)
 
 This boils down to the following possibilities:
-- `HasManyEmbedded`
+- `HasManyEmbedded` (deprecated)
 - `HasManyNested`
 - `HasManyProxies`
 - `HasOneEmbedded`
@@ -221,10 +221,6 @@ and one that `Deserializes` the items.
 This approach allows for a lot of freedom in the way collections are mapped.
 The available [deserializers](https://github.com/Stratadox/Deserializer) can map 
 the collection either as plain array or to a custom collection object.
-
-While `HasManyNested` maps the array associated with its `key` into a collection
-of objects, the `HasManyEmbedded` is used when the input array itself consists
-of a list of scalars. The latter is mostly useful within nested structures.
 
 These deserializers may in turn use mapped hydrator instances. The combination  
 is able to map entire structures of objects in all kinds and shapes.
