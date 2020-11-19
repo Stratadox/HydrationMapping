@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
 use Stratadox\Deserializer\Deserializer;
+use Stratadox\Hydration\Mapping\Property\KeyRequiring;
 use Stratadox\HydrationMapping\KeyedMapping;
 use Throwable;
 

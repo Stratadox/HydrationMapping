@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Type;
 
+use Stratadox\Hydration\Mapping\Property\KeyRequiring;
 use Stratadox\HydrationMapping\KeyedMapping;
 use function in_array;
 use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
@@ -15,6 +16,8 @@ use Stratadox\HydrationMapping\MappingFailure;
  */
 final class CanBeBoolean implements KeyedMapping
 {
+    use KeyRequiring;
+
     /** @var KeyedMapping */
     private $or;
     /** @var mixed[] */
@@ -63,10 +66,11 @@ final class CanBeBoolean implements KeyedMapping
     /** @inheritdoc */
     public function value(array $data, $owner = null)
     {
-        if (in_array($data[$this->or->key()], $this->truths, true)) {
+        $this->mustHaveTheKeyInThe($data);
+        if (in_array($data[$this->key()], $this->truths, true)) {
             return true;
         }
-        if (in_array($data[$this->or->key()], $this->falsehoods, true)) {
+        if (in_array($data[$this->key()], $this->falsehoods, true)) {
             return false;
         }
         try {

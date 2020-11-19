@@ -14,6 +14,7 @@ use Throwable;
  * of single-property objects.
  *
  * @deprecated Because quite useless, really
+ * @codeCoverageIgnore
  * @author Stratadox
  */
 final class HasManyEmbedded implements Mapping

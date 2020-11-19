@@ -3,11 +3,10 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Type;
 
-use Stratadox\Hydration\Mapping\Property\MissingTheKey;
+use Stratadox\Hydration\Mapping\Property\KeyRequiring;
 use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
 use Stratadox\HydrationMapping\KeyedMapping;
 use Stratadox\HydrationMapping\MappingFailure;
-use function array_key_exists;
 use function preg_match;
 
 /**
@@ -17,6 +16,8 @@ use function preg_match;
  */
 final class CanBeInteger implements KeyedMapping
 {
+    use KeyRequiring;
+
     /** @var KeyedMapping */
     private $or;
 
@@ -72,10 +73,8 @@ final class CanBeInteger implements KeyedMapping
     private function my(array $data)
     {
         $key = $this->or->key();
-        if (array_key_exists($key, $data)) {
-            return $data[$key];
-        }
-        throw MissingTheKey::inTheInput($data, $this, $key);
+        $this->mustHaveTheKeyInThe($data);
+        return $data[$key];
     }
 
     private function looksLikeAnInteger(string $value): bool
