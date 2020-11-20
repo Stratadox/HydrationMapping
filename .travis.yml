@@ -19,7 +19,7 @@ script:
   - mkdir -p build/logs
   - vendor/bin/phpunit -c phpunit.xml --testdox
   - vendor/bin/phpstan analyse -c phpstan.neon
-  - ./infection.phar --min-covered-msi=100
+  - ./infection.phar --min-covered-msi=80
 
 after_success:
   - travis_retry php vendor/bin/php-coveralls
