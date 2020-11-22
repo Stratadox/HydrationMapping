@@ -175,7 +175,6 @@ Each of these are connected to the input data in one of three ways:
 - As `*Proxies` (for loading lazily)
 
 This boils down to the following possibilities:
-- `HasManyEmbedded` (deprecated)
 - `HasManyNested`
 - `HasManyProxies`
 - `HasOneEmbedded`
@@ -255,18 +254,19 @@ the reference of the "owner" object to the given property.
 
 ### Advanced validation
 
-Advanced input validation can be applied with `Check`. A `Check` will produce 
-the value of the mapping if the [specification](https://github.com/Stratadox/Specification)
-is satisfied with it, or throw an exception otherwise.
+Advanced input validation can be applied with a `ConstrainedMapping`. 
+A `ConstrainedMapping` will produce the value of the mapping if the 
+[specification](https://github.com/Stratadox/Specification) is satisfied with 
+it, or throw an exception otherwise.
 
 For example, a check on whether a rating is between 1 and 5 might look like this:
 ```php
-use Stratadox\Hydration\Mapping\Property\Check;
+use Stratadox\Hydration\Mapping\Composite\ConstrainedMapping;
 use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
-use Stratadox\HydrationMapping\Test\Double\Constraint\IsNotLess;
-use Stratadox\HydrationMapping\Test\Double\Constraint\IsNotMore;
+use Your\Constraint\IsNotLess;
+use Your\Constraint\IsNotMore;
 
-Check::thatIt(
+ConstrainedMapping::checkThatIt(
     IsNotLess::than(1)->and(IsNotMore::than(5)),
     IntegerValue::inProperty('rating')
 );
@@ -335,9 +335,9 @@ than propagating the exception: `Defaults::to(-1, IntegerValue::inProperty('foo'
 
 ### Extension
 
-The `ClosureResult` mapping provides an easy extension point.
+The `ClosureMapping` provides an easy extension point.
 It takes in an anonymous function as constructor parameter.
 This function is called with the input data to produce the mapped result.
 
 For additional extension power, custom mapping can be produced by implementing 
-the `MapsProperty` interface.
+the `Mapping` interface.
