@@ -22,7 +22,6 @@ script:
   - ./infection.phar --min-covered-msi=80
 
 after_success:
-  - travis_retry php vendor/bin/php-coveralls
   - bash <(curl -s https://codecov.io/bash)
 
 after_failure:

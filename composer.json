@@ -27,10 +27,8 @@
         "stratadox/deserializer-contracts": "^0.3"
     },
     "require-dev": {
-        "ext-bcmath": "*",
         "phpstan/phpstan": "^0.12",
         "phpunit/phpunit": "^7.1",
-        "php-coveralls/php-coveralls": "^2.1",
         "stratadox/deserializer": "^0.2.1",
         "stratadox/specification": "^1.0",
         "stratadox/proxy": "^0.4"

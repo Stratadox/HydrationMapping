@@ -1,7 +1,7 @@
 # Hydration Mapping
 
-[![Build Status](https://travis-ci.org/Stratadox/HydrationMapping.svg?branch=master)](https://travis-ci.org/Stratadox/HydrationMapping)
-[![Coverage Status](https://coveralls.io/repos/github/Stratadox/HydrationMapping/badge.svg?branch=master)](https://coveralls.io/github/Stratadox/HydrationMapping?branch=master)
+[![Build Status](https://circleci.com/gh/Stratadox/HydrationMapping.svg?style=shield)](https://app.circleci.com/pipelines/github/Stratadox/HydrationMapping)
+[![codecov](https://codecov.io/gh/Stratadox/HydrationMapping/branch/master/graph/badge.svg)](https://codecov.io/gh/Stratadox/HydrationMapping)
 [![Infection Minimum](https://img.shields.io/badge/msi-100-brightgreen.svg)](https://travis-ci.org/Stratadox/HydrationMapping)
 [![PhpStan Level](https://img.shields.io/badge/phpstan-8-brightgreen.svg)](https://travis-ci.org/Stratadox/HydrationMapping)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Stratadox/HydrationMapping/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Stratadox/HydrationMapping/?branch=master)
