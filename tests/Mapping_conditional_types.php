@@ -5,7 +5,7 @@ namespace Stratadox\HydrationMapping\Test;
 use PHPUnit\Framework\TestCase;
 use Stratadox\Deserializer\DeserializationFailure;
 use Stratadox\Deserializer\ObjectDeserializer;
-use Stratadox\Hydration\Mapping\Composite\ConstrainedMapping;
+use Stratadox\Hydration\Mapping\Property\Check;
 use Stratadox\Hydration\Mapping\Property\Defaults;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneEmbedded;
 use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
@@ -50,10 +50,7 @@ class Mapping_conditional_types extends TestCase
             ObjectInstantiator::forThe(Foo::class),
             MappedHydrator::using(
                 ObjectHydrator::default(),
-                ConstrainedMapping::checkThatIt(
-                    IsNotMore::than(10),
-                    IntegerValue::inProperty('integer')
-                )
+                Check::thatIt(IsNotMore::than(10), IntegerValue::inProperty('integer'))
             )
         );
 
@@ -70,10 +67,7 @@ class Mapping_conditional_types extends TestCase
             ObjectInstantiator::forThe(Foo::class),
             MappedHydrator::using(
                 ObjectHydrator::default(),
-                ConstrainedMapping::checkThatIt(
-                    IsNotMore::than(10),
-                    IntegerValue::inProperty('integer')
-                )
+                Check::thatIt(IsNotMore::than(10), IntegerValue::inProperty('integer'))
             )
         );
 
@@ -90,13 +84,10 @@ class Mapping_conditional_types extends TestCase
             ObjectInstantiator::forThe(Thing::class),
             MappedHydrator::using(
                 ObjectHydrator::default(),
-                ConstrainedMapping::checkThatIt(
-                    IsLonger::than(2),
-                    HasOneEmbedded::inProperty(
-                        'name',
-                        ObjectDeserializer::forThe(Name::class)
-                    )
-                )
+                Check::thatIt(IsLonger::than(2), HasOneEmbedded::inProperty(
+                    'name',
+                    ObjectDeserializer::forThe(Name::class)
+                ))
             )
         );
 
@@ -113,13 +104,10 @@ class Mapping_conditional_types extends TestCase
             ObjectInstantiator::forThe(Thing::class),
             MappedHydrator::using(
                 ObjectHydrator::default(),
-                ConstrainedMapping::checkThatIt(
-                    IsLonger::than(2),
-                    HasOneEmbedded::inProperty(
-                        'name',
-                        ObjectDeserializer::forThe(Name::class)
-                    )
-                )
+                Check::thatIt(IsLonger::than(2), HasOneEmbedded::inProperty(
+                    'name',
+                    ObjectDeserializer::forThe(Name::class)
+                ))
             )
         );
 

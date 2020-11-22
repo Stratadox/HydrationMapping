@@ -19,11 +19,6 @@ final class ConstrainedMapping implements Mapping
         $this->mapping = $mapping;
     }
 
-    public static function checkThatIt(Satisfiable $condition, Mapping $mapping): self
-    {
-        return new self($condition, $mapping);
-    }
-
     public function name(): string
     {
         return $this->mapping->name();

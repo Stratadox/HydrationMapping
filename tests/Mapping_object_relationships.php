@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Stratadox\Deserializer\CollectionDeserializer;
 use Stratadox\Deserializer\DeserializationFailure;
 use Stratadox\Deserializer\ObjectDeserializer;
-use Stratadox\Hydration\Mapping\Composite\ConstrainedMapping;
+use Stratadox\Hydration\Mapping\Property\Check;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasManyNested;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneEmbedded;
 use Stratadox\Hydration\Mapping\Property\Relationship\HasOneNested;
@@ -287,10 +287,7 @@ class Mapping_object_relationships extends TestCase
                             ObjectHydrator::default(),
                             StringValue::inProperty('name'),
                             StringValue::inProperty('thumbnail'),
-                            ConstrainedMapping::checkThatIt(
-                                IsNotMore::than(5),
-                                IntegerValue::inProperty('rating')
-                            )
+                            Check::thatIt(IsNotMore::than(5), IntegerValue::inProperty('rating'))
                         )
                     )
                 )

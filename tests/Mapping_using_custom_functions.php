@@ -5,7 +5,7 @@ namespace Stratadox\HydrationMapping\Test;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 use Stratadox\Deserializer\ObjectDeserializer;
-use Stratadox\Hydration\Mapping\ClosureMapping;
+use Stratadox\Hydration\Mapping\Property\Dynamic\ClosureResult;
 use Stratadox\Hydrator\MappedHydrator;
 use Stratadox\Hydrator\ReflectiveHydrator;
 use Stratadox\Instantiator\ObjectInstantiator;
@@ -22,7 +22,7 @@ class Mapping_using_custom_functions extends TestCase
             ObjectInstantiator::forThe(stdClass::class),
             MappedHydrator::using(
                 ReflectiveHydrator::default(),
-                ClosureMapping::inProperty('hello', function (array $data) {
+                ClosureResult::inProperty('hello', function (array $data) {
                     return $data['message'] . '!!! OMG!';
                 })
             )
