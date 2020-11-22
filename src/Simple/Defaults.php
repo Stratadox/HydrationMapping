@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Stratadox\Hydration\Mapping\Property;
+namespace Stratadox\Hydration\Mapping\Simple;
 
 use Stratadox\Hydration\Mapping\Composite\CompositeMapping;
 use Stratadox\Hydration\Mapping\FixedMapping;

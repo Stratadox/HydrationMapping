@@ -36,8 +36,8 @@ Together they form a strong team that solves a single purpose: mapping data to a
 
 For example:
 ```php
-use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
-use Stratadox\Hydration\Mapping\Property\Type\StringValue;
+use Stratadox\Hydration\Mapping\Simple\Type\IntegerValue;
+use Stratadox\Hydration\Mapping\Simple\Type\StringValue;
 use Stratadox\Hydrator\MappedHydrator;
 use Stratadox\Hydrator\ObjectHydrator;
 
@@ -59,8 +59,8 @@ $hydrator->writeTo($book, [
 More often, the mapped hydrator is given to a [`deserializer`](https://github.com/Stratadox/Deserializer):
 ```php
 use Stratadox\Deserializer\ObjectDeserializer;
-use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
-use Stratadox\Hydration\Mapping\Property\Type\StringValue;
+use Stratadox\Hydration\Mapping\Simple\Type\IntegerValue;
+use Stratadox\Hydration\Mapping\Simple\Type\StringValue;
 use Stratadox\Hydrator\MappedHydrator;
 use Stratadox\Hydrator\ObjectHydrator;
 use Stratadox\Instantiator\ObjectInstantiator;
@@ -125,7 +125,7 @@ To skip the entire typecasting process, the `OriginalValue` mapping can be used.
 Input to a `BooleanValue` must either be 0, 1 or already boolean typed.
 Custom true/false values can be provided as optional parameters:
 ```php
-use Stratadox\Hydration\Mapping\Property\Type\BooleanValue;
+use Stratadox\Hydration\Mapping\Simple\Type\BooleanValue;
 
 $myProperty = BooleanValue::withCustomTruths('foo', ['yes', 'y'], ['no', 'n']);
 ```
@@ -150,10 +150,10 @@ to produce, for instance, mapping configurations that first attempt to map the
 value to a boolean, otherwise as an integer, if that cannot be done to cast it 
 to a floating point, and if all else fails, make it a string:
 ```php
-use Stratadox\Hydration\Mapping\Property\Type\CanBeBoolean;
-use Stratadox\Hydration\Mapping\Property\Type\CanBeInteger;
-use Stratadox\Hydration\Mapping\Property\Type\CanBeFloat;
-use Stratadox\Hydration\Mapping\Property\Type\StringValue;
+use Stratadox\Hydration\Mapping\Simple\Type\CanBeBoolean;
+use Stratadox\Hydration\Mapping\Simple\Type\CanBeInteger;
+use Stratadox\Hydration\Mapping\Simple\Type\CanBeFloat;
+use Stratadox\Hydration\Mapping\Simple\Type\StringValue;
 
 $theProperty = CanBeBoolean::orCustom(
     CanBeInteger::or(
@@ -262,7 +262,7 @@ it, or throw an exception otherwise.
 For example, a check on whether a rating is between 1 and 5 might look like this:
 ```php
 use Stratadox\Hydration\Mapping\Composite\ConstrainedMapping;
-use Stratadox\Hydration\Mapping\Property\Type\IntegerValue;
+use Stratadox\Hydration\Mapping\Simple\Type\IntegerValue;
 use Your\Constraint\IsNotLess;
 use Your\Constraint\IsNotMore;
 

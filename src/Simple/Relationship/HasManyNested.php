@@ -1,14 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Stratadox\Hydration\Mapping\Property\Relationship;
+namespace Stratadox\Hydration\Mapping\Simple\Relationship;
 
 use Stratadox\Deserializer\Deserializer;
 use Stratadox\Hydration\Mapping\DifferentKey;
 use Stratadox\Hydration\Mapping\Nested;
-use Stratadox\Hydration\Mapping\Property\Keyed;
 use Stratadox\Hydration\Mapping\Relation\RelationCollectionMapping;
-use Stratadox\HydrationMapping\KeyedMapping;
+use Stratadox\HydrationMapping\Mapping;
 
 final class HasManyNested
 {
@@ -16,11 +15,11 @@ final class HasManyNested
         string $name,
         Deserializer $collection,
         Deserializer $item
-    ): KeyedMapping {
-        return Keyed::mapping($name, Nested::inKey(
+    ): Mapping {
+        return Nested::inKey(
             $name,
             RelationCollectionMapping::inProperty($name, $collection, $item)
-        ));
+        );
     }
 
     public static function inPropertyWithDifferentKey(
@@ -28,10 +27,7 @@ final class HasManyNested
         string $key,
         Deserializer $collection,
         Deserializer $item
-    ): KeyedMapping {
-        return Keyed::mapping($key, DifferentKey::use(
-            $key,
-            self::inProperty($name, $collection, $item)
-        ));
+    ): Mapping {
+        return DifferentKey::use($key, self::inProperty($name, $collection, $item));
     }
 }

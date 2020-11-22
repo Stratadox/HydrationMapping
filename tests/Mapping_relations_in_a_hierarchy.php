@@ -6,9 +6,9 @@ use PHPUnit\Framework\TestCase;
 use Stratadox\Deserializer\ArrayDeserializer;
 use Stratadox\Deserializer\DeserializationFailure;
 use Stratadox\Deserializer\ObjectDeserializer;
-use Stratadox\Hydration\Mapping\Property\Relationship\HasBackReference;
-use Stratadox\Hydration\Mapping\Property\Relationship\HasManyNested;
-use Stratadox\Hydration\Mapping\Property\Type\StringValue;
+use Stratadox\Hydration\Mapping\Relation\ObservedRelationMapping;
+use Stratadox\Hydration\Mapping\Simple\Relationship\HasManyNested;
+use Stratadox\Hydration\Mapping\Simple\Type\StringValue;
 use Stratadox\HydrationMapping\Test\Double\Employee\Employee;
 use Stratadox\HydrationMapping\Test\Double\Employee\Employer;
 use Stratadox\Hydrator\MappedHydrator;
@@ -24,7 +24,7 @@ class Mapping_relations_in_a_hierarchy extends TestCase
     /** @test */
     function mapping_a_relationship_to_the_parent_element_in_a_hierarchy()
     {
-        $reference = HasBackReference::inProperty('employer');
+        $reference = ObservedRelationMapping::inProperty('employer');
         $deserialize = ObjectDeserializer::using(
             ObjectInstantiator::forThe(Employer::class),
             ObserveBefore::hydrating(
@@ -72,7 +72,7 @@ class Mapping_relations_in_a_hierarchy extends TestCase
             MappedHydrator::using(
                 ObjectHydrator::default(),
                 StringValue::inProperty('name'),
-                HasBackReference::inProperty('employer')
+                ObservedRelationMapping::inProperty('employer')
             )
         );
 
