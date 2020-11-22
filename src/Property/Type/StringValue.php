@@ -3,16 +3,22 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Type;
 
-/**
- * Maps string-like input to a string property in an object property.
- *
- * @author Stratadox
- */
-final class StringValue extends ScalarValue
+use Stratadox\Hydration\Mapping\DifferentKey;
+use Stratadox\Hydration\Mapping\Property\Keyed;
+use Stratadox\Hydration\Mapping\Primitive\StringMapping;
+use Stratadox\HydrationMapping\KeyedMapping;
+
+final class StringValue
 {
-    /** @inheritdoc */
-    public function value(array $data, $owner = null): string
+    public static function inProperty(string $name): KeyedMapping
     {
-        return (string) $this->my($data);
+        return Keyed::mapping($name, StringMapping::inProperty($name));
+    }
+
+    public static function inPropertyWithDifferentKey(
+        string $name,
+        string $key
+    ): KeyedMapping {
+        return Keyed::mapping($key, DifferentKey::use($key, StringMapping::inProperty($name)));
     }
 }

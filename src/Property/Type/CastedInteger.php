@@ -3,16 +3,22 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Type;
 
-/**
- * Maps scalar input to an integer property in an object property.
- *
- * @author Stratadox
- */
-final class CastedInteger extends ScalarValue
+use Stratadox\Hydration\Mapping\DifferentKey;
+use Stratadox\Hydration\Mapping\Primitive\IntegerMapping;
+use Stratadox\Hydration\Mapping\Property\Keyed;
+use Stratadox\HydrationMapping\KeyedMapping;
+
+final class CastedInteger
 {
-    /** @inheritdoc */
-    public function value(array $data, $owner = null): int
+    public static function inProperty(string $name): KeyedMapping
     {
-        return (int) $this->my($data);
+        return Keyed::mapping($name, IntegerMapping::inProperty($name));
+    }
+
+    public static function inPropertyWithDifferentKey(
+        string $name,
+        string $key
+    ): KeyedMapping {
+        return Keyed::mapping($key, DifferentKey::use($key, IntegerMapping::inProperty($name)));
     }
 }

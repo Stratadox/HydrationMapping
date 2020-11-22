@@ -3,23 +3,28 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Type;
 
-use function is_numeric;
-use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
+use Stratadox\Hydration\Mapping\Composite\ConditionalMapping;
+use Stratadox\Hydration\Mapping\DifferentKey;
+use Stratadox\Hydration\Mapping\Primitive\FloatCheck;
+use Stratadox\Hydration\Mapping\Primitive\FloatMapping;
+use Stratadox\Hydration\Mapping\Property\Keyed;
+use Stratadox\HydrationMapping\KeyedMapping;
 
-/**
- * Maps numeric input to a float property in an object property.
- *
- * @author Stratadox
- */
-final class FloatValue extends ScalarValue
+final class FloatValue
 {
-    /** @inheritdoc */
-    public function value(array $data, $owner = null): float
+    public static function inProperty(string $name): KeyedMapping
     {
-        $value = $this->my($data);
-        if (!is_numeric($value)) {
-            throw UnmappableProperty::itMustBeNumeric($this, $value);
-        }
-        return (float) $value;
+        return Keyed::mapping($name,
+            ConditionalMapping::ensureThat(FloatCheck::passes(), FloatMapping::inProperty($name))
+        );
+    }
+
+    public static function inPropertyWithDifferentKey(
+        string $name,
+        string $key
+    ): KeyedMapping {
+        return Keyed::mapping($key, DifferentKey::use($key,
+            ConditionalMapping::ensureThat(FloatCheck::passes(), FloatMapping::inProperty($name))
+        ));
     }
 }

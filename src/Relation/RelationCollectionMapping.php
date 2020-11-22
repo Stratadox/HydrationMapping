@@ -1,19 +1,13 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
-namespace Stratadox\Hydration\Mapping\Property\Relationship;
+namespace Stratadox\Hydration\Mapping\Relation;
 
+use Stratadox\Deserializer\DeserializationFailure;
 use Stratadox\Deserializer\Deserializer;
-use Stratadox\Hydration\Mapping\Relation\CollectionMappingFailure;
-use Stratadox\Hydration\Mapping\Relation\RelationMappingFailure;
 use Stratadox\HydrationMapping\Mapping;
 use Throwable;
 
-/**
- * @deprecated
- * @codeCoverageIgnore
- */
-final class HasManyEmbedded implements Mapping
+final class RelationCollectionMapping implements Mapping
 {
     /** @var string */
     private $name;
@@ -21,28 +15,23 @@ final class HasManyEmbedded implements Mapping
     private $collection;
     /** @var Deserializer */
     private $item;
-    /** @var string */
-    private $key;
 
     private function __construct(
         string $name,
         Deserializer $collection,
-        Deserializer $item,
-        string $key
+        Deserializer $item
     ) {
         $this->name = $name;
         $this->collection = $collection;
         $this->item = $item;
-        $this->key = $key;
     }
 
     public static function inProperty(
         string $name,
         Deserializer $collection,
-        Deserializer $item,
-        string $key = 'key'
+        Deserializer $item
     ): Mapping {
-        return new self($name, $collection, $item, $key);
+        return new self($name, $collection, $item);
     }
 
     public function name(): string
@@ -52,11 +41,8 @@ final class HasManyEmbedded implements Mapping
 
     public function value(array $data, $owner = null)
     {
-        $objects = [];
         try {
-            foreach ($data as $value) {
-                $objects[] = $this->item->from([$this->key => $value]);
-            }
+            $objects = $this->itemsFromArray($data);
         } catch (Throwable $exception) {
             throw RelationMappingFailure::encountered($this, $exception);
         }
@@ -65,5 +51,19 @@ final class HasManyEmbedded implements Mapping
         } catch (Throwable $exception) {
             throw CollectionMappingFailure::encountered($this, $exception);
         }
+    }
+
+    /**
+     * @param array[] $data
+     * @return object[]
+     * @throws DeserializationFailure
+     */
+    private function itemsFromArray(array $data): array
+    {
+        $objects = [];
+        foreach ($data as $objectData) {
+            $objects[] = $this->item->from($objectData);
+        }
+        return $objects;
     }
 }

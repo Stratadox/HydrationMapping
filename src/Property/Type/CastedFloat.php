@@ -3,16 +3,24 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Type;
 
-/**
- * Maps scalar input to a float property in an object property.
- *
- * @author Stratadox
- */
-final class CastedFloat extends ScalarValue
+use Stratadox\Hydration\Mapping\DifferentKey;
+use Stratadox\Hydration\Mapping\Primitive\FloatMapping;
+use Stratadox\Hydration\Mapping\Property\Keyed;
+use Stratadox\HydrationMapping\KeyedMapping;
+
+final class CastedFloat
 {
-    /** @inheritdoc */
-    public function value(array $data, $owner = null): float
+    public static function inProperty(string $name): KeyedMapping
     {
-        return (float) $this->my($data);
+        return Keyed::mapping($name, FloatMapping::inProperty($name));
+    }
+
+    public static function inPropertyWithDifferentKey(
+        string $name,
+        string $key
+    ): KeyedMapping {
+        return Keyed::mapping($key, DifferentKey::use($key,
+            FloatMapping::inProperty($name)
+        ));
     }
 }

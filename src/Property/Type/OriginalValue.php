@@ -3,16 +3,26 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Type;
 
-/**
- * Maps the value directly onto an object property.
- *
- * @author Stratadox
- */
-final class OriginalValue extends ScalarValue
+use Stratadox\Hydration\Mapping\DifferentKey;
+use Stratadox\Hydration\Mapping\Primitive\OriginalMapping;
+use Stratadox\Hydration\Mapping\Property\Keyed;
+use Stratadox\HydrationMapping\KeyedMapping;
+
+final class OriginalValue
 {
-    /** @inheritdoc */
-    public function value(array $data, $owner = null)
+    public static function inProperty(string $name): KeyedMapping
     {
-        return $this->my($data);
+        return Keyed::mapping($name,
+            OriginalMapping::inProperty($name)
+        );
+    }
+
+    public static function inPropertyWithDifferentKey(
+        string $name,
+        string $key
+    ): KeyedMapping {
+        return Keyed::mapping($key, DifferentKey::use($key,
+            OriginalMapping::inProperty($name)
+        ));
     }
 }

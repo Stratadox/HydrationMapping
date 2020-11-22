@@ -103,18 +103,20 @@ class Mapping_basic_data_types extends TestCase
                 StringValue::inPropertyWithDifferentKey('string', 'foo'),
                 BooleanValue::inPropertyWithDifferentKey('boolean', 'foo'),
                 FloatValue::inPropertyWithDifferentKey('float', 'foo'),
-                NullValue::inPropertyWithDifferentKey('null', 'foo')
+                NullValue::inPropertyWithDifferentKey('null', 'foo'),
+                OriginalValue::inPropertyWithDifferentKey('mixed', 'foo')
             )
         );
 
         /** @var Foo $foo */
-        $foo = $deserialize->from(['foo' => 0]);
+        $foo = $deserialize->from(['foo' => '0']);
 
         self::assertSame(0, $foo->integer());
         self::assertSame('0', $foo->string());
         self::assertFalse($foo->boolean());
         self::assertSame(0.0, $foo->float());
         self::assertNull($foo->null());
+        self::assertSame('0', $foo->mixed());
     }
 
     /** @test */
@@ -237,6 +239,23 @@ class Mapping_basic_data_types extends TestCase
     }
 
     /** @test */
+    function mapping_casted_float_values_in_different_key()
+    {
+        $deserialize = ObjectDeserializer::using(
+            ObjectInstantiator::forThe(Foo::class),
+            MappedHydrator::using(
+                ObjectHydrator::default(),
+                CastedFloat::inPropertyWithDifferentKey('float', 'number')
+            )
+        );
+
+        /** @var Foo $foo */
+        $foo = $deserialize->from(['number' => 'NaN']);
+
+        self::assertSame(0.0, $foo->float());
+    }
+
+    /** @test */
     function not_mapping_integer_values_outside_of_integer_range()
     {
         $deserialize = ObjectDeserializer::using(
@@ -248,7 +267,7 @@ class Mapping_basic_data_types extends TestCase
         );
 
         $this->expectException(DeserializationFailure::class);
-        $this->expectExceptionMessage('range');
+        $this->expectExceptionMessage('99999999999999999999999999999999999');
 
         $deserialize->from(['integer' => '99999999999999999999999999999999999']);
     }

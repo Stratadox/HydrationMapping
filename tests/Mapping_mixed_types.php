@@ -130,7 +130,7 @@ class Mapping_mixed_types extends TestCase
         );
 
         $this->expectException(DeserializationFailure::class);
-        $this->expectExceptionMessage('integer');
+        $this->expectExceptionMessageRegExp('/integer/i');
 
         $deserialize->from(['number' => 'Not a number']);
     }
@@ -182,7 +182,7 @@ class Mapping_mixed_types extends TestCase
         );
 
         $this->expectException(DeserializationFailure::class);
-        $this->expectExceptionMessage('float');
+        $this->expectExceptionMessageRegExp('/float/i');
 
         $deserialize->from(['x' => 'Invalid']);
     }
@@ -300,7 +300,7 @@ class Mapping_mixed_types extends TestCase
 
         $this->expectException(DeserializationFailure::class);
         $this->expectExceptionMessageRegExp(
-            '/((bool).*(float).*(integer))|((integer).*(float).*(bool))/'
+            '/((bool).*(float).*(integer))|((integer).*(float).*(bool))/i'
         );
 
         $deserialize->from(['x' => 'Hello']);

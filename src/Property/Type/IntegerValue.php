@@ -3,26 +3,28 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Property\Type;
 
-use Stratadox\Hydration\Mapping\Property\UnmappableProperty;
-use function preg_match;
+use Stratadox\Hydration\Mapping\Composite\ConditionalMapping;
+use Stratadox\Hydration\Mapping\DifferentKey;
+use Stratadox\Hydration\Mapping\Primitive\IntegerCheck;
+use Stratadox\Hydration\Mapping\Primitive\IntegerMapping;
+use Stratadox\Hydration\Mapping\Property\Keyed;
+use Stratadox\HydrationMapping\KeyedMapping;
 
-/**
- * Maps integer-like input to an integer property in an object property.
- *
- * @author Stratadox
- */
-final class IntegerValue extends ScalarValue
+final class IntegerValue
 {
-    /** @inheritdoc */
-    public function value(array $data, $owner = null): int
+    public static function inProperty(string $name): KeyedMapping
     {
-        $value = $this->my($data);
-        if (!preg_match('/^[-+]?\d+$/', (string) $value)) {
-            throw UnmappableProperty::itMustBeLikeAnInteger($this, $value);
-        }
-        if ($value > (string) PHP_INT_MAX || $value < (string) PHP_INT_MIN) {
-            throw UnmappableProperty::itMustBeInIntegerRange($this, $value);
-        }
-        return (int) $value;
+        return Keyed::mapping($name,
+            ConditionalMapping::ensureThat(IntegerCheck::passes(), IntegerMapping::inProperty($name))
+        );
+    }
+
+    public static function inPropertyWithDifferentKey(
+        string $name,
+        string $key
+    ): KeyedMapping {
+        return Keyed::mapping($key, DifferentKey::use($key,
+            ConditionalMapping::ensureThat(IntegerCheck::passes(), IntegerMapping::inProperty($name))
+        ));
     }
 }
