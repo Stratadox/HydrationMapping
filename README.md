@@ -2,7 +2,7 @@
 
 [![Build Status](https://circleci.com/gh/Stratadox/HydrationMapping.svg?style=shield)](https://app.circleci.com/pipelines/github/Stratadox/HydrationMapping)
 [![codecov](https://codecov.io/gh/Stratadox/HydrationMapping/branch/master/graph/badge.svg)](https://codecov.io/gh/Stratadox/HydrationMapping)
-[![Infection Minimum](https://img.shields.io/badge/msi-100-brightgreen.svg)](https://travis-ci.org/Stratadox/HydrationMapping)
+[![Infection Minimum](https://img.shields.io/badge/min_msi-70-green.svg)](https://app.circleci.com/pipelines/github/Stratadox/Hydrator)
 [![PhpStan Level](https://img.shields.io/badge/phpstan-8-brightgreen.svg)](https://travis-ci.org/Stratadox/HydrationMapping)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Stratadox/HydrationMapping/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Stratadox/HydrationMapping/?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/cc2585ce303967dd4c7d/maintainability)](https://codeclimate.com/github/Stratadox/HydrationMapping/maintainability)
