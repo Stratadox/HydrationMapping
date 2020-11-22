@@ -5,11 +5,7 @@ namespace Stratadox\Hydration\Mapping\Property\Relationship;
 
 use Stratadox\Hydration\Mapping\Relation\ObservedRelationMapping;
 
-/**
- * Maps a back-reference in a bidirectional relationship.
- *
- * @author Stratadox
- */
+/** @deprecated - use ObservedRelationMapping directly instead */
 final class HasBackReference
 {
     public static function inProperty(string $name): ObservedRelationMapping
