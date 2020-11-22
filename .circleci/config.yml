@@ -23,7 +23,7 @@ jobs:
       - run: mkdir -p build/logs
       - run: ./vendor/bin/phpunit -c phpunit.xml --testdox
       - run: ./vendor/bin/phpstan analyse -c phpstan.neon
-      - run: ./infection.phar --min-msi=90 --min-covered-msi=100
+      - run: ./infection.phar --min-msi=70
       - run: touch build/logs/infection-log.txt
       - run: cat build/logs/infection-log.txt
       - store_artifacts:
