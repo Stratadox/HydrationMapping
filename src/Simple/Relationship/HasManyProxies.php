@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Stratadox\Hydration\Mapping\Simple\Relationship;
 
 use Stratadox\Deserializer\Deserializer;
-use Stratadox\Hydration\Mapping\DifferentKey;
+use Stratadox\Hydration\Mapping\Transform\KeyTransform;
 use Stratadox\Hydration\Mapping\Relation\NumberedProxyCollectionMapping;
 use Stratadox\HydrationMapping\Mapping;
 use Stratadox\Proxy\ProxyFactory;
@@ -25,6 +25,6 @@ final class HasManyProxies
         Deserializer $collection,
         ProxyFactory $proxyFactory
     ): Mapping {
-        return DifferentKey::use($key, self::inProperty($name, $collection, $proxyFactory));
+        return KeyTransform::use($key, self::inProperty($name, $collection, $proxyFactory));
     }
 }

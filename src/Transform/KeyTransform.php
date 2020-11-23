@@ -1,10 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Stratadox\Hydration\Mapping;
+namespace Stratadox\Hydration\Mapping\Transform;
 
+use Stratadox\Hydration\Mapping\AssertKey;
 use Stratadox\HydrationMapping\Mapping;
 
-final class Nested implements Mapping
+final class KeyTransform implements Mapping
 {
     /** @var string */
     private $key;
@@ -17,7 +18,7 @@ final class Nested implements Mapping
         $this->mapping = $mapping;
     }
 
-    public static function inKey(string $key, Mapping $mapping): self
+    public static function use(string $key, Mapping $mapping): Mapping
     {
         return new self($key, $mapping);
     }
@@ -30,6 +31,8 @@ final class Nested implements Mapping
     public function value(array $data, $owner = null)
     {
         AssertKey::exists($this, $data, $this->key);
-        return $this->mapping->value($data[$this->key]);
+        $data[$this->name()] = $data[$this->key];
+        unset($data[$this->key]);
+        return $this->mapping->value($data, $owner);
     }
 }

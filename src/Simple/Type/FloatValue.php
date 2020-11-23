@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Stratadox\Hydration\Mapping\Simple\Type;
 
 use Stratadox\Hydration\Mapping\Composite\ConditionalMapping;
-use Stratadox\Hydration\Mapping\DifferentKey;
+use Stratadox\Hydration\Mapping\Transform\KeyTransform;
 use Stratadox\Hydration\Mapping\Primitive\FloatCheck;
 use Stratadox\Hydration\Mapping\Primitive\FloatMapping;
 use Stratadox\Hydration\Mapping\Simple\Keyed;
@@ -25,6 +25,6 @@ final class FloatValue
         string $name,
         string $key
     ): Mapping {
-        return DifferentKey::use($key, self::inProperty($name));
+        return KeyTransform::use($key, self::inProperty($name));
     }
 }

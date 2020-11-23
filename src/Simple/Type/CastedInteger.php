@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Simple\Type;
 
-use Stratadox\Hydration\Mapping\DifferentKey;
+use Stratadox\Hydration\Mapping\Transform\KeyTransform;
 use Stratadox\Hydration\Mapping\Primitive\IntegerMapping;
 use Stratadox\Hydration\Mapping\Simple\Keyed;
 use Stratadox\HydrationMapping\KeyedMapping;
@@ -20,6 +20,6 @@ final class CastedInteger
         string $name,
         string $key
     ): Mapping {
-        return DifferentKey::use($key, IntegerMapping::inProperty($name));
+        return KeyTransform::use($key, IntegerMapping::inProperty($name));
     }
 }

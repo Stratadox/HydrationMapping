@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Stratadox\Hydration\Mapping\Simple\Relationship;
 
 use Stratadox\Deserializer\Deserializer;
-use Stratadox\Hydration\Mapping\Nested;
+use Stratadox\Hydration\Mapping\Transform\NestingTransform;
 use Stratadox\Hydration\Mapping\Relation\RelationMapping;
 use Stratadox\HydrationMapping\Mapping;
 
@@ -14,7 +14,10 @@ final class HasOneNested
         string $name,
         Deserializer $deserializer
     ): Mapping {
-        return Nested::inKey($name, RelationMapping::inProperty($name, $deserializer));
+        return NestingTransform::inKey($name, RelationMapping::inProperty(
+            $name,
+            $deserializer
+        ));
     }
 
     public static function inPropertyWithDifferentKey(
@@ -22,6 +25,9 @@ final class HasOneNested
         string $key,
         Deserializer $deserializer
     ): Mapping {
-        return Nested::inKey($key, RelationMapping::inProperty($name, $deserializer));
+        return NestingTransform::inKey($key, RelationMapping::inProperty(
+            $name,
+            $deserializer
+        ));
     }
 }

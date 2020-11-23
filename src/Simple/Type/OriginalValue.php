@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Simple\Type;
 
-use Stratadox\Hydration\Mapping\DifferentKey;
+use Stratadox\Hydration\Mapping\Transform\KeyTransform;
 use Stratadox\Hydration\Mapping\Primitive\OriginalMapping;
 use Stratadox\HydrationMapping\Mapping;
 
@@ -18,6 +18,6 @@ final class OriginalValue
         string $name,
         string $key
     ): Mapping {
-        return DifferentKey::use($key, OriginalMapping::inProperty($name));
+        return KeyTransform::use($key, OriginalMapping::inProperty($name));
     }
 }

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Stratadox\Hydration\Mapping\Simple\Type;
 
-use Stratadox\Hydration\Mapping\DifferentKey;
+use Stratadox\Hydration\Mapping\Transform\KeyTransform;
 use Stratadox\Hydration\Mapping\Primitive\BooleanMapping;
 use Stratadox\HydrationMapping\Mapping;
 
@@ -23,7 +23,7 @@ final class BooleanValue
         array $truths,
         array $falsehoods
     ): Mapping {
-        return DifferentKey::use(
+        return KeyTransform::use(
             $key,
             BooleanMapping::custom($name, $truths, $falsehoods)
         );
@@ -38,6 +38,6 @@ final class BooleanValue
         string $name,
         string $key
     ): Mapping {
-        return DifferentKey::use($key, BooleanMapping::inProperty($name));
+        return KeyTransform::use($key, BooleanMapping::inProperty($name));
     }
 }

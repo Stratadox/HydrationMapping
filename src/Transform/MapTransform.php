@@ -1,10 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Stratadox\Hydration\Mapping;
+namespace Stratadox\Hydration\Mapping\Transform;
 
 use Stratadox\HydrationMapping\Mapping;
+use function array_map;
 
-final class DifferentKey implements Mapping
+final class MapTransform implements Mapping
 {
     /** @var string */
     private $key;
@@ -17,7 +18,7 @@ final class DifferentKey implements Mapping
         $this->mapping = $mapping;
     }
 
-    public static function use(string $key, Mapping $mapping): self
+    public static function withKey(string $key, Mapping $mapping): Mapping
     {
         return new self($key, $mapping);
     }
@@ -29,9 +30,9 @@ final class DifferentKey implements Mapping
 
     public function value(array $data, $owner = null)
     {
-        AssertKey::exists($this, $data, $this->key);
-        $data[$this->mapping->name()] = $data[$this->key];
-        unset($data[$this->key]);
+        $data = array_map(function ($value): array {
+            return [$this->key => $value];
+        }, $data);
         return $this->mapping->value($data, $owner);
     }
 }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace Stratadox\Hydration\Mapping\Simple\Relationship;
 
 use Stratadox\Deserializer\Deserializer;
-use Stratadox\Hydration\Mapping\DifferentKey;
-use Stratadox\Hydration\Mapping\Nested;
+use Stratadox\Hydration\Mapping\Transform\KeyTransform;
+use Stratadox\Hydration\Mapping\Transform\NestingTransform;
 use Stratadox\Hydration\Mapping\Relation\RelationCollectionMapping;
 use Stratadox\HydrationMapping\Mapping;
 
@@ -16,7 +16,7 @@ final class HasManyNested
         Deserializer $collection,
         Deserializer $item
     ): Mapping {
-        return Nested::inKey(
+        return NestingTransform::inKey(
             $name,
             RelationCollectionMapping::inProperty($name, $collection, $item)
         );
@@ -28,6 +28,6 @@ final class HasManyNested
         Deserializer $collection,
         Deserializer $item
     ): Mapping {
-        return DifferentKey::use($key, self::inProperty($name, $collection, $item));
+        return KeyTransform::use($key, self::inProperty($name, $collection, $item));
     }
 }
