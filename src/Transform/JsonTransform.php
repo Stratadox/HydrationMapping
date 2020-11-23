@@ -5,6 +5,7 @@ namespace Stratadox\Hydration\Mapping\Transform;
 use Stratadox\Hydration\Mapping\AssertKey;
 use Stratadox\HydrationMapping\Mapping;
 use Stratadox\HydrationMapping\MappingFailure;
+use function gettype;
 use function is_array;
 use function json_decode;
 use function json_last_error;
@@ -55,7 +56,7 @@ final class JsonTransform implements Mapping
             );
         }
         throw JsonTransformationFailure::cannotBeScalar(
-            $value,
+            gettype($value),
             $this->key,
             $this->name()
         );

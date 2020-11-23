@@ -4,7 +4,6 @@ namespace Stratadox\Hydration\Mapping\Transform;
 
 use RuntimeException;
 use Stratadox\HydrationMapping\MappingFailure;
-use function gettype;
 use function sprintf;
 
 final class JsonTransformationFailure extends RuntimeException implements MappingFailure
@@ -23,14 +22,14 @@ final class JsonTransformationFailure extends RuntimeException implements Mappin
     }
 
     public static function cannotBeScalar(
-        $value,
+        string $type,
         string $key,
         string $name
     ): self {
         return new self(sprintf(
             'Unexpected %s while transforming the json from key `%s` for in ' .
             'the property `%s`: expecting an array',
-            gettype($value),
+            $type,
             $key,
             $name
         ));
